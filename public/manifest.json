@@ -1,0 +1,15 @@
+{
+  "short_name": "InterCoin",
+  "name": "Create React App Sample",
+  "icons": [
+    {
+      "src": "intercoin.png",
+      "type": "image/png",
+      "sizes": "32x22"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
