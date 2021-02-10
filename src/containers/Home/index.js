@@ -7,6 +7,7 @@ import { AppContext } from 'contexts';
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
+    flexDirection: 'column',
     minHeight: `calc(100vh - ${theme.custom.layout.topAppBarHeight}px)`,
     width: '100%',
     justifyContent: 'center',
@@ -16,7 +17,7 @@ const useStyles = makeStyles(theme => ({
 
 const Home = () => {
   const classes = useStyles();
-  const { setLoadingInfo } = useContext(AppContext);
+  const { setLoadingInfo, accountAddress } = useContext(AppContext);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     setLoadingInfo(true);
@@ -28,6 +29,7 @@ const Home = () => {
   return (
     <div className={classes.root}>
       <Typography variant='h5'>InterCoin Dapp Is Coming Soon! </Typography>
+      <Typography variant='h5'>Your Account Address : {accountAddress}  </Typography>
     </div>
   );
 };
