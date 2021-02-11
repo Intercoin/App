@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
 
 const Home = () => {
   const classes = useStyles();
-  const { setLoadingInfo, accountAddress } = useContext(AppContext);
+  const { setLoadingInfo, account } = useContext(AppContext);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     setLoadingInfo(true);
@@ -29,7 +29,7 @@ const Home = () => {
   return (
     <div className={classes.root}>
       <Typography variant='h5'>InterCoin Dapp Is Coming Soon! </Typography>
-      <Typography variant='h5'>Your Account Address : {accountAddress}  </Typography>
+      <Typography variant='h5'>Your Account Address : {account}  </Typography>
     </div>
   );
 };
