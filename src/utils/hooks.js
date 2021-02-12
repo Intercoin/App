@@ -3,19 +3,17 @@ import Web3 from 'web3';
 
 import { NETWORK_URL } from 'config';
 
-const useWeb3 = () => {
-  let web3
-  let web3Provider
-
-  if (typeof web3 !== 'undefined') {
-    web3Provider = web3?.currentProvider
-  } else {
-    web3Provider = new Web3.providers.HttpProvider(NETWORK_URL)
+const useWeb3 = async () => {
+  console.log('kevin ===>detecting the connection status===>',window.ethereum )
+  if (window.ethereum) {
+    window.web3 = new Web3(window.ethereum)
+    await window.ethereum.enable()
   }
-  web3 = new Web3(web3Provider)
-  return {
-    web3,
-    web3Provider
+  else if (window.web3) {
+    window.web3 = new Web3(window.web3.currentProvider || NETWORK_URL)
+  }
+  else {
+    window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
   }
 };
 
