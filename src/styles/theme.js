@@ -22,7 +22,8 @@ const theme = responsiveFontSizes(createMuiTheme({
       contrastText: '#fff'
     },
     background: {
-      default: '#1B1F2E',
+      default: '#292C40',
+      main: '#1B1F2E',
       sideDrawer: '#0f1118',
       selectedMenu: '#292C4130',
       main: '#232637',
@@ -46,9 +47,8 @@ const theme = responsiveFontSizes(createMuiTheme({
       lightBlue: '#1f2334'
     },
     layout: {
-      topAppBarHeight: 80,
-      footerHeight: 173,
-      drawerWidth: 268,
+      topAppBarHeight: 47,
+      footerHeight: 77
     },
   }
 }));

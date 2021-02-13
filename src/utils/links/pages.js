@@ -1,6 +1,7 @@
 
 const PAGES = {
-  HOME: '/'
+  HOME: '/',
+  POOLS: '/pools'
 };
 
 export { PAGES } 

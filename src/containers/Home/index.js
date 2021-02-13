@@ -1,14 +1,15 @@
 
 import React, { useEffect, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
 import { AppContext } from 'contexts';
+
+import CardWrapper from 'hoc/CardWrapper';
 
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    minHeight: `calc(100vh - ${theme.custom.layout.topAppBarHeight}px)`,
+    height: `100%`,
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center'
@@ -28,8 +29,8 @@ const Home = () => {
 
   return (
     <div className={classes.root}>
-      <Typography variant='h5'>InterCoin Dapp Is Coming Soon! </Typography>
-      <Typography variant='h5'>Your Account Address : {account}  </Typography>
+      <CardWrapper title={'InterCoin Communities'}>
+      </CardWrapper>
     </div>
   );
 };

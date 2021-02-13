@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
     position: 'relative'
   },
   root: {
-    margin: theme.spacing(3/8),
+    margin: theme.spacing(3 / 8),
     boxShadow: 'none',
     textTransform: 'none',
     backgroundColor: theme.palette.secondary.main,
@@ -62,14 +62,14 @@ const useStyles = makeStyles(theme => ({
     marginLeft: -12,
   },
   "@keyframes shine": {
-    '0%': {left: '200%'},
-    '100%': {left: '-200%'}
+    '0%': { left: '200%' },
+    '100%': { left: '-200%' }
   }
 }));
 
-const ContainedButton = ({ className, type, color, variant='contained', disabled, loading, children, ...rest }) => {
+const ContainedButton = ({ className, type, color, variant = 'contained', disabled, loading, children, ...rest }) => {
   const classes = useStyles();
-  
+
   return (
     <div className={classes.wrapper}>
       <Button
