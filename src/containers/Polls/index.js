@@ -1,6 +1,5 @@
 
 import React, { useEffect, useContext, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { AppContext } from 'contexts';
 
 import CardWrapper from 'hoc/CardWrapper';
@@ -15,20 +14,6 @@ import EditButton from 'components/UI/Buttons/EditButton';
 import DeleteButton from 'components/UI/Buttons/DeleteButton';
 import CheckBox from 'components/UI/CheckBox';
 import { poolData } from 'utils/helper/mockupData';
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    height: `100%`,
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  actionColumn: {
-    width: theme.spacing(11),
-  },
-}));
 
 const headerData = ['Title', 'Voting Count', 'Context', 'Action'];
 const Pools = () => {
@@ -61,7 +46,7 @@ const Pools = () => {
 
   return (
     <div className={classes.root}>
-      <CardWrapper title={'InterCoin Pools'} buttonName={'CREATE NEW POOL'}>
+      <CardWrapper title={'InterCoin Polls'} buttonName={'CREATE NEW POLL'}>
         <Table>
           <HeaderRow>
             <th style={{ textAlign: 'center', fontSize: 24 }}>

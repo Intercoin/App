@@ -10,7 +10,7 @@ import TopAppBarMenuItem from './TopAppBarMenuItem';
 const useStyles = makeStyles(theme => ({
   menuItem: {
     flexDirection: 'row',
-    width : 'fit-content',
+    width: 'fit-content',
     minHeight: '100%',
     padding: 0
   }
@@ -18,10 +18,9 @@ const useStyles = makeStyles(theme => ({
 
 const TopAppBarMenu = ({ menuItems, history, location }) => {
   const classes = useStyles();
-  const { topAppMenu, topMenuChageHandler } = useContext(AppContext);
+  const { topAppMenu } = useContext(AppContext);
 
   const menuItemClickHandler = (event, index) => {
-    topMenuChageHandler(index)
     history.push(menuItems[index].url)
   };
 

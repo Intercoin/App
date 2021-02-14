@@ -4,6 +4,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
+import { PAGES } from 'utils/links/pages';
 import ContainedButton from 'components/UI/Buttons/ContainedButton'
 
 const useStyles = makeStyles(theme => ({
@@ -11,7 +12,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down('xs')]: {
       margin: theme.spacing(2, 2, 0, 2)
     },
-  
+
     display: 'flex',
     marginBottom: theme.spacing(2),
     justifyContent: 'space-between',
@@ -33,7 +34,7 @@ const GridTitle = ({ title, buttonName }) => {
       {
         buttonName &&
         <ContainedButton
-          href={`${'/'}/new?tab=${'/'}`}
+          href={`${PAGES.POLLS}/new`}
           type='submit'>
           {buttonName}
         </ContainedButton>

@@ -1,7 +1,7 @@
 
 const PAGES = {
   HOME: '/',
-  POOLS: '/pools'
+  POLLS: '/polls'
 };
 
 export { PAGES } 

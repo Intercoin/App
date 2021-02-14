@@ -18,8 +18,8 @@ const TOP_BAR_MENUS = [
   {
     id: 'pools',
     icon: <HowToVoteIcon />,
-    url: '/pools',
-    text: 'Pools'
+    url: '/polls',
+    text: 'Polls'
   },
   {
     id: 'currencies',
