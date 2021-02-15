@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
-    height: theme.spacing(4),
+    minHeight: theme.spacing(4),
     backgroundColor: theme.custom.palette.lightBlue, // `${theme.palette.primary.light}4D`,
     // backgroundColor: 'green',
     '& th:first-child': {

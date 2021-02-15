@@ -1,6 +1,7 @@
 
 import React, { useEffect, useContext, useState } from 'react';
 import { AppContext } from 'contexts';
+import { withRouter } from 'react-router-dom';
 
 import CardWrapper from 'hoc/CardWrapper';
 import { useTableStyles } from 'styles/common-table';
@@ -13,15 +14,21 @@ import Paginator from 'components/UI/CustomTable/Paginator';
 import EditButton from 'components/UI/Buttons/EditButton';
 import DeleteButton from 'components/UI/Buttons/DeleteButton';
 import CheckBox from 'components/UI/CheckBox';
+import PollDialog from 'components/UI/PollDialog';
 import { poolData } from 'utils/helper/mockupData';
+import { PAGES } from 'utils/links/pages';
 
-const headerData = ['Title', 'Voting Count', 'Context', 'Action'];
-const Pools = () => {
+const headerData = ['Voting Title', 'Count', 'Context', 'Action'];
+
+const Pools = ({ history }) => {
   const classes = useTableStyles();
   const { setLoadingInfo, account } = useContext(AppContext);
   const [tableData, setTableData] = useState([]);
+  const [pollData, setPollData] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
   const [checked, setChecked] = useState({});
+  const [isDialog, setIsDialog] = useState();
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     setLoadingInfo(true);
@@ -31,6 +38,10 @@ const Pools = () => {
   }, [setLoadingInfo]);
 
   const editHandler = _id => () => {
+    history.push({
+      pathname: `${PAGES.POLLS}/${_id}`
+    })
+
   };
 
   const removeHandler = (_id) => () => {
@@ -38,15 +49,25 @@ const Pools = () => {
 
   const changeHandler = name => event => {
     setChecked({ ...checked, [event.target.name]: event.target.checked });
-
   }
+
+  const selectPollHandler = (rowData) => {
+    console.log('checking rendering counts')
+    setPollData(rowData)
+    setIsDialog(true);
+  }
+
+  const openCloseDialogHandler = show => () => {
+    setIsDialog(show);
+  }
+
   useEffect(() => {
     setTableData(poolData)
   }, [poolData])
 
   return (
     <div className={classes.root}>
-      <CardWrapper title={'InterCoin Polls'} buttonName={'CREATE NEW POLL'}>
+      <CardWrapper title={'Intercoin Polls'} buttonName={'CREATE NEW POLL'}>
         <Table>
           <HeaderRow>
             <th style={{ textAlign: 'center', fontSize: 24 }}>
@@ -61,11 +82,11 @@ const Pools = () => {
           <tbody className={classes.tbodyClass}>
             {tableData && tableData.map((rowData, index) => {
               return (
-                <Row key={index}>
-                  <Cell className={classes.checkBoxColumn} center>
+                <Row onClick={() => selectPollHandler(rowData)} key={index}>
+                  <Cell center>
                     <CheckBox checked={checked[index]} name={index} onChange={changeHandler} />
                   </Cell>
-                  <Cell>
+                  <Cell >
                     {rowData.title}
                   </Cell>
                   <Cell>
@@ -75,8 +96,10 @@ const Pools = () => {
                     {rowData.context}
                   </Cell>
                   <Cell className={classes.actionColumn} center>
-                    <EditButton onClick={editHandler(rowData._id)} />
-                    <DeleteButton onClick={removeHandler(rowData._id)} />
+                    <div className={classes.actionContainer}>
+                      <EditButton onClick={editHandler(index)} />
+                      <DeleteButton onClick={removeHandler(rowData._id)} />
+                    </div>
                   </Cell>
                 </Row>
               );
@@ -89,9 +112,18 @@ const Pools = () => {
             currentPage={currentPage}
             setCurrentPage={setCurrentPage} />
         </div>
+        {
+          isDialog &&
+          <PollDialog
+            pollData = {pollData}
+            headerTitle={'Please enter your question!'}
+            open={true}
+            onClose={openCloseDialogHandler(false)}
+          />
+        }
       </CardWrapper>
     </div>
   );
 };
 
-export default Pools;
+export default withRouter(Pools);

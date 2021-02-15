@@ -77,7 +77,7 @@ const ContainedButton = ({ className, type, color, variant = 'contained', disabl
         color={color}
         variant={variant}
         type={type}
-        disabled={loading || disabled}
+        disabled={loading}
         {...rest}>
         {children}
       </Button>

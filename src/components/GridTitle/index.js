@@ -8,23 +8,22 @@ import { PAGES } from 'utils/links/pages';
 import ContainedButton from 'components/UI/Buttons/ContainedButton'
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    [theme.breakpoints.down('xs')]: {
-      margin: theme.spacing(2, 2, 0, 2)
+  root: props => ({
+    [theme.breakpoints.down('sm')] : {
+      padding: theme.spacing(2, 0, 0, 0),
     },
-
     display: 'flex',
     marginBottom: theme.spacing(2),
-    justifyContent: 'space-between',
-    alignItem: 'center'
-  },
+    justifyContent: props.center ? 'center' : 'space-between',
+    alignItems: 'center'
+  }),
   bold: {
     fontWeight: '400'
   }
 }));
 
-const GridTitle = ({ title, buttonName }) => {
-  const classes = useStyles();
+const GridTitle = ({ title, buttonName, center }) => {
+  const classes = useStyles({ center });
 
   return (
     <div className={classes.root}>

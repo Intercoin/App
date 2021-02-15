@@ -5,15 +5,15 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: 12,
-    height: 13
+    width: 14,
+    height: 14
   }
 }));
 
 const TrashIcon = ({className, viewBox, color, ...rest}) => {
   const classes = useStyles();
   return (
-    <SvgIcon viewBox={viewBox || "0 0 12 13"} {...rest} className={clsx(classes.root, className)}>
+    <SvgIcon viewBox={viewBox || "0 0 14 14"} {...rest} className={clsx(classes.root, className)}>
       <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <g transform="translate(-1358.000000, -244.000000)" fill={color || "#A20F3C"} fillRule="nonzero">
           <g transform="translate(1358.000000, 244.000000)">

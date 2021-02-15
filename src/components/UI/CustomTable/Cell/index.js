@@ -6,7 +6,8 @@ const useStyles = makeStyles(theme => ({
   root: {
     fontSize: 14,
     fontWeight: 300,
-    padding: `0 ${theme.spacing(0.5)}px`
+    padding: `0 ${theme.spacing(0.5)}px`,
+    padding:theme.spacing(0.5)
   },
   center: {
     display: 'flex',

@@ -6,14 +6,22 @@ import TrashIcon from 'components/Icons/TrashIcon';
 
 const useStyles = makeStyles(theme => ({
   root: {
+    [theme.breakpoints.down('sm')]: {
+      borderLeft: `1px solid ${theme.palette.text.secondary}`,
+    },
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     cursor: 'pointer',
     height: theme.spacing(3),
-    padding: `0 ${theme.spacing(2)}px 0 ${theme.spacing(1)}px`
+    // padding: `0 ${theme.spacing(2)}px 0 ${theme.spacing(1)}px`,
+    padding: `0 ${theme.spacing(2)}px`,
+
   },
   label: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none'
+    },
     color: theme.palette.error.main,
     marginRight: theme.spacing(10 / 8),
     textDecoration: 'underline'

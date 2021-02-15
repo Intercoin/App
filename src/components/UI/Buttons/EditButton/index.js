@@ -17,6 +17,9 @@ const useStyles = makeStyles(theme => ({
     borderLeft: `1px solid ${theme.palette.text.secondary}`,
   },
   label: {
+    [theme.breakpoints.down('sm')]: {
+     display:'none'
+    },
     color: theme.palette.text.secondary,
     marginRight: theme.spacing(10 / 8),
     textDecoration: 'underline'

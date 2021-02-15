@@ -4,8 +4,10 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
+    cursor: 'pointer',
     height: theme.spacing(7.5),
     boxShadow: '0 3px 8px 0 rgba(0,0,0,0.15)',
+    margin: theme.spacing(0.5),
     backgroundColor: theme.palette.primary.light,
     transition: 'ease-out 0.3s',
     userSelect: 'none',
@@ -24,11 +26,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Row = ({ children }) => {
+const Row = ({ children , onClick}) => {
   const classes = useStyles();
 
   return (
-    <tr className={classes.root}>
+    <tr className={classes.root} onClick = {onClick}>
       {children}
     </tr>
   );

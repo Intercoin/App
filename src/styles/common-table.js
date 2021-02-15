@@ -34,7 +34,7 @@ const useTableStyles = makeStyles(theme => ({
     fontSize: theme.spacing(18 / 8)
   },
   actionColumn: {
-    width: theme.spacing(20),
+    width: '10%',
   },
   paginator: {
     marginTop: 'auto',
@@ -70,6 +70,12 @@ const useTableStyles = makeStyles(theme => ({
   filterPanelStyle: {
     width: 280,
     marginRight: theme.spacing(2)
+  },
+  actionContainer : {
+    [theme.breakpoints.down('sm')]: {
+      flexDirection:'column'
+    },
+    display:'flex'
   }
 }));
 

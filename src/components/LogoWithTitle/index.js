@@ -22,7 +22,7 @@ const LogoWithTitle = ({ logoWidth, logoHeight, titleVariant, className }) => {
     <div className={clsx(classes.root, className)}>
       <Logo className={classes.logo} width={logoWidth} height={logoHeight} />
       <Typography color='textPrimary' variant={titleVariant}>
-        InterCoin
+        Intercoin
       </Typography>
     </div>
   );

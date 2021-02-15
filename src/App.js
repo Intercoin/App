@@ -40,7 +40,7 @@ const App = ({ location, history }) => {
   window.ethereum.on('accountsChanged', function (accounts) {
     loadBlockChainDataInfo();
   });
-  console.log('kevin===>', location, history)
+
   useEffect(() => {
     TOP_BAR_MENUS.map((TOP_BAR_MENU, index) => {
       if (TOP_BAR_MENU.url === location.pathname || location.pathname.includes(TOP_BAR_MENU.url)) {
@@ -49,7 +49,6 @@ const App = ({ location, history }) => {
     });
 
   }, [location]);
-
 
   return (
     <AppContext.Provider
