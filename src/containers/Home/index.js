@@ -1,14 +1,16 @@
 
 import React, { useEffect, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 import { AppContext } from 'contexts';
+
+import CardWrapper from 'hoc/CardWrapper';
 
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    minHeight: `calc(100vh - ${theme.custom.layout.topAppBarHeight}px)`,
+    height: '100%',
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center'
@@ -17,7 +19,7 @@ const useStyles = makeStyles(theme => ({
 
 const Home = () => {
   const classes = useStyles();
-  const { setLoadingInfo, accountAddress } = useContext(AppContext);
+  const { setLoadingInfo, account } = useContext(AppContext);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     setLoadingInfo(true);
@@ -28,8 +30,11 @@ const Home = () => {
 
   return (
     <div className={classes.root}>
-      <Typography variant='h5'>InterCoin Dapp Is Coming Soon! </Typography>
-      <Typography variant='h5'>Your Account Address : {accountAddress}  </Typography>
+      <CardWrapper title={'Intercoin Communities'}>
+        <div style={{ display: 'flex', width: '100%', height: '100%', alignItems: 'center', justifyItems: 'center' }}>
+          <Typography variant='h6'> Coming Soon! </Typography>
+        </div>
+      </CardWrapper>
     </div>
   );
 };

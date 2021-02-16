@@ -8,6 +8,7 @@ const theme = responsiveFontSizes(createMuiTheme({
       main: '#141720',
       dark: '#161A29',
       contrastText: '#fff',
+      darkLight: '#292C41',
     },
     secondary: {
       light: '#555e6c',
@@ -22,7 +23,8 @@ const theme = responsiveFontSizes(createMuiTheme({
       contrastText: '#fff'
     },
     background: {
-      default: '#1B1F2E',
+      default: '#292C40',
+      main: '#1B1F2E',
       sideDrawer: '#0f1118',
       selectedMenu: '#292C4130',
       main: '#232637',
@@ -46,9 +48,8 @@ const theme = responsiveFontSizes(createMuiTheme({
       lightBlue: '#1f2334'
     },
     layout: {
-      topAppBarHeight: 80,
-      footerHeight: 173,
-      drawerWidth: 268,
+      topAppBarHeight: 47,
+      footerHeight: 77
     },
   }
 }));
