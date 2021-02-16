@@ -18,7 +18,6 @@ import { MemoizedOutlinedTextField } from 'components/UI/OutlinedTextField';
 import ContainedButton from 'components/UI/Buttons/ContainedButton';
 import OptionDialog from 'components/UI/OptionDialog';
 import { PAGES } from 'utils/links/pages';
-// import CloseIcon from 'components/Icons/CloseIcon';
 import { poolData, optionData } from 'utils/helper/mockupData';
 
 
@@ -106,7 +105,8 @@ const AddEditPolls = ({ history, location, match }) => {
     setValue(event.target.value);
   };
 
-  const submitHandler = () => { }
+  const submitHandler = () => {
+  }
   const goBack = () => {
     history.push({
       pathname: PAGES.POLLS,
@@ -120,12 +120,10 @@ const AddEditPolls = ({ history, location, match }) => {
   }
 
   const dialogHander = () => {
-    console.log('checking rendering counts')
     setIsDialog(true);
   }
 
   const optionEditHandler = () => {
-    console.log('kevin===> rendering count!!!')
   }
 
   return (

@@ -47,9 +47,11 @@ const Pools = ({ history }) => {
   const removeHandler = (_id) => () => {
   };
 
-  const changeHandler = name => event => {
+  const changeHandler = event => {
     setChecked({ ...checked, [event.target.name]: event.target.checked });
+    event.stopPropagation();
   }
+
 
   const selectPollHandler = (rowData) => {
     console.log('checking rendering counts')
@@ -84,7 +86,8 @@ const Pools = ({ history }) => {
               return (
                 <Row onClick={() => selectPollHandler(rowData)} key={index}>
                   <Cell center>
-                    <CheckBox checked={checked[index]} name={index} onChange={changeHandler} />
+                    <CheckBox checked={checked[index]} name={index} onClick={changeHandler} />
+                    {/* <div onClick={changeHandler}>test</div> */}
                   </Cell>
                   <Cell >
                     {rowData.title}
@@ -115,7 +118,7 @@ const Pools = ({ history }) => {
         {
           isDialog &&
           <PollDialog
-            pollData = {pollData}
+            pollData={pollData}
             headerTitle={'Please enter your question!'}
             open={true}
             onClose={openCloseDialogHandler(false)}

@@ -32,9 +32,9 @@ const useStyles = makeStyles(theme => ({
     height: 96,
     minHeight: 'unset'
   },
-  dialogBackgroundColor: {
+  dialogContent: {
     [theme.breakpoints.down('xs')] : {
-      maxHeight: '380px',
+      maxHeight: '340px',
     },
     maxHeight: '460px',
     overflowX: 'unset',
@@ -72,7 +72,7 @@ const PollDialog = ({ open, onClose, pollData }) => {
       <form onSubmit={onFormSubmit} >
         <div className={dialogClasses.root}>
           <Typography variant='h6' className={classes.titleLine}>{pollData.title}</Typography>
-          <DialogContent dividers className={classes.dialogBackgroundColor}>
+          <DialogContent dividers className={classes.dialogContent}>
             {optionData.map((option, index) => {
 
               return (

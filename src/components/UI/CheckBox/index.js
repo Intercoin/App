@@ -40,7 +40,7 @@ const CheckBoxIcon = ({ checked }) => {
   );
 }
 
-const CustomCheckBox = ({ checked, value, onChange, ...rest }) => {
+const CustomCheckBox = ({ checked, value,onChange, onClick, ...rest }) => {
   const classes = useStyles();
   return (
     <Checkbox
@@ -48,7 +48,8 @@ const CustomCheckBox = ({ checked, value, onChange, ...rest }) => {
       value={value}
       icon={<CheckBoxIcon />}
       checkedIcon={<CheckBoxIcon checked />}
-      onChange={onChange} />
+      onClick={onClick}
+      onChange = {onChange} />
   );
 }
 

@@ -12,7 +12,7 @@ const useWeb3 = async () => {
     window.web3 = new Web3(window.web3.currentProvider || NETWORK_URL)
   }
   else {
-    window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
+    window.location.assign("https://chrome.google.com/webstore/detail/nkbihfbeogaeaoehlefnkodbefgpgknn")
   }
 };
 
