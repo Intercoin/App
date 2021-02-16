@@ -15,6 +15,7 @@ import EditButton from 'components/UI/Buttons/EditButton';
 import DeleteButton from 'components/UI/Buttons/DeleteButton';
 import CheckBox from 'components/UI/CheckBox';
 import PollDialog from 'components/UI/PollDialog';
+import AdminPollDialog from 'components/UI/AdminPollDialog';
 import { poolData } from 'utils/helper/mockupData';
 import { PAGES } from 'utils/links/pages';
 
@@ -28,6 +29,7 @@ const Pools = ({ history }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [checked, setChecked] = useState({});
   const [isDialog, setIsDialog] = useState();
+  const [isAdminDialog, setIsAdminDialog] = useState();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
@@ -57,6 +59,7 @@ const Pools = ({ history }) => {
     console.log('checking rendering counts')
     setPollData(rowData)
     setIsDialog(true);
+    setIsAdminDialog(true)
   }
 
   const openCloseDialogHandler = show => () => {
@@ -118,6 +121,15 @@ const Pools = ({ history }) => {
         {
           isDialog &&
           <PollDialog
+            pollData={pollData}
+            headerTitle={'Please enter your question!'}
+            open={true}
+            onClose={openCloseDialogHandler(false)}
+          />
+        }
+        {
+          isAdminDialog &&
+          <AdminPollDialog
             pollData={pollData}
             headerTitle={'Please enter your question!'}
             open={true}

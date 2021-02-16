@@ -3,11 +3,18 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import DialogContent from '@material-ui/core/DialogContent';
+import '../../../../node_modules/react-vis/dist/style.css';
+
+import {
+  FlexibleWidthXYPlot,
+  XAxis,
+  LineMarkSeries,
+} from 'react-vis';
 
 import DialogWrapper, { dialogStyles } from 'hoc/DialogWrapper';
 import ContainedButton from 'components/UI/Buttons/ContainedButton';
-import CustomSlider from '../CustomSlider';
 import { optionData } from 'utils/helper/mockupData';
+
 
 const useStyles = makeStyles(theme => ({
   actionButton: {
@@ -56,10 +63,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const PollDialog = ({ open, onClose, pollData }) => {
+const AdminPollDialog = ({ open, onClose, pollData }) => {
   const classes = useStyles();
   const dialogClasses = dialogStyles();
-
   const [state, setState] = useState({});
 
   const onFormSubmit = async (ev) => {
@@ -77,19 +83,31 @@ const PollDialog = ({ open, onClose, pollData }) => {
 
               return (
                 <div key={index} className={classes.sliderContainer}>
-                  <Typography style={{ fontWeight: '300' }} variant='subtitle2'>{` ( ${index + 1} )  `}   {option.content}</Typography>
-                  <CustomSlider
-                    value={option.to / 2}
-                    from={option.from}
-                    to={option.to}
-                  />
+                  <Typography style = {{fontWeight:'300'}} variant='subtitle2'>{` ( ${index + 1} )  `}  {option.content}</Typography>
+                  <FlexibleWidthXYPlot height={80}>
+                    <XAxis />
+                    <LineMarkSeries
+                      className="linemark-series-example"
+                      style={{
+                        strokeWidth: '3px'
+                      }}
+                      markStyle={{ stroke: 'blue' }}
+                      data={[{ x: option.to/2, y: 0 }]}
+                    />
+                    <LineMarkSeries
+                      curve={'curveMonotoneX'}
+                      data={[{ x: option.from, y: 80 }, { x: option.to/2, y: 99 }, { x: option.to, y: 70 }]}
+                    />
+                  </FlexibleWidthXYPlot>
                 </div>
               )
             })}
+            <Typography>(1) we should complete this work asap!</Typography>
+
           </DialogContent>
           <div className={classes.dialogActions}>
             <ContainedButton className={classes.actionButton} type="submit">
-              Vote
+              Invite More
             </ContainedButton>
           </div>
         </div>
@@ -98,4 +116,4 @@ const PollDialog = ({ open, onClose, pollData }) => {
   );
 }
 
-export default PollDialog;
+export default AdminPollDialog;
