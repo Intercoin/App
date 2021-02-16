@@ -27,13 +27,6 @@ const useStyles = makeStyles(theme => ({
 
 const TopAppBarMenuItem = ({ selected, menuItem, onClick }) => {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const handleClick = event => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   return (
     <>
@@ -44,12 +37,11 @@ const TopAppBarMenuItem = ({ selected, menuItem, onClick }) => {
           root: classes.listItem
         }}
         selected={selected}
-        onClick={menuItem.id === 'be-partner' ? handleClick : onClick}>
+        onClick={onClick}>
         {menuItem.icon}
         <ListItemText>
           <Typography variant='h6' className={classes.menuFont} noWrap>{menuItem.text}</Typography>
         </ListItemText>
-        {anchorEl ? menuItem.antiBadgeIcon : menuItem.badgeIcon}
       </ListItem>
     </>
   );

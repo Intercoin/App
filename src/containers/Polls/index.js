@@ -59,7 +59,6 @@ const Pools = ({ history }) => {
     console.log('checking rendering counts')
     setPollData(rowData)
     setIsDialog(true);
-    setIsAdminDialog(true)
   }
 
   const openCloseDialogHandler = show => () => {

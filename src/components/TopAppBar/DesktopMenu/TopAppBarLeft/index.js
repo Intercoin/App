@@ -13,9 +13,7 @@ const TopAppBarLeft = () => {
   const classes = useStyles();
 
   return (
-    <div>
-      <LogoWithTitle logoWidth={80} logoHeight={80} titleVariant={'h6'} className={classes.margin} />
-    </div>
+    <LogoWithTitle logoWidth={80} logoHeight={80} titleVariant={'h6'} className={classes.margin} />
   );
 };
 

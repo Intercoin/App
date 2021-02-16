@@ -16,16 +16,15 @@ import { TOP_BAR_MENUS } from 'constants/top-menu-items';
 
 const DELAY_TIME = 100;
 const Home = loadable(() => pMinDelay(import('containers/Home'), DELAY_TIME));
+const Communities = loadable(() => pMinDelay(import('containers/Communities'), DELAY_TIME));
 const Polls = loadable(() => pMinDelay(import('containers/Polls'), DELAY_TIME));
 const AddEditPolls = loadable(() => pMinDelay(import('containers/Polls/AddEditPolls'), DELAY_TIME));
 
 const App = ({ location, history }) => {
   const [loadingInfo, setLoadingInfo] = useState(false);
   const [account, setAccount] = useState();
-  const [topAppMenu, setTopAppMenu] = useState(0);
-  const topMenuChageHandler = (index) => {
-    setTopAppMenu(index);
-  };
+  const [topAppMenu, setTopAppMenu] = useState('');
+
   useWeb3();
   const loadBlockChainDataInfo = () => {
     window.web3.eth?.getCoinbase((err, account) => {
@@ -45,9 +44,9 @@ const App = ({ location, history }) => {
     TOP_BAR_MENUS.map((TOP_BAR_MENU, index) => {
       if (TOP_BAR_MENU.url === location.pathname || location.pathname.includes(TOP_BAR_MENU.url)) {
         setTopAppMenu(index)
+        console.log('kevin==> select ')
       }
     });
-
   }, [location]);
 
   return (
@@ -57,7 +56,7 @@ const App = ({ location, history }) => {
         setLoadingInfo,
         account,
         topAppMenu,
-        topMenuChageHandler
+        setTopAppMenu
       }}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
@@ -66,7 +65,8 @@ const App = ({ location, history }) => {
             <Switch>
               <Route render={() => (
                 <Switch>
-                  <Route exact path={PAGES.HOME} component={Home} />
+                  <Route exact path={PAGES.Home} component={Home} />
+                  <Route exact path={PAGES.Communities} component={Communities} />
                   <Route exact path={PAGES.POLLS} component={Polls} />
                   <Route exact path={`${PAGES.POLLS}/:_id`} component={AddEditPolls} />
                 </Switch>

@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Home = () => {
+const Communities = () => {
   const classes = useStyles();
   const { setLoadingInfo, account } = useContext(AppContext);
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -30,13 +30,13 @@ const Home = () => {
 
   return (
     <div className={classes.root}>
-      <CardWrapper title={'Intercoin'}>
+      <CardWrapper title={'Intercoin Communities'}>
         <div style={{ display: 'flex', width: '100%', height: '100%', alignItems: 'center', justifyItems: 'center' }}>
-          <Typography variant='h6'> Welcome! </Typography>
+          <Typography variant='h6'> Coming Soon! </Typography>
         </div>
       </CardWrapper>
     </div>
   );
 };
 
-export default Home;
+export default Communities;

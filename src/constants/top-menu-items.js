@@ -12,7 +12,7 @@ const TOP_BAR_MENUS = [
   {
     id: 'Communities',
     icon: <ForumIcon />,
-    url: '/',
+    url: '/communities',
     text: 'Communities'
   },
   {
