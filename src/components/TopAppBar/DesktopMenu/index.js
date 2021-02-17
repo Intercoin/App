@@ -1,5 +1,5 @@
 
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Hidden from '@material-ui/core/Hidden';
 
@@ -23,14 +23,15 @@ const useStyles = makeStyles(theme => ({
 const DesktopMenu = () => {
   const classes = useStyles();
   const { account } = useContext(AppContext);
+  const [open, setOpen] = useState(false);
 
   return (
     <>
       <div className={classes.LogoContainer}>
-        <MobileMenu />
-        <TopAppBarLeft />
+        <MobileMenu setOpen={setOpen} open={open} />
+        <TopAppBarLeft setOpen = {setOpen} />
         <Hidden mdDown implementation='css' className={classes.height}>
-        <TopAppBarMenu menuItems={TOP_BAR_MENUS.filter((item, index) => index < (account !== null ? 6 : 1))} />
+          <TopAppBarMenu menuItems={TOP_BAR_MENUS.filter((item, index) => index < (account !== null ? 6 : 1))} />
         </Hidden>
       </div>
       <TopAppBarRight />

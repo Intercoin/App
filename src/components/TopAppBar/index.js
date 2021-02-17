@@ -9,12 +9,13 @@ import DesktopMenu from './DesktopMenu';
 import { commonUseStyles } from 'styles/use-styles';
 
 const useStyles = makeStyles(theme => ({
-  appBar: {
+  appBar: props => ({
     [theme.breakpoints.down('md')]: {
       paddingLeft: theme.spacing(3),
       paddingRight: theme.spacing(3)
     },
     [theme.breakpoints.down('sm')]: {
+      backgroundColor: props.layout ? theme.palette.background.default : theme.palette.background.main,
       paddingRight: 0
     },
     [theme.breakpoints.down(340)]: {
@@ -27,13 +28,13 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'space-between',
     zIndex: theme.zIndex.drawer + 3,
     padding: theme.spacing(0, 5, 0, 5),
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: props.layout ? theme.palette.background.default : theme.palette.background.main,
     minHeight: theme.spacing(4.5),
     maxWidth: theme.custom.layout.topBarMaxWidth,
     marginLeft: 'auto',
     marginRight: 'auto',
     borderBottom: `none`
-  },
+  }),
   flex: {
     [theme.breakpoints.up('sm')]: {
       flexDirection: 'row',
@@ -43,9 +44,10 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down('sm')]: {
       display: 'contents',
     },
+    backgroundColor: theme.palette.background.default,
     width: '100%',
-    paddingLeft: 0,
-    paddingRight: 0,
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1),
     display: 'flex',
     flexDirection: 'column-reverse'
   },
@@ -67,8 +69,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const TopAppBar = () => {
-  const classes = useStyles();
+const TopAppBar = ({ layout }) => {
+  const classes = useStyles({ layout });
   const commonClasses = commonUseStyles();
 
   return (

@@ -58,11 +58,13 @@ const Pools = ({ history }) => {
   const selectPollHandler = (rowData) => {
     console.log('checking rendering counts')
     setPollData(rowData)
-    setIsDialog(true);
+    // setIsDialog(true);
+    setIsAdminDialog(true)
   }
 
   const openCloseDialogHandler = show => () => {
     setIsDialog(show);
+    setIsAdminDialog(show)
   }
 
   useEffect(() => {

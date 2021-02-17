@@ -18,7 +18,7 @@ import { optionData } from 'utils/helper/mockupData';
 
 const useStyles = makeStyles(theme => ({
   actionButton: {
-    backgroundColor: theme.custom.palette.darkRed,
+    backgroundColor: theme.palette.text.hoverText,
     minWidth: theme.spacing(12),
     border: 'none'
   },
@@ -83,7 +83,7 @@ const AdminPollDialog = ({ open, onClose, pollData }) => {
 
               return (
                 <div key={index} className={classes.sliderContainer}>
-                  <Typography style = {{fontWeight:'300'}} variant='subtitle2'>{` ( ${index + 1} )  `}  {option.content}</Typography>
+                  <Typography style={{ fontWeight: '300' }} variant='subtitle2'>{` ( ${index + 1} )  `}  {option.content}</Typography>
                   <FlexibleWidthXYPlot height={80}>
                     <XAxis />
                     <LineMarkSeries
@@ -92,18 +92,17 @@ const AdminPollDialog = ({ open, onClose, pollData }) => {
                         strokeWidth: '3px'
                       }}
                       markStyle={{ stroke: 'blue' }}
-                      data={[{ x: option.to/2, y: 0 }]}
+                      data={[{ x: option.to / 2, y: 0 }]}
                     />
                     <LineMarkSeries
                       curve={'curveMonotoneX'}
-                      data={[{ x: option.from, y: 80 }, { x: option.to/2, y: 99 }, { x: option.to, y: 70 }]}
+                      data={[{ x: option.from, y: 80 }, { x: option.to / 2, y: 99 }, { x: option.to, y: 70 }]}
                     />
                   </FlexibleWidthXYPlot>
                 </div>
               )
             })}
             <Typography>(1) we should complete this work asap!</Typography>
-
           </DialogContent>
           <div className={classes.dialogActions}>
             <ContainedButton className={classes.actionButton} type="submit">

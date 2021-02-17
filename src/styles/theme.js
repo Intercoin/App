@@ -32,7 +32,8 @@ const theme = responsiveFontSizes(createMuiTheme({
     },
     text: {
       primary: '#fff',
-      secondary: '#555E7F',
+      // secondary: '#555E7F',
+      secondary: '#6B76A1',
       inactiveSubMenu: '#92959e',
       notification: '#8D9BD4',
       hoverText: '#16ACE2'

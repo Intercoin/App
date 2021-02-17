@@ -24,6 +24,7 @@ const App = ({ location, history }) => {
   const [loadingInfo, setLoadingInfo] = useState(false);
   const [account, setAccount] = useState();
   const [topAppMenu, setTopAppMenu] = useState('');
+  const [layout, setLayout] = useState(true)
 
   useWeb3();
   const loadBlockChainDataInfo = () => {
@@ -44,9 +45,12 @@ const App = ({ location, history }) => {
     TOP_BAR_MENUS.map((TOP_BAR_MENU, index) => {
       if (TOP_BAR_MENU.url === location.pathname || location.pathname.includes(TOP_BAR_MENU.url)) {
         setTopAppMenu(index)
-        console.log('kevin==> select ')
+        setLayout(true)
       }
     });
+    if (location.pathname === '/') {
+      setLayout(false)
+    }
   }, [location]);
 
   return (
@@ -61,7 +65,7 @@ const App = ({ location, history }) => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Suspense fallback={<div>Loading...</div>}>
-          <Layout>
+          <Layout layout={layout}>
             <Switch>
               <Route render={() => (
                 <Switch>

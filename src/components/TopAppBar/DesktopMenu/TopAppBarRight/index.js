@@ -28,8 +28,8 @@ const TopAppBarRight = () => {
       {account
         ?
         <div className={classes.avatarContainer}>
-          <Avatar size="40" round={true} name={"Inter Coin"} />
-          <Typography variant='body1' style={{ marginLeft: 8 }}>
+          <Avatar size="32" round={true} name={"Inter Coin"} />
+          <Typography variant='body1' style={{ marginLeft: 8, marginRight:4 }}>
             {account.slice(0, 5) + '...' + account.slice(account.length - 5, account.length)}
           </Typography>
         </div>

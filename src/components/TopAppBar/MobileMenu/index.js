@@ -28,13 +28,16 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const MobileMenu = () => {
+const MobileMenu = ({ open, setOpen }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
-  const [open, setOpen] = useState(false);
   const handleClick = event => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
     setOpen(!open)
+  };
+  const handleItemClick = () => {
+    setAnchorEl(null);
+    setOpen(false);
   };
   useEffect(() => {
     if (open) {
@@ -44,10 +47,6 @@ const MobileMenu = () => {
       document.body.style.overflow = 'unset';
     }
   }, [open])
-  const handleItemClick = () => {
-    setAnchorEl(null);
-    setOpen(false);
-  };
 
   return (
     <>

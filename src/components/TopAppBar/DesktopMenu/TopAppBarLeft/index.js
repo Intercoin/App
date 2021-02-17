@@ -9,11 +9,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const TopAppBarLeft = () => {
+const TopAppBarLeft = ({setOpen}) => {
   const classes = useStyles();
 
   return (
-    <LogoWithTitle logoWidth={80} logoHeight={80} titleVariant={'h6'} className={classes.margin} />
+    <LogoWithTitle setOpen = {setOpen} logoWidth={80} logoHeight={80} titleVariant={'h6'} className={classes.margin} />
   );
 };
 

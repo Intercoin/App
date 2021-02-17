@@ -23,12 +23,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const LogoWithTitle = ({ history, logoWidth, logoHeight, titleVariant, className }) => {
+const LogoWithTitle = ({ setOpen, history, logoWidth, logoHeight, titleVariant, className }) => {
   const classes = useStyles();
   const { setTopAppMenu } = useContext(AppContext);
   const onClickHander = () => {
     history.push(PAGES.Home);
     setTopAppMenu('');
+    setOpen(false)
   }
 
   return (
