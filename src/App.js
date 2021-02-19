@@ -5,9 +5,6 @@ import React, { useState, useEffect, Suspense } from 'react';
 //  web3 test modal ray
 import Web3Modal from "web3modal";
 import Web3 from "web3";
-import WalletConnectProvider from "@walletconnect/web3-provider";
-import Authereum from "authereum";
-import Fortmatic from "fortmatic";
 import { apiGetAccountAssets } from "utils/helper/api";
 //web3 test modal ray
 
@@ -31,7 +28,6 @@ const Polls = loadable(() => pMinDelay(import('containers/Polls'), DELAY_TIME));
 const AddEditPolls = loadable(() => pMinDelay(import('containers/Polls/AddEditPolls'), DELAY_TIME));
 
 const App = ({ location }) => {
-
   const INITIAL_STATE = {
     fetching: false,
     address: "",
