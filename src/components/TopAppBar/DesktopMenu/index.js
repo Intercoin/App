@@ -10,6 +10,8 @@ import TopAppBarMenu from './TopAppBarMenu';
 import { TOP_BAR_MENUS } from 'constants/top-menu-items';
 import MobileMenu from 'components/TopAppBar/MobileMenu';
 
+import { isEmpty } from 'utils/utility';
+
 const useStyles = makeStyles(theme => ({
   height: {
     height: '100%'
@@ -22,7 +24,7 @@ const useStyles = makeStyles(theme => ({
 }));
 const DesktopMenu = () => {
   const classes = useStyles();
-  const { account } = useContext(AppContext);
+  const { account, state } = useContext(AppContext);
   const [open, setOpen] = useState(false);
 
   return (
@@ -31,7 +33,7 @@ const DesktopMenu = () => {
         <MobileMenu setOpen={setOpen} open={open} />
         <TopAppBarLeft setOpen = {setOpen} />
         <Hidden mdDown implementation='css' className={classes.height}>
-          <TopAppBarMenu menuItems={TOP_BAR_MENUS.filter((item, index) => index < (account !== null ? 6 : 1))} />
+          <TopAppBarMenu menuItems={TOP_BAR_MENUS.filter((item, index) => index < (!isEmpty(state.address) ? 6 : 1))} />
         </Hidden>
       </div>
       <TopAppBarRight />

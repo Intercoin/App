@@ -1,10 +1,10 @@
 
+import { AppContext } from 'contexts';
 import { useContext } from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import { makeStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router-dom';
 
-import { AppContext } from 'contexts';
 import TopAppBarMenuItem from './TopAppBarMenuItem';
 
 const useStyles = makeStyles(theme => ({

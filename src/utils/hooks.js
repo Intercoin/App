@@ -1,7 +1,6 @@
 
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import Web3 from 'web3';
-import { SizeMe } from 'react-sizeme';
 
 import { NETWORK_URL } from 'config';
 
@@ -18,27 +17,21 @@ const useWeb3 = async () => {
   }
 };
 
-const useSizeMe = (render, options) => {
-  const [currentSize, setSize] = useState({ width: null, height: null });
-  return [
-    <SizeMe {...options}>
-      {({ size }) => {
-        if (
-          size.width !== currentSize.width ||
-          size.height !== currentSize.height
-        ) {
-          setSize(size);
-        }
-        return render({ ...size });
-      }}
-    </SizeMe>,
-    currentSize.width,
-    currentSize.height,
-  ];
-}
+const useAccount = () => {
+  const [accountInfo, setAccountInfo] = useState(localStorage.getItem('account'));
 
+  // console.log('kevin account hooks ===>',accountInfo)
+
+  const setAccountInfoState = useCallback((value) => {
+    setAccountInfo(value);
+    // console.log('kevin account hooks nextstep!! ===>',value)
+    localStorage.setItem('account', value);
+  },[]);
+
+  return { accountInfo, setAccountInfoState};
+};
 
 export {
   useWeb3,
-  useSizeMe
+  useAccount
 };
