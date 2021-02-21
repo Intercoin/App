@@ -24,17 +24,24 @@ const useStyles = makeStyles(theme => ({
     overflow: 'auto'
   },
   buttonColor: {
-    color: theme.palette.text.primary
+    [theme.breakpoints.down(339)]: {
+      marginLeft: 8
+    },
+    color: theme.palette.text.primary,
+
   }
 }));
 
-const MobileMenu = () => {
+const MobileMenu = ({ open, setOpen }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
-  const [open, setOpen] = useState(false);
   const handleClick = event => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
     setOpen(!open)
+  };
+  const handleItemClick = () => {
+    setAnchorEl(null);
+    setOpen(false);
   };
   useEffect(() => {
     if (open) {
@@ -44,10 +51,6 @@ const MobileMenu = () => {
       document.body.style.overflow = 'unset';
     }
   }, [open])
-  const handleItemClick = () => {
-    setAnchorEl(null);
-    setOpen(false);
-  };
 
   return (
     <>

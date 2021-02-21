@@ -5,17 +5,15 @@ import LogoWithTitle from 'components/LogoWithTitle';
 
 const useStyles = makeStyles(theme => ({
   margin: {
-    margin: theme.spacing(1, 0),
+    margin: `${theme.spacing(0)} !important`,
   }
 }));
 
-const TopAppBarLeft = () => {
+const TopAppBarLeft = ({ setOpen }) => {
   const classes = useStyles();
 
   return (
-    <div>
-      <LogoWithTitle logoWidth={80} logoHeight={80} titleVariant={'h6'} className={classes.margin} />
-    </div>
+    <LogoWithTitle setOpen={setOpen} logoWidth={80} logoHeight={80} titleVariant={'h6'} className={classes.margin} />
   );
 };
 

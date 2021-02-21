@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
     },
     flexGrow: 1,
     minHeight: `calc(100vh - ${theme.custom.layout.topAppBarHeight + theme.custom.layout.footerHeight}px)`,
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: theme.palette.background.main,
     padding: theme.spacing(0, 5, 0, 5)
   },
   mainPanel: {
@@ -37,14 +37,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Layout = ({ children }) => {
+const Layout = ({ children, layout }) => {
   const classes = useStyles({});
 
   return (
     <>
       <div className={classes.root}>
-        <TopAppBar />
-        <main className={classes.main}>
+        <TopAppBar layout={layout} />
+        <main className={layout ? classes.main : classes.landingMain}>
           <div className={classes.mainPanel}>
             {children}
           </div>

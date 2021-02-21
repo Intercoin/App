@@ -15,8 +15,7 @@ const useStyles = makeStyles(theme => ({
     textTransform: 'none',
     backgroundColor: theme.palette.secondary.main,
     color: theme.palette.primary.contrastText,
-    minWidth: theme.spacing(20),
-
+    minWidth: theme.spacing(15),
     position: 'relative',
     overflow: 'hidden',
     '&::after': {

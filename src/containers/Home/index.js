@@ -3,8 +3,18 @@ import React, { useEffect, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { AppContext } from 'contexts';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
+import Section from 'hoc/Section';
+import SectionAlternate from 'hoc/SectionAlternate';
+import Hero from './Hero';
+import Partners from './Partners';
+import Customization from './Customization';
+import Support from './Support';
+import Download from './Download';
 import CardWrapper from 'hoc/CardWrapper';
+import { integrations, support } from 'utils/helper/mockupData';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,13 +38,30 @@ const Home = () => {
     }, 2000);
   }, [setLoadingInfo]);
 
+  AOS.init({
+    once: true,
+    delay: 50,
+    duration: 500,
+    easing: 'ease-in-out',
+  });
+
   return (
     <div className={classes.root}>
-      <CardWrapper title={'Intercoin Communities'}>
-        <div style={{ display: 'flex', width: '100%', height: '100%', alignItems: 'center', justifyItems: 'center' }}>
-          <Typography variant='h6'> Coming Soon! </Typography>
-        </div>
-      </CardWrapper>
+      <Section >
+        <Hero />
+      </Section>
+      <Section>
+        <Partners data={integrations} />
+      </Section>
+      <SectionAlternate>
+        <Customization />
+      </SectionAlternate>
+      <Section narrow>
+        <Support data={support} />
+      </Section>
+      <Section>
+        <Download data={[]} />
+      </Section>
     </div>
   );
 };

@@ -1,6 +1,7 @@
 
 const PAGES = {
-  HOME: '/',
+  Home: '/',
+  Communities: '/communities',
   POLLS: '/polls'
 };
 

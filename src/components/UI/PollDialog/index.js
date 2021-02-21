@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
     minHeight: 'unset'
   },
   dialogContent: {
-    [theme.breakpoints.down('xs')] : {
+    [theme.breakpoints.down('xs')]: {
       maxHeight: '340px',
     },
     maxHeight: '460px',
@@ -77,7 +77,7 @@ const PollDialog = ({ open, onClose, pollData }) => {
 
               return (
                 <div key={index} className={classes.sliderContainer}>
-                  <Typography variant='subtitle2'>({index + 1})   {option.content}</Typography>
+                  <Typography style={{ fontWeight: '300' }} variant='subtitle2'>{` ( ${index + 1} )  `}   {option.content}</Typography>
                   <CustomSlider
                     value={option.to / 2}
                     from={option.from}

@@ -29,7 +29,7 @@ const MenuPanel = ({ title, menuItems, history, onItemClick }) => {
         {menuItems.map((menuItem, index) => (
           <MenuPanelListItem
             key={menuItem.id}
-            selected={topAppMenu == index}
+            selected={topAppMenu === index}
             menuItem={menuItem}
             onClick={(event) => listItemClickHandler(event, index)} />
         ))}
