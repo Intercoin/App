@@ -4,10 +4,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import { AppContext } from 'contexts';
 import { withRouter } from 'react-router-dom';
 import Grid from "@material-ui/core/Grid";
-import Avatar from '@material-ui/core/Avatar';
 
 import CardWrapper from 'hoc/CardWrapper';
 import IntercoinAvatarBox from 'components/IntercoinAvatarBox';
+import IntercoinTabContainer from 'components/IntercoinTabContainer';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -35,6 +35,7 @@ const useStyles = makeStyles(theme => ({
 const Profile = ({ history }) => {
   const classes = useStyles();
   const { account, setLoadingInfo } = useContext(AppContext);
+  const [filterValue, setFilterValue] = useState("");
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     setLoadingInfo(true);
@@ -48,8 +49,7 @@ const Profile = ({ history }) => {
       <CardWrapper title={'Profile'} >
         <Grid container spacing={2} className={classes.container} >
           <IntercoinAvatarBox />
-        </Grid>
-        <Grid container spacing={2} className={classes.container} >
+          <IntercoinTabContainer setFilterValue={setFilterValue} />
           <Grid item xs={12} sm={6} md={4} lg={3}>
           </Grid>
         </Grid>

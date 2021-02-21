@@ -72,7 +72,6 @@ const IntercoinTabPanel = ({ value, tabs, onChange, backgroundColor, indicatorCo
           key={tab.id}
           icon={tab.icon}
           label={tab.label}
-          data-tut={tab.tour || ''}
           className={index === value ? classes.tab : classes.unSelectedTab}
         />
       ))}
