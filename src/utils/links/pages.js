@@ -1,8 +1,9 @@
 
 const PAGES = {
-  Home: '/',
-  Communities: '/communities',
-  POLLS: '/polls'
+  HOME: '/',
+  COMMUNITIES: '/communities',
+  POLLS: '/polls',
+  PROFILE: '/profile'
 };
 
 export { PAGES } 

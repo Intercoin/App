@@ -23,7 +23,7 @@ const headerData = ['Voting Title', 'Count', 'Context', 'Action'];
 
 const Pools = ({ history }) => {
   const classes = useTableStyles();
-  const { setLoadingInfo, account } = useContext(AppContext);
+  const { setLoadingInfo } = useContext(AppContext);
   const [tableData, setTableData] = useState([]);
   const [pollData, setPollData] = useState({});
   const [currentPage, setCurrentPage] = useState(1);

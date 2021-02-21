@@ -27,7 +27,7 @@ const LogoWithTitle = ({ setOpen, history, logoWidth, logoHeight, titleVariant, 
   const classes = useStyles();
   const { setTopAppMenu } = useContext(AppContext);
   const onClickHander = () => {
-    history.push(PAGES.Home);
+    history.push(PAGES.HOME);
     setTopAppMenu('');
     setOpen(false)
   }

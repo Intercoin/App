@@ -1,9 +1,12 @@
 
 import React, { useMemo } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { useHistory } from "react-router-dom";
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
+
+import { PAGES } from 'utils/links/pages';
 
 const filterLists = ({ itemsType, AvatarItems }) => {
   switch (itemsType) {
@@ -50,14 +53,19 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const IntercoinDownMenu = ({ anchorEl, onClose, marginTop, itemsType, AvatarItems, setAnchorEl, deactivate }) => {
-
   const classes = useStyles({ marginTop });
+  const history = useHistory();
 
   const items = useMemo(
     () => filterLists({ itemsType, AvatarItems })
     , [itemsType]);
 
-  const routeHandler = (title) => () => {
+  const routeHandler = (url) => () => {
+    history.push(url)
+    onClose();
+  }
+
+  const ItemHandler = (title) => {
     if (title === 'Deactive') {
       deactivate();
     }
@@ -91,7 +99,7 @@ const IntercoinDownMenu = ({ anchorEl, onClose, marginTop, itemsType, AvatarItem
               <Typography
                 variant='body1'
                 className={classes.hoverEffect}
-                onClick={item.icon === undefined ? routeHandler(item.title) : null}
+                onClick={item.url === undefined ?()=> ItemHandler(item.title) : routeHandler(item.url)}
               >
                 {item.title}
               </Typography>
@@ -108,7 +116,11 @@ IntercoinDownMenu.defaultProps = {
   itemsType: 'avatar',
   AvatarItems: [
     {
-      title: "Deactive"
+      title: "Profile",
+      url: PAGES.PROFILE
+    },
+    {
+      title: "Deactive",
     }
   ]
 }

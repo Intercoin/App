@@ -48,10 +48,10 @@ const TopAppBarRight = () => {
       {!isEmpty(account)
         ?
         <div className={classes.avatarContainer}>
-          <Avatar onClick={handleClick} size="32" style={{ cursor: 'pointer' }} round={true} name={"Inter Coin"} />
-          <Typography variant='body1' style={{ marginLeft: 8, marginRight: 4 }}>
+          <Avatar onClick={handleClick} size="40" style={{ cursor: 'pointer' }} round={true} name={"Inter Coin"} />
+          {/* <Typography variant='body1' style={{ marginLeft: 8, marginRight: 4 }}>
             {account.slice(0, 4) + '...' + account.slice(account.length - 4, account.length)}
-          </Typography>
+          </Typography> */}
           <IntercoinDownMenu marginTop={2.5} anchorEl={anchorEl} onClose={handleClose} deactivate={deactivate} itemsType />
         </div>
         :

@@ -168,6 +168,7 @@ const AddEditPolls = ({ history, location, match }) => {
         </ContainedButton>
           <ContainedButton
             disabled={''}
+            style = {{backgroundColor : '#4caf50'}}
             onClick={submitHandler}>
             CREATE POLL
         </ContainedButton>

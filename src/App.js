@@ -23,9 +23,7 @@ const Home = loadable(() => pMinDelay(import('containers/Home'), DELAY_TIME));
 const Communities = loadable(() => pMinDelay(import('containers/Communities'), DELAY_TIME));
 const Polls = loadable(() => pMinDelay(import('containers/Polls'), DELAY_TIME));
 const AddEditPolls = loadable(() => pMinDelay(import('containers/Polls/AddEditPolls'), DELAY_TIME));
-
-
-
+const Profile = loadable(() => pMinDelay(import('containers/Profile'), DELAY_TIME));
 
 const App = ({ location }) => {
   const context = useWeb3React();
@@ -94,10 +92,11 @@ const App = ({ location }) => {
             <Switch>
               <Route render={() => (
                 <Switch>
-                  <Route exact path={PAGES.Home} component={Home} />
-                  <Route exact path={PAGES.Communities} component={Communities} />
+                  <Route exact path={PAGES.HOME} component={Home} />
+                  <Route exact path={PAGES.COMMUNITIES} component={Communities} />
                   <Route exact path={PAGES.POLLS} component={Polls} />
                   <Route exact path={`${PAGES.POLLS}/:_id`} component={AddEditPolls} />
+                  <Route exact path={PAGES.PROFILE} component={Profile} />
                 </Switch>
               )} />
             </Switch>
