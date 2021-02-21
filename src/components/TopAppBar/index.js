@@ -11,8 +11,8 @@ import { commonUseStyles } from 'styles/use-styles';
 const useStyles = makeStyles(theme => ({
   appBar: props => ({
     [theme.breakpoints.down('md')]: {
-      paddingLeft: theme.spacing(3),
-      paddingRight: theme.spacing(3)
+      paddingLeft: theme.spacing(2),
+      paddingRight: theme.spacing(2)
     },
     [theme.breakpoints.down('sm')]: {
       backgroundColor: props.layout ? theme.palette.background.default : theme.palette.background.main,

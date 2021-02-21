@@ -24,7 +24,11 @@ const useStyles = makeStyles(theme => ({
     overflow: 'auto'
   },
   buttonColor: {
-    color: theme.palette.text.primary
+    [theme.breakpoints.down(339)]: {
+      marginLeft: 8
+    },
+    color: theme.palette.text.primary,
+
   }
 }));
 

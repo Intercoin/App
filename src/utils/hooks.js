@@ -1,37 +1,86 @@
 
-import React, { useState, useCallback } from 'react';
-import Web3 from 'web3';
+import { useState, useEffect } from 'react'
+import { useWeb3React } from '@web3-react/core'
 
-import { NETWORK_URL } from 'config';
+import { injected } from 'connectors.js'
 
-const useWeb3 = async () => {
-  if (window.ethereum) {
-    window.web3 = new Web3(window.ethereum)
-    await window.ethereum.enable()
-  }
-  else if (window.web3) {
-    window.web3 = new Web3(window.web3.currentProvider || NETWORK_URL)
-  }
-  else {
-    window.location.assign("https://chrome.google.com/webstore/detail/nkbihfbeogaeaoehlefnkodbefgpgknn")
-  }
-};
+const useEagerConnect = () => {
+  const { activate, active } = useWeb3React()
 
-const useAccount = () => {
-  const [accountInfo, setAccountInfo] = useState(localStorage.getItem('account'));
+  const [tried, setTried] = useState(false)
 
-  // console.log('kevin account hooks ===>',accountInfo)
+  useEffect(() => {
+    injected.isAuthorized().then((isAuthorized) => {
+      if (isAuthorized) {
+        activate(injected, undefined, true).catch(() => {
+          setTried(true)
+        })
+      } else {
+        setTried(true)
+      }
+    })
+  }, []) // intentionally only running on mount (make sure it's only mounted once :))
 
-  const setAccountInfoState = useCallback((value) => {
-    setAccountInfo(value);
-    // console.log('kevin account hooks nextstep!! ===>',value)
-    localStorage.setItem('account', value);
-  },[]);
+  // if the connection worked, wait until we get confirmation of that to flip the flag
+  useEffect(() => {
+    if (!tried && active) {
+      setTried(true)
+    }
+  }, [tried, active])
 
-  return { accountInfo, setAccountInfoState};
-};
+  return tried
+}
+
+const useInactiveListener = (suppress) => {
+  const { active, error, activate, deactivate } = useWeb3React()
+
+  useEffect(() => {
+    const { ethereum } = window
+    if (ethereum && ethereum.on && !active && !error && !suppress) {
+      const handleConnect = () => {
+        console.log("Handling 'connect' event")
+        activate(injected)
+      }
+      const handleChainChanged = (chainId) => {
+        console.log("Handling 'chainChanged' event with payload", chainId)
+        activate(injected)
+      }
+      const handleAccountsChanged = (accounts) => {
+        console.log("Handling 'accountsChanged' event with payload", accounts)
+        if (accounts.length > 0) {
+          activate(injected)
+        }
+      }
+      const handleNetworkChanged = (networkId) => {
+        console.log("Handling 'networkChanged' event with payload", networkId)
+        activate(injected)
+      }
+
+      const closeWallet = () => {
+        console.log("Handling 'disconnect' event")
+        deactivate(injected)
+      }
+
+      ethereum.on('connect', handleConnect)
+      ethereum.on('chainChanged', handleChainChanged)
+      ethereum.on('accountsChanged', handleAccountsChanged)
+      ethereum.on('networkChanged', handleNetworkChanged)
+      ethereum.on('disconnect', closeWallet)
+      return () => {
+        if (ethereum.removeListener) {
+          ethereum.removeListener('connect', handleConnect)
+          ethereum.removeListener('chainChanged', handleChainChanged)
+          ethereum.removeListener('accountsChanged', handleAccountsChanged)
+          ethereum.removeListener('networkChanged', handleNetworkChanged)
+          ethereum.on('disconnect', closeWallet)
+        }
+      }
+    }
+  }, [active, error, suppress, activate])
+}
+
 
 export {
-  useWeb3,
-  useAccount
+  useEagerConnect,
+  useInactiveListener
 };

@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
     boxShadow: theme.shadows[10],
     borderRadius: theme.spacing(3 / 8),
     [theme.breakpoints.up('sm')]: {
-      width: 560
+      width: 660
     },
     zIndex: LAYER.DIALOG_MAIN
   },
