@@ -13,10 +13,10 @@ const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     flexDirection: 'row',
-    height: '100%',
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    padding: theme.spacing(1)
   },
   avatarContainer: {
     display: 'flex',
@@ -38,11 +38,18 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     '& .MuiIconButton-root': {
       padding: theme.spacing(.5, 2, .5, 2)
-
     }
   },
   iconColor: {
     color: theme.palette.text.secondary
+  },
+  accountName: {
+    [theme.breakpoints.down('xs')]: {
+      flexDirection: 'column'
+    },
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 }));
 
@@ -58,6 +65,12 @@ const Profile = ({ history }) => {
           <Typography>Kevin </Typography>
           <Typography>Jin</Typography>
         </div>
+      </div >
+      <div className={classes.accountName} >
+        <Typography component='div' color='textSecondary' style={{ paddingRight: 4 }} >Acccount  :
+          </Typography>
+        <Typography> {account?.slice(0, 5) + '...' + account?.slice(account?.length - 5, account?.length)}
+        </Typography>
       </div>
       <div className={classes.contactContainer}>
         <IconButton className={classes.iconColor}>

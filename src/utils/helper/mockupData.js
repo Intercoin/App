@@ -181,32 +181,89 @@ const transactionData = [
   {
     type: 1,
     sender: "kevin",
-    receiver: 'James'
+    receiver: 'James',
+    avatarUrl: "/assets/images/photos/people/ss-400x-js@2x.png"
+  },
+  {
+    type: 1,
+    sender: "kevin jin",
+    receiver: 'Romeo juliet',
+    avatarUrl: "/assets/images/photos/people/rl-400x.png"
+  },
+  {
+    type: 1,
+    sender: "kevin jin",
+    receiver: 'James Bond',
+    avatarUrl: "/assets/images/photos/people/rl-400x.png"
+  },
+  {
+    type: 1,
+    sender: "kevin jin",
+    receiver: 'Romeo juliet',
+    avatarUrl: "/assets/images/photos/people/expert-cover.png"
   },
   {
     type: 1,
     sender: "kevin",
-    receiver: 'Romio'
+    receiver: 'James',
+    avatarUrl: "/assets/images/photos/people/ss-400x-js@2x.png"
   },
   {
     type: 1,
-    sender: "kevin",
-    receiver: 'James'
+    sender: "kevin jin",
+    receiver: 'Romeo juliet',
+    avatarUrl: "/assets/images/photos/people/expert-cover.png"
   },
   {
     type: 1,
+    sender: "kevin jin",
+    receiver: 'James Bond',
+    avatarUrl: "/assets/images/photos/people/rl-400x.png"
+  },
+  {
+    type: 1,
+    sender: "kevin jin",
+    receiver: 'Romeo juliet',
+    avatarUrl: "/assets/images/photos/people/rl-400x.png"
+  },
+  {
+    type: 1,
+    sender: "kevin jin",
+    receiver: 'Romeo juliet',
+    avatarUrl: "/assets/images/photos/people/rl-400x.png"
+  },
+
+  {
+    type: 1,
     sender: "kevin",
-    receiver: 'Romio'
+    receiver: 'James',
+    avatarUrl: "/assets/images/photos/people/ss-400x-js@2x.png"
+  },
+  {
+    type: 1,
+    sender: "kevin jin",
+    receiver: 'James Bond',
+    avatarUrl: "/assets/images/photos/people/rl-400x.png"
+  },
+  {
+    type: 1,
+    sender: "kevin jin",
+    receiver: 'Romeo juliet',
+    avatarUrl: "/assets/images/photos/people/expert-cover.png"
   },
   {
     type: 2,
-    name: "Box Think",
-    logo: '/assets/images/intercoin.png'
+    companyTitle: "Intercoin : Welcome",
+    subTitle: "Intercoin - Building the world wide web ",
+    imageUrl: '/assets/images/intercoin.png',
+    avatarUrl: "/assets/images/photos/people/rl-400x.png"
   },
   {
     type: 2,
-    name: "/assets/images/intercoin.png",
-    logo: 'url'
+    companyTitle: "Scoot Santens - Social Network",
+    subTitle: "The Disproportionate Efficent",
+    imageUrl: '/assets/images/logos/evidencer_200w.png',
+    avatarUrl: "/assets/images/photos/people/expert-cover.png"
   }
 ]
 

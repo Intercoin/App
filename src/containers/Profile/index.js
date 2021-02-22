@@ -18,14 +18,14 @@ const useStyles = makeStyles(theme => ({
     height: '100%',
     width: '100%',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   container: {
     [theme.breakpoints.down('sm')]: {
       padding: 0
     },
     display: 'flex',
-    margin: 0,
+    margin: -8,
     flexGrow: 1,
   },
   large: {
@@ -55,7 +55,7 @@ const Profile = ({ history }) => {
           {
             transactionData.map((transaction, index) => {
               return (
-                <RecentTransactions transaction={transaction} />
+                <RecentTransactions key={index} transaction={transaction} />
               )
             })
           }
