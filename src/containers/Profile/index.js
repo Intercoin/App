@@ -21,7 +21,6 @@ const useStyles = makeStyles(theme => ({
     height: '100%',
     width: '100%',
     justifyContent: 'center',
-    alignItems: 'center',
   },
   container: {
     [theme.breakpoints.down('sm')]: {
