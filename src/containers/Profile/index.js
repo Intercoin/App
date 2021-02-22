@@ -8,6 +8,8 @@ import Grid from "@material-ui/core/Grid";
 import CardWrapper from 'hoc/CardWrapper';
 import IntercoinAvatarBox from 'components/IntercoinAvatarBox';
 import IntercoinTabContainer from 'components/IntercoinTabContainer';
+import RecentTransactions from './RecentTransactions';
+import { transactionData } from 'utils/helper/mockupData';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -46,13 +48,20 @@ const Profile = ({ history }) => {
 
   return (
     <div className={classes.root}>
-      <CardWrapper title={'Profile'} >
+      <CardWrapper flexDirection >
         <Grid container spacing={2} className={classes.container} >
           <IntercoinAvatarBox />
           <IntercoinTabContainer setFilterValue={setFilterValue} />
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-          </Grid>
+          {
+            transactionData.map((transaction, index) => {
+              return (
+                <RecentTransactions transaction={transaction} />
+              )
+            })
+          }
         </Grid>
+        {/* <Grid item xs={12} sm={6} md={4} lg={3}>
+        </Grid> */}
       </CardWrapper>
     </div>
   );

@@ -177,9 +177,43 @@ const support = {
   ],
 };
 
+const transactionData = [
+  {
+    type: 1,
+    sender: "kevin",
+    receiver: 'James'
+  },
+  {
+    type: 1,
+    sender: "kevin",
+    receiver: 'Romio'
+  },
+  {
+    type: 1,
+    sender: "kevin",
+    receiver: 'James'
+  },
+  {
+    type: 1,
+    sender: "kevin",
+    receiver: 'Romio'
+  },
+  {
+    type: 2,
+    name: "Box Think",
+    logo: '/assets/images/intercoin.png'
+  },
+  {
+    type: 2,
+    name: "/assets/images/intercoin.png",
+    logo: 'url'
+  }
+]
+
 export {
   poolData,
   optionData,
   integrations,
-  support
+  support,
+  transactionData
 }

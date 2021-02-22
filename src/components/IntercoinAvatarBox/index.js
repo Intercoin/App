@@ -23,8 +23,8 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'row'
   },
   large: {
-    width: theme.spacing(7),
-    height: theme.spacing(7),
+    width: theme.spacing(8),
+    height: theme.spacing(8),
   },
   nameContainer: {
     display: 'flex',
@@ -37,7 +37,8 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     '& .MuiIconButton-root': {
-      padding: theme.spacing(.5)
+      padding: theme.spacing(.5, 2, .5, 2)
+
     }
   },
   iconColor: {
