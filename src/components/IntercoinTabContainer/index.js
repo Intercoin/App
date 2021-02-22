@@ -19,11 +19,12 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     fontSize: 15,
     padding: theme.spacing(0, 7, 0, 7),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: 0,
       '& .MuiTab-root': {
       },
     },
+
     marginBottom: theme.spacing(1),
     '& .MuiTab-root': {
       minWidth: '7.5%',

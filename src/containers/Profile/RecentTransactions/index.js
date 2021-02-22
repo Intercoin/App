@@ -7,11 +7,13 @@ import CardContent from '@material-ui/core/CardContent';
 import { Typography } from '@material-ui/core';
 import ForumOutlinedIcon from '@material-ui/icons/ForumOutlined';
 import { Avatar } from '@material-ui/core';
+import clsx from 'clsx';
+import { isEmpty } from 'utils/utility';
 
 const useStyles = makeStyles(theme => ({
   root: {},
-  card: {
-    backgroundColor: theme.palette.background.default,
+  card: props => ({
+    backgroundColor: props.selected ? theme.palette.background.sideDrawer : theme.palette.background.default,
     display: 'flex',
     width: "100%",
     flexDirection: 'column',
@@ -26,7 +28,7 @@ const useStyles = makeStyles(theme => ({
       opacity: '100%'
     },
     transition: 'ease-out 0.4s',
-  },
+  }),
   cardContent: {
     display: 'flex',
     flexDirection: 'row',
@@ -38,17 +40,23 @@ const useStyles = makeStyles(theme => ({
   cardMedia: {
     width: 60,
     height: 36
+  },
+  selected: {
+    backgroundColor: theme.palette.background.main
   }
 }));
 
-const RecentTransactions = ({ transaction }) => {
-  const classes = useStyles();
+const RecentTransactions = ({ transaction, contactBoard, setContactBoard, id }) => {
+  const classes = useStyles({});
+  const clickHandler = () => {
+    setContactBoard(id);
+  }
 
   return (
-    <Grid item xs={12} sm={6} md={4} lg={3}>
-      <Card className={classes.card}>
+    <Grid item xs={12} sm={!isEmpty(contactBoard) ? 12 : 12} md={!isEmpty(contactBoard) ? 6 : 4} lg={!isEmpty(contactBoard) ? 4 : 3}>
+      <Card className={classes.card} onClick={clickHandler}>
         {transaction.type === 1 ?
-          <CardContent className={classes.cardContent}>
+          <CardContent className={clsx(classes.cardContent, contactBoard === id && classes.selected)}>
             <ForumOutlinedIcon variant='outline' fontSize='large' />
             <Typography variant='body1' style={{ padding: 8 }} noWrap>
               {transaction?.sender} ⇔ {transaction?.receiver}

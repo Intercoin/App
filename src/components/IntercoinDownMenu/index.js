@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
     '& .MuiMenu-paper': {
       backgroundColor: theme.palette.background.default,
       marginTop: theme.spacing(props.marginTop),
-      border: `1px solid ${theme.custom.palette.darkRed}`,
+      border: `1px solid ${theme.palette.text.hoverText}`,
     },
     '&:focus': {
       backgroundColor: theme.palette.secondary.main
@@ -99,7 +99,7 @@ const IntercoinDownMenu = ({ anchorEl, onClose, marginTop, itemsType, AvatarItem
               <Typography
                 variant='body1'
                 className={classes.hoverEffect}
-                onClick={item.url === undefined ?()=> ItemHandler(item.title) : routeHandler(item.url)}
+                onClick={item.url === undefined ? () => ItemHandler(item.title) : routeHandler(item.url)}
               >
                 {item.title}
               </Typography>

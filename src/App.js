@@ -1,10 +1,8 @@
 
 import 'typeface-roboto';
 import React, { useState, useEffect, Suspense } from 'react';
-//  web3 test modal ray
 import { useWeb3React } from '@web3-react/core'
 import { useEagerConnect, useInactiveListener } from 'utils/hooks.js'
-//web3 test modal ray
 import { Switch, Route, withRouter } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -36,16 +34,12 @@ const App = ({ location }) => {
     }
   }, [activatingConnector, connector])
 
-  // handle logic to eagerly connect to the injected ethereum provider, if it exists and has granted access already
   const triedEager = useEagerConnect()
-
-  // handle logic to connect in reaction to certain events on the injected ethereum provider, if it exists
   useInactiveListener(!triedEager || !!activatingConnector)
 
   const [loadingInfo, setLoadingInfo] = useState(false);
   const [topAppMenu, setTopAppMenu] = useState('');
   const [layout, setLayout] = useState(true)
-  //  web3 test modal ray
 
   const openCloseDialogHandler = show => () => {
     setIsWalletDialog(show)

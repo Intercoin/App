@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.text.secondary
   },
   accountName: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       flexDirection: 'column'
     },
     display: 'flex',
@@ -60,7 +60,7 @@ const Profile = ({ history }) => {
   return (
     <div className={classes.root}>
       <div className={classes.avatarContainer}>
-        <Avatar className={classes.large} />
+        <Avatar src='/assets/images/intercoin.png' className={classes.large} />
         <div className={classes.nameContainer}>
           <Typography>Kevin </Typography>
           <Typography>Jin</Typography>
