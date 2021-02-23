@@ -16,7 +16,8 @@ const useStyles = makeStyles(theme => ({
     },
     [theme.breakpoints.down('sm')]: {
       backgroundColor: props.layout ? theme.palette.background.default : theme.palette.background.main,
-      paddingRight: 0
+      paddingRight: 0,
+      paddingLeft: 0
     },
     [theme.breakpoints.down(340)]: {
       padding: 0,

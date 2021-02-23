@@ -30,11 +30,11 @@ const DesktopMenu = () => {
   return (
     <>
       <div className={classes.LogoContainer}>
-        <MobileMenu setOpen={setOpen} open={open} />
-        <TopAppBarLeft setOpen = {setOpen} />
-        <Hidden mdDown implementation='css' className={classes.height}>
-          <TopAppBarMenu menuItems={TOP_BAR_MENUS.filter((item, index) => index < (!isEmpty(account) ? 6 : 1))} />
-        </Hidden>
+        <TopAppBarLeft setOpen={setOpen} />
+        {/* <MobileMenu setOpen={setOpen} open={open} /> */}
+        {/* <Hidden mdDown implementation='css' className={classes.height}> */}
+        <TopAppBarMenu menuItems={TOP_BAR_MENUS.filter((item, index) => index < (!isEmpty(account) ? 6 : 1))} />
+        {/* </Hidden> */}
       </div>
       <TopAppBarRight />
     </>

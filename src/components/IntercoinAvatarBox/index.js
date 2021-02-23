@@ -27,6 +27,9 @@ const useStyles = makeStyles(theme => ({
     height: theme.spacing(8),
   },
   nameContainer: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none'
+    },
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -53,23 +56,22 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Profile = ({ history }) => {
+const Profile = ({ history, chainId, account }) => {
   const classes = useStyles();
-  const { account } = useContext(AppContext);
 
   return (
     <div className={classes.root}>
       <div className={classes.avatarContainer}>
-        <Avatar src='/assets/images/intercoin.png' className={classes.large} />
+        <Avatar src='/assets/images/photos/people/rl-400x.png' className={classes.large} />
         <div className={classes.nameContainer}>
           <Typography>Kevin </Typography>
           <Typography>Jin</Typography>
         </div>
       </div >
       <div className={classes.accountName} >
-        <Typography component='div' color='textSecondary' style={{ paddingRight: 4 }} >Acccount  :
-          </Typography>
-        <Typography> {account?.slice(0, 5) + '...' + account?.slice(account?.length - 5, account?.length)}
+        <Typography component='div' color='textSecondary' style={{ paddingRight: 4 }} >Kevin Jin's Main Wallet
+        </Typography>
+        <Typography> {account?.slice(0, 9) + '...' + account?.slice(account?.length - 6, account?.length)}
         </Typography>
       </div>
       <div className={classes.contactContainer}>

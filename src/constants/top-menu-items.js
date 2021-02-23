@@ -1,49 +1,42 @@
 
-import ForumIcon from '@material-ui/icons/Forum';
-import HowToVoteIcon from '@material-ui/icons/HowToVote';
-import LocalAtmIcon from '@material-ui/icons/LocalAtm';
-import CreditCardIcon from '@material-ui/icons/CreditCard';
-import MultilineChartIcon from '@material-ui/icons/MultilineChart';
-import SettingsRemoteIcon from '@material-ui/icons/SettingsRemote';
-
 import PAGES from 'utils/links/pages';
 
 const TOP_BAR_MENUS = [
   {
     id: 'Communities',
-    icon: <ForumIcon />,
+    icon: <img width='24' height='24' src='/assets/images/menu/communities.png' alt='calls' />,
     url: '/communities',
     text: 'Communities'
   },
   {
     id: 'pools',
-    icon: <HowToVoteIcon />,
+    icon: <img width='24' height='24' src='/assets/images/menu/polls.png' alt='calls' />,
     url: '/polls',
     text: 'Polls'
   },
   {
     id: 'currencies',
-    icon: <LocalAtmIcon />,
+    icon: <img width='24' height='24' src='/assets/images/menu/currencies.png' alt='calls' />,
     url: '/currencies',
     text: "Currencies"
   },
   {
     id: 'income',
-    icon: <CreditCardIcon />,
+    icon: <img width='24' height='24' src='/assets/images/menu/income.png' alt='calls' />,
     url: '/income',
     text: "Income"
   },
   {
     id: 'contests',
-    icon: <MultilineChartIcon />,
+    icon: <img width='24' height='24' src='/assets/images/menu/contest.png' alt='calls' />,
     url: '/contests',
     text: "Contests"
   },
   {
     id: 'controlling',
-    icon: <SettingsRemoteIcon />,
+    icon: <img width='24' height='24' src='/assets/images/menu/sharedControl.png' alt='calls' />,
     url: '/controlling',
-    text: "Controlling"
+    text: "Shared Control"
   }
 ];
 

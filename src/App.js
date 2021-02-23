@@ -66,6 +66,7 @@ const App = ({ location }) => {
         setTopAppMenu,
         setIsWalletDialog,
         account,
+        chainId,
         deactivate
       }}>
       <ThemeProvider theme={theme}>

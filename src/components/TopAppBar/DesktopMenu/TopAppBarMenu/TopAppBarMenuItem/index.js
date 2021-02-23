@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
+import Hidden from '@material-ui/core/Hidden';
 
 const useStyles = makeStyles(theme => ({
   selectedItem: {
@@ -20,6 +21,9 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 300
   },
   listItem: {
+    [theme.breakpoints.down(340)]: {
+      padding: (0, 9, 0, 9),
+    },
     padding: (0, 10, 0, 10),
     height: '64px',
   }
@@ -39,9 +43,11 @@ const TopAppBarMenuItem = ({ selected, menuItem, onClick }) => {
         selected={selected}
         onClick={onClick}>
         {menuItem.icon}
-        <ListItemText>
-          <Typography variant='h6' className={classes.menuFont} noWrap>{menuItem.text}</Typography>
-        </ListItemText>
+        <Hidden smDown implementation='css' className={classes.height}>
+          <ListItemText>
+            <Typography variant='h6' className={classes.menuFont} noWrap>{menuItem.text}</Typography>
+          </ListItemText>
+        </Hidden>
       </ListItem>
     </>
   );

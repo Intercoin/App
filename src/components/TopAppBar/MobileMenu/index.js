@@ -55,7 +55,7 @@ const MobileMenu = ({ open, setOpen }) => {
   return (
     <>
       <MenuButton type='button' className={classes.buttonColor} onClick={handleClick} isOpen={open} />
-      <div>
+      {/* <div>
         <Popper p={2000} open={open} anchorEl={anchorEl} transition className={classes.popper} elevation={8} placement={"top-start"} disablePortal={false}>
           {({ TransitionProps }) => (
             <Fade {...TransitionProps} timeout={350}>
@@ -65,7 +65,7 @@ const MobileMenu = ({ open, setOpen }) => {
             </Fade>
           )}
         </Popper>
-      </div>
+      </div> */}
     </>
   );
 };

@@ -1,13 +1,15 @@
 
 import React, { useContext } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Avatar, { ConfigProvider } from 'react-avatar';
 import { AppContext } from 'contexts';
-import Typography from '@material-ui/core/Typography';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useHistory } from "react-router-dom";
 // import WalletModel from 'components/WalletModel';
 import ContainedButton from 'components/UI/Buttons/ContainedButton';
 import IntercoinDownMenu from 'components/IntercoinDownMenu';
 import { isEmpty } from 'utils/utility';
+import { PAGES } from 'utils/links/pages';
 
 const useStyles = makeStyles(theme => ({
   avatarContainer: {
@@ -22,11 +24,16 @@ const useStyles = makeStyles(theme => ({
 
 const TopAppBarRight = () => {
   const classes = useStyles()
+  const theme = useTheme();
   const { account, deactivate, setIsWalletDialog } = useContext(AppContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const matches = useMediaQuery(theme.breakpoints.down('350'));
+  const history = useHistory();
+
 
   const handleClick = event => {
-    setAnchorEl(event.currentTarget);
+    // setAnchorEl(event.currentTarget);
+    history.push(PAGES.PROFILE)
   };
 
   const handleClose = () => {
@@ -48,10 +55,8 @@ const TopAppBarRight = () => {
       {!isEmpty(account)
         ?
         <div className={classes.avatarContainer}>
-          <Avatar onClick={handleClick} size="40" style={{ cursor: 'pointer' }} round={true} name={"Inter Coin"} />
-          {/* <Typography variant='body1' style={{ marginLeft: 8, marginRight: 4 }}>
-            {account.slice(0, 4) + '...' + account.slice(account.length - 4, account.length)}
-          </Typography> */}
+          <Avatar onClick={handleClick} size={matches ? "28" : "40"} style={{ cursor: 'pointer' }} round={true}
+            src={'/assets/images/photos/people/rl-400x.png'} name={"Inter Coin"} />
           <IntercoinDownMenu marginTop={2.5} anchorEl={anchorEl} onClose={handleClose} deactivate={deactivate} itemsType />
         </div>
         :
