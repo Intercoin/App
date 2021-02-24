@@ -9,9 +9,6 @@ import TopAppBarMenuItem from './TopAppBarMenuItem';
 
 const useStyles = makeStyles(theme => ({
   menuItem: {
-    [theme.breakpoints.down('sm')]: {
-  
-    },
     flexDirection: 'row',
     width: 'fit-content',
     minHeight: '100%',
@@ -29,18 +26,18 @@ const TopAppBarMenu = ({ menuItems, mobileMenu, history, location }) => {
   };
 
   return (
-   <>
-    <ListItem className={classes.menuItem}>
-      {menuItems.map((menuItem, index) => (
-        <TopAppBarMenuItem
-          key={menuItem.id}
-          mobileMenu={mobileMenu}
-          selected={topAppMenu === index}
-          menuItem={menuItem}
-          onClick={event => menuItemClickHandler(event, index)} />
-      ))}
+    <>
+      <ListItem className={classes.menuItem}>
+        {menuItems.map((menuItem, index) => (
+          <TopAppBarMenuItem
+            key={menuItem.id}
+            mobileMenu={mobileMenu}
+            selected={topAppMenu === index}
+            menuItem={menuItem}
+            onClick={event => menuItemClickHandler(event, index)} />
+        ))}
       </ListItem>
-      </>
+    </>
   );
 };
 

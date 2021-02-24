@@ -86,7 +86,7 @@ const Profile = ({ history }) => {
   const classes = useStyles();
   const { account, chainId, setLoadingInfo } = useContext(AppContext);
   const [filterValue, setFilterValue] = useState("");
-  const [contactBoard, setContactBoard] = useState()
+  const [contactBoard, setContactBoard] = useState();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     setLoadingInfo(true);

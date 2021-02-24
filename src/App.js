@@ -39,7 +39,7 @@ const App = ({ location }) => {
     }
   }, [activatingConnector, connector])
 
-  const triedEager = useEagerConnect()
+  const triedEager = useEagerConnect();
   useInactiveListener(!triedEager || !!activatingConnector)
 
   const [loadingInfo, setLoadingInfo] = useState(false);
@@ -96,8 +96,9 @@ const App = ({ location }) => {
                   <Route exact path={PAGES.HOME.url} component={Home} />
                   <Route exact path={PAGES.COMMUNITIES.url} component={Communities} />
                   <Route exact path={PAGES.POLLS.url} component={Polls} />
-                  <Route exact path={`${PAGES.CURRENCIES.url}/:_id`} component={Currencies} />
-                  <Route exact path={PAGES.CURRENCIES.url} component={Profile} />
+                  <Route exact path={`${PAGES.POLLS.url}/:_id`} component={AddEditPolls} />
+                  <Route exact path={PAGES.CURRENCIES.url} component={Currencies} />
+                  <Route exact path={PAGES.PROFILE.url} component={Profile} />
                   <Route exact path={PAGES.INCOME.url} component={Income} />
                   <Route exact path={PAGES.CONTESTS.url} component={Contests} />
                   <Route exact path={PAGES.SHARED_CONTROL.url} component={SharedControl} />
