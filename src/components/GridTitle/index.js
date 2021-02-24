@@ -33,7 +33,7 @@ const GridTitle = ({ title, buttonName, center }) => {
       {
         buttonName &&
         <ContainedButton
-          href={`${PAGES.POLLS}/new`}
+          href={`${PAGES.POLLS.url}/new`}
           type='submit'>
           {buttonName}
         </ContainedButton>

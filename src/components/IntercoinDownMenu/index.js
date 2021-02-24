@@ -117,7 +117,7 @@ IntercoinDownMenu.defaultProps = {
   AvatarItems: [
     {
       title: "Profile",
-      url: PAGES.PROFILE
+      url: PAGES.PROFILE.url
     },
     {
       title: "Deactive",

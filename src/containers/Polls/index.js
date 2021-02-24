@@ -41,7 +41,7 @@ const Pools = ({ history }) => {
 
   const editHandler = _id => () => {
     history.push({
-      pathname: `${PAGES.POLLS}/${_id}`
+      pathname: `${PAGES.POLLS.url}/${_id}`
     })
 
   };

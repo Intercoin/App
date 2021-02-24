@@ -7,6 +7,7 @@ import clsx from 'clsx';
 import { AppContext } from 'contexts';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
+import CircleButton from 'components/UI/Buttons/CircleButton';
 
 import Logo from 'components/Logo';
 import { PAGES } from 'utils/links/pages';
@@ -39,16 +40,14 @@ const LogoWithTitle = ({ setOpen, history, logoWidth, logoHeight, titleVariant, 
   const classes = useStyles();
   const { setTopAppMenu } = useContext(AppContext);
   const onClickHander = () => {
-    history.push(PAGES.HOME);
+    history.push(PAGES.HOME.url);
     setTopAppMenu('');
     setOpen(false)
   }
 
   return (
     <div className={clsx(classes.root, className)}>
-      <IconButton onClick={onClickHander}>
-        <Logo className={classes.logo} width={logoWidth} height={logoHeight} />
-      </IconButton>
+      <CircleButton style = {{ display : 'flex',  backgroundColor : '#292C40' }}  onClick={onClickHander} icon={<Logo className={classes.logo} width={logoWidth} height={logoHeight} />} />
       <Hidden mdDown implementation='css' className={classes.height}>
         <Typography color='textPrimary' variant={titleVariant}>
           Intercoin

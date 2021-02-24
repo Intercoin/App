@@ -7,6 +7,8 @@ import { useHistory } from "react-router-dom";
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 
+import CircleButton from 'components/UI/Buttons/CircleButton';
+import RadiusButton from 'components//RadiusButton';
 import ContainedButton from 'components/UI/Buttons/ContainedButton';
 import IntercoinDownMenu from 'components/IntercoinDownMenu';
 import { isEmpty } from 'utils/utility';
@@ -38,7 +40,7 @@ const TopAppBarRight = () => {
 
   const handleClick = event => {
     // setAnchorEl(event.currentTarget);
-    history.push(PAGES.PROFILE)
+    history.push(PAGES.PROFILE.url)
   };
 
   const handleClose = () => {
@@ -60,22 +62,19 @@ const TopAppBarRight = () => {
         colors={['#FF2929', '#FF7A29', '#FAD02E', '#91FA49', '#36D8B7', '#3B8AFF', '#991EF9', '#FF5DCD']}>
         {!isEmpty(account)
           ?
-          <IconButton onClick={handleClick} className={classes.avatarContainer}>
-            <Avatar size={"40"} style={{ cursor: 'pointer' }} round={true}
-              src={'/assets/images/photos/people/rl-400x.png'} name={"Inter Coin"} />
-            <IntercoinDownMenu marginTop={2.5} anchorEl={anchorEl} onClose={handleClose} deactivate={deactivate} itemsType />
-          </IconButton>
+          <CircleButton onClick={handleClick} className={classes.avatarContainer} icon = {<Avatar size={"38"} style={{ cursor: 'pointer'}} round={true}
+          src={'/assets/images/photos/people/rl-400x.png'} name={"Inter Coin"} />}/>
           :
-          <ContainedButton
+          <RadiusButton
             style={{ backgroundColor: '#16ACE2' }}
             onClick={connectWallet}>
             Connect Wallet
-         </ContainedButton>
+          </RadiusButton>
         }
       </ConfigProvider>
-      <IconButton >
-        <SearchIcon style={{ color: '#fff' }} fontSize="large" />
-      </IconButton>
+      <CircleButton
+        style = {{backgroundColor : '#1B1F2E', marginLeft  :8}}
+        icon={<SearchIcon style={{ color: '#fff' }} />} />
     </div>
   );
 };

@@ -109,7 +109,7 @@ const AddEditPolls = ({ history, location, match }) => {
   }
   const goBack = () => {
     history.push({
-      pathname: PAGES.POLLS,
+      pathname: PAGES.POLLS.url,
       state: {
         currentPage: (location.state || {}).currentPage
       }
