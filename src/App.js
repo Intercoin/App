@@ -15,6 +15,7 @@ import { AppContext } from 'contexts';
 import { PAGES } from 'utils/links/pages';
 import { TOP_BAR_MENUS } from 'constants/top-menu-items';
 import WalletModal from 'components/WalletModal';
+import { isEmpty } from 'utils/utility';
 
 const DELAY_TIME = 100;
 const Home = loadable(() => pMinDelay(import('containers/Home'), DELAY_TIME));
@@ -27,7 +28,7 @@ const Income = loadable(() => pMinDelay(import('containers/Income'), DELAY_TIME)
 const Contests = loadable(() => pMinDelay(import('containers/Contests'), DELAY_TIME));
 const SharedControl = loadable(() => pMinDelay(import('containers/SharedControl'), DELAY_TIME));
 
-const App = ({ location }) => {
+const App = ({ location, history }) => {
   const context = useWeb3React();
   const { connector, library, chainId, account, activate, deactivate, active, error } = context
   const [isWalletDialog, setIsWalletDialog] = useState();
@@ -49,6 +50,11 @@ const App = ({ location }) => {
   const openCloseDialogHandler = show => () => {
     setIsWalletDialog(show)
   }
+  useEffect(() => {
+    if (isEmpty(account)) {
+      history.push(PAGES.HOME.url)
+    }
+  }, [account])
 
   useEffect(() => {
     TOP_BAR_MENUS.map((TOP_BAR_MENU, index) => {
@@ -92,17 +98,22 @@ const App = ({ location }) => {
             }
             <Switch>
               <Route render={() => (
-                <Switch>
-                  <Route exact path={PAGES.HOME.url} component={Home} />
-                  <Route exact path={PAGES.COMMUNITIES.url} component={Communities} />
-                  <Route exact path={PAGES.POLLS.url} component={Polls} />
-                  <Route exact path={`${PAGES.POLLS.url}/:_id`} component={AddEditPolls} />
-                  <Route exact path={PAGES.CURRENCIES.url} component={Currencies} />
-                  <Route exact path={PAGES.PROFILE.url} component={Profile} />
-                  <Route exact path={PAGES.INCOME.url} component={Income} />
-                  <Route exact path={PAGES.CONTESTS.url} component={Contests} />
-                  <Route exact path={PAGES.SHARED_CONTROL.url} component={SharedControl} />
-                </Switch>
+                account ?
+                  <Switch>
+                    <Route exact path={PAGES.HOME.url} component={Home} />
+                    <Route exact path={PAGES.COMMUNITIES.url} component={Communities} />
+                    <Route exact path={PAGES.POLLS.url} component={Polls} />
+                    <Route exact path={`${PAGES.POLLS.url}/:_id`} component={AddEditPolls} />
+                    <Route exact path={PAGES.CURRENCIES.url} component={Currencies} />
+                    <Route exact path={PAGES.PROFILE.url} component={Profile} />
+                    <Route exact path={PAGES.INCOME.url} component={Income} />
+                    <Route exact path={PAGES.CONTESTS.url} component={Contests} />
+                    <Route exact path={PAGES.SHARED_CONTROL.url} component={SharedControl} />
+                  </Switch>
+                  :
+                  <Switch>
+                    <Route exact path={PAGES.HOME.url} component={Home} />
+                  </Switch>
               )} />
             </Switch>
           </Layout>
