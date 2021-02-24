@@ -1,16 +1,18 @@
 
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import Hidden from '@material-ui/core/Hidden';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles(theme => ({
-  selectedItem: {
-    color: theme.palette.primary.contrastText,
+  selectedItem: props => ({
+    borderTop: props.mobileMenu ? `1px solid ${theme.palette.text.hoverText}` : null,
+    color: props.mobileMenu ? theme.palette.text.hoverText : theme.palette.primary.contrastText,
     backgroundColor: `${theme.palette.background.main} !important`
-  },
+  }),
   menuFont: {
     [theme.breakpoints.down(1360)]: {
       fontSize: theme.spacing(1.8),
@@ -29,8 +31,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const TopAppBarMenuItem = ({ selected, menuItem, onClick }) => {
-  const classes = useStyles();
+const TopAppBarMenuItem = ({ selected, menuItem, onClick, mobileMenu }) => {
+  const classes = useStyles({ mobileMenu });
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up('md'));
 
   return (
     <>
@@ -42,7 +46,7 @@ const TopAppBarMenuItem = ({ selected, menuItem, onClick }) => {
         }}
         selected={selected}
         onClick={onClick}>
-        {menuItem.icon}
+        {(mobileMenu || matches) && menuItem.icon}
         <Hidden smDown implementation='css' className={classes.height}>
           <ListItemText>
             <Typography variant='h6' className={classes.menuFont} noWrap>{menuItem.text}</Typography>

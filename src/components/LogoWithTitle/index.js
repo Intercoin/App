@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
 import { AppContext } from 'contexts';
 import Hidden from '@material-ui/core/Hidden';
+import IconButton from '@material-ui/core/IconButton';
 
 import Logo from 'components/Logo';
 import { PAGES } from 'utils/links/pages';
@@ -23,9 +24,10 @@ const useStyles = makeStyles(theme => ({
     },
   },
   logo: {
-    [theme.breakpoints.down('xs')]: {
-      marginRight: theme.spacing(.2)
-    },
+
+    // [theme.breakpoints.down('xs')]: {
+    //   marginRight: theme.spacing(.2)
+    // },
     marginRight: theme.spacing(1.5)
   },
   height: {
@@ -43,9 +45,11 @@ const LogoWithTitle = ({ setOpen, history, logoWidth, logoHeight, titleVariant, 
   }
 
   return (
-    <div onClick={onClickHander} className={clsx(classes.root, className)}>
-      <Logo className={classes.logo} width={logoWidth} height={logoHeight} />
-      <Hidden smDown implementation='css' className={classes.height}>
+    <div className={clsx(classes.root, className)}>
+      <IconButton onClick={onClickHander}>
+        <Logo className={classes.logo} width={logoWidth} height={logoHeight} />
+      </IconButton>
+      <Hidden mdDown implementation='css' className={classes.height}>
         <Typography color='textPrimary' variant={titleVariant}>
           Intercoin
       </Typography>

@@ -96,6 +96,7 @@ const App = ({ location }) => {
               )} />
             </Switch>
           </Layout>
+          
         </Suspense>
       </ThemeProvider>
     </AppContext.Provider>

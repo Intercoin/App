@@ -6,16 +6,15 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: 24,
-    height: 22,
-    color: theme.palette.text.primary,
+    width: 29,
+    height: 28
   }
 }));
 
 const CurrenciesIcon = ({ className, viewBox, color, ...rest }) => {
   const classes = useStyles();
   return (
-    <SvgIcon viewBox={viewBox || "0 0 495.045 475.045"} {...rest} className={clsx(classes.root, className)}>
+    <SvgIcon viewBox={viewBox || "0 0 495.045 455.045"} {...rest} className={clsx(classes.root, className)}>
       <g>
         <g id="Icons_23_">
           <g>

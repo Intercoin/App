@@ -2,7 +2,7 @@
 import Icon from '@material-ui/core/Icon';
 import OutlinedFlagRoundedIcon from '@material-ui/icons/OutlinedFlagRounded';
 import HowToVoteOutlinedIcon from '@material-ui/icons/HowToVoteOutlined';
-import CreditCardIcon from '@material-ui/icons/CreditCard';
+import CardTravelIcon from '@material-ui/icons/CardTravel';
 import SignalWifi2BarLockIcon from '@material-ui/icons/SignalWifi2BarLock';
 import CurrenciesIcon from 'components/Icons/CurrenciesIcon';
 import ContestIcon from 'components/Icons/ContestIcon';
@@ -11,25 +11,25 @@ import PAGES from 'utils/links/pages';
 const TOP_BAR_MENUS = [
   {
     id: 'Communities',
-    icon: <OutlinedFlagRoundedIcon fontSize='default' />,
+    icon: <OutlinedFlagRoundedIcon fontSize='large' />,
     url: '/communities',
     text: 'Communities'
   },
   {
     id: 'pools',
-    icon: <HowToVoteOutlinedIcon fontSize='default' />,
+    icon: <HowToVoteOutlinedIcon fontSize='large' />,
     url: '/polls',
     text: 'Polls'
   },
   {
     id: 'currencies',
-    icon: <CurrenciesIcon />,
+    icon: <CurrenciesIcon fontSize='large' />,
     url: '/currencies',
     text: "Currencies"
   },
   {
     id: 'income',
-    icon: <CreditCardIcon fontSize='default' />,
+    icon: <CardTravelIcon fontSize='large' />,
     url: '/income',
     text: "Income"
   },
@@ -41,7 +41,7 @@ const TOP_BAR_MENUS = [
   },
   {
     id: 'controlling',
-    icon: <SignalWifi2BarLockIcon fontSize='default' />,
+    icon: <SignalWifi2BarLockIcon fontSize='large' />,
     url: '/controlling',
     text: "Shared Control"
   }
