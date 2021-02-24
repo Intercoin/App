@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     },
     display: 'flex',
     alignItems: 'center',
-    paddingRight: theme.spacing(2),
+    // paddingRight: theme.spacing(2),
     '&:hover': {
       cursor: 'pointer'
     },

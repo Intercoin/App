@@ -8,7 +8,6 @@ import TopAppBarLeft from './TopAppBarLeft';
 import TopAppBarRight from './TopAppBarRight'
 import TopAppBarMenu from './TopAppBarMenu';
 import { TOP_BAR_MENUS } from 'constants/top-menu-items';
-import MobileMenu from 'components/TopAppBar/MobileMenu';
 
 import { isEmpty } from 'utils/utility';
 
@@ -19,6 +18,7 @@ const useStyles = makeStyles(theme => ({
   LogoContainer: {
     display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center'
   }
 }));
@@ -29,12 +29,9 @@ const DesktopMenu = () => {
 
   return (
     <>
+      <TopAppBarLeft setOpen={setOpen} />
       <div className={classes.LogoContainer}>
-        <TopAppBarLeft setOpen={setOpen} />
-        {/* <MobileMenu setOpen={setOpen} open={open} /> */}
-        {/* <Hidden mdDown implementation='css' className={classes.height}> */}
         <TopAppBarMenu menuItems={TOP_BAR_MENUS.filter((item, index) => index < (!isEmpty(account) ? 6 : 1))} />
-        {/* </Hidden> */}
       </div>
       <TopAppBarRight />
     </>
