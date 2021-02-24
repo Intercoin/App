@@ -84,7 +84,7 @@ const useStyles = makeStyles(theme => ({
 
 const Profile = ({ history }) => {
   const classes = useStyles();
-  const { account, chainId, setLoadingInfo } = useContext(AppContext);
+  const { account, chainId, setLoadingInfo, setIsWalletDialog } = useContext(AppContext);
   const [filterValue, setFilterValue] = useState("");
   const [contactBoard, setContactBoard] = useState();
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -104,10 +104,15 @@ const Profile = ({ history }) => {
       <CardWrapper >
         <div>
           <Grid container spacing={2} className={classes.container} >
-            <IntercoinAvatarBox account={account} chainId={chainId} />
+            <IntercoinAvatarBox
+              account={account}
+              chainId={chainId}
+              setIsWalletDialog={setIsWalletDialog}
+            />
             <IntercoinTabContainer setFilterValue={setFilterValue} />
             {
               transactionData.map((transaction, index) => {
+                
                 return (
                   <RecentTransactions
                     key={index}

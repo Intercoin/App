@@ -31,7 +31,7 @@ const App = ({ location }) => {
   const context = useWeb3React();
   const { connector, library, chainId, account, activate, deactivate, active, error } = context
   const [isWalletDialog, setIsWalletDialog] = useState();
-  const [activatingConnector, setActivatingConnector] = useState()
+  const [activatingConnector, setActivatingConnector] = useState();
 
   useEffect(() => {
     if (activatingConnector && activatingConnector === connector) {

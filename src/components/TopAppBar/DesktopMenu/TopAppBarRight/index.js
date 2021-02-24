@@ -9,8 +9,6 @@ import SearchIcon from '@material-ui/icons/Search';
 
 import CircleButton from 'components/UI/Buttons/CircleButton';
 import RadiusButton from 'components//RadiusButton';
-import ContainedButton from 'components/UI/Buttons/ContainedButton';
-import IntercoinDownMenu from 'components/IntercoinDownMenu';
 import { isEmpty } from 'utils/utility';
 import { PAGES } from 'utils/links/pages';
 
