@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const MobileMenu = ({ open, setOpen }) => {
+const isMobileMenu = ({ open, setOpen }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const handleClick = event => {
@@ -70,4 +70,4 @@ const MobileMenu = ({ open, setOpen }) => {
   );
 };
 
-export default MobileMenu;
+export default isMobileMenu;

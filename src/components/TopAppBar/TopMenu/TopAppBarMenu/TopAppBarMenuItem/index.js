@@ -9,8 +9,8 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles(theme => ({
   selectedItem: props => ({
-    borderTop: props.mobileMenu ? `1px solid ${theme.palette.text.hoverText}` : null,
-    color: props.mobileMenu ? theme.palette.text.hoverText : theme.palette.primary.contrastText,
+    borderTop: props.isMobileMenu ? `1px solid ${theme.palette.text.hoverText}` : null,
+    color: props.isMobileMenu ? theme.palette.text.hoverText : theme.palette.primary.contrastText,
     backgroundColor: `${theme.palette.background.main} !important`
   }),
   menuFont: {
@@ -31,8 +31,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const TopAppBarMenuItem = ({ selected, menuItem, onClick, mobileMenu }) => {
-  const classes = useStyles({ mobileMenu });
+const TopAppBarMenuItem = ({ selected, menuItem, onClick, isMobileMenu }) => {
+  const classes = useStyles({ isMobileMenu });
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('md'));
 
@@ -46,7 +46,7 @@ const TopAppBarMenuItem = ({ selected, menuItem, onClick, mobileMenu }) => {
         }}
         selected={selected}
         onClick={onClick}>
-        {(mobileMenu || matches) && menuItem.icon}
+        {(isMobileMenu || matches) && menuItem.icon}
         <Hidden smDown implementation='css' className={classes.height}>
           <ListItemText>
             <Typography variant='h6' className={classes.menuFont} noWrap>{menuItem.text}</Typography>

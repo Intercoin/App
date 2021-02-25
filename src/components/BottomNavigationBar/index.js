@@ -6,8 +6,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
 import { AppContext } from 'contexts';
-import TopAppBarMenu from 'components/TopAppBar/DesktopMenu/TopAppBarMenu';
+import TopAppBarMenu from 'components/TopAppBar/TopMenu/TopAppBarMenu';
 import { TOP_BAR_MENUS } from 'constants/top-menu-items';
+import TopAppBarRight from 'components/TopAppBar/TopMenu/TopAppBarRight';
 import { isEmpty } from 'utils/utility';
 
 const useStyles = makeStyles((theme) => ({
@@ -49,7 +50,8 @@ const BottomNavigationBar = () => {
     <React.Fragment>
       <AppBar position="fixed" color="primary" className={classes.appBar}>
         <Toolbar>
-          <TopAppBarMenu mobileMenu menuItems={TOP_BAR_MENUS.filter((item, index) => index < (!isEmpty(account) ? 6 : 1))} />
+          <TopAppBarMenu isMobileMenu menuItems={TOP_BAR_MENUS.filter((item, index) => index < (!isEmpty(account) ? 6 : 0))} />
+          <TopAppBarRight isMobileMenu />
         </Toolbar>
       </AppBar>
     </React.Fragment>

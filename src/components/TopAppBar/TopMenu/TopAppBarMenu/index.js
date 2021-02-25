@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const TopAppBarMenu = ({ menuItems, mobileMenu, history, location }) => {
+const TopAppBarMenu = ({ menuItems, isMobileMenu, history, location }) => {
   const classes = useStyles();
 
   const { topAppMenu } = useContext(AppContext);
@@ -31,7 +31,7 @@ const TopAppBarMenu = ({ menuItems, mobileMenu, history, location }) => {
         {menuItems.map((menuItem, index) => (
           <TopAppBarMenuItem
             key={menuItem.id}
-            mobileMenu={mobileMenu}
+            isMobileMenu={isMobileMenu}
             selected={topAppMenu === index}
             menuItem={menuItem}
             onClick={event => menuItemClickHandler(event, index)} />
