@@ -27,7 +27,6 @@ const DesktopMenu = () => {
   const classes = useStyles();
   const { account, topAppMenu } = useContext(AppContext);
   const [open, setOpen] = useState(false);
-  console.log('kevin===>', ``)
 
   return (
     <>

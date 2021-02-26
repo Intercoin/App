@@ -143,6 +143,7 @@ const PollDialog = ({ open, onClose, headerTitle, activatingConnector, setActiva
 
                 return (
                   <WalletCard
+                    connected = {connected}
                     disabled={disabled}
                     key={name}
                     name={name}

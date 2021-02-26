@@ -1,6 +1,6 @@
 
 import React from 'react';
-
+import clsx from 'clsx';
 import { withStyles, useTheme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -8,12 +8,6 @@ import CardContent from '@material-ui/core/CardContent';
 import { Typography, useMediaQuery } from '@material-ui/core';
 
 import { Spinner } from 'components/UI/Spinner';
-
-// import Prancheta from '../../assets/imgs/Prancheta.png';
-// import CosmicCloud from '../../assets/imgs/Cosmic Cloud Icon-01.png';
-// import Eurostar from '../../assets/imgs/Eurostar Icon-01.png';
-// import GoldeDreams from '../../assets/imgs/Golde Dreams Icon-01.png';
-// import TITANLOGO from '../../assets/imgs/TITANLOGO.png';
 
 const styles = (theme) => {
   return {
@@ -27,13 +21,14 @@ const styles = (theme) => {
       flexDirection: 'column',
       justifyContent: 'space-between',
       cursor: 'pointer',
-      borderRadius: 20,
+      // borderRadius: 20,
       '&:hover': {
         transform: 'translateY(-5px)',
         transition: `ease-out 0.4s `,
         opacity: '100%'
       },
       transition: 'ease-out 0.4s',
+      borderRadius: '15px',
     },
     cardContent: {
       display: 'flex',
@@ -79,6 +74,9 @@ const styles = (theme) => {
     noDecorationLink: {
       textDecoration: 'none'
     },
+    selected: {
+      border: `0.5px solid ${theme.palette.text.notification}`
+    }
   };
 };
 
@@ -91,7 +89,7 @@ const WalletCard = (props) => {
 
   return (
     <Grid onClick={() => props.onClick()} item xs={12} sm={6} md={6} lg={6}>
-      <Card className={classes.card}>
+      <Card className={clsx(classes.card, props.connected && classes.selected)}>
         <CardContent className={classes.cardContent}>
           <div className={classes.iconContainer}>
             <img style={{ width: isSm ? '28px' : '40px', height: isSm ? '28px' : '40px', }} src={`../../assets/images/${props.name}.png`} alt='Logo' />
