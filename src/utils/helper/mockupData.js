@@ -103,24 +103,6 @@ const optionData = [
     from: 0.0,
     to: 5.0
   },
-  {
-    id: 6,
-    content: "Should we follow the best practices to build any web application?",
-    from: 0.0,
-    to: 10.0
-  },
-  {
-    id: 7,
-    content: "Or should we speed up the development without doing care of the quality?",
-    from: 0.0,
-    to: 10.0
-  },
-  {
-    id: 8,
-    content: "Should we focus on both the quality and speed?",
-    from: 0.0,
-    to: 10.0
-  },
 ]
 
 const integrations = [

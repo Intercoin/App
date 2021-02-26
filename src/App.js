@@ -65,7 +65,7 @@ const App = ({ location, history }) => {
     });
 
     if (location.pathname === '/') {
-      setLayout(false)
+      // setLayout(false)
     }
   }, [location]);
 

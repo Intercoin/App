@@ -2,8 +2,8 @@
 import Icon from '@material-ui/core/Icon';
 import OutlinedFlagRoundedIcon from '@material-ui/icons/OutlinedFlagRounded';
 import HowToVoteOutlinedIcon from '@material-ui/icons/HowToVoteOutlined';
-import CardTravelIcon from '@material-ui/icons/CardTravel';
-import SignalWifi2BarLockIcon from '@material-ui/icons/SignalWifi2BarLock';
+import CreditCardIcon from '@material-ui/icons/CreditCard';
+import LockIcon from '@material-ui/icons/Lock';
 import CurrenciesIcon from 'components/Icons/CurrenciesIcon';
 import ContestIcon from 'components/Icons/ContestIcon';
 import { PAGES } from 'utils/links/pages';
@@ -29,7 +29,7 @@ const TOP_BAR_MENUS = [
   },
   {
     id: 'income',
-    icon: <CardTravelIcon fontSize='large' />,
+    icon: <CreditCardIcon fontSize='large' />,
     url: PAGES.INCOME.url,
     text: "Income"
   },
@@ -41,7 +41,7 @@ const TOP_BAR_MENUS = [
   },
   {
     id: 'sharedControl',
-    icon: <SignalWifi2BarLockIcon fontSize='large' />,
+    icon: <LockIcon fontSize='large' />,
     url: PAGES.SHARED_CONTROL.url,
     text: "Shared Control"
   }

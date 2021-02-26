@@ -23,8 +23,8 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 300
   },
   listItem: {
-    [theme.breakpoints.down(340)]: {
-      padding: (0, 9, 0, 9),
+    [theme.breakpoints.down(370)]: {
+      padding: (0, 6, 0, 6),
     },
     padding: (0, 10, 0, 10),
     height: '64px',

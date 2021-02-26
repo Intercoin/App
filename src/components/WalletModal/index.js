@@ -14,7 +14,7 @@ import WalletCard from 'components/UI/WalletCard';
 import ContainedButton from 'components/UI/Buttons/ContainedButton';
 import { Spinner } from 'components/UI/Spinner';
 import { useEagerConnect, useInactiveListener } from 'utils/hooks.js'
-import { walletconnect, injected } from 'constants/connectors';
+import { walletconnect, injected, intercoinToken, xDai } from 'constants/connectors';
 
 const useStyles = makeStyles(theme => ({
   actionButton: {
@@ -36,10 +36,15 @@ const useStyles = makeStyles(theme => ({
     minHeight: 'unset'
   },
   dialogContent: {
+    [theme.breakpoints.down(360)]: {
+      maxHeight: '200px',
+    },
     [theme.breakpoints.down('xs')]: {
-      maxHeight: '400px',
+      maxHeight: '382px',
     },
     maxHeight: '460px',
+    width:'auto',
+    // padding : 4,
     overflowX: 'unset',
     overflowY: 'scroll',
     '&::-webkit-scrollbar-track': {
@@ -87,7 +92,9 @@ const PollDialog = ({ open, onClose, headerTitle, activatingConnector, setActiva
 
   const connectorsByName = {
     'MetaMask': injected,
-    'WalletConnect': walletconnect
+    'WalletConnect': walletconnect,
+    'Intercoin': intercoinToken,
+    'xDai': xDai
   }
 
   const { connector, library, chainId, account, activate, deactivate, active, error } = context
@@ -124,7 +131,6 @@ const PollDialog = ({ open, onClose, headerTitle, activatingConnector, setActiva
           <Typography variant='h6' className={classes.titleLine}>{headerTitle}</Typography>
           <DialogContent dividers className={classes.dialogContent}>
             <Grid container spacing={2} className={classes.container} >
-
               {Object.keys(connectorsByName).map(name => {
                 const currentConnector = connectorsByName[name]
                 const activating = currentConnector === activatingConnector
@@ -141,8 +147,7 @@ const PollDialog = ({ open, onClose, headerTitle, activatingConnector, setActiva
                     onClick={() => {
                       setActivatingConnector(currentConnector)
                       activate(connectorsByName[name])
-                    }}
-                  >
+                    }}>
                     <div
                       style={{
                         position: 'absolute',
@@ -179,7 +184,6 @@ const PollDialog = ({ open, onClose, headerTitle, activatingConnector, setActiva
                 )}
                 {!!error && <h4 style={{ marginTop: '1rem', marginBottom: '0', color: '#16ACE2' }}>{getErrorMessage(error)}</h4>}
               </div>
-
             </Grid>
           </DialogContent>
           <div className={classes.dialogActions}>

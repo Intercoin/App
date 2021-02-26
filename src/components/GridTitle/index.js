@@ -1,6 +1,6 @@
 
 import React from 'react';
-
+import { useHistory } from "react-router-dom";
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -9,7 +9,7 @@ import ContainedButton from 'components/UI/Buttons/ContainedButton'
 
 const useStyles = makeStyles(theme => ({
   root: props => ({
-    [theme.breakpoints.down('sm')] : {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(2, 0, 0, 0),
     },
     display: 'flex',
@@ -24,6 +24,10 @@ const useStyles = makeStyles(theme => ({
 
 const GridTitle = ({ title, buttonName, center }) => {
   const classes = useStyles({ center });
+  const history = useHistory();
+  const clickHandler = () => {
+    history.push(`${PAGES.POLLS.url}/new`)
+  }
 
   return (
     <div className={classes.root}>
@@ -33,8 +37,9 @@ const GridTitle = ({ title, buttonName, center }) => {
       {
         buttonName &&
         <ContainedButton
-          href={`${PAGES.POLLS.url}/new`}
-          type='submit'>
+          style={{ backgroundColor: '#4caf50' }}
+          onClick={clickHandler}
+        >
           {buttonName}
         </ContainedButton>
       }

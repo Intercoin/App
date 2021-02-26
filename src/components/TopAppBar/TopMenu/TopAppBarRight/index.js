@@ -34,11 +34,12 @@ const TopAppBarRight = ({ isMobileMenu }) => {
   const classes = useStyles()
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('md'));
-  const { account, deactivate, setIsWalletDialog } = useContext(AppContext);
+  const { account, deactivate, setIsWalletDialog, setTopAppMenu } = useContext(AppContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const history = useHistory();
 
   const handleClick = event => {
+    setTopAppMenu(10)
     // setAnchorEl(event.currentTarget);
     history.push(PAGES.PROFILE.url)
   };
@@ -67,11 +68,13 @@ const TopAppBarRight = ({ isMobileMenu }) => {
               src={'/assets/images/photos/people/rl-400x.png'} name={"Inter Coin"} />} />}
           </>
           :
-          <RadiusButton
-            style={{ backgroundColor: '#16ACE2' }}
-            onClick={connectWallet}>
-            Connect Wallet
-          </RadiusButton>
+          <>
+            {!isMobileMenu && <RadiusButton
+              style={{ backgroundColor: '#16ACE2' }}
+              onClick={connectWallet}>
+              Connect Wallet
+          </RadiusButton>}
+          </>
         }
       </ConfigProvider>
       {/* <CircleButton

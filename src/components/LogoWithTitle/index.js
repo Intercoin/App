@@ -24,13 +24,12 @@ const useStyles = makeStyles(theme => ({
       cursor: 'pointer'
     },
   },
-  logo: {
-
+  // logo: {
     // [theme.breakpoints.down('xs')]: {
     //   marginRight: theme.spacing(.2)
     // },
-    marginRight: theme.spacing(1.5)
-  },
+  //   marginRight: theme.spacing(1.5)
+  // },
   height: {
     height: '100%'
   },
