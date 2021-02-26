@@ -3,7 +3,7 @@ import IntercoinImage from 'components/IntercoinImage';
 
 const sources = [
   {
-    srcSet: '/assets/images/intercoin.png 600w, /assets/images/intercoin.png 960w, /assets/images/intercoin.png 1280w',
+    srcSet: '/assets/images/Intercoin.png 600w, /assets/images/Intercoin.png 960w, /assets/images/Intercoin.png 1280w',
     type: 'image/webp'
   },
   {

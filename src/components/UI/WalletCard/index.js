@@ -1,11 +1,11 @@
 
 import React from 'react';
 
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, useTheme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import { Typography } from '@material-ui/core';
+import { Typography, useMediaQuery } from '@material-ui/core';
 
 import { Spinner } from 'components/UI/Spinner';
 
@@ -43,14 +43,14 @@ const styles = (theme) => {
       paddingBottom: '16px !important'
     },
     iconContainer: {
-      width: '30%'
+      width: '23%'
     },
     titleContainer: {
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-evenly',
       paddingBottom: 0,
-      width: '70%'
+      width: '77%'
     },
     subtitle: {
       color: theme.palette.subForeColor4
@@ -84,16 +84,20 @@ const styles = (theme) => {
 
 const WalletCard = (props) => {
   const { classes } = props;
+  const theme = useTheme();
+  const isSm = useMediaQuery(theme.breakpoints.down('sm'), {
+    defaultMatches: true,
+  });
 
   return (
     <Grid onClick={() => props.onClick()} item xs={12} sm={6} md={6} lg={6}>
       <Card className={classes.card}>
         <CardContent className={classes.cardContent}>
           <div className={classes.iconContainer}>
-            <img style={{ width: '40px', height: '40px', }} src={`../../assets/images/${props.name}.png`} alt='Logo' />
+            <img style={{ width: isSm ? '28px' : '40px', height: isSm ? '28px' : '40px', }} src={`../../assets/images/${props.name}.png`} alt='Logo' />
           </div>
           <div className={classes.titleContainer}>
-            <Typography variant='h6'>
+            <Typography variant='h6' noWrap>
               {props.name}
             </Typography>
           </div>

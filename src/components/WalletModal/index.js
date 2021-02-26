@@ -38,13 +38,17 @@ const useStyles = makeStyles(theme => ({
   dialogContent: {
     [theme.breakpoints.down(360)]: {
       maxHeight: '200px',
+      padding : theme.spacing(0.5),
     },
     [theme.breakpoints.down('xs')]: {
       maxHeight: '382px',
+      padding : theme.spacing(1,0,1,.5),
     },
+    display:'flex',
+    justifyContent:'center',
+    padding : theme.spacing(1),
     maxHeight: '460px',
-    width:'auto',
-    // padding : 4,
+    width: 'auto',
     overflowX: 'unset',
     overflowY: 'scroll',
     '&::-webkit-scrollbar-track': {
@@ -193,8 +197,7 @@ const PollDialog = ({ open, onClose, headerTitle, activatingConnector, setActiva
                 cursor: 'pointer',
               }}
               variant="outlined"
-              onClick={showmoreHandler}
-            >
+              onClick={showmoreHandler}>
               Show more
           </ContainedButton>
           </div>

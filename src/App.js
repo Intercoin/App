@@ -69,6 +69,15 @@ const App = ({ location, history }) => {
     }
   }, [location]);
 
+  useEffect(() => {
+    if (isWalletDialog) {
+      document.body.style.overflow = 'hidden';
+    }
+    else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isWalletDialog])
+
   return (
     <AppContext.Provider
       value={{
