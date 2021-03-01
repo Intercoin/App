@@ -20,6 +20,7 @@ import { isEmpty } from 'utils/utility';
 const DELAY_TIME = 100;
 const Home = loadable(() => pMinDelay(import('containers/Home'), DELAY_TIME));
 const Communities = loadable(() => pMinDelay(import('containers/Communities'), DELAY_TIME));
+const CommunitiesDetail = loadable(() => pMinDelay(import('containers/Communities/CommunitiesDetail'), DELAY_TIME));
 const Polls = loadable(() => pMinDelay(import('containers/Polls'), DELAY_TIME));
 const AddEditPolls = loadable(() => pMinDelay(import('containers/Polls/AddEditPolls'), DELAY_TIME));
 const Profile = loadable(() => pMinDelay(import('containers/Profile'), DELAY_TIME));
@@ -111,6 +112,7 @@ const App = ({ location, history }) => {
                   <Switch>
                     <Route exact path={PAGES.HOME.url} component={Home} />
                     <Route exact path={PAGES.COMMUNITIES.url} component={Communities} />
+                    <Route exact path={`${PAGES.COMMUNITIES.url}/address`} component={CommunitiesDetail} />
                     <Route exact path={PAGES.POLLS.url} component={Polls} />
                     <Route exact path={`${PAGES.POLLS.url}/:_id`} component={AddEditPolls} />
                     <Route exact path={PAGES.CURRENCIES.url} component={Currencies} />

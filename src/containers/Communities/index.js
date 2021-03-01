@@ -6,11 +6,13 @@ import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid";
 import Card from '@material-ui/core/Card';
 import AddIcon from '@material-ui/icons/Add';
+import { useHistory } from "react-router-dom";
 
 import CardWrapper from 'hoc/CardWrapper';
 import CircleButton from 'components/UI/Buttons/CircleButton';
 import { communityData } from 'utils/helper/mockupData';
 import IntercoinCard from 'components/IntercoinCard';
+import { PAGES } from 'utils/links/pages';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -47,6 +49,7 @@ const useStyles = makeStyles(theme => ({
 
 const Communities = () => {
   const classes = useStyles();
+  const history = useHistory();
   const { setLoadingInfo, account } = useContext(AppContext);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
@@ -55,6 +58,12 @@ const Communities = () => {
       setLoadingInfo(false);
     }, 2000);
   }, [setLoadingInfo]);
+
+  const cardHandler = () => {
+    history.push({
+      pathname: `${PAGES.COMMUNITIES.url}/address`
+    })
+  }
 
   return (
     <div className={classes.root}>
@@ -79,7 +88,7 @@ const Communities = () => {
             })
           }
           <Grid item xs={12} sm={6} md={4} lg={3}>
-            <Card className={classes.card}>
+            <Card className={classes.card} onClick={cardHandler}>
               <CircleButton
                 style={{ marginLeft: 4, backgroundColor: '#292C40' }}
                 icon={<AddIcon style={{ color: "#fff", width: 32, height: 32 }} fontSize={'large'} />} />

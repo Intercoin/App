@@ -17,6 +17,7 @@ import IntercoinTabContainer from 'components/IntercoinTabContainer';
 import RecentTransactions from './RecentTransactions';
 import { transactionData } from 'utils/helper/mockupData';
 import { isEmpty } from 'utils/utility';
+import { ProfileTabList } from 'constants/InterCoinTabList';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -109,7 +110,10 @@ const Profile = ({ history }) => {
               chainId={chainId}
               setIsWalletDialog={setIsWalletDialog}
             />
-            <IntercoinTabContainer setFilterValue={setFilterValue} />
+            <IntercoinTabContainer
+              setFilterValue={setFilterValue}
+              TabList={ProfileTabList}
+            />
             {
               transactionData.map((transaction, index) => {
 
