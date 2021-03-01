@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
 import CircleButton from 'components/UI/Buttons/CircleButton';
 import RadiusButton from 'components/RadiusButton';
@@ -77,9 +78,14 @@ const TopAppBarRight = ({ isMobileMenu }) => {
           </>
         }
       </ConfigProvider>
-      {/* <CircleButton
-        style={{ backgroundColor: '#1B1F2E', marginLeft: 8 }}
-        icon={<SearchIcon style={{ color: '#fff' }} />} /> */}
+      {!isMobileMenu && <>
+        <CircleButton
+          style={{ backgroundColor: '#1B1F2E', marginLeft: 4 }}
+          icon={<AddCircleOutlineIcon fontSize={'large'} style={{ color: '#fff', width: 38, height: 38 }} />} />
+        <CircleButton
+          style={{ backgroundColor: '#1B1F2E', marginLeft: 4 }}
+          icon={<SearchIcon fontSize={'large'} style={{ color: '#fff', width: 35, height: 35 }} />} />
+      </>}
     </div>
   );
 };

@@ -38,15 +38,15 @@ const useStyles = makeStyles(theme => ({
   dialogContent: {
     [theme.breakpoints.down(360)]: {
       maxHeight: '200px',
-      padding : theme.spacing(0.5),
+      padding: theme.spacing(0.5),
     },
     [theme.breakpoints.down('xs')]: {
       maxHeight: '382px',
-      padding : theme.spacing(1,0,1,.5),
+      padding: theme.spacing(1, 0, 1, .5),
     },
-    display:'flex',
-    justifyContent:'center',
-    padding : theme.spacing(1),
+    display: 'flex',
+    justifyContent: 'center',
+    padding: theme.spacing(1),
     maxHeight: '460px',
     width: 'auto',
     overflowX: 'unset',
@@ -143,7 +143,7 @@ const PollDialog = ({ open, onClose, headerTitle, activatingConnector, setActiva
 
                 return (
                   <WalletCard
-                    connected = {connected}
+                    connected={connected}
                     disabled={disabled}
                     key={name}
                     name={name}

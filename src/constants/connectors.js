@@ -11,7 +11,7 @@ const POLLING_INTERVAL = 12000
 
 export const walletconnect = new WalletConnectConnector({
   rpc: {
-    chainId: 1
+    chainId: [1, 3, 4, 5, 42]
   },
   bridge: 'https://bridge.walletconnect.org',
   qrcode: true,
