@@ -50,11 +50,11 @@ const App = ({ location, history }) => {
   const openCloseDialogHandler = show => () => {
     setIsWalletDialog(show)
   }
-  useEffect(() => {
-    if (isEmpty(account)) {
-      history.push(PAGES.HOME.url)
-    }
-  }, [account])
+  // useEffect(() => {
+  //   if (isEmpty(account)) {
+  //     history.push(PAGES.HOME.url)
+  //   }
+  // }, [account])
 
   useEffect(() => {
     TOP_BAR_MENUS.map((TOP_BAR_MENU, index) => {
@@ -67,7 +67,7 @@ const App = ({ location, history }) => {
     if (location.pathname === '/') {
       // setLayout(false)
     }
-  }, [location]);
+  }, [location.pathname, topAppMenu]);
 
   useEffect(() => {
     if (isWalletDialog) {

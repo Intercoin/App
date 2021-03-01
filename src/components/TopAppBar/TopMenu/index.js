@@ -34,7 +34,7 @@ const DesktopMenu = () => {
       {/* <Typography variant='h5'>{TOP_BAR_MENUS[topAppMenu]?.text}</Typography> */}
       <div className={classes.LogoContainer}>
         <Hidden smDown implementation='css' className={classes.height}>
-          <TopAppBarMenu menuItems={TOP_BAR_MENUS.filter((item, index) => index < (!isEmpty(account) ? 6 : 0))} />
+          <TopAppBarMenu menuItems={TOP_BAR_MENUS.filter((item, index) => index < (!isEmpty(account) ? 4 : 0))} />
         </Hidden>
       </div>
       <TopAppBarRight />

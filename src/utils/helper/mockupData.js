@@ -251,34 +251,39 @@ const transactionData = [
 
 const communityData = [
   {
-    logoUrl: '',
+    logoUrl: '/assets/images/logos/evidencer_200w.png',
     communityTitle: 'New York  City',
     personalInfo: 'citizen',
-    role: 'NYC & Company'
+    role: 'NYC & Company',
+    feedbackScore: 22.5
   },
   {
-    logoUrl: '',
+    logoUrl: '/assets/images/logos/team-of-electronic-servants_200w.png',
     communityTitle: 'Marshall Chess Club',
     personalInfo: 'player',
-    role: 'manager'
+    role: 'manager',
+    feedbackScore: 200
   },
   {
-    logoUrl: '',
-    communityTitle: 'New York  City',
-    personalInfo: 'citizen',
-    role: 'NYC & Company'
+    logoUrl: '/assets/images/logos/value-exchange_200w.png',
+    communityTitle: 'Chipotle Grill',
+    personalInfo: 'PA',
+    role: 'customer',
+    feedbackScore: 3.25
   },
   {
-    logoUrl: '',
+    logoUrl: '/assets/images/logos/victim-services_200w.png',
     communityTitle: 'New York  City',
     personalInfo: 'citizen',
-    role: 'NYC & Company'
+    role: 'NYC & Company',
+    feedbackScore: 200
   },
   {
-    logoUrl: '',
-    communityTitle: 'New York  City',
-    personalInfo: 'citizen',
-    role: 'NYC & Company'
+    logoUrl: '/assets/images/logos/web3evm-p02-300sq.png',
+    communityTitle: 'Marshall Chess Club',
+    personalInfo: 'PA',
+    role: 'customer',
+    feedbackScore: 3.25
   }
 ]
 
@@ -287,5 +292,6 @@ export {
   optionData,
   integrations,
   support,
-  transactionData
+  transactionData,
+  communityData
 }

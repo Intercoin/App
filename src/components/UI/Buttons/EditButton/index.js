@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   },
   label: {
     [theme.breakpoints.down('sm')]: {
-     display:'none'
+      display: 'none'
     },
     color: theme.palette.text.secondary,
     marginRight: theme.spacing(10 / 8),
