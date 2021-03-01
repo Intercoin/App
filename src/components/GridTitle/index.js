@@ -10,7 +10,7 @@ import ContainedButton from 'components/UI/Buttons/ContainedButton'
 const useStyles = makeStyles(theme => ({
   root: props => ({
     [theme.breakpoints.down('sm')]: {
-      padding: theme.spacing(2, 0, 0, 0),
+      padding: props.noPaddingTop ? theme.spacing(0) : theme.spacing(2, 0, 0, 0),
     },
     display: 'flex',
     marginBottom: theme.spacing(2),
@@ -22,8 +22,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const GridTitle = ({ title, buttonName, center }) => {
-  const classes = useStyles({ center });
+const GridTitle = ({ title, buttonName, center, noPaddingTop }) => {
+  const classes = useStyles({ center, noPaddingTop });
   const history = useHistory();
   const clickHandler = () => {
     history.push(`${PAGES.POLLS.url}/new`)

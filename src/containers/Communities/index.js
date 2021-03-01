@@ -69,7 +69,6 @@ const Communities = () => {
     <div className={classes.root}>
       <CardWrapper >
         <Grid container spacing={2} className={classes.container} >
-
           {
             communityData.map((community, index) => {
 

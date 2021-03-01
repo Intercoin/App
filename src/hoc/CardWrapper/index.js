@@ -25,15 +25,17 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const CardWrapper = ({ children, title, buttonName, center, flexDirection }) => {
-  const classes = useStyles({ flexDirection });
+const CardWrapper = ({ children, title, buttonName, center, flexDirection, noPaddingTop }) => {
+  const classes = useStyles({ flexDirection, noPaddingTop});
 
   return (
     <div className={classes.root}>
       <GridTitle
         center={center}
         title={title}
-        buttonName={buttonName} />
+        buttonName={buttonName}
+        noPaddingTop = {noPaddingTop}
+        />
       {children}
     </div>
   );

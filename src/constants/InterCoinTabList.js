@@ -5,6 +5,10 @@ import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import LocalAtmIcon from '@material-ui/icons/LocalAtm';
+import PersonIcon from '@material-ui/icons/Person';
+import CurrenciesIcon from 'components/Icons/CurrenciesIcon';
+import EnhancedEncryptionIcon from '@material-ui/icons/EnhancedEncryption';
+import CheckBoxIcon from 'components/Icons/CheckBoxIcon';
 
 const ProfileTabList = [
   {
@@ -27,6 +31,26 @@ const ProfileTabList = [
   }
 ]
 
+const CommunityTabList = [
+  {
+    icon: <PersonIcon fontSize='large' />,
+    title: 'People'
+  },
+  {
+    icon: <CurrenciesIcon fontSize='large' />,
+    title: 'Coin'
+  },
+  {
+    icon: <EnhancedEncryptionIcon fontSize='large' />,
+    title: 'OwnerShip'
+  },
+  {
+    icon: <CheckBoxIcon fontSize='large' />,
+    title: 'Vote'
+  }
+]
+
 export {
-  ProfileTabList
+  ProfileTabList,
+  CommunityTabList
 }

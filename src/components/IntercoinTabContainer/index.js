@@ -18,7 +18,6 @@ const useStyles = makeStyles(theme => ({
       '& .MuiTab-root': {
       },
     },
-
     marginBottom: theme.spacing(1),
     '& .MuiTab-root': {
       minWidth: '7.5%',
@@ -32,7 +31,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const IntercoinTabContainer = ({ setFilterValue, initialSelectTab, TabList }) => {
+const IntercoinTabContainer = ({ setFilterValue, initialSelectTab, TabList, isTabFullWidth }) => {
   let CategoryGroupTab = [];
   !isEmpty(TabList) && TabList.map((category, index) => {
     CategoryGroupTab.push({
@@ -57,6 +56,7 @@ const IntercoinTabContainer = ({ setFilterValue, initialSelectTab, TabList }) =>
     <div className={classes.root}>
       <IntercoinTab
         value={tab}
+        isTabFullWidth = {isTabFullWidth}
         tabs={CategoryGroupTab}
         onChange={onChangeHandler}
       />
