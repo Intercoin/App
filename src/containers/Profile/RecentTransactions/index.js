@@ -12,8 +12,8 @@ import { isEmpty } from 'utils/utility';
 
 const useStyles = makeStyles(theme => ({
   root: {},
-  card: props => ({
-    backgroundColor: props.selected ? theme.palette.background.sideDrawer : theme.palette.background.default,
+  card: {
+    backgroundColor: theme.palette.background.default,
     display: 'flex',
     width: "100%",
     flexDirection: 'column',
@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
       opacity: '100%'
     },
     transition: 'ease-out 0.4s',
-  }),
+  },
   cardContent: {
     display: 'flex',
     flexDirection: 'row',

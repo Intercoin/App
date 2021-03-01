@@ -9,9 +9,12 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles(theme => ({
   selectedItem: props => ({
+    [theme.breakpoints.down('sm')]: {
+      padding: theme.spacing(2)
+    },
     borderTop: props.isMobileMenu ? `1px solid ${theme.palette.text.hoverText}` : null,
     color: props.isMobileMenu ? theme.palette.text.hoverText : theme.palette.primary.contrastText,
-    backgroundColor: `${theme.palette.background.main} !important`
+    backgroundColor: `${theme.palette.background.main} !important`,
   }),
   menuFont: {
     [theme.breakpoints.down(1360)]: {
@@ -23,8 +26,9 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 300
   },
   listItem: {
-    [theme.breakpoints.down(370)]: {
-      padding: (0, 6, 0, 6),
+    [theme.breakpoints.down('sm')]: {
+      // padding: (0, 6, 0, 6),
+      padding: theme.spacing(2)
     },
     padding: (0, 10, 0, 10),
     height: '64px',

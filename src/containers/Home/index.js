@@ -1,7 +1,6 @@
 
 import React, { useEffect, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import { AppContext } from 'contexts';
 import AOS from 'aos';
 import 'aos/dist/aos.css';

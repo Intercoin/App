@@ -2,6 +2,7 @@
 import React, { useEffect, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import Grid from "@material-ui/core/Grid";
 import { AppContext } from 'contexts';
 
 import CardWrapper from 'hoc/CardWrapper';
@@ -30,10 +31,19 @@ const Communities = () => {
 
   return (
     <div className={classes.root}>
-      <CardWrapper title={'Intercoin Communities'}>
-        <div style={{ display: 'flex', width: '100%', height: '100%', alignItems: 'center', justifyItems: 'center' }}>
-          <Typography variant='h6'> Coming Soon! </Typography>
-        </div>
+      <CardWrapper >
+        <Grid container spacing={2} className={classes.container} >
+
+          {/* {
+            transactionData.map((transaction, index) => {
+
+              return (
+                <div>
+                </div>
+              )
+            })
+          } */}
+        </Grid>
       </CardWrapper>
     </div>
   );

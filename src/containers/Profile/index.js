@@ -112,7 +112,7 @@ const Profile = ({ history }) => {
             <IntercoinTabContainer setFilterValue={setFilterValue} />
             {
               transactionData.map((transaction, index) => {
-                
+
                 return (
                   <RecentTransactions
                     key={index}

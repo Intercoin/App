@@ -249,6 +249,39 @@ const transactionData = [
   }
 ]
 
+const communityData = [
+  {
+    logoUrl: '',
+    communityTitle: 'New York  City',
+    personalInfo: 'citizen',
+    role: 'NYC & Company'
+  },
+  {
+    logoUrl: '',
+    communityTitle: 'Marshall Chess Club',
+    personalInfo: 'player',
+    role: 'manager'
+  },
+  {
+    logoUrl: '',
+    communityTitle: 'New York  City',
+    personalInfo: 'citizen',
+    role: 'NYC & Company'
+  },
+  {
+    logoUrl: '',
+    communityTitle: 'New York  City',
+    personalInfo: 'citizen',
+    role: 'NYC & Company'
+  },
+  {
+    logoUrl: '',
+    communityTitle: 'New York  City',
+    personalInfo: 'citizen',
+    role: 'NYC & Company'
+  }
+]
+
 export {
   poolData,
   optionData,
