@@ -30,4 +30,3 @@ const EditIcon = ({className, viewBox, color, ...rest}) => {
 }
 
 export default EditIcon;
-

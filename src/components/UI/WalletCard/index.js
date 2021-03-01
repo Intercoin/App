@@ -1,19 +1,13 @@
 
 import React from 'react';
-
-import { withStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
+import { withStyles, useTheme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import { Typography } from '@material-ui/core';
+import { Typography, useMediaQuery } from '@material-ui/core';
 
 import { Spinner } from 'components/UI/Spinner';
-
-// import Prancheta from '../../assets/imgs/Prancheta.png';
-// import CosmicCloud from '../../assets/imgs/Cosmic Cloud Icon-01.png';
-// import Eurostar from '../../assets/imgs/Eurostar Icon-01.png';
-// import GoldeDreams from '../../assets/imgs/Golde Dreams Icon-01.png';
-// import TITANLOGO from '../../assets/imgs/TITANLOGO.png';
 
 const styles = (theme) => {
   return {
@@ -27,13 +21,14 @@ const styles = (theme) => {
       flexDirection: 'column',
       justifyContent: 'space-between',
       cursor: 'pointer',
-      borderRadius: 20,
+      // borderRadius: 20,
       '&:hover': {
         transform: 'translateY(-5px)',
         transition: `ease-out 0.4s `,
         opacity: '100%'
       },
       transition: 'ease-out 0.4s',
+      borderRadius: '15px',
     },
     cardContent: {
       display: 'flex',
@@ -43,14 +38,14 @@ const styles = (theme) => {
       paddingBottom: '16px !important'
     },
     iconContainer: {
-      width: '30%'
+      width: '23%'
     },
     titleContainer: {
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-evenly',
       paddingBottom: 0,
-      width: '70%'
+      width: '77%'
     },
     subtitle: {
       color: theme.palette.subForeColor4
@@ -79,21 +74,28 @@ const styles = (theme) => {
     noDecorationLink: {
       textDecoration: 'none'
     },
+    selected: {
+      border: `0.5px solid ${theme.palette.text.notification}`
+    }
   };
 };
 
 const WalletCard = (props) => {
   const { classes } = props;
+  const theme = useTheme();
+  const isSm = useMediaQuery(theme.breakpoints.down('sm'), {
+    defaultMatches: true,
+  });
 
   return (
     <Grid onClick={() => props.onClick()} item xs={12} sm={6} md={6} lg={6}>
-      <Card className={classes.card}>
+      <Card className={clsx(classes.card, props.connected && classes.selected)}>
         <CardContent className={classes.cardContent}>
           <div className={classes.iconContainer}>
-            <img style={{ width: '40px', height: '40px', }} src={`../../assets/images/${props.name}.png`} alt='Logo' />
+            <img style={{ width: isSm ? '28px' : '40px', height: isSm ? '28px' : '40px', }} src={`../../assets/images/${props.name}.png`} alt='Logo' />
           </div>
           <div className={classes.titleContainer}>
-            <Typography variant='h6'>
+            <Typography variant='h6' noWrap>
               {props.name}
             </Typography>
           </div>

@@ -103,24 +103,6 @@ const optionData = [
     from: 0.0,
     to: 5.0
   },
-  {
-    id: 6,
-    content: "Should we follow the best practices to build any web application?",
-    from: 0.0,
-    to: 10.0
-  },
-  {
-    id: 7,
-    content: "Or should we speed up the development without doing care of the quality?",
-    from: 0.0,
-    to: 10.0
-  },
-  {
-    id: 8,
-    content: "Should we focus on both the quality and speed?",
-    from: 0.0,
-    to: 10.0
-  },
 ]
 
 const integrations = [
@@ -177,9 +159,100 @@ const support = {
   ],
 };
 
+const transactionData = [
+  {
+    type: 1,
+    sender: "kevin",
+    receiver: 'James',
+    avatarUrl: "/assets/images/photos/people/ss-400x-js@2x.png"
+  },
+  {
+    type: 1,
+    sender: "kevin jin",
+    receiver: 'Romeo juliet',
+    avatarUrl: "/assets/images/photos/people/rl-400x.png"
+  },
+  {
+    type: 1,
+    sender: "kevin jin",
+    receiver: 'James Bond',
+    avatarUrl: "/assets/images/photos/people/rl-400x.png"
+  },
+  {
+    type: 1,
+    sender: "kevin jin",
+    receiver: 'Romeo juliet',
+    avatarUrl: "/assets/images/photos/people/expert-cover.png"
+  },
+  {
+    type: 1,
+    sender: "kevin",
+    receiver: 'James',
+    avatarUrl: "/assets/images/photos/people/ss-400x-js@2x.png"
+  },
+  {
+    type: 1,
+    sender: "kevin jin",
+    receiver: 'Romeo juliet',
+    avatarUrl: "/assets/images/photos/people/expert-cover.png"
+  },
+  {
+    type: 1,
+    sender: "kevin jin",
+    receiver: 'James Bond',
+    avatarUrl: "/assets/images/photos/people/rl-400x.png"
+  },
+  {
+    type: 1,
+    sender: "kevin jin",
+    receiver: 'Romeo juliet',
+    avatarUrl: "/assets/images/photos/people/rl-400x.png"
+  },
+  {
+    type: 1,
+    sender: "kevin jin",
+    receiver: 'Romeo juliet',
+    avatarUrl: "/assets/images/photos/people/rl-400x.png"
+  },
+
+  {
+    type: 1,
+    sender: "kevin",
+    receiver: 'James',
+    avatarUrl: "/assets/images/photos/people/ss-400x-js@2x.png"
+  },
+  {
+    type: 1,
+    sender: "kevin jin",
+    receiver: 'James Bond',
+    avatarUrl: "/assets/images/photos/people/rl-400x.png"
+  },
+  {
+    type: 1,
+    sender: "kevin jin",
+    receiver: 'Romeo juliet',
+    avatarUrl: "/assets/images/photos/people/expert-cover.png"
+  },
+  {
+    type: 2,
+    companyTitle: "Intercoin : Welcome",
+    subTitle: "Intercoin - Building the world wide web ",
+    imageUrl: '/assets/images/Intercoin.png',
+    avatarUrl: "/assets/images/photos/people/rl-400x.png"
+  },
+  {
+    type: 2,
+    companyTitle: "Scoot Santens - Social Network",
+    subTitle: "The Disproportionate Efficent",
+    imageUrl: '/assets/images/logos/evidencer_200w.png',
+    avatarUrl: "/assets/images/photos/people/expert-cover.png"
+  }
+]
+
 export {
   poolData,
   optionData,
   integrations,
-  support
+  support,
+  transactionData
 }

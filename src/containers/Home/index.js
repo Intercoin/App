@@ -13,7 +13,6 @@ import Partners from './Partners';
 import Customization from './Customization';
 import Support from './Support';
 import Download from './Download';
-import CardWrapper from 'hoc/CardWrapper';
 import { integrations, support } from 'utils/helper/mockupData';
 
 const useStyles = makeStyles(theme => ({

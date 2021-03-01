@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import clsx from 'clsx';
 
-import DesktopMenu from './DesktopMenu';
+import TopMenu from './TopMenu';
 import { commonUseStyles } from 'styles/use-styles';
 
 const useStyles = makeStyles(theme => ({
@@ -16,7 +16,8 @@ const useStyles = makeStyles(theme => ({
     },
     [theme.breakpoints.down('sm')]: {
       backgroundColor: props.layout ? theme.palette.background.default : theme.palette.background.main,
-      paddingRight: 0
+      paddingRight: 0,
+      paddingLeft: 0
     },
     [theme.breakpoints.down(340)]: {
       padding: 0,
@@ -79,7 +80,7 @@ const TopAppBar = ({ layout }) => {
       className={classes.appBar}>
       <Toolbar className={classes.flex} >
         <div className={clsx(classes.horizontalFlex, commonClasses.responsiveWidth, classes.height)}>
-          <DesktopMenu />
+          <TopMenu />
         </div>
       </Toolbar>
     </AppBar>

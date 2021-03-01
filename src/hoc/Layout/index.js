@@ -3,6 +3,7 @@ import { memo } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 import TopAppBar from 'components/TopAppBar';
+import BottomNavigationBar from 'components/BottomNavigationBar';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -49,6 +50,7 @@ const Layout = ({ children, layout }) => {
             {children}
           </div>
         </main>
+        <BottomNavigationBar />
       </div>
     </>
   );

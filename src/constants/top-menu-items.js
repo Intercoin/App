@@ -1,49 +1,49 @@
 
-import ForumIcon from '@material-ui/icons/Forum';
-import HowToVoteIcon from '@material-ui/icons/HowToVote';
-import LocalAtmIcon from '@material-ui/icons/LocalAtm';
+import Icon from '@material-ui/core/Icon';
+import OutlinedFlagRoundedIcon from '@material-ui/icons/OutlinedFlagRounded';
+import HowToVoteOutlinedIcon from '@material-ui/icons/HowToVoteOutlined';
 import CreditCardIcon from '@material-ui/icons/CreditCard';
-import MultilineChartIcon from '@material-ui/icons/MultilineChart';
-import SettingsRemoteIcon from '@material-ui/icons/SettingsRemote';
-
-import PAGES from 'utils/links/pages';
+import LockIcon from '@material-ui/icons/Lock';
+import CurrenciesIcon from 'components/Icons/CurrenciesIcon';
+import ContestIcon from 'components/Icons/ContestIcon';
+import { PAGES } from 'utils/links/pages';
 
 const TOP_BAR_MENUS = [
   {
     id: 'Communities',
-    icon: <ForumIcon />,
-    url: '/communities',
+    icon: <OutlinedFlagRoundedIcon fontSize='large' />,
+    url: PAGES.COMMUNITIES.url,
     text: 'Communities'
   },
   {
     id: 'pools',
-    icon: <HowToVoteIcon />,
-    url: '/polls',
+    icon: <HowToVoteOutlinedIcon fontSize='large' />,
+    url: PAGES.POLLS.url,
     text: 'Polls'
   },
   {
     id: 'currencies',
-    icon: <LocalAtmIcon />,
-    url: '/currencies',
+    icon: <CurrenciesIcon fontSize='large' />,
+    url: PAGES.CURRENCIES.url,
     text: "Currencies"
   },
   {
     id: 'income',
-    icon: <CreditCardIcon />,
-    url: '/income',
+    icon: <CreditCardIcon fontSize='large' />,
+    url: PAGES.INCOME.url,
     text: "Income"
   },
   {
     id: 'contests',
-    icon: <MultilineChartIcon />,
-    url: '/contests',
+    icon: <ContestIcon />,
+    url: PAGES.CONTESTS.url,
     text: "Contests"
   },
   {
-    id: 'controlling',
-    icon: <SettingsRemoteIcon />,
-    url: '/controlling',
-    text: "Controlling"
+    id: 'sharedControl',
+    icon: <LockIcon fontSize='large' />,
+    url: PAGES.SHARED_CONTROL.url,
+    text: "Shared Control"
   }
 ];
 

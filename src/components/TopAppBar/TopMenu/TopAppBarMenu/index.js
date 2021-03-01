@@ -16,8 +16,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const TopAppBarMenu = ({ menuItems, history, location }) => {
+const TopAppBarMenu = ({ menuItems, isMobileMenu, history, location }) => {
   const classes = useStyles();
+
   const { topAppMenu } = useContext(AppContext);
 
   const menuItemClickHandler = (event, index) => {
@@ -25,15 +26,18 @@ const TopAppBarMenu = ({ menuItems, history, location }) => {
   };
 
   return (
-    <ListItem className={classes.menuItem}>
-      {menuItems.map((menuItem, index) => (
-        <TopAppBarMenuItem
-          key={menuItem.id}
-          selected={topAppMenu === index}
-          menuItem={menuItem}
-          onClick={event => menuItemClickHandler(event, index)} />
-      ))}
-    </ListItem>
+    <>
+      <ListItem className={classes.menuItem}>
+        {menuItems.map((menuItem, index) => (
+          <TopAppBarMenuItem
+            key={menuItem.id}
+            isMobileMenu={isMobileMenu}
+            selected={topAppMenu === index}
+            menuItem={menuItem}
+            onClick={event => menuItemClickHandler(event, index)} />
+        ))}
+      </ListItem>
+    </>
   );
 };
 
