@@ -8,6 +8,8 @@ import CardWrapper from 'hoc/CardWrapper';
 import IntercoinTabContainer from 'components/IntercoinTabContainer';
 import { CommunityTabList } from 'constants/InterCoinTabList';
 import OutlinedButton from 'components/UI/Buttons/OutlinedButton';
+import TabContent from './TabContent';
+import { communityDetailData } from 'utils/helper/mockupData';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -52,6 +54,9 @@ const CommunitiesDetail = () => {
           <Typography variant='body1'>15 members </Typography>
           <OutlinedButton className={classes.button}>+ Invite </OutlinedButton>
         </div>
+        <TabContent
+          communityDetailData={communityDetailData}
+        />
       </CardWrapper>
     </div>
   );

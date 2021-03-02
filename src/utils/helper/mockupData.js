@@ -1,3 +1,6 @@
+import ImageIcon from '@material-ui/icons/Image';
+import WorkIcon from '@material-ui/icons/Work';
+import BeachAccessIcon from '@material-ui/icons/BeachAccess';
 
 const poolData = [
   {
@@ -287,11 +290,46 @@ const communityData = [
   }
 ]
 
+const communityDetailData = [
+  {
+    name: 'John Smith',
+    role: 'Member, admin',
+    avatar: <WorkIcon />
+  },
+  {
+    name: 'Bob Moo',
+    role: 'Member, engineer',
+    avatar: <ImageIcon />
+  },
+  {
+    name: '0X23436544...324',
+    avatar: <ImageIcon />
+  },
+  {
+    name: '0X23456434...628'
+  },
+  {
+    name: '0X27456434...384',
+    avatar: <BeachAccessIcon />
+  },
+  {
+    name: '0X23654434...322'
+  },
+  {
+    name: '0X26453734...321',
+    avatar: <BeachAccessIcon />
+  },
+  {
+    name: '0X23445634...726'
+  }
+]
+
 export {
   poolData,
   optionData,
   integrations,
   support,
   transactionData,
-  communityData
+  communityData,
+  communityDetailData
 }

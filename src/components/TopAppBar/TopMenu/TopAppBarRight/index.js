@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
   },
   avatarContainer: {
     [theme.breakpoints.down('sm')]: {
-      // marginRight: 8
+      marginRight: 24
     },
     display: 'flex',
     justifyContent: 'center',

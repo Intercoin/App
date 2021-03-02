@@ -7,6 +7,7 @@ import LockIcon from '@material-ui/icons/Lock';
 import CurrenciesIcon from 'components/Icons/CurrenciesIcon';
 import ContestIcon from 'components/Icons/ContestIcon';
 import CheckBoxIcon from 'components/Icons/CheckBoxIcon';
+import InterCoinIcon from 'components/Icons/InterCoinIcon';
 import { PAGES } from 'utils/links/pages';
 
 const TOP_BAR_MENUS = [
@@ -24,7 +25,7 @@ const TOP_BAR_MENUS = [
   },
   {
     id: 'currencies',
-    icon: <CurrenciesIcon fontSize='large' />,
+    icon: <InterCoinIcon fontSize='large' />,
     url: PAGES.CURRENCIES.url,
     text: "Currencies"
   },
