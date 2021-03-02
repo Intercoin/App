@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
   },
   avatarContainer: {
     [theme.breakpoints.down('sm')]: {
-      marginRight: 24
+      margin: theme.spacing(0, 1, 0, 2)
     },
     display: 'flex',
     justifyContent: 'center',
@@ -70,20 +70,21 @@ const TopAppBarRight = ({ isMobileMenu }) => {
           </>
           :
           <>
-            {!isMobileMenu && <RadiusButton
-              style={{ backgroundColor: '#16ACE2' }}
-              onClick={connectWallet}>
-              Connect Wallet
-          </RadiusButton>}
+            {!isMobileMenu &&
+              <RadiusButton
+                style={{ backgroundColor: '#16ACE2' }}
+                onClick={connectWallet}>
+                Connect Wallet
+              </RadiusButton>}
           </>
         }
       </ConfigProvider>
       {!isMobileMenu && <>
         <CircleButton
-          style={{ backgroundColor: '#1B1F2E', marginLeft: 4 }}
+          style={{ backgroundColor: '#1B1F2E', margin: 4 }}
           icon={<AddCircleOutlineIcon fontSize={'large'} style={{ color: '#fff', width: 38, height: 38 }} />} />
         <CircleButton
-          style={{ backgroundColor: '#1B1F2E', marginLeft: 4 }}
+          style={{ backgroundColor: '#1B1F2E', margin: 4 }}
           icon={<SearchIcon fontSize={'large'} style={{ color: '#fff', width: 35, height: 35 }} />} />
       </>}
     </div>

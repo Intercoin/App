@@ -39,17 +39,19 @@ const useStyles = makeStyles(theme => ({
   },
   selected: {
     backgroundColor: theme.palette.background.main
+  },
+  badgeBackgroundColor: {
+    // backgroundColor: theme.custom.palette.gold
+    background: 'linear-gradient(to bottom, #AB8227 0%, #40310F 48.34%, #D8A42D 100%)',
   }
 }));
 
-const RecentTransactions = ({ selectedCard, id, imageUrl, content, subContent, detail, value }) => {
+const RecentTransactions = ({ selectedCard, id, imageUrl, content, subContent, detail, value, onClick }) => {
   const classes = useStyles({});
-  const clickHandler = () => {
-  }
 
   return (
     <Grid item xs={12} sm={6} md={4} lg={3}>
-      <Card className={classes.card} onClick={clickHandler}>
+      <Card className={classes.card} onClick={() => onClick(id)}>
         <CardContent className={clsx(selectedCard === id && classes.selected)}>
           <Grid container direction="row" justify="center" alignItems="center"  >
             <Grid item xs={2}>
@@ -64,7 +66,10 @@ const RecentTransactions = ({ selectedCard, id, imageUrl, content, subContent, d
               </Typography>
             </Grid>
             <Grid item xs={1}>
-              <Badge color='error'
+              <Badge color='primary'
+                classes={{
+                  colorPrimary: classes.badgeBackgroundColor
+                }}
                 max={999999}
                 anchorOrigin={{
                   vertical: 'top',

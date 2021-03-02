@@ -1,9 +1,9 @@
 
 import { AppContext } from 'contexts';
-import { useContext } from 'react';
+import { useContext, memo } from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import { makeStyles } from '@material-ui/core/styles';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import TopAppBarMenuItem from './TopAppBarMenuItem';
 
@@ -16,9 +16,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const TopAppBarMenu = ({ menuItems, isMobileMenu, history, location }) => {
+const TopAppBarMenu = ({ menuItems, isMobileMenu }) => {
   const classes = useStyles();
-
+  const history = useHistory();
   const { topAppMenu } = useContext(AppContext);
 
   const menuItemClickHandler = (event, index) => {
@@ -33,6 +33,7 @@ const TopAppBarMenu = ({ menuItems, isMobileMenu, history, location }) => {
             key={menuItem.id}
             isMobileMenu={isMobileMenu}
             selected={topAppMenu === index}
+            menuNumber={index}
             menuItem={menuItem}
             onClick={event => menuItemClickHandler(event, index)} />
         ))}
@@ -41,4 +42,4 @@ const TopAppBarMenu = ({ menuItems, isMobileMenu, history, location }) => {
   );
 };
 
-export default withRouter(TopAppBarMenu);
+export default memo(TopAppBarMenu);

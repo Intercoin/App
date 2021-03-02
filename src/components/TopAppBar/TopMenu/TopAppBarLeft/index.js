@@ -13,7 +13,13 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center'
   },
   margin: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none'
+    },
     margin: `${theme.spacing(0)} !important`,
+  },
+  height: {
+    paddingLeft: theme.spacing(1.5)
   }
 }));
 
@@ -24,7 +30,7 @@ const TopAppBarLeft = ({ setOpen, topAppMenu, TOP_BAR_MENUS }) => {
     <div className={classes.root}>
       <LogoWithTitle setOpen={setOpen} logoWidth={80} logoHeight={80} titleVariant={'h6'} className={classes.margin} />
       <Hidden mdUp implementation='css' className={classes.height}>
-        <Typography variant='h5'>{topAppMenu === 10 ? "Profile" : TOP_BAR_MENUS[topAppMenu]?.text}</Typography>
+        <Typography variant='h3'>{topAppMenu === 10 ? "Profile" : TOP_BAR_MENUS[topAppMenu]?.text}</Typography>
       </Hidden>
     </div>
   );

@@ -56,7 +56,7 @@ const IntercoinTabContainer = ({ setFilterValue, initialSelectTab, TabList, isTa
     <div className={classes.root}>
       <IntercoinTab
         value={tab}
-        isTabFullWidth = {isTabFullWidth}
+        isTabFullWidth={isTabFullWidth}
         tabs={CategoryGroupTab}
         onChange={onChangeHandler}
       />

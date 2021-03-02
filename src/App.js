@@ -24,7 +24,7 @@ const CommunitiesDetail = loadable(() => pMinDelay(import('containers/Communitie
 const Polls = loadable(() => pMinDelay(import('containers/Polls'), DELAY_TIME));
 const AddEditPolls = loadable(() => pMinDelay(import('containers/Polls/AddEditPolls'), DELAY_TIME));
 const Profile = loadable(() => pMinDelay(import('containers/Profile'), DELAY_TIME));
-const Currencies = loadable(() => pMinDelay(import('containers/Currencies'), DELAY_TIME));
+const Currencies = loadable(() => pMinDelay(import('containers/Home'), DELAY_TIME));
 const Income = loadable(() => pMinDelay(import('containers/Income'), DELAY_TIME));
 const Contests = loadable(() => pMinDelay(import('containers/Contests'), DELAY_TIME));
 const SharedControl = loadable(() => pMinDelay(import('containers/SharedControl'), DELAY_TIME));

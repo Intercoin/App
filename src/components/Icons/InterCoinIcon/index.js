@@ -6,12 +6,22 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 
 const useStyles = makeStyles(theme => ({
   root: {
+    [theme.breakpoints.down('sm')]: {
+      width: 68,
+      height: 70
+    },
+    [theme.breakpoints.down('339')]: {
+      width: 48,
+      height: 50
+    },
     width: 36,
     height: 38
   }
 }));
 
 const InterCoinIcon = ({ className, viewBox, color, ...rest }) => {
+  const restDAta = { ...rest }
+
   const classes = useStyles();
   return (
     <SvgIcon width="175px" height="175px" x="0px" y="0px" viewBox={viewBox || "0 0 175 175"} enableBackground="new 0 0 175 175"  {...rest} className={clsx(classes.root, className)}>

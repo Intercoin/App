@@ -258,35 +258,35 @@ const communityData = [
     communityTitle: 'New York  City',
     personalInfo: 'citizen',
     role: 'NYC & Company',
-    feedbackScore: 22.5
+    tokenAmount: 22.5
   },
   {
     logoUrl: '/assets/images/logos/team-of-electronic-servants_200w.png',
     communityTitle: 'Marshall Chess Club',
     personalInfo: 'player',
     role: 'manager',
-    feedbackScore: 200
+    tokenAmount: 200
   },
   {
     logoUrl: '/assets/images/logos/value-exchange_200w.png',
     communityTitle: 'Chipotle Grill',
     personalInfo: 'PA',
     role: 'customer',
-    feedbackScore: 3.25
+    tokenAmount: 3.25
   },
   {
     logoUrl: '/assets/images/logos/victim-services_200w.png',
     communityTitle: 'New York  City',
     personalInfo: 'citizen',
     role: 'NYC & Company',
-    feedbackScore: 200
+    tokenAmount: 200
   },
   {
     logoUrl: '/assets/images/logos/web3evm-p02-300sq.png',
     communityTitle: 'Marshall Chess Club',
     personalInfo: 'PA',
     role: 'customer',
-    feedbackScore: 3.25
+    tokenAmount: 3.25
   }
 ]
 

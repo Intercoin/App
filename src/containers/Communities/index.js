@@ -24,8 +24,7 @@ const useStyles = makeStyles(theme => ({
     height: '100%',
     width: '100%',
     justifyContent: 'center',
-    alignItems: 'center',
-
+    alignItems: 'center'
   },
   card: {
     backgroundColor: theme.palette.background.default,
@@ -44,7 +43,7 @@ const useStyles = makeStyles(theme => ({
       opacity: '100%'
     },
     transition: 'ease-out 0.4s',
-  },
+  }
 }));
 
 const Communities = () => {
@@ -59,9 +58,10 @@ const Communities = () => {
     }, 2000);
   }, [setLoadingInfo]);
 
-  const cardHandler = () => {
+  const cardHandler = (id) => {
     history.push({
-      pathname: `${PAGES.COMMUNITIES.url}/address`
+      pathname: `${PAGES.COMMUNITIES.url}/address`,
+      state: communityData[id]
     })
   }
 
@@ -81,7 +81,8 @@ const Communities = () => {
                   content={community.communityTitle}
                   subContent={community.role}
                   detail={community.personalInfo}
-                  value={community.feedbackScore}
+                  value={community.tokenAmount}
+                  onClick={cardHandler}
                 />
               )
             })

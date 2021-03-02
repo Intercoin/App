@@ -38,7 +38,7 @@ const CommunityTabList = [
   },
   {
     icon: <CurrenciesIcon fontSize='large' />,
-    title: 'Coin'
+    title: 'Currency'
   },
   {
     icon: <EnhancedEncryptionIcon fontSize='large' />,

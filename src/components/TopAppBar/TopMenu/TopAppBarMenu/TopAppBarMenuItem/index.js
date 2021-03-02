@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { memo } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
       padding: theme.spacing(2)
     },
     borderTop: props.isMobileMenu ? `1px solid ${theme.palette.text.hoverText}` : null,
-    color: props.isMobileMenu ? theme.palette.text.hoverText : theme.palette.primary.contrastText,
+    color: `${props.isMobileMenu ? theme.palette.text.hoverText : theme.palette.primary.contrastText} !important`,
     backgroundColor: `${theme.palette.background.main} !important`,
   }),
   menuFont: {
@@ -25,18 +25,18 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.text.primary,
     fontWeight: 300
   },
-  listItem: {
+  listItem: props => ({
     [theme.breakpoints.down('sm')]: {
-      // padding: (0, 6, 0, 6),
-      padding: theme.spacing(2)
+      padding: theme.spacing(2),
+      color: props.menuNumber === 2 ? '#FFA000' : null
     },
     padding: (0, 10, 0, 10),
     height: '64px',
-  }
+  })
 }));
 
-const TopAppBarMenuItem = ({ selected, menuItem, onClick, isMobileMenu }) => {
-  const classes = useStyles({ isMobileMenu });
+const TopAppBarMenuItem = ({ selected, menuItem, onClick, isMobileMenu, menuNumber }) => {
+  const classes = useStyles({ isMobileMenu, menuNumber });
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('md'));
 
@@ -57,8 +57,9 @@ const TopAppBarMenuItem = ({ selected, menuItem, onClick, isMobileMenu }) => {
           </ListItemText>
         </Hidden>
       </ListItem>
+
     </>
   );
 };
 
-export default TopAppBarMenuItem
+export default memo(TopAppBarMenuItem);

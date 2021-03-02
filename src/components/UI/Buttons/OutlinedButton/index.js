@@ -6,11 +6,11 @@ import clsx from 'clsx';
 import ButtonLink from 'components/UI/Buttons/ButtonLink';
 
 const useStyles = makeStyles(theme => ({
-  root: props => ({
+  root: {
     textTransform: 'none',
     // TODO: handle color='error'
     // border: `1px solid ${props.color ? theme.palette[props.color].main : theme.palette.primary.main}`
-  })
+  }
 }));
 
 const OutlinedButton = ({ className, color, variant, href, children, ...rest }) => {

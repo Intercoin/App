@@ -46,7 +46,9 @@ const theme = responsiveFontSizes(createMuiTheme({
       lightGrey: '#D8D8D8',
       darkRed: '#ba1a48',
       grey: '#99A5D3',
-      lightBlue: '#1f2334'
+      lightBlue: '#1f2334',
+      gold: '#D8A42D',
+      darkYellow: '#FFA000'
     },
     layout: {
       topAppBarHeight: 47,

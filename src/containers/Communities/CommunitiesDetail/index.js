@@ -1,15 +1,12 @@
 
 import React, { useEffect, useState, useContext } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { Typography, useMediaQuery } from '@material-ui/core';
 import { AppContext } from 'contexts';
 
-import CardWrapper from 'hoc/CardWrapper';
-import IntercoinTabContainer from 'components/IntercoinTabContainer';
-import { CommunityTabList } from 'constants/InterCoinTabList';
-import OutlinedButton from 'components/UI/Buttons/OutlinedButton';
-import TabContent from './TabContent';
 import { communityDetailData } from 'utils/helper/mockupData';
+import Desktop from './Desktop';
+import Mobile from './Mobile';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -32,8 +29,11 @@ const useStyles = makeStyles(theme => ({
 
 const CommunitiesDetail = () => {
   const classes = useStyles();
+  const theme = useTheme();
   const { setLoadingInfo, account } = useContext(AppContext);
-  const [filterValue, setFilterValue] = useState("");
+  const isSm = useMediaQuery(theme.breakpoints.down('sm'), {
+    defaultMatches: true,
+  });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     setLoadingInfo(true);
@@ -44,20 +44,10 @@ const CommunitiesDetail = () => {
 
   return (
     <div className={classes.root}>
-      <CardWrapper noPaddingTop>
-        <IntercoinTabContainer
-          isTabFullWidth
-          setFilterValue={setFilterValue}
-          TabList={CommunityTabList}
-        />
-        <div className={classes.tabHeader} >
-          <Typography variant='body1'>15 members </Typography>
-          <OutlinedButton className={classes.button}>+ Invite </OutlinedButton>
-        </div>
-        <TabContent
-          communityDetailData={communityDetailData}
-        />
-      </CardWrapper>
+      {isSm ?
+        <Mobile communityDetailData={communityDetailData} />
+        :
+        <Desktop communityDetailData={communityDetailData} />}
     </div>
   );
 };
