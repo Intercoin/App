@@ -9,8 +9,6 @@ import clsx from 'clsx';
 import { Avatar } from '@material-ui/core';
 import Badge from '@material-ui/core/Badge';
 
-import { isEmpty } from 'utils/utility';
-
 const useStyles = makeStyles(theme => ({
   root: {},
   card: {

@@ -324,6 +324,57 @@ const communityDetailData = [
   }
 ]
 
+const tagData = [
+  {
+    valeu: 0,
+    title: "Clothing",
+    image: '/assets/images/logos/value-exchange_200w.png',
+  },
+  {
+    value: 1,
+    title: "Books",
+    image: '/assets/images/logos/victim-services_200w.png'
+  },
+  {
+    value: 2,
+    title: "Venues",
+    image: '/assets/images/logos/value-exchange_200w.png',
+  },
+  {
+    value: 3,
+    title: "Tutoring",
+    image: '/assets/images/logos/web3evm-p02-300sq.png'
+  }
+]
+
+const roleData = [
+  {
+    valeu: 0,
+    title: "All Roles",
+    image: '/assets/images/logos/web3evm-p02-300sq.png'
+  },
+  {
+    value: 1,
+    title: "Owners",
+    image: '/assets/images/logos/value-exchange_200w.png',
+  },
+  {
+    value: 2,
+    title: "Managers",
+    image: '/assets/images/logos/victim-services_200w.png'
+  },
+  {
+    value: 3,
+    title: "Vendors",
+    image: '/assets/images/logos/value-exchange_200w.png',
+  },
+  {
+    value: 4,
+    title: "Members",
+    image: '/assets/images/logos/value-exchange_200w.png',
+  }
+]
+
 export {
   poolData,
   optionData,
@@ -331,5 +382,7 @@ export {
   support,
   transactionData,
   communityData,
-  communityDetailData
+  communityDetailData,
+  tagData,
+  roleData
 }
