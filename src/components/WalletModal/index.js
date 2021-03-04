@@ -14,7 +14,7 @@ import WalletCard from 'components/UI/WalletCard';
 import ContainedButton from 'components/UI/Buttons/ContainedButton';
 import { Spinner } from 'components/UI/Spinner';
 import { useEagerConnect, useInactiveListener } from 'utils/hooks.js'
-import { walletconnect, injected, intercoinToken, xDai } from 'constants/connectors';
+import { walletconnect, injected, intercoinToken, xDai, fortmatic } from 'constants/connectors';
 
 const useStyles = makeStyles(theme => ({
   actionButton: {
@@ -74,7 +74,7 @@ const useStyles = makeStyles(theme => ({
 const PollDialog = ({ open, onClose, headerTitle, activatingConnector, setActivatingConnector }) => {
   const classes = useStyles();
   const dialogClasses = dialogStyles();
-  const [showmore, setShowmore] = useState(false)
+  const [showMore, setShowMore] = useState(false)
 
   const context = useWeb3React()
   const getErrorMessage = (error) => {
@@ -96,6 +96,7 @@ const PollDialog = ({ open, onClose, headerTitle, activatingConnector, setActiva
 
   const connectorsByName = {
     'MetaMask': injected,
+    'Fortmatic': fortmatic,
     'WalletConnect': walletconnect,
     'Intercoin': intercoinToken,
     'xDai': xDai
@@ -125,7 +126,7 @@ const PollDialog = ({ open, onClose, headerTitle, activatingConnector, setActiva
   }
 
   const showmoreHandler = () => {
-    setShowmore(true)
+    setShowMore(!showMore)
   }
 
   return (
@@ -135,7 +136,7 @@ const PollDialog = ({ open, onClose, headerTitle, activatingConnector, setActiva
           <Typography variant='h6' className={classes.titleLine}>{headerTitle}</Typography>
           <DialogContent dividers className={classes.dialogContent}>
             <Grid container spacing={2} className={classes.container} >
-              {Object.keys(connectorsByName).map(name => {
+              {Object.keys(connectorsByName).filter((item, index) => index < (showMore ? Object.keys(connectorsByName).length : 4)).map(name => {
                 const currentConnector = connectorsByName[name]
                 const activating = currentConnector === activatingConnector
                 const connected = currentConnector === connector
@@ -199,8 +200,8 @@ const PollDialog = ({ open, onClose, headerTitle, activatingConnector, setActiva
               }}
               variant="outlined"
               onClick={showmoreHandler}>
-              Show more
-          </ContainedButton>
+              {showMore ? 'Show less' : 'Show more'}
+            </ContainedButton>
           </div>
         </div>
       </form>

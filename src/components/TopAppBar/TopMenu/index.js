@@ -2,7 +2,6 @@
 import React, { useState, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Hidden from '@material-ui/core/Hidden';
-import Typography from '@material-ui/core/Typography';
 
 import { AppContext } from 'contexts';
 import TopAppBarLeft from './TopAppBarLeft';
@@ -34,7 +33,8 @@ const DesktopMenu = () => {
       {/* <Typography variant='h5'>{TOP_BAR_MENUS[topAppMenu]?.text}</Typography> */}
       <div className={classes.LogoContainer}>
         <Hidden smDown implementation='css' className={classes.height}>
-          <TopAppBarMenu menuItems={TOP_BAR_MENUS.filter((item, index) => index < (!isEmpty(account) ? 4 : 0))} />
+          <TopAppBarMenu topAppMenu={topAppMenu}
+            menuItems={TOP_BAR_MENUS.filter((item, index) => index < (!isEmpty(account) ? 4 : 0))} />
         </Hidden>
       </div>
       <TopAppBarRight />

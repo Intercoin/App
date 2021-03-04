@@ -1,7 +1,8 @@
 
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
+import { FortmaticConnector } from '@web3-react/fortmatic-connector';
+import { InjectedConnector } from '@web3-react/injected-connector';
 
-import { InjectedConnector } from '@web3-react/injected-connector'
 
 const POLLING_INTERVAL = 12000
 // const RPC_URLS: { [chainId] } = {
@@ -38,3 +39,5 @@ export const xDai = new InjectedConnector({
   symbox: 'xDai',
   pollingInterval: POLLING_INTERVAL
 })
+
+export const fortmatic = new FortmaticConnector({ apiKey: 'pk_test_D58C7F46E173BEDB', chainId: 4 })

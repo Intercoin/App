@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
 const CurrenciesIcon = ({ className, viewBox, color, ...rest }) => {
   const classes = useStyles();
   return (
-    <SvgIcon viewBox={viewBox || "0 0 495.045 455.045"} {...rest} className={clsx(classes.root, className)}>
+    <SvgIcon viewBox={viewBox || "0 0 495.045 485.045"} {...rest} className={clsx(classes.root, className)}>
       <g>
         <g id="Icons_23_">
           <g>

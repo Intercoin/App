@@ -9,6 +9,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import CurrenciesIcon from 'components/Icons/CurrenciesIcon';
 import EnhancedEncryptionIcon from '@material-ui/icons/EnhancedEncryption';
 import CheckBoxIcon from 'components/Icons/CheckBoxIcon';
+import LockIcon from '@material-ui/icons/Lock';
 
 const ProfileTabList = [
   {
@@ -41,12 +42,12 @@ const CommunityTabList = [
     title: 'Currency'
   },
   {
-    icon: <EnhancedEncryptionIcon fontSize='large' />,
-    title: 'OwnerShip'
+    icon: <EnhancedEncryptionIcon style={{ height: 31 }} fontSize='large' />,
+    title: 'Governance'
   },
   {
     icon: <CheckBoxIcon fontSize='large' />,
-    title: 'Vote'
+    title: 'Voting'
   }
 ]
 

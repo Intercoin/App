@@ -14,6 +14,8 @@ import LabelImportantIcon from '@material-ui/icons/LabelImportant';
 
 import CircleButton from 'components/UI/Buttons/CircleButton';
 import RoleTagDialog from 'components/UI/RoleTagDialog';
+import RoleIcon from 'components/Icons/RoleIcon';
+import LabelIcon from 'components/Icons/LabelIcon';
 import { roleData } from 'utils/helper/mockupData';
 import { tagData } from 'utils/helper/mockupData';
 
@@ -104,12 +106,12 @@ const FullScreenDialog = ({ open, onClose, comunityInfo, children }) => {
           <Toolbar className={classes.toolbar}>
             <div className={classes.buttonContainer}>
               <CircleButton onClick={() => onClickHandler('Roles')}
-                style={{ display: 'flex', backgroundColor: '#292C40' }} icon={<AppsIcon style={{ color: '#fff' }} fontSize='large' />} />
+                style={{ display: 'flex', backgroundColor: '#292C40' }} icon={<RoleIcon style={{ color: '#fff' }} fontSize='large' />} />
               <Typograhpy variant='h6'>All Roles </Typograhpy>
             </div>
             <div className={classes.buttonContainer}>
               <CircleButton onClick={() => onClickHandler('Tags')}
-                style={{ display: 'flex', backgroundColor: '#292C40' }} icon={<LabelImportantIcon style={{ color: '#fff' }} fontSize='large' />} />
+                style={{ display: 'flex', backgroundColor: '#292C40' }} icon={<LabelIcon style={{ color: '#fff' }} fontSize='large' />} />
               <Typograhpy variant='h6'>All Tags </Typograhpy>
             </div>
           </Toolbar>

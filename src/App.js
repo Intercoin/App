@@ -15,6 +15,7 @@ import { AppContext } from 'contexts';
 import { PAGES } from 'utils/links/pages';
 import { TOP_BAR_MENUS } from 'constants/top-menu-items';
 import WalletModal from 'components/WalletModal';
+import { formatEther } from '@ethersproject/units'
 import { isEmpty } from 'utils/utility';
 
 const DELAY_TIME = 100;
@@ -32,14 +33,41 @@ const SharedControl = loadable(() => pMinDelay(import('containers/SharedControl'
 const App = ({ location, history }) => {
   const context = useWeb3React();
   const { connector, library, chainId, account, activate, deactivate, active, error } = context
+
   const [isWalletDialog, setIsWalletDialog] = useState();
   const [activatingConnector, setActivatingConnector] = useState();
-
+  const [balance, setBalance] = useState()
   useEffect(() => {
     if (activatingConnector && activatingConnector === connector) {
       setActivatingConnector(undefined)
     }
   }, [activatingConnector, connector])
+
+  useEffect(() => {
+    if (!!account && !!library) {
+      let stale = false
+
+      library
+        .getBalance(account)
+        .then((balance) => {
+          if (!stale) {
+            setBalance(balance)
+          }
+        })
+        .catch(() => {
+          if (!stale) {
+            setBalance(null)
+          }
+        })
+
+      return () => {
+        stale = true
+        setBalance(undefined)
+      }
+    }
+  }, [account, library, chainId])
+
+  console.log('kevin getting the account balance===>', balance && formatEther(balance))
 
   const triedEager = useEagerConnect();
   useInactiveListener(!triedEager || !!activatingConnector)
@@ -63,10 +91,15 @@ const App = ({ location, history }) => {
         setTopAppMenu(index)
         setLayout(true)
       }
+      else {
+        if (location.pathname === PAGES.PROFILE.url) {
+          setTopAppMenu(10)
+        }
+      }
     });
 
-    if (location.pathname === '/') {
-      // setLayout(false)
+    if (location.pathname === PAGES.CURRENCIES.url) {
+      setLayout(false)
     }
   }, [location.pathname, topAppMenu]);
 
