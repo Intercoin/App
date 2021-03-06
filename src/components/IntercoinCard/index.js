@@ -44,12 +44,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const RecentTransactions = ({ selectedCard, id, imageUrl, content, subContent, detail, value, onClick }) => {
+const RecentTransactions = ({ selectedCard, id, imageUrl, content, subContent, detail, value, cardHandler }) => {
   const classes = useStyles({});
 
   return (
     <Grid item xs={12} sm={6} md={4} lg={3}>
-      <Card className={classes.card} onClick={() => onClick(id)}>
+      <Card className={classes.card} onClick={() => cardHandler(id)}>
         <CardContent className={clsx(selectedCard === id && classes.selected)}>
           <Grid container direction="row" justify="center" alignItems="center"  >
             <Grid item xs={2}>

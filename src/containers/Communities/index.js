@@ -13,6 +13,8 @@ import CircleButton from 'components/UI/Buttons/CircleButton';
 import { communityData } from 'utils/helper/mockupData';
 import IntercoinCard from 'components/IntercoinCard';
 import { PAGES } from 'utils/links/pages';
+import { isEmpty } from 'utils/utility';
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -59,10 +61,16 @@ const Communities = () => {
   }, [setLoadingInfo]);
 
   const cardHandler = (id) => {
-    history.push({
-      pathname: `${PAGES.COMMUNITIES.url}/address`,
-      state: communityData[id]
-    })
+    console.log('kevin===>id checking', id)
+    if (isEmpty(id)) {
+
+    }
+    else {
+      history.push({
+        pathname: `${PAGES.COMMUNITIES.url}/address`,
+        state: communityData[id]
+      })
+    }
   }
 
   return (
@@ -75,20 +83,20 @@ const Communities = () => {
               return (
                 <IntercoinCard
                   key={index}
-                  selectedCard={1}
+                  selectedCard={''}
                   id={index}
                   imageUrl={community.logoUrl}
                   content={community.communityTitle}
                   subContent={community.role}
                   detail={community.personalInfo}
                   value={community.tokenAmount}
-                  onClick={cardHandler}
+                  cardHandler={cardHandler}
                 />
               )
             })
           }
           <Grid item xs={12} sm={6} md={4} lg={3}>
-            <Card className={classes.card} onClick={cardHandler}>
+            <Card className={classes.card} onClick={()=>cardHandler()}>
               <CircleButton
                 style={{ marginLeft: 4, backgroundColor: '#292C40' }}
                 icon={<AddIcon style={{ color: "#fff", width: 32, height: 32 }} fontSize={'large'} />} />

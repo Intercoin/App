@@ -67,7 +67,7 @@ const App = ({ location, history }) => {
     }
   }, [account, library, chainId])
 
-  console.log('kevin getting the account balance===>', balance && formatEther(balance))
+  // console.log('kevin getting the account balance===>', balance && formatEther(balance),context )
 
   const triedEager = useEagerConnect();
   useInactiveListener(!triedEager || !!activatingConnector)
