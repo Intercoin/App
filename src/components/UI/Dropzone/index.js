@@ -6,7 +6,7 @@ import { useDropzone } from 'react-dropzone';
 import Compressor from 'compressorjs';
 import PicIcon from 'components/Icons/PicIcon';
 import TrashIcon from 'components/Icons/TrashIcon';
-import dashImage from 'assets/images/dashed.png';
+import dashImage from './images/dashed.png';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -71,11 +71,11 @@ const Dropzone = ({ image, setImage, imageURL }) => {
     setImageSrc(imageURL);
   }, [imageURL]);
 
-  const onDrop = useCallback( async (acceptedFiles) => {
+  const onDrop = useCallback(async (acceptedFiles) => {
     if (!Array.isArray(acceptedFiles) || acceptedFiles.length <= 0) return;
     const file = acceptedFiles[0];
 
-    const compressorPromise = new Promise(function(resolve, reject) {
+    const compressorPromise = new Promise(function (resolve, reject) {
       new Compressor(file, {
         quality: 0.7,
         convertSize: 500000,
@@ -110,10 +110,10 @@ const Dropzone = ({ image, setImage, imageURL }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const accept=".jpg, .png, .jpeg";
+  const accept = ".jpg, .png, .jpeg";
 
-  const {getRootProps, getInputProps} = useDropzone({onDrop, accept})
- 
+  const { getRootProps, getInputProps } = useDropzone({ onDrop, accept })
+
   return (
     <>
       <div {...getRootProps()}

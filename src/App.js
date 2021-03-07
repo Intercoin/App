@@ -33,6 +33,7 @@ const SharedControl = loadable(() => pMinDelay(import('containers/SharedControl'
 const App = ({ location, history }) => {
   const context = useWeb3React();
   const { connector, library, chainId, account, activate, deactivate, active, error } = context
+  // console.log('kevin web3 library', library)
 
   const [isWalletDialog, setIsWalletDialog] = useState();
   const [activatingConnector, setActivatingConnector] = useState();
@@ -67,7 +68,7 @@ const App = ({ location, history }) => {
     }
   }, [account, library, chainId])
 
-  // console.log('kevin getting the account balance===>', balance && formatEther(balance),context )
+  // console.log('kevin getting the account balance===>',account, balance && formatEther(balance),context )
 
   const triedEager = useEagerConnect();
   useInactiveListener(!triedEager || !!activatingConnector)
@@ -116,6 +117,7 @@ const App = ({ location, history }) => {
     <AppContext.Provider
       value={{
         loadingInfo,
+        library,
         setLoadingInfo,
         topAppMenu,
         setTopAppMenu,

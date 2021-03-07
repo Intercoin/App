@@ -60,7 +60,7 @@ const useInactiveListener = (suppress) => {
         deactivate(injected)
       }
 
-      ethereum.on('connect', handleConnect)
+      ethereum.on('connect', handleConnect) 
       ethereum.on('chainChanged', handleChainChanged)
       ethereum.on('accountsChanged', handleAccountsChanged)
       ethereum.on('networkChanged', handleNetworkChanged)

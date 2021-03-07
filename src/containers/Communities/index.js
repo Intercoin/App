@@ -1,5 +1,5 @@
 
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { AppContext } from 'contexts';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -7,6 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import Card from '@material-ui/core/Card';
 import AddIcon from '@material-ui/icons/Add';
 import { useHistory } from "react-router-dom";
+import { Contract } from '@ethersproject/contracts'
 
 import CardWrapper from 'hoc/CardWrapper';
 import CircleButton from 'components/UI/Buttons/CircleButton';
@@ -14,7 +15,8 @@ import { communityData } from 'utils/helper/mockupData';
 import IntercoinCard from 'components/IntercoinCard';
 import { PAGES } from 'utils/links/pages';
 import { isEmpty } from 'utils/utility';
-
+import CommunityContract from 'contracts/CommunityContract';
+import AddCommunityDialog from 'components/UI/AddCommunityDialog';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -50,20 +52,22 @@ const useStyles = makeStyles(theme => ({
 
 const Communities = () => {
   const classes = useStyles();
+  const { setLoadingInfo, account, chainId, library } = useContext(AppContext);
+  const [isDialog, setIsDialog] = useState(false);
   const history = useHistory();
-  const { setLoadingInfo, account } = useContext(AppContext);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const openCloseDialogHandler = show => () => {
+    setIsDialog(show);
+  }
   useEffect(() => {
     setLoadingInfo(true);
     setTimeout(() => {
       setLoadingInfo(false);
     }, 2000);
   }, [setLoadingInfo]);
-
+  // console.log('kevin===>', CommunityContract.networks[chainId]?.address)
   const cardHandler = (id) => {
-    console.log('kevin===>id checking', id)
     if (isEmpty(id)) {
-
+      setIsDialog(true);
     }
     else {
       history.push({
@@ -71,6 +75,16 @@ const Communities = () => {
         state: communityData[id]
       })
     }
+  }
+
+  const creatNewCommunityHandler = (title, image) => {
+    console.log('kevin===>', isEmpty(title))
+    if (isEmpty(title) || !chainId || !CommunityContract.networks || !CommunityContract.networks[chainId]) {
+      return null
+    }
+    const communityContract = new Contract(CommunityContract.networks[chainId].address, CommunityContract.abi, library.getSigner(account))
+    communityContract?.setSettings(title, ["data:image/png;base64", "iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAIAAACRXR/mAAAB"], 'descirtions');
+    setIsDialog(false);
   }
 
   return (
@@ -90,13 +104,13 @@ const Communities = () => {
                   subContent={community.role}
                   detail={community.personalInfo}
                   value={community.tokenAmount}
-                  cardHandler={cardHandler}
+                  cardHandler={cardHandler} RoleTagDialog
                 />
               )
             })
           }
           <Grid item xs={12} sm={6} md={4} lg={3}>
-            <Card className={classes.card} onClick={()=>cardHandler()}>
+            <Card className={classes.card} onClick={() => cardHandler()}>
               <CircleButton
                 style={{ marginLeft: 4, backgroundColor: '#292C40' }}
                 icon={<AddIcon style={{ color: "#fff", width: 32, height: 32 }} fontSize={'large'} />} />
@@ -105,6 +119,13 @@ const Communities = () => {
           </Grid>
         </Grid>
       </CardWrapper>
+      {isDialog &&
+        <AddCommunityDialog
+          title={'Creating a new Community'}
+          open={true}
+          onClose={openCloseDialogHandler('')}
+          creatNewCommunityHandler={creatNewCommunityHandler} />
+      }
     </div>
   );
 };
