@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import clsx from 'clsx';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import ButtonLink from 'components/UI/Buttons/ButtonLink';
 
@@ -10,10 +11,13 @@ const useStyles = makeStyles(theme => ({
     textTransform: 'none',
     // TODO: handle color='error'
     // border: `1px solid ${props.color ? theme.palette[props.color].main : theme.palette.primary.main}`
+  },
+  loadingSpin: {
+    position: 'absolute'
   }
 }));
 
-const OutlinedButton = ({ className, color, variant, href, children, ...rest }) => {
+const OutlinedButton = ({ className, color, variant, href, children, loading, ...rest }) => {
   const classes = useStyles();
 
   return (
@@ -21,10 +25,12 @@ const OutlinedButton = ({ className, color, variant, href, children, ...rest }) 
       component={href ? ButtonLink : 'button'}
       href={href}
       className={clsx(className, classes.root)}
+      disabled={loading}
       color={color}
       variant='outlined'
       {...rest}>
       {children}
+      {loading && <CircularProgress className={classes.loadingSpin} color={color === 'primary' ? 'secondary' : 'primary'} size={20} />}
     </Button>
   );
 };

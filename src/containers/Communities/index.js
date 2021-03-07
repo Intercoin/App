@@ -8,6 +8,7 @@ import Card from '@material-ui/core/Card';
 import AddIcon from '@material-ui/icons/Add';
 import { useHistory } from "react-router-dom";
 import { Contract } from '@ethersproject/contracts'
+import { useQuery } from 'react-query';
 
 import CardWrapper from 'hoc/CardWrapper';
 import CircleButton from 'components/UI/Buttons/CircleButton';
@@ -17,6 +18,7 @@ import { PAGES } from 'utils/links/pages';
 import { isEmpty } from 'utils/utility';
 import CommunityContract from 'contracts/CommunityContract';
 import AddCommunityDialog from 'components/UI/AddCommunityDialog';
+import { conversionToDollar } from 'services/conversion';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -55,6 +57,13 @@ const Communities = () => {
   const { setLoadingInfo, account, chainId, library } = useContext(AppContext);
   const [isDialog, setIsDialog] = useState(false);
   const history = useHistory();
+  const params = {
+    fsym: 'ETH',
+    tsyms: 'USD'
+  };
+  const { data: conversionCurrency, isLoading: pageLoading } = useQuery(['conversionUSD'],
+    () => conversionToDollar({ params }));
+
   const openCloseDialogHandler = show => () => {
     setIsDialog(show);
   }
@@ -64,7 +73,7 @@ const Communities = () => {
       setLoadingInfo(false);
     }, 2000);
   }, [setLoadingInfo]);
-  // console.log('kevin===>', CommunityContract.networks[chainId]?.address)
+
   const cardHandler = (id) => {
     if (isEmpty(id)) {
       setIsDialog(true);
@@ -77,13 +86,15 @@ const Communities = () => {
     }
   }
 
-  const creatNewCommunityHandler = (title, image) => {
-    console.log('kevin===>', isEmpty(title))
+  const creatNewCommunityHandler = (title, image, ticker) => {
+
     if (isEmpty(title) || !chainId || !CommunityContract.networks || !CommunityContract.networks[chainId]) {
       return null
     }
+    const ico = isEmpty(image) ? ["data:image/png;base64", ""] : image.split(',')
+
     const communityContract = new Contract(CommunityContract.networks[chainId].address, CommunityContract.abi, library.getSigner(account))
-    communityContract?.setSettings(title, ["data:image/png;base64", "iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAIAAACRXR/mAAAB"], 'descirtions');
+    communityContract?.setSettings(title, ico, ticker);
     setIsDialog(false);
   }
 
@@ -123,6 +134,7 @@ const Communities = () => {
         <AddCommunityDialog
           title={'Creating a new Community'}
           open={true}
+          ticker={conversionCurrency?.data.USD}
           onClose={openCloseDialogHandler('')}
           creatNewCommunityHandler={creatNewCommunityHandler} />
       }

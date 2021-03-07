@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const AddCommunityDialog = ({ open, onClose, title, creatNewCommunityHandler }) => {
+const AddCommunityDialog = ({ open, onClose, title, ticker, creatNewCommunityHandler }) => {
     const classes = useStyles();
     const dialogClasses = dialogStyles();
     const [image, setImage] = useState('');
@@ -95,7 +95,12 @@ const AddCommunityDialog = ({ open, onClose, title, creatNewCommunityHandler }) 
                     </div>
                 </DialogContent>
                 <div className={classes.dialogActions}>
-                    <OutlinedButton onClick={() => creatNewCommunityHandler(state.communityTitle, image)} className={classes.button}>Create</OutlinedButton>
+                    <OutlinedButton
+                        // loading
+                        onClick={() => creatNewCommunityHandler(state.communityTitle, image, ticker)}
+                        className={classes.button}>
+                        Create
+                    </OutlinedButton>
                 </div>
             </form>
         </DialogWrapper>
