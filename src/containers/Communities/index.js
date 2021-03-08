@@ -19,6 +19,7 @@ import AddCommunityDialog from 'components/UI/AddCommunityDialog';
 import { conversionToDollar } from 'services/conversion';
 import { useBlockNumber } from 'utils/hooks';
 import { communityInstance } from 'services/communityInstance';
+import IntercoinLoading from 'components/IntercoinLoading';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -57,7 +58,9 @@ const Communities = () => {
   const { setLoadingInfo, account, chainId, library } = useContext(AppContext);
   const history = useHistory();
   const blockNumber = useBlockNumber();
-  const community = communityInstance(account, chainId, library)
+  const community = communityInstance(account, chainId, library);
+  const [communityDataList, setCommunityDataList] = useState([]);
+  const [communityCreateLoading, setcommunityCreateLoading] = useState(false);
 
   const [isDialog, setIsDialog] = useState(false);
   const params = {
@@ -95,14 +98,19 @@ const Communities = () => {
     if (isEmpty(title) || isEmpty(ticker)) {
       return null
     }
+    setcommunityCreateLoading(true)
     const ico = isEmpty(image) ? ["data:image/png;base64", ""] : image.split(',')
     community?.setSettings(title, ico, ticker);
     setIsDialog(false);
+
   }
 
   useEffect(() => {
-    const communityData = community?.getSettings()
-   console.log('kevin===>',communityData)
+    Promise.resolve(community?.getSettings()).then(function (communityData) {
+      setCommunityDataList([communityData])
+      setcommunityCreateLoading(false)
+    })
+
   }, [blockNumber])
 
   return (
@@ -110,29 +118,30 @@ const Communities = () => {
       <CardWrapper >
         <Grid container spacing={2} className={classes.container} >
           {
-            communityData.map((community, index) => {
+            communityDataList.map((community, index) => {
 
               return (
                 <IntercoinCard
                   key={index}
                   selectedCard={''}
                   id={index}
-                  imageUrl={community.logoUrl}
-                  content={community.communityTitle}
-                  subContent={community.role}
-                  detail={community.personalInfo}
+                  imageUrl={community.logoUrl || '/assets/images/logos/value-exchange_200w.png'}
+                  content={community[0]}
+                  subContent={community.role || 'owner, manager, developer'}
+                  detail={community.personalInfo || 'member'}
                   value={community.tokenAmount}
-                  cardHandler={cardHandler} RoleTagDialog
+                  cardHandler={cardHandler}
                 />
               )
             })
           }
           <Grid item xs={12} sm={6} md={4} lg={3}>
             <Card className={classes.card} onClick={() => cardHandler()}>
+              {communityCreateLoading && <IntercoinLoading wholeOverlay />}
               <CircleButton
                 style={{ marginLeft: 4, backgroundColor: '#292C40' }}
-                icon={<AddIcon style={{ color: "#fff", width: 32, height: 32 }} fontSize={'large'} />} />
-              <Typography variant='h6'> Start a Community </Typography>
+                icon={<AddIcon style={{ color: communityCreateLoading ? '#6B76A1' : '#fff', width: 32, height: 32 }} fontSize={'large'} />} />
+              <Typography variant='h6' color={communityCreateLoading ? 'textSecondary' : 'inherit'}> {'Start a Community'}  </Typography>
             </Card>
           </Grid>
         </Grid>
