@@ -7,7 +7,6 @@ import Grid from "@material-ui/core/Grid";
 import Card from '@material-ui/core/Card';
 import AddIcon from '@material-ui/icons/Add';
 import { useHistory } from "react-router-dom";
-import { Contract } from '@ethersproject/contracts'
 import { useQuery } from 'react-query';
 
 import CardWrapper from 'hoc/CardWrapper';
@@ -16,9 +15,10 @@ import { communityData } from 'utils/helper/mockupData';
 import IntercoinCard from 'components/IntercoinCard';
 import { PAGES } from 'utils/links/pages';
 import { isEmpty } from 'utils/utility';
-import CommunityContract from 'contracts/CommunityContract';
 import AddCommunityDialog from 'components/UI/AddCommunityDialog';
 import { conversionToDollar } from 'services/conversion';
+import { useBlockNumber } from 'utils/hooks';
+import { communityInstance } from 'services/communityInstance';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -55,18 +55,23 @@ const useStyles = makeStyles(theme => ({
 const Communities = () => {
   const classes = useStyles();
   const { setLoadingInfo, account, chainId, library } = useContext(AppContext);
-  const [isDialog, setIsDialog] = useState(false);
   const history = useHistory();
+  const blockNumber = useBlockNumber();
+  const community = communityInstance(account, chainId, library)
+
+  const [isDialog, setIsDialog] = useState(false);
   const params = {
     fsym: 'ETH',
     tsyms: 'USD'
   };
+
   const { data: conversionCurrency, isLoading: pageLoading } = useQuery(['conversionUSD'],
     () => conversionToDollar({ params }));
 
   const openCloseDialogHandler = show => () => {
     setIsDialog(show);
   }
+
   useEffect(() => {
     setLoadingInfo(true);
     setTimeout(() => {
@@ -87,18 +92,18 @@ const Communities = () => {
   }
 
   const creatNewCommunityHandler = (title, image, ticker) => {
-
-    console.log('kevin ===> title, image, ticker===>', title, image, ticker)
-
-    if (isEmpty(title) || isEmpty(title) || !chainId || !CommunityContract.networks || !CommunityContract.networks[chainId]) {
+    if (isEmpty(title) || isEmpty(ticker)) {
       return null
     }
     const ico = isEmpty(image) ? ["data:image/png;base64", ""] : image.split(',')
-
-    const communityContract = new Contract(CommunityContract.networks[chainId].address, CommunityContract.abi, library.getSigner(account));
-    communityContract?.setSettings(title, ico, ticker);
+    community?.setSettings(title, ico, ticker);
     setIsDialog(false);
   }
+
+  useEffect(() => {
+    const communityData = community?.getSettings()
+   console.log('kevin===>',communityData)
+  }, [blockNumber])
 
   return (
     <div className={classes.root}>

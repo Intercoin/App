@@ -60,7 +60,7 @@ const useInactiveListener = (suppress) => {
         deactivate(injected)
       }
 
-      ethereum.on('connect', handleConnect) 
+      ethereum.on('connect', handleConnect)
       ethereum.on('chainChanged', handleChainChanged)
       ethereum.on('accountsChanged', handleAccountsChanged)
       ethereum.on('networkChanged', handleNetworkChanged)
@@ -78,8 +78,32 @@ const useInactiveListener = (suppress) => {
   }, [active, error, suppress, activate])
 }
 
+const useBlockNumber = () => {
+
+  const { library } = useWeb3React()
+  const [blockNumber, setBlockNumber] = useState(-1)
+
+  useEffect(() => {
+    if (!library) {
+      return
+    }
+    const t = setInterval(async () => {
+      try {
+        setBlockNumber(await library.getBlockNumber())
+      } catch (error) {
+        console.error('failed to get block number', error)
+      }
+      return () => {
+        clearInterval(t)
+      }
+    }, 1000)
+
+  }, [library])
+  return blockNumber
+}
 
 export {
   useEagerConnect,
-  useInactiveListener
+  useInactiveListener,
+  useBlockNumber
 };
