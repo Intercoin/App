@@ -88,7 +88,9 @@ const Communities = () => {
 
   const creatNewCommunityHandler = (title, image, ticker) => {
 
-    if (isEmpty(title) || !chainId || !CommunityContract.networks || !CommunityContract.networks[chainId]) {
+    console.log('kevin===>', title, image, ticker)
+
+    if (isEmpty(title) || isEmpty(title)  || !chainId || !CommunityContract.networks || !CommunityContract.networks[chainId]) {
       return null
     }
     const ico = isEmpty(image) ? ["data:image/png;base64", ""] : image.split(',')

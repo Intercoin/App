@@ -73,7 +73,6 @@ const AddCommunityDialog = ({ open, onClose, title, ticker, creatNewCommunityHan
         }));
     }, []);
 
-
     return (
         <DialogWrapper open={open} onClose={onClose} smallWidth >
             <form onSubmit={onFormSubmit} >
