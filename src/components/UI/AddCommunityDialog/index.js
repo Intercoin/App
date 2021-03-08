@@ -9,6 +9,7 @@ import OutlinedButton from 'components/UI/Buttons/OutlinedButton';
 import { MemoizedOutlinedTextField } from 'components/UI/OutlinedTextField';
 import { MemoizedOutlinedSelect } from 'components/UI/OutlinedSelect';
 import Dropzone from 'components/UI/Dropzone';
+import { TRANSACTIONTYPES } from 'constants/transactionTypes';
 import { isEmpty } from 'utils/utility';
 
 const useStyles = makeStyles(theme => ({
@@ -50,7 +51,9 @@ const AddCommunityDialog = ({ open, onClose, title, ticker, creatNewCommunityHan
     const classes = useStyles();
     const dialogClasses = dialogStyles();
     const [image, setImage] = useState('');
-    const [state, setState] = useState({})
+    const [state, setState] = useState({
+        transactionType: TRANSACTIONTYPES[0]
+    })
 
     const imageChangeHandler = img => {
         setImage(img);
@@ -74,6 +77,10 @@ const AddCommunityDialog = ({ open, onClose, title, ticker, creatNewCommunityHan
         }));
     }, []);
 
+    const onSelectHandler = useCallback((value, name) => {
+        setState(prevState => ({ ...prevState, [name]: value }));
+    }, []);
+
     return (
         <DialogWrapper open={open} onClose={onClose} smallWidth >
             <form onSubmit={onFormSubmit} >
@@ -87,7 +94,13 @@ const AddCommunityDialog = ({ open, onClose, title, ticker, creatNewCommunityHan
                             onChange={inputChangeHandler} />
                     </div>
                     <div className={classes.section}>
-                        <MemoizedOutlinedSelect />
+                        <MemoizedOutlinedSelect
+                            name='transactionType'
+                            placeholder='Transaction Type'
+                            value={state.transactionType}
+                            items={TRANSACTIONTYPES}
+                            onChange={onSelectHandler}
+                        />
                     </div>
                     <div className={classes.section}>
                         <Dropzone
