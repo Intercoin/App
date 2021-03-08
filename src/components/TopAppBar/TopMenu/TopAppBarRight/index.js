@@ -103,10 +103,10 @@ const TopAppBarRight = ({ isMobileMenu }) => {
       {!isMobileMenu && <>
         <CircleButton
           style={{ backgroundColor: '#292C41', margin: 4 }}
-          icon={<AddCircleOutlineIcon fontSize={'large'} style={{ color: '#fff', width: 38, height: 38 }} />} />
+          icon={<AddCircleOutlineIcon fontSize={'large'} style={{ color: '#fff', width: 40, height: 40 }} />} />
         <CircleButton
-          style={{ backgroundColor: '#1B1F2E', margin: 4 }}
-          icon={<SearchIcon fontSize={'large'} style={{ color: '#fff', width: 35, height: 35 }} />} />
+          style={{ backgroundColor: '#292C41', margin: 4 }}
+          icon={<SearchIcon fontSize={'large'} style={{ color: '#fff', width: 40, height: 40 }} />} />
       </>}
     </div>
   );

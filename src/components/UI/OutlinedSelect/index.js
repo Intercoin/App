@@ -3,7 +3,6 @@ import clsx from 'clsx';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
-import OutlinedChip from 'components/UI/OutlinedChip';
 import ArrowDownIcon from 'components/Icons/ArrowDownIcon';
 
 const useStyles = props => makeStyles(theme => ({
@@ -23,14 +22,14 @@ const useStyles = props => makeStyles(theme => ({
     background: 'transparent',
     border: `1px solid ${theme.palette.secondary.contrastText}`,
     borderRadius: theme.spacing(0.5),
-    
+
     '& > div': {
-      padding: props.prefixWidth? `0 40px 0 ${props.prefixWidth}px !important`: (props.startAdornment? `0 40px 0 60px !important`: `0 40px 0 12px !important`)
+      padding: props.prefixWidth ? `0 40px 0 ${props.prefixWidth}px !important` : (props.startAdornment ? `0 40px 0 60px !important` : `0 40px 0 12px !important`)
     },
     '& input': {
       padding: `8px 6px !important`,
       color: theme.palette.secondary.contrastText,
-      '-webkit-text-fill-color' : theme.palette.secondary.contrastText,
+      '-webkit-text-fill-color': theme.palette.secondary.contrastText,
       '-webkit-box-shadow': '0 0 0px 1000px transparent inset',
       border: 'none',
       '&:-webkit-autofill': {
@@ -39,11 +38,11 @@ const useStyles = props => makeStyles(theme => ({
       fontSize: props.sm && `14px !important`,
       '&:focus': {
         color: theme.palette.primary.contrastText,
-        '-webkit-text-fill-color' : theme.palette.primary.contrastText,
+        '-webkit-text-fill-color': theme.palette.primary.contrastText,
       },
     },
     '& fieldset': {
-        border: 'none'
+      border: 'none'
     },
     '&:hover': {
       border: `1px solid ${theme.custom.palette.grey}`
@@ -67,8 +66,8 @@ const useStyles = props => makeStyles(theme => ({
     border: `1px solid ${theme.palette.secondary.contrastText}`,
   },
   optionItem: { // list item
-    height: !props.sm ? 40: 34,
-    fontSize: !props.sm ? 14: 13,
+    height: !props.sm ? 40 : 34,
+    fontSize: !props.sm ? 14 : 13,
     whiteSpace: 'nowrap',
     textTransform: 'ellipsis',
     '&:hover': {
@@ -84,9 +83,9 @@ const useStyles = props => makeStyles(theme => ({
   },
   startAdornment: {
     position: 'absolute',
-    transform: props.sm? 'translate(-50%, -50%) scale(0.74)': 'translate(-50%, -50%)',
+    transform: props.sm ? 'translate(-50%, -50%) scale(0.74)' : 'translate(-50%, -50%)',
     top: '50%',
-    left: props.prefixWidth? props.prefixWidth / 2 + 4: 32,
+    left: props.prefixWidth ? props.prefixWidth / 2 + 4 : 32,
     display: 'flex',
     justifyItems: 'center',
     alignItems: 'center',
@@ -98,7 +97,7 @@ const useStyles = props => makeStyles(theme => ({
 }));
 
 const OutlinedSelect = ({
-  items=[],
+  items = [],
   children,
   className,
   placeholder,
@@ -112,11 +111,11 @@ const OutlinedSelect = ({
   multiple,
   sm,
   name,
-  filterSelectedOptions=true,
+  filterSelectedOptions = true,
   renderTags,
   ...rest
 }) => {
-  const classes = useStyles({sm, startAdornment, prefixWidth})();
+  const classes = useStyles({ sm, startAdornment, prefixWidth })();
 
   const onChangeHandler = (event, value) => {
     // value.value && console.log('ANT: EMERGERNCY : FIX THIS, ', name, value);
@@ -135,7 +134,7 @@ const OutlinedSelect = ({
         <div className={classes.root}>
           {startAdornment && <div className={classes.startAdornment}>{startAdornment}</div>}
           <TextField
-            className={clsx(classes.textField, error && classes.error )}
+            className={clsx(classes.textField, error && classes.error)}
             {...params}
             variant="outlined"
             placeholder={placeholder || 'Select'}
@@ -144,7 +143,7 @@ const OutlinedSelect = ({
         </div>
       )}
       // TODO: hard coded color value
-      popupIcon={ readOnly ? null: <ArrowDownIcon className={classes.arrowIcon} color='#6B76A1' />}
+      popupIcon={readOnly ? null : <ArrowDownIcon className={classes.arrowIcon} color='#6B76A1' />}
       classes={{
         popper: classes.popper,
         inputRoot: classes.input,
@@ -154,14 +153,6 @@ const OutlinedSelect = ({
       }}
       value={value}
       onChange={onChangeHandler}
-      renderTags={renderTags && ((value, getTagProps) =>
-        value.map((option, index) => {
-          const { onDelete }  = getTagProps({ index });
-          return (
-            <OutlinedChip key={index} label={option.label} onDelete={!renderTags.hideDelete ? onDelete: null} />
-          );
-        })
-      )}
       {...rest}
     />
   );

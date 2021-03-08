@@ -9,7 +9,7 @@ import TrashIcon from 'components/Icons/TrashIcon';
 import dashImage from './images/dashed.png';
 
 const useStyles = makeStyles(theme => ({
-  root: {
+  root: props => ({
     cursor: 'pointer',
     position: 'relative',
     display: 'flex',
@@ -19,11 +19,11 @@ const useStyles = makeStyles(theme => ({
     background: 'transparent',
     width: '100%',
     height: '100%',
-    minHeight: 180,
+    minHeight: props.dropZoneSize ? props.dropZoneSize : 180,
     '&:focus': {
       outline: 'none'
     },
-  },
+  }),
   commonBorder: {
     border: `1px solid ${theme.palette.secondary.contrastText}`,
   },
@@ -57,8 +57,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Dropzone = ({ image, setImage, imageURL }) => {
-  const classes = useStyles();
+const Dropzone = ({ image, setImage, imageURL, title, dropZoneSize }) => {
+  const classes = useStyles({ dropZoneSize });
   const [imageSrc, setImageSrc] = useState();
 
   const onClear = event => {
@@ -123,7 +123,7 @@ const Dropzone = ({ image, setImage, imageURL }) => {
           <>
             <PicIcon />
             <Typography variant='body2' color='textSecondary' className={classes.placeholder}>
-              Drag and Drop <br /> Thumbnail image here
+              Drag and Drop <br /> {title} here
             </Typography>
           </>
         }
@@ -139,7 +139,6 @@ const Dropzone = ({ image, setImage, imageURL }) => {
           </>
         }
       </div>
-
     </>
   )
 }

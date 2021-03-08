@@ -7,6 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogWrapper, { dialogStyles } from 'hoc/DialogWrapper';
 import OutlinedButton from 'components/UI/Buttons/OutlinedButton';
 import { MemoizedOutlinedTextField } from 'components/UI/OutlinedTextField';
+import { MemoizedOutlinedSelect } from 'components/UI/OutlinedSelect';
 import Dropzone from 'components/UI/Dropzone';
 import { isEmpty } from 'utils/utility';
 
@@ -41,7 +42,7 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: theme.custom.palette.green
     },
     section: {
-        margin: theme.spacing(3)
+        margin: theme.spacing(2, 1, 2, 1)
     }
 }));
 
@@ -76,7 +77,7 @@ const AddCommunityDialog = ({ open, onClose, title, ticker, creatNewCommunityHan
     return (
         <DialogWrapper open={open} onClose={onClose} smallWidth >
             <form onSubmit={onFormSubmit} >
-                <Typography variant='h6' className={classes.titleLine}>{title}</Typography>
+                <Typography variant='h6' className={classes.titleLine} noWrap>{title}</Typography>
                 <DialogContent dividers className={classes.dialogContent}>
                     <div className={classes.section}>
                         <MemoizedOutlinedTextField
@@ -86,10 +87,15 @@ const AddCommunityDialog = ({ open, onClose, title, ticker, creatNewCommunityHan
                             onChange={inputChangeHandler} />
                     </div>
                     <div className={classes.section}>
+                        <MemoizedOutlinedSelect />
+                    </div>
+                    <div className={classes.section}>
                         <Dropzone
                             image={image}
                             setImage={imageChangeHandler}
                             imageURL={state.imageURL}
+                            title='Community Image'
+                            dropZoneSize={150}
                         />
                     </div>
                 </DialogContent>
