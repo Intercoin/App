@@ -1,5 +1,5 @@
 
-import React, { useState, useCallback, useContext } from 'react';
+import React, { useState, useCallback, useContext, useEffect } from 'react';
 import { AppContext } from 'contexts';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
@@ -67,6 +67,8 @@ const RoleTagDialog = ({ dataList, open, onClose, title }) => {
     newRole: '',
     newTag: ''
   });
+  const [allRoles, setAllRoles] = useState([]);
+  const [allTags, setAllTags] = useState([]);
   const [createRole, setCreateRole] = useState(false);
   const [selectedId, setSelectedId] = useState([]);
 
@@ -86,7 +88,7 @@ const RoleTagDialog = ({ dataList, open, onClose, title }) => {
       }
       else {
         console.log('kevin===>TagAdd')
-        // community.createTag(state.newTag)
+        // TODO kevin community.createTag(state.newTag) 
       }
     }
   }
@@ -105,6 +107,26 @@ const RoleTagDialog = ({ dataList, open, onClose, title }) => {
     }));
   }, []);
 
+  useEffect(() => {
+    if (!isEmpty(account) && !isEmpty(community)) {
+      Promise.resolve(community['getRoles()']()).then(function (allRoles) {
+        setAllRoles(allRoles)
+      }).catch(function (error) {
+        console.log('getRolesError===>', error)
+      })
+    }
+  }, [])
+
+  const filterLists = (title) => {
+    switch (title) {
+      case 'Roles':
+        return allRoles;
+      case 'Tags':
+        return allTags;
+      default:
+        return allRoles;
+    }
+  }
 
   return (
     <DialogWrapper open={open} onClose={onClose} isCheckIcon={!isEmpty(selectedId) ? true : false} smallWidth >
@@ -131,15 +153,15 @@ const RoleTagDialog = ({ dataList, open, onClose, title }) => {
               </ListItem>
               :
               <>
-                {dataList.map((data, index) => {
+                {filterLists(title).map((title, index) => {
 
                   return (
                     <ListItem button classes={{ selected: classes.selectedItem }}
                       key={index} onClick={() => selectHandler(index)} selected={index === selectedId}>
                       <ListItemAvatar>
-                        <Avatar src={data?.image} variant='square' />
+                        <Avatar src={'/assets/images/logos/victim-services_200w.png'} variant='square' />
                       </ListItemAvatar>
-                      <ListItemText primary={data.title} />
+                      <ListItemText primary={title} />
                     </ListItem>
                   )
                 })}

@@ -108,6 +108,9 @@ const Communities = () => {
     Promise.resolve(community?.getSettings()).then(function (communityData) {
       setCommunityDataList([communityData])
       setcommunityCreateLoading(false)
+    }).catch(function (error) {
+      console.log('community creating error ===>', error)
+      setcommunityCreateLoading(false)
     })
 
   }, [blockNumber])
