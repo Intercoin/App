@@ -45,6 +45,7 @@ const App = ({ location, history }) => {
   }, [activatingConnector, connector])
 
   useEffect(() => {
+    console.log('kevin getting the latest block number')
     if (!!account && !!library) {
       let stale = false
 

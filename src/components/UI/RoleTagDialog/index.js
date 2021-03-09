@@ -1,5 +1,6 @@
 
-import React, { useState } from 'react';
+import React, { useState, useCallback, useContext } from 'react';
+import { AppContext } from 'contexts';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -9,9 +10,11 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 
-import DialogWrapper, { dialogStyles } from 'hoc/DialogWrapper';
+import DialogWrapper from 'hoc/DialogWrapper';
 import OutlinedButton from 'components/UI/Buttons/OutlinedButton';
+import { MemoizedOutlinedTextField } from 'components/UI/OutlinedTextField';
 import { isEmpty } from 'utils/utility';
+import { communityInstance } from 'services/communityInstance';
 
 const useStyles = makeStyles(theme => ({
   dialogActions: {
@@ -58,18 +61,50 @@ const useStyles = makeStyles(theme => ({
 
 const RoleTagDialog = ({ dataList, open, onClose, title }) => {
   const classes = useStyles();
-  const dialogClasses = dialogStyles();
-
+  const { account, chainId, library } = useContext(AppContext);
+  const community = communityInstance(account, chainId, library);
+  const [state, setState] = useState({
+    newRole: '',
+    newTag: ''
+  });
+  const [createRole, setCreateRole] = useState(false);
   const [selectedId, setSelectedId] = useState([]);
+
+  const selectHandler = (id) => {
+    setSelectedId(id)
+  }
+
+  const clickHandler = () => {
+    setCreateRole(true)
+
+  }
+
+  const creatNewHandler = () => {
+    if (account) {
+      if (title === 'Roles') {
+        community.createRole(state.newRole)
+      }
+      else {
+        console.log('kevin===>TagAdd')
+        // community.createTag(state.newTag)
+      }
+    }
+  }
 
   const onFormSubmit = async (ev) => {
     ev.preventDefault()
     onClose();
   }
 
-  const selectHandler = (id) => {
-    setSelectedId(id)
-  }
+  const inputChangeHandler = useCallback(event => {
+    console.log('kevin')
+    const { name, value } = event.target;
+    setState(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  }, []);
+
 
   return (
     <DialogWrapper open={open} onClose={onClose} isCheckIcon={!isEmpty(selectedId) ? true : false} smallWidth >
@@ -77,22 +112,46 @@ const RoleTagDialog = ({ dataList, open, onClose, title }) => {
         <Typography variant='h6' className={classes.titleLine}>{title}</Typography>
         <DialogContent dividers className={classes.dialogContent}>
           <List className={classes.listContainer}>
-            {dataList.map((data, index) => {
+            {createRole ?
+              <ListItem>
+                {title === 'Roles'
+                  ? <MemoizedOutlinedTextField
+                    placeholder='Enter title of Role'
+                    name='newRole'
+                    value={state.newRole}
+                    onChange={inputChangeHandler}
+                  />
+                  : <MemoizedOutlinedTextField
+                    placeholder='Enter title of Tag'
+                    name='newTag'
+                    value={state.newTag}
+                    onChange={inputChangeHandler}
+                  />
+                }
+              </ListItem>
+              :
+              <>
+                {dataList.map((data, index) => {
 
-              return (
-                <ListItem button classes={{ selected: classes.selectedItem }}
-                  key={index} onClick={() => selectHandler(index)} selected={index === selectedId}>
-                  <ListItemAvatar>
-                    <Avatar src={data?.image} variant='square' />
-                  </ListItemAvatar>
-                  <ListItemText primary={data.title} />
-                </ListItem>
-              )
-            })}
+                  return (
+                    <ListItem button classes={{ selected: classes.selectedItem }}
+                      key={index} onClick={() => selectHandler(index)} selected={index === selectedId}>
+                      <ListItemAvatar>
+                        <Avatar src={data?.image} variant='square' />
+                      </ListItemAvatar>
+                      <ListItemText primary={data.title} />
+                    </ListItem>
+                  )
+                })}
+              </>
+            }
           </List>
         </DialogContent>
         <div className={classes.dialogActions}>
-          <OutlinedButton className={classes.button}>+ New {title} </OutlinedButton>
+          {createRole
+            ? <OutlinedButton onClick={creatNewHandler} className={classes.button}>+ Create {title === 'Roles' ? 'Role' : 'Tag'} </OutlinedButton>
+            : <OutlinedButton onClick={clickHandler} className={classes.button}>+ New {title === 'Roles' ? 'Role' : 'Tag'} </OutlinedButton>
+          }
         </div>
       </form>
     </DialogWrapper>

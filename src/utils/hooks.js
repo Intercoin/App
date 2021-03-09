@@ -93,6 +93,7 @@ const useBlockNumber = () => {
       } catch (error) {
         console.error('failed to get block number', error)
       }
+
       return () => {
         clearInterval(t)
       }

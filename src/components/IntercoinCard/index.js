@@ -51,12 +51,13 @@ const RecentTransactions = ({ selectedCard, id, imageUrl, content, subContent, d
     <Grid item xs={12} sm={6} md={4} lg={3}>
       <Card className={classes.card} onClick={() => cardHandler(id)}>
         <CardContent className={clsx(selectedCard === id && classes.selected)}>
-          <Grid container direction="row" justify="center" alignItems="center"  >
+          <Grid container direction="row" justify="center" alignItems="center">
             <Grid item xs={2}>
               <Avatar variant='square' src={imageUrl} />
             </Grid>
             <Grid item xs>
-              <Typography component='div' variant='body1' style={{ display: 'flex', flexDirection: 'column', padding: 8 }} noWrap>
+              <Typography style={{ display: 'flex', flexDirection: 'column', padding: 8 }}
+                component='div' variant='body1' noWrap>
                 {content}
                 <Typography variant='caption'>
                   {detail} , {subContent}
@@ -65,15 +66,9 @@ const RecentTransactions = ({ selectedCard, id, imageUrl, content, subContent, d
             </Grid>
             <Grid item xs={1}>
               <Badge color='primary'
-                classes={{
-                  colorPrimary: classes.badgeBackgroundColor
-                }}
-                max={999999}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                badgeContent={value} />
+                classes={{ colorPrimary: classes.badgeBackgroundColor }}
+                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                max={999999} badgeContent={value} />
             </Grid>
           </Grid>
         </CardContent>

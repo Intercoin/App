@@ -90,7 +90,7 @@ const FullScreenDialog = ({ open, onClose, comunityInfo, children }) => {
 
   return (
     <>
-      <Dialog fullScreen open={open} onClose={onClose} scroll={'body'} TransitionComponent={Transition}>
+      <Dialog disableEnforceFocus fullScreen open={open} onClose={onClose} scroll={'body'} TransitionComponent={Transition}>
         <AppBar className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
             <div className={classes.titleContainer}>

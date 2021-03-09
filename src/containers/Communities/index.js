@@ -57,7 +57,7 @@ const Communities = () => {
   const classes = useStyles();
   const { setLoadingInfo, account, chainId, library } = useContext(AppContext);
   const history = useHistory();
-  const blockNumber = useBlockNumber();
+  const blockNumber = useBlockNumber(library);
   const community = communityInstance(account, chainId, library);
   const [communityDataList, setCommunityDataList] = useState([]);
   const [communityCreateLoading, setcommunityCreateLoading] = useState(false);
@@ -100,9 +100,8 @@ const Communities = () => {
     }
     setcommunityCreateLoading(true)
     const ico = isEmpty(image) ? ["data:image/png;base64", ""] : image.split(',')
-    community?.setSettings(title, ico, ticker);
+    community?.setSettings(title, ["data:image/png;base64", ""], ticker);
     setIsDialog(false);
-
   }
 
   useEffect(() => {
@@ -129,7 +128,7 @@ const Communities = () => {
                   content={community[0]}
                   subContent={community.role || 'owner, manager, developer'}
                   detail={community.personalInfo || 'member'}
-                  value={community.tokenAmount}
+                  value={community.tokenAmount || 232}
                   cardHandler={cardHandler}
                 />
               )
