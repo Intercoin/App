@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react'
 import { useWeb3React } from '@web3-react/core'
 
 import { walletconnect, injected, intercoinToken, xDai } from 'constants/connectors';
+import { communityInstance } from 'services/communityInstance';
+import { isEmpty } from 'utils/utility';
 
 const useEagerConnect = () => {
   const { activate, active } = useWeb3React()
@@ -103,8 +105,27 @@ const useBlockNumber = () => {
   return blockNumber
 }
 
+const useOwner = () => {
+  const { account, chainId, library } = useWeb3React()
+  const [owner, setOwner] = useState();
+  const community = communityInstance(account, chainId, library);
+
+  if (isEmpty(community) || isEmpty(community) || isEmpty(community)) {
+    return null
+  }
+
+  Promise.resolve(community.owner()).then(function (owner) {
+    setOwner(owner)
+    console.log(' owner', owner)
+  }).catch(function (error) {
+    console.log('owner===>', error)
+  })
+  return owner
+}
+
 export {
   useEagerConnect,
   useInactiveListener,
-  useBlockNumber
+  useBlockNumber,
+  useOwner
 };

@@ -15,6 +15,8 @@ import OutlinedButton from 'components/UI/Buttons/OutlinedButton';
 import { MemoizedOutlinedTextField } from 'components/UI/OutlinedTextField';
 import { isEmpty } from 'utils/utility';
 import { communityInstance } from 'services/communityInstance';
+import IntercoinLoading from 'components/IntercoinLoading';
+import { useBlockNumber, useOwner } from 'utils/hooks';
 
 const useStyles = makeStyles(theme => ({
   dialogActions: {
@@ -44,12 +46,6 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(1, .5, 0, .5),
 
   },
-  sliderContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    // height: theme.spacing(18)
-  },
   button: {
     backgroundColor: theme.custom.palette.green
   },
@@ -62,15 +58,19 @@ const useStyles = makeStyles(theme => ({
 const RoleTagDialog = ({ dataList, open, onClose, title }) => {
   const classes = useStyles();
   const { account, chainId, library } = useContext(AppContext);
+  const blockNumber = useBlockNumber(library);
   const community = communityInstance(account, chainId, library);
+  const owner = useOwner();
   const [state, setState] = useState({
     newRole: '',
     newTag: ''
   });
   const [allRoles, setAllRoles] = useState([]);
+  const [ownRoles, setOwnRoles] = useState([]);
   const [allTags, setAllTags] = useState([]);
   const [createRole, setCreateRole] = useState(false);
   const [selectedId, setSelectedId] = useState([]);
+  const [roleTagLoading, setRoleTagLoading] = useState(false);
 
   const selectHandler = (id) => {
     setSelectedId(id)
@@ -78,12 +78,13 @@ const RoleTagDialog = ({ dataList, open, onClose, title }) => {
 
   const clickHandler = () => {
     setCreateRole(true)
-
   }
 
   const creatNewHandler = () => {
     if (account) {
       if (title === 'Roles') {
+        setRoleTagLoading(true)
+        setCreateRole(false)
         community.createRole(state.newRole)
       }
       else {
@@ -99,7 +100,6 @@ const RoleTagDialog = ({ dataList, open, onClose, title }) => {
   }
 
   const inputChangeHandler = useCallback(event => {
-    console.log('kevin')
     const { name, value } = event.target;
     setState(prevState => ({
       ...prevState,
@@ -109,13 +109,31 @@ const RoleTagDialog = ({ dataList, open, onClose, title }) => {
 
   useEffect(() => {
     if (!isEmpty(account) && !isEmpty(community)) {
-      Promise.resolve(community['getRoles()']()).then(function (allRoles) {
-        setAllRoles(allRoles)
+      setRoleTagLoading(true)
+      Promise.resolve(community['getRoles(address)'](account)).then(function (ownRoles) {
+        setOwnRoles(ownRoles)
+        setRoleTagLoading(false)
       }).catch(function (error) {
-        console.log('getRolesError===>', error)
+        setRoleTagLoading(false)
+        console.log('ownRoles===>', error)
       })
     }
   }, [])
+
+  useEffect(() => {
+    if (!isEmpty(account) && !isEmpty(community)) {
+      Promise.resolve(community['getRoles()']()).then(function (allRoles) {
+        setAllRoles(allRoles)
+        setRoleTagLoading(false)
+      }).catch(function (error) {
+        setRoleTagLoading(false)
+        console.log('getRolesError===>', error)
+      })
+
+    }
+  }, [blockNumber])
+
+
 
   const filterLists = (title) => {
     switch (title) {
@@ -128,8 +146,20 @@ const RoleTagDialog = ({ dataList, open, onClose, title }) => {
     }
   }
 
+  const titleFilter = (title) => {
+    switch (title) {
+      case 'Roles':
+        return 'Role';
+      case 'Tags':
+        return 'Tag';
+      default:
+        return allRoles;
+    }
+  }
+
   return (
     <DialogWrapper open={open} onClose={onClose} isCheckIcon={!isEmpty(selectedId) ? true : false} smallWidth >
+      {roleTagLoading && <IntercoinLoading wholeOverlay />}
       <form onSubmit={onFormSubmit} >
         <Typography variant='h6' className={classes.titleLine}>{title}</Typography>
         <DialogContent dividers className={classes.dialogContent}>
@@ -156,13 +186,17 @@ const RoleTagDialog = ({ dataList, open, onClose, title }) => {
                 {filterLists(title).map((title, index) => {
 
                   return (
-                    <ListItem button classes={{ selected: classes.selectedItem }}
-                      key={index} onClick={() => selectHandler(index)} selected={index === selectedId}>
-                      <ListItemAvatar>
-                        <Avatar src={'/assets/images/logos/victim-services_200w.png'} variant='square' />
-                      </ListItemAvatar>
-                      <ListItemText primary={title} />
-                    </ListItem>
+                    <React.Fragment key={index}>
+                      {!isEmpty(title) &&
+                        <ListItem button style={{ marginBottom: 4 }} classes={{ selected: classes.selectedItem }}
+                          key={index} onClick={() => selectHandler(index)} selected={ownRoles.includes(title)}>
+                          <ListItemAvatar>
+                            <Avatar src={'/assets/images/logos/victim-services_200w.png'} variant='square' />
+                          </ListItemAvatar>
+                          <ListItemText primary={title} />
+                        </ListItem>
+                      }
+                    </React.Fragment>
                   )
                 })}
               </>
@@ -171,8 +205,8 @@ const RoleTagDialog = ({ dataList, open, onClose, title }) => {
         </DialogContent>
         <div className={classes.dialogActions}>
           {createRole
-            ? <OutlinedButton onClick={creatNewHandler} className={classes.button}>+ Create {title === 'Roles' ? 'Role' : 'Tag'} </OutlinedButton>
-            : <OutlinedButton onClick={clickHandler} className={classes.button}>+ New {title === 'Roles' ? 'Role' : 'Tag'} </OutlinedButton>
+            ? <OutlinedButton onClick={creatNewHandler} className={classes.button}>+ Create {titleFilter(title)} </OutlinedButton>
+            : owner === account && <OutlinedButton onClick={clickHandler} className={classes.button}>+ New {titleFilter(title)} </OutlinedButton>
           }
         </div>
       </form>
