@@ -14,6 +14,7 @@ import LabelImportantIcon from '@material-ui/icons/LabelImportant';
 
 import CircleButton from 'components/UI/Buttons/CircleButton';
 import RoleTagDialog from 'components/UI/RoleTagDialog';
+import MemberDetail from 'components/UI/MemberDetail';
 import RoleIcon from 'components/Icons/RoleIcon';
 import LabelIcon from 'components/Icons/LabelIcon';
 import { roleData } from 'utils/helper/mockupData';
