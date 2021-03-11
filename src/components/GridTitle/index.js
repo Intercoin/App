@@ -1,11 +1,11 @@
 
 import React from 'react';
 import { useHistory } from "react-router-dom";
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import { Typography, useMediaQuery } from '@material-ui/core';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import { PAGES } from 'utils/links/pages';
-import ContainedButton from 'components/UI/Buttons/ContainedButton'
+import ContainedButton from 'components/UI/Buttons/ContainedButton';
 
 const useStyles = makeStyles(theme => ({
   root: props => ({
@@ -18,6 +18,9 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center'
   }),
   bold: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none'
+    },
     fontWeight: '400'
   }
 }));
@@ -25,6 +28,11 @@ const useStyles = makeStyles(theme => ({
 const GridTitle = ({ title, buttonName, center, noPaddingTop }) => {
   const classes = useStyles({ center, noPaddingTop });
   const history = useHistory();
+  const theme = useTheme();
+  const isSm = useMediaQuery(theme.breakpoints.down('sm'), {
+    defaultMatches: true,
+  });
+
   const clickHandler = () => {
     history.push(`${PAGES.POLLS.url}/new`)
   }
@@ -35,9 +43,9 @@ const GridTitle = ({ title, buttonName, center, noPaddingTop }) => {
         {title}
       </Typography>
       {
-        buttonName &&
+        buttonName && !isSm &&
         <ContainedButton
-          style={{ backgroundColor: '#4caf50' }}
+          style={{ backgroundColor: theme.palette.text.textHover }}
           onClick={clickHandler}
         >
           {buttonName}

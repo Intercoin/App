@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
   },
   smallRect: {
     [theme.breakpoints.up('sm')]: {
-      width: 500
+      width: '500'
     }
   },
   closeIcon: {

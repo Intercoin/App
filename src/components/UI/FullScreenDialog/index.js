@@ -14,7 +14,7 @@ import LabelImportantIcon from '@material-ui/icons/LabelImportant';
 
 import CircleButton from 'components/UI/Buttons/CircleButton';
 import RoleTagDialog from 'components/UI/RoleTagDialog';
-import MemberDetail from 'components/UI/MemberDetail';
+import MemberDetailDialog from 'components/UI/MemberDetailDialog';
 import RoleIcon from 'components/Icons/RoleIcon';
 import LabelIcon from 'components/Icons/LabelIcon';
 import { roleData } from 'utils/helper/mockupData';
@@ -69,9 +69,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const FullScreenDialog = ({ open, onClose, comunityInfo, children }) => {
   const classes = useStyles();
   const [isDialog, setIsDialog] = useState('')
+  const [isDetailDialog, setIsDetailDialog] = useState()
 
   const openCloseDialogHandler = show => () => {
     setIsDialog(show);
+    setIsDetailDialog(show)
   }
 
   const onClickHandler = (string) => {
@@ -124,6 +126,13 @@ const FullScreenDialog = ({ open, onClose, comunityInfo, children }) => {
           open={true}
           onClose={openCloseDialogHandler('')}
           dataList={filteringData(isDialog)} />}
+      {/* {isDetailDialog &&
+        <MemberDetailDialog
+          title={''}
+          onClose={openCloseDialogHandler}
+          open={true}
+        />
+      } */}
     </>
   );
 }

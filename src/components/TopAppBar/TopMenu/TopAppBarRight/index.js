@@ -7,7 +7,7 @@ import { AppContext } from 'contexts';
 import { useHistory } from "react-router-dom";
 import SearchIcon from '@material-ui/icons/Search';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import AddIcon from '@material-ui/icons/Add';
 import ListItem from '@material-ui/core/ListItem';
 
 import CircleButton from 'components/UI/Buttons/CircleButton';
@@ -103,10 +103,10 @@ const TopAppBarRight = ({ isMobileMenu }) => {
       {!isMobileMenu && <>
         <CircleButton
           style={{ backgroundColor: '#292C41', margin: 4 }}
-          icon={<AddCircleOutlineIcon fontSize={'large'} style={{ color: '#fff', width: 40, height: 40 }} />} />
+          icon={<AddIcon fontSize={'large'} style={{ color: '#fff', width: 40, height: 40 }} />} />
         <CircleButton
           style={{ backgroundColor: '#292C41', margin: 4 }}
-          icon={<SearchIcon fontSize={'large'} style={{ color: '#fff', width: 40, height: 40 }} />} />
+          icon={<SearchIcon fontSize={'large'} style={{ color: '#fff', width: 35, height: 35 }} />} />
       </>}
     </div>
   );
