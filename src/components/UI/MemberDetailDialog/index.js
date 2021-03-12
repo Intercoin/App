@@ -12,15 +12,16 @@ import Chip from '@material-ui/core/Chip';
 import FaceIcon from '@material-ui/icons/Face';
 import SendIcon from '@material-ui/icons/Send';
 import Divider from '@material-ui/core/Divider';
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from 'react-router-dom';
 
-import { dialogStyles } from 'hoc/DialogWrapper';
 import OutlinedButton from 'components/UI/Buttons/OutlinedButton';
 import { MemoizedOutlinedSelect } from 'components/UI/OutlinedSelect';
 import { PAGES } from 'utils/links/pages';
 import CircleButton from 'components/UI/Buttons/CircleButton';
 import CloseIcon from '@material-ui/icons/Close';
 import DoneIcon from '@material-ui/icons/Done';
+import { useGetAccountRules, useOwner, useAllRules } from 'utils/hooks';
+import IntercoinLoading from 'components/IntercoinLoading';
 
 import { isEmpty } from 'utils/utility';
 
@@ -47,8 +48,8 @@ const useStyles = makeStyles(theme => ({
     },
     avatar: {
         border: `2px solid ${theme.palette.text.secondary}`,
-        height: theme.spacing(8),
-        width: theme.spacing(8),
+        height: theme.spacing(9),
+        width: theme.spacing(9),
         marginRight: theme.spacing(1)
     },
     chipConatiner: {
@@ -93,23 +94,32 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const MemberDetailDialog = () => {
     const classes = useStyles();
     const history = useHistory();
-    const [open, setOpen] = useState(true);
+    const location = useLocation();
 
+    const [open, setOpen] = useState(true);
+    const [state, setState] = useState({});
+    const owner = useOwner();
+    const { allRoles, allRolesLoading } = useAllRules();
+
+    const { accountRulesloading, ownRoles } = useGetAccountRules(location.state.account)
     const onClose = () => {
         history.push(`${PAGES.COMMUNITIES.url}/address`)
     }
-
     const handleDelete = () => {
         console.info('kevin TODO giving some events');
     };
+    const onSelectHandler = useCallback((value, name) => {
+        setState(prevState => ({ ...prevState, [name]: value }));
+    }, []);
 
     return (
         <Dialog classes={{ paper: classes.root }} disableEnforceFocus fullScreen open={open} TransitionComponent={Transition} >
+            {accountRulesloading ? <IntercoinLoading wholeOverlay /> : null}
             <DialogTitle>
                 <div className={classes.dialogTitleContainer}>
                     <div className={classes.avatarContainer}>
                         <Avatar src={'/assets/images/photos/people/scst@2x.png'} className={classes.avatar} />
-                        <Typography variant='h4'>Greg Foo</Typography>
+                        <Typography variant='h4'>{location.state.name}</Typography>
                     </div>
                     <CircleButton
                         style={{ backgroundColor: '#1B1F2E' }} onClick={onClose}
@@ -123,42 +133,19 @@ const MemberDetailDialog = () => {
                     </Typography>
                 </OutlinedButton>
                 <div className={classes.chipConatiner}>
-                    <Chip
-                        icon={<FaceIcon />}
-                        label="Members"
-                        clickable
-                        color="Primary"
-                        onDelete={handleDelete}
-                        classes={{ colorPrimary: classes.chip }}
-                        deleteIcon={<DoneIcon />}
-                    />
-                    <Chip
-                        icon={<FaceIcon />}
-                        label="Students"
-                        clickable
-                        color="Primary"
-                        onDelete={handleDelete}
-                        classes={{ colorPrimary: classes.chip }}
-                        deleteIcon={<DoneIcon />}
-                    />
-                    <Chip
-                        icon={<FaceIcon />}
-                        label="Teachers"
-                        clickable
-                        color="Primary"
-                        onDelete={handleDelete}
-                        classes={{ colorPrimary: classes.chip }}
-                        deleteIcon={<DoneIcon />}
-                    />
-                    <Chip
-                        icon={<FaceIcon />}
-                        label="Guests"
-                        clickable
-                        color="Primary"
-                        onDelete={handleDelete}
-                        classes={{ colorPrimary: classes.chip }}
-                        deleteIcon={<DoneIcon />}
-                    />
+                    {ownRoles.map((role, index) => {
+                        return (
+                            <Chip
+                                key={index}
+                                icon={<FaceIcon />}
+                                label={role}
+                                clickable
+                                color="primary"
+                                onDelete={handleDelete}
+                                classes={{ colorPrimary: classes.chip }}
+                                deleteIcon={<DoneIcon />}
+                            />)
+                    })}
                 </div>
             </DialogContent>
             <DialogActions disableSpacing classes={{ root: classes.dialogActionContainer }} >
@@ -168,20 +155,30 @@ const MemberDetailDialog = () => {
                         Send Payment
                      </Typography>
                 </OutlinedButton>
-                <Divider width={'100%'} style={{ backgroundColor: '#6B76A1' }} variant='fullWidth' orientation={'horizontal'} />
-                <Typography variant='h3' style={{ marginRight: 'auto', padding: 8 }} >Inconme </Typography>
-                <Typography className={classes.selectContainer} component='div' variant='h5'>
-                    Managed by :
-                    <MemoizedOutlinedSelect style={{ width: '50%' }} />
-                </Typography>
-                <Typography variant='h6' style={{ padding: 4 }}>
-                    Max $120/week, $20/day
+                {owner === location.state.account &&
+                    <>
+                        <Divider width={'100%'} style={{ backgroundColor: '#6B76A1' }} variant='fullWidth' orientation={'horizontal'} />
+                        <Typography variant='h3' style={{ marginRight: 'auto', padding: 8 }} >Income </Typography>
+                        <Typography className={classes.selectContainer} component='div' variant='h5'>
+                            Managed by :
+                        <MemoizedOutlinedSelect
+                                placeholder='Role'
+                                name='role'
+                                style={{ width: '50%' }}
+                                items={allRoles.filter(item => item)}
+                                value={state.role}
+                                onChange={onSelectHandler}
+                            />
+                        </Typography>
+                        <Typography variant='h6' style={{ padding: 4 }}>
+                            Max $120/week, $20/day
                      </Typography>
-                <OutlinedButton className={classes.button}>
-                    <Typography variant='h6'>
-                        + Add Restricition
+                        <OutlinedButton className={classes.button}>
+                            <Typography variant='h6'>
+                                + Add Restricition
                 </Typography>
-                </OutlinedButton>
+                        </OutlinedButton>
+                    </>}
             </DialogActions >
         </Dialog>
     );

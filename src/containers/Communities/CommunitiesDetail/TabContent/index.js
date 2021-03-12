@@ -9,6 +9,12 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import { useHistory } from "react-router-dom";
 
+import ImageIcon from '@material-ui/icons/Image';
+import WorkIcon from '@material-ui/icons/Work';
+import BeachAccessIcon from '@material-ui/icons/BeachAccess';
+
+// TODO should be changed reall image or icon
+
 import { PAGES } from 'utils/links/pages';
 
 const useStyles = makeStyles(theme => ({
@@ -35,7 +41,7 @@ const TabContent = ({ communityDetailData }) => {
   const listClickHandler = (communityDetail) => {
     history.push({
       pathname:  `${PAGES.COMMUNITIES.url}/address/role`,
-      state: 'admin'
+      state: communityDetail
     })
 }
 
@@ -49,7 +55,7 @@ return (
               <ListItem onClick={() => listClickHandler(communityDetail)}>
                 <ListItemAvatar>
                   <Avatar>
-                    {communityDetail?.avatar}
+                   <ImageIcon />
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText primary={communityDetail.name} secondary={communityDetail?.role} />

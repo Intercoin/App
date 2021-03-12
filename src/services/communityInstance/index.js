@@ -1,7 +1,7 @@
 
 import { Contract } from '@ethersproject/contracts'
 
-import CommunityContract from 'contracts/CommunityContract';
+import CommunityContract from 'contracts/community/CommunityContract';
 
 const communityInstance = (account, chainId, library) => {
 

@@ -1,6 +1,4 @@
-import ImageIcon from '@material-ui/icons/Image';
-import WorkIcon from '@material-ui/icons/Work';
-import BeachAccessIcon from '@material-ui/icons/BeachAccess';
+
 
 const poolData = [
   {
@@ -294,33 +292,41 @@ const communityDetailData = [
   {
     name: 'John Smith',
     role: 'Member, admin',
-    avatar: <WorkIcon />
+    avatar:  '/assets/images/logos/web3evm-p02-300sq.png',
+    account : '0x48631372F83B65387F84018F68B1ADf536Be17AD'
   },
   {
     name: 'Bob Moo',
     role: 'Member, engineer',
-    avatar: <ImageIcon />
+    avatar:  '/assets/images/logos/web3evm-p02-300sq.png',
+    account : '0x48631372F83B65387F84018F68B1ADf536Be17AD'
   },
   {
     name: '0X23436544...324',
-    avatar: <ImageIcon />
+    avatar:  '/assets/images/logos/web3evm-p02-300sq.png',
+    account : '0xe9D045cF6D3a2418eab537d3AC7a905a1dDcF048'
   },
   {
-    name: '0X23456434...628'
+    name: '0X23456434...628',
+    account : '0x48631372F83B65387F84018F68B1ADf536Be17AD'
   },
   {
     name: '0X27456434...384',
-    avatar: <BeachAccessIcon />
+    avatar:  '/assets/images/logos/web3evm-p02-300sq.png',
+    account : '0x48631372F83B65387F84018F68B1ADf536Be17AD'
   },
   {
-    name: '0X23654434...322'
+    name: '0X23654434...322',
+    account : '0xe9D045cF6D3a2418eab537d3AC7a905a1dDcF048'
   },
   {
     name: '0X26453734...321',
-    avatar: <BeachAccessIcon />
+    avatar:  '/assets/images/logos/web3evm-p02-300sq.png',
+    account : '0x48631372F83B65387F84018F68B1ADf536Be17AD'
   },
   {
-    name: '0X23445634...726'
+    name: '0X23445634...726',
+    account : '0x2Ca51ED4e4Bb914cbFC58A17d6D8b705c9407614'
   }
 ]
 

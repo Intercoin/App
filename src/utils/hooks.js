@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useWeb3React } from '@web3-react/core'
 
 import { walletconnect, injected, intercoinToken, xDai } from 'constants/connectors';
@@ -110,22 +110,71 @@ const useOwner = () => {
   const [owner, setOwner] = useState();
   const community = communityInstance(account, chainId, library);
 
-  if (isEmpty(community) || isEmpty(community) || isEmpty(community)) {
-    return null
-  }
-
-  Promise.resolve(community.owner()).then(function (owner) {
-    setOwner(owner)
-    console.log(' owner', owner)
-  }).catch(function (error) {
-    console.log('owner===>', error)
-  })
+  useMemo(() => {
+    Promise.resolve(community.owner()).then(function (owner) {
+      setOwner(owner)
+      console.log(' owner', owner)
+    }).catch(function (error) {
+      console.log('owner===>', error)
+    })
+  }, [])
   return owner
+}
+
+const useGetAccountRules = (account) => {
+
+  const { chainId, library } = useWeb3React()
+  const community = communityInstance(account, chainId, library);
+  const [ownRoles, setOwnRoles] = useState([]);
+  const [accountRulesloading, setAccountRulesloading] = useState(false);
+
+  useMemo(() => {
+    if (isEmpty(community) || isEmpty(account) || isEmpty(library)) {
+      return null
+    }
+
+    if (!isEmpty(account) && !isEmpty(community)) {
+      setAccountRulesloading(true)
+      Promise.resolve(community['getRoles(address)'](account)).then(function (ownRoles) {
+        setOwnRoles(ownRoles)
+        setAccountRulesloading(false)
+      }).catch(function (error) {
+        setAccountRulesloading(false)
+        console.log('getAccountRoles===>', error)
+      })
+    }
+  }, [account])
+
+  return { ownRoles, accountRulesloading }
+}
+
+const useAllRules = () => {
+  const { chainId, account, library } = useWeb3React()
+  const community = communityInstance(account, chainId, library);
+  const [allRoles, setAllRoles] = useState([]);
+  const [allRolesLoading, setAllRolesLoading] = useState(false);
+
+  useMemo(() => {
+    if (isEmpty(community) || isEmpty(account) || isEmpty(library)) {
+      return null
+    }
+    Promise.resolve(community['getRoles()']()).then(function (allRoles) {
+      setAllRoles(allRoles)
+      setAllRolesLoading(false)
+    }).catch(function (error) {
+      setAllRolesLoading(false)
+      console.log('getAllRolesError===>', error)
+    })
+  }, [])
+
+  return { allRoles, allRolesLoading }
 }
 
 export {
   useEagerConnect,
   useInactiveListener,
   useBlockNumber,
-  useOwner
+  useOwner,
+  useGetAccountRules,
+  useAllRules
 };

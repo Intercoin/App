@@ -129,7 +129,6 @@ const RoleTagDialog = ({ dataList, open, onClose, title }) => {
         setRoleTagLoading(false)
         console.log('getRolesError===>', error)
       })
-
     }
   }, [blockNumber])
 
