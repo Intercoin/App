@@ -1,5 +1,5 @@
 
-import React, { useState, useCallback, useContext, useEffect } from 'react';
+import React, { useState, useCallback, useContext, useEffect, useMemo } from 'react';
 import { AppContext } from 'contexts';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
@@ -15,6 +15,7 @@ import OutlinedButton from 'components/UI/Buttons/OutlinedButton';
 import { MemoizedOutlinedTextField } from 'components/UI/OutlinedTextField';
 import { isEmpty } from 'utils/utility';
 import { communityInstance } from 'services/communityInstance';
+import { statsInstance } from 'services/statsInstance';
 import IntercoinLoading from 'components/IntercoinLoading';
 import { useBlockNumber, useOwner } from 'utils/hooks';
 
@@ -60,6 +61,8 @@ const RoleTagDialog = ({ dataList, open, onClose, title }) => {
   const { account, chainId, library } = useContext(AppContext);
   const blockNumber = useBlockNumber(library);
   const community = communityInstance(account, chainId, library);
+  const stats = statsInstance(account, chainId, library);
+
   const owner = useOwner();
   const [state, setState] = useState({
     newRole: '',
@@ -67,8 +70,9 @@ const RoleTagDialog = ({ dataList, open, onClose, title }) => {
   });
   const [allRoles, setAllRoles] = useState([]);
   const [ownRoles, setOwnRoles] = useState([]);
-  const [allTags, setAllTags] = useState([]);
-  const [createRole, setCreateRole] = useState(false);
+  const [allTags, setAllTags] = useState([]); //TODO should be changed real tag names or something
+  const [createRoleTag, setCreateRoleTag] = useState(false);
+  const [createTag, setCreateTag] = useState(false);
   const [selectedId, setSelectedId] = useState([]);
   const [roleTagLoading, setRoleTagLoading] = useState(false);
 
@@ -77,19 +81,21 @@ const RoleTagDialog = ({ dataList, open, onClose, title }) => {
   }
 
   const clickHandler = () => {
-    setCreateRole(true)
+    setCreateRoleTag(true)
   }
 
   const creatNewHandler = () => {
     if (account) {
       if (title === 'Roles') {
         setRoleTagLoading(true)
-        setCreateRole(false)
+        setCreateRoleTag(false)
         community.createRole(state.newRole)
       }
       else {
-        console.log('kevin===>TagAdd')
-        // TODO kevin community.createTag(state.newTag) 
+        setRoleTagLoading(true)
+        setCreateRoleTag(false)
+        stats.record('0x3200000000000000000000000000000000000000000000000000000000000000', 3, {from : account})
+        // TODO kevin should be changed 
       }
     }
   }
@@ -107,20 +113,32 @@ const RoleTagDialog = ({ dataList, open, onClose, title }) => {
     }));
   }, []);
 
-  useEffect(() => {
+  useMemo(() => {
     if (!isEmpty(account) && !isEmpty(community)) {
       setRoleTagLoading(true)
-      Promise.resolve(community['getRoles(address)'](account)).then(function (ownRoles) {
-        setOwnRoles(ownRoles)
-        setRoleTagLoading(false)
-      }).catch(function (error) {
-        setRoleTagLoading(false)
-        console.log('ownRoles===>', error)
-      })
+      if (title === 'Roles') {
+        Promise.resolve(community['getRoles(address)'](account)).then(function (ownRoles) {
+          setOwnRoles(ownRoles)
+          setRoleTagLoading(false)
+        }).catch(function (error) {
+          setRoleTagLoading(false)
+          console.log('ownRoles===>', error)
+        })
+      }
+      else {
+        Promise.resolve(stats.avgSumByAllTags(31536000)).then(function (avgTagCount) {
+          const TagList = ["Clothing", "Development", "Books", "Venues", "Tutoring"];      //TODO should be updated the smartContract
+          setAllTags(TagList.filter((item, index) => index < parseInt(avgTagCount)));
+          setRoleTagLoading(false)
+        }).catch(function (error) {
+          setRoleTagLoading(false)
+          console.log('getTagsError===>', error)
+        })
+      }
     }
   }, [])
 
-  useEffect(() => {
+  useMemo(() => {
     if (!isEmpty(account) && !isEmpty(community)) {
       Promise.resolve(community['getRoles()']()).then(function (allRoles) {
         setAllRoles(allRoles)
@@ -131,8 +149,6 @@ const RoleTagDialog = ({ dataList, open, onClose, title }) => {
       })
     }
   }, [blockNumber])
-
-
 
   const filterLists = (title) => {
     switch (title) {
@@ -163,7 +179,7 @@ const RoleTagDialog = ({ dataList, open, onClose, title }) => {
         <Typography variant='h6' className={classes.titleLine}>{title}</Typography>
         <DialogContent dividers className={classes.dialogContent}>
           <List className={classes.listContainer}>
-            {createRole ?
+            {createRoleTag ?
               <ListItem>
                 {title === 'Roles'
                   ? <MemoizedOutlinedTextField
@@ -203,7 +219,7 @@ const RoleTagDialog = ({ dataList, open, onClose, title }) => {
           </List>
         </DialogContent>
         <div className={classes.dialogActions}>
-          {createRole
+          {createRoleTag
             ? <OutlinedButton onClick={creatNewHandler} className={classes.button}>+ Create {titleFilter(title)} </OutlinedButton>
             : owner === account && <OutlinedButton onClick={clickHandler} className={classes.button}>+ New {titleFilter(title)} </OutlinedButton>
           }

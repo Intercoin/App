@@ -81,7 +81,6 @@ const useInactiveListener = (suppress) => {
 }
 
 const useBlockNumber = () => {
-
   const { library } = useWeb3React()
   const [blockNumber, setBlockNumber] = useState(-1)
 
@@ -113,7 +112,6 @@ const useOwner = () => {
   useMemo(() => {
     Promise.resolve(community.owner()).then(function (owner) {
       setOwner(owner)
-      console.log(' owner', owner)
     }).catch(function (error) {
       console.log('owner===>', error)
     })
@@ -122,7 +120,6 @@ const useOwner = () => {
 }
 
 const useGetAccountRules = (account) => {
-
   const { chainId, library } = useWeb3React()
   const community = communityInstance(account, chainId, library);
   const [ownRoles, setOwnRoles] = useState([]);

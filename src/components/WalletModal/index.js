@@ -183,7 +183,7 @@ const PollDialog = ({ open, onClose, headerTitle, activatingConnector, setActiva
                       cursor: 'pointer',
                     }}
                     variant="outlined"
-                    onClick={() => metaMaskInstallHandler()}
+                    onClick={() =>metaMaskInstallHandler()}
                   >
                     Install Metamask
                   </ContainedButton>

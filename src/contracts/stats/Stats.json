@@ -14526,12 +14526,12 @@
     "1337": {
       "events": {},
       "links": {},
-      "address": "0xE9416a50Ca35247EA20819b43c686B5fFD0Ad57F",
-      "transactionHash": "0xb284f169ecb9403282e87720fcbadb02c3d36ff882e32bdfc838170476973779"
+      "address": "0x3602C24545B7a6E67f62Fb8a7e7a31A4E9B1f5e3",
+      "transactionHash": "0x19a8e1e58d59d17041eae100ff1c73527fbcb40d49ca3849ce5f6f51b8bfc244"
     }
   },
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-03-10T20:17:49.477Z",
+  "updatedAt": "2021-03-12T09:28:58.129Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {

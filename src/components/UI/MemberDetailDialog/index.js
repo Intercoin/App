@@ -114,7 +114,6 @@ const MemberDetailDialog = () => {
 
     return (
         <Dialog classes={{ paper: classes.root }} disableEnforceFocus fullScreen open={open} TransitionComponent={Transition} >
-            {accountRulesloading ? <IntercoinLoading wholeOverlay /> : null}
             <DialogTitle>
                 <div className={classes.dialogTitleContainer}>
                     <div className={classes.avatarContainer}>
@@ -133,6 +132,7 @@ const MemberDetailDialog = () => {
                     </Typography>
                 </OutlinedButton>
                 <div className={classes.chipConatiner}>
+                    {accountRulesloading ? <IntercoinLoading wholeOverlay /> : null}
                     {ownRoles.map((role, index) => {
                         return (
                             <Chip
@@ -176,7 +176,7 @@ const MemberDetailDialog = () => {
                         <OutlinedButton className={classes.button}>
                             <Typography variant='h6'>
                                 + Add Restricition
-                </Typography>
+                            </Typography>
                         </OutlinedButton>
                     </>}
             </DialogActions >
