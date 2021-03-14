@@ -14,7 +14,7 @@ import SendIcon from '@material-ui/icons/Send';
 import Divider from '@material-ui/core/Divider';
 import { useHistory, useLocation } from 'react-router-dom';
 
-import OutlinedButton from 'components/UI/Buttons/OutlinedButton';
+import RadiusButton from 'components/RadiusButton';
 import { MemoizedOutlinedSelect } from 'components/UI/OutlinedSelect';
 import { PAGES } from 'utils/links/pages';
 import CircleButton from 'components/UI/Buttons/CircleButton';
@@ -76,8 +76,10 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center'
     },
     button: {
-        width: `calc(100% - ${theme.spacing(2)}px)`,
-        backgroundColor: theme.custom.palette.green
+        // display: 'flex',
+        // width: `calc(100% - ${theme.spacing(2)}px) !important`,
+        width: '100% !important'
+        // backgroundColor: theme.custom.palette.green
     },
     dialogActionContainer: {
         display: 'flex',
@@ -97,13 +99,13 @@ const useStyles = makeStyles(theme => ({
     "@keyframes shine": {
         '0%': { left: '200%' },
         '100%': { left: '-200%' }
-      }
+    }
 }));
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const MemberDetailDialog = ({communityDetail, account, onClose}) => {
+const MemberDetailDialog = ({ communityDetail, account, onClose }) => {
     const classes = useStyles();
     const history = useHistory();
     const location = useLocation();
@@ -128,7 +130,7 @@ const MemberDetailDialog = ({communityDetail, account, onClose}) => {
 
     return (
         <div>
-            <Dialog classes={{ paper: classes.root }} disableEnforceFocus fullScreen  = {isSm ? true : false} open={open} TransitionComponent={Transition} >
+            <Dialog classes={{ paper: classes.root }} disableEnforceFocus fullScreen={isSm ? true : false} open={open} TransitionComponent={Transition} >
                 <DialogTitle>
                     <div className={classes.dialogTitleContainer}>
                         <div className={classes.avatarContainer}>
@@ -141,11 +143,11 @@ const MemberDetailDialog = ({communityDetail, account, onClose}) => {
                     </div>
                 </DialogTitle>
                 <DialogContent classes={{ root: classes.dialogContent }}>
-                    <OutlinedButton className={classes.button}>
+                    <RadiusButton variant='outlined' className={classes.button} fullWidth={true}>
                         <Typography variant='h6'>
-                            Add to Contacts
+                            + Add to Contacts
                     </Typography>
-                    </OutlinedButton>
+                    </RadiusButton>
                     <div className={classes.chipConatiner}>
                         {accountRulesloading ? <IntercoinLoading wholeOverlay /> : null}
                         {ownRoles.map((role, index) => {
@@ -164,12 +166,12 @@ const MemberDetailDialog = ({communityDetail, account, onClose}) => {
                     </div>
                 </DialogContent>
                 <DialogActions disableSpacing classes={{ root: classes.dialogActionContainer }} >
-                    <OutlinedButton className={classes.button} style={{ marginBottom: 20 }}>
+                    <RadiusButton variant='outlined' className={classes.button} style={{ marginBottom: 20 }} fullWidth={true}>
                         <SendIcon style={{ marginRight: 8 }} />
                         <Typography variant='h6'>
                             Send Payment
                      </Typography>
-                    </OutlinedButton>
+                    </RadiusButton>
                     {owner === communityDetail.account &&
                         <>
                             <Divider width={'100%'} style={{ backgroundColor: '#6B76A1' }} variant='fullWidth' orientation={'horizontal'} />
@@ -188,11 +190,11 @@ const MemberDetailDialog = ({communityDetail, account, onClose}) => {
                             <Typography variant='h6' style={{ padding: 4 }}>
                                 Max $120/week, $20/day
                      </Typography>
-                            <OutlinedButton className={classes.button}>
+                            <RadiusButton variant='outlined' className={classes.button} fullWidth={true}>
                                 <Typography variant='h6'>
                                     + Add Restricition
-                            </Typography>
-                            </OutlinedButton>
+                                </Typography>
+                            </RadiusButton>
                         </>}
                 </DialogActions >
             </Dialog>

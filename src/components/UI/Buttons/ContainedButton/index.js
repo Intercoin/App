@@ -6,9 +6,10 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import clsx from 'clsx';
 
 const useStyles = makeStyles(theme => ({
-  wrapper: {
-    position: 'relative'
-  },
+  wrapper: props => ({
+    position: 'relative',
+    width: props.fullWidth ? '100%' : null
+  }),
   root: {
     margin: theme.spacing(3 / 8),
     boxShadow: 'none',
@@ -66,8 +67,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ContainedButton = ({ className, type, color, variant = 'contained', disabled, loading, children, ...rest }) => {
-  const classes = useStyles();
+const ContainedButton = ({ className, type, color, variant = 'contained', disabled, loading, children, fullWidth, ...rest }) => {
+  const classes = useStyles({ fullWidth });
 
   return (
     <div className={classes.wrapper}>
