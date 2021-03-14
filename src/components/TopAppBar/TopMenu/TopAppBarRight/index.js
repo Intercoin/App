@@ -100,14 +100,15 @@ const TopAppBarRight = ({ isMobileMenu }) => {
           }
         </ConfigProvider>
       </div>
-      {!isMobileMenu && <>
-        <CircleButton
-          style={{ backgroundColor: '#292C41', margin: 4 }}
-          icon={<AddIcon fontSize={'large'} style={{ color: '#fff', width: 40, height: 40 }} />} />
-        <CircleButton
-          style={{ backgroundColor: '#292C41', margin: 4 }}
-          icon={<SearchIcon fontSize={'large'} style={{ color: '#fff', width: 35, height: 35 }} />} />
-      </>}
+      {!isMobileMenu && !isEmpty(account) &&
+        <>
+          <CircleButton
+            style={{ backgroundColor: '#292C41', margin: 4 }}
+            icon={<AddIcon fontSize={'large'} style={{ color: '#fff', width: 40, height: 40 }} />} />
+          <CircleButton
+            style={{ backgroundColor: '#292C41', margin: 4 }}
+            icon={<SearchIcon fontSize={'large'} style={{ color: '#fff', width: 35, height: 35 }} />} />
+        </>}
     </div>
   );
 };

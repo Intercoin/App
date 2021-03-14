@@ -32,12 +32,6 @@ const Pools = ({ history }) => {
   const [isAdminDialog, setIsAdminDialog] = useState();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    setLoadingInfo(true);
-    setTimeout(() => {
-      setLoadingInfo(false);
-    }, 2000);
-  }, [setLoadingInfo]);
 
   const editHandler = _id => () => {
     history.push({
@@ -56,7 +50,6 @@ const Pools = ({ history }) => {
 
 
   const selectPollHandler = (rowData) => {
-    console.log('checking rendering counts')
     setPollData(rowData)
     // setIsDialog(true);
     setIsAdminDialog(true)

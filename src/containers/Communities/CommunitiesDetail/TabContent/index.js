@@ -1,72 +1,30 @@
 
 import React from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { useMediaQuery, Grid } from '@material-ui/core';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
-import { useHistory } from "react-router-dom";
 
-import ImageIcon from '@material-ui/icons/Image';
-import WorkIcon from '@material-ui/icons/Work';
-import BeachAccessIcon from '@material-ui/icons/BeachAccess';
+import People from './People';
+import Currency from './Currency';
+import Governance from './Governance';
+import Voting from './Voting';
 
-// TODO should be changed reall image or icon
+const TabContent = ({ filterValue, communityDetailData }) => {
+  const switchContent = (title) => {
+    switch (title) {
+      case 0:
+        return <People communityDetailData={communityDetailData} />;
+      case 1:
+        return <Currency />;
+      case 2:
+        return <Governance />;
+      case 3:
+        return <Voting />;
+      default:
+        return <People />;
+    }
+  }
 
-import { PAGES } from 'utils/links/pages';
-
-const useStyles = makeStyles(theme => ({
-
-  root: {
-    width: '100%',
-  },
-  GridContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-}));
-
-const TabContent = ({ communityDetailData }) => {
-  const classes = useStyles();
-  const theme = useTheme();
-  const isSM = useMediaQuery(theme.breakpoints.down('sm'), {
-    defaultMatches: true,
-  });
-  const history = useHistory();
-
-  const listClickHandler = (communityDetail) => {
-    history.push({
-      pathname:  `${PAGES.COMMUNITIES.url}/address/role`,
-      state: communityDetail
-    })
-}
-
-return (
-  <List className={classes.root}>
-    <Grid container direction={isSM ? "column" : "row"} justify="center" spacing={2}  >
-      {
-        communityDetailData.map((communityDetail, index) => {
-          return (
-            <Grid xs={isSM ? 12 : 6} item key={index}>
-              <ListItem onClick={() => listClickHandler(communityDetail)}>
-                <ListItemAvatar>
-                  <Avatar>
-                   <ImageIcon />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary={communityDetail.name} secondary={communityDetail?.role} />
-              </ListItem>
-            </Grid>
-          )
-        })
-      }
-    </Grid>
-  </List>
-);
+  return (
+    switchContent(filterValue, communityDetailData)
+  );
 };
 
 export default TabContent;

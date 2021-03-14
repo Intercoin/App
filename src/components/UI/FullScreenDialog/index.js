@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typograhpy from '@material-ui/core/Typography';
 import Dialog from '@material-ui/core/Dialog';
@@ -14,7 +14,6 @@ import LabelImportantIcon from '@material-ui/icons/LabelImportant';
 
 import CircleButton from 'components/UI/Buttons/CircleButton';
 import RoleTagDialog from 'components/UI/RoleTagDialog';
-import MemberDetailDialog from 'components/UI/MemberDetailDialog';
 import RoleIcon from 'components/Icons/RoleIcon';
 import LabelIcon from 'components/Icons/LabelIcon';
 import { roleData } from 'utils/helper/mockupData';
@@ -39,6 +38,9 @@ const useStyles = makeStyles((theme) => ({
     top: 'auto',
     bottom: 0,
     backgroundColor: theme.palette.background.default
+  },
+  paperBody: {
+    backgroundColor: theme.palette.background.main
   },
   title: {
     marginLeft: theme.spacing(2),
@@ -68,12 +70,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const FullScreenDialog = ({ open, onClose, comunityInfo, children }) => {
   const classes = useStyles();
-  const [isDialog, setIsDialog] = useState('')
-  const [isDetailDialog, setIsDetailDialog] = useState()
+  const [isDialog, setIsDialog] = useState('');
+  const [communityStats, setCommunityStats] = useState()
 
   const openCloseDialogHandler = show => () => {
     setIsDialog(show);
-    setIsDetailDialog(show)
   }
 
   const onClickHandler = (string) => {
@@ -91,14 +92,19 @@ const FullScreenDialog = ({ open, onClose, comunityInfo, children }) => {
     }
   }
 
+
+  useEffect(()=>{
+    setCommunityStats(comunityInfo)
+  },[comunityInfo])
+
   return (
     <>
-      <Dialog disableEnforceFocus fullScreen open={open} onClose={onClose} scroll={'body'} TransitionComponent={Transition}>
+      <Dialog classes={{ paperScrollBody: classes.paperBody }} disableEnforceFocus fullScreen open={open} onClose={onClose} scroll={'body'} TransitionComponent={Transition}>
         <AppBar className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
             <div className={classes.titleContainer}>
-              {comunityInfo?.logoUrl && <Avatar variant='square' src={comunityInfo.logoUrl} />}
-              <Typograhpy style={{ marginLeft: 8 }} variant='h5'> {comunityInfo?.communityTitle} </Typograhpy>
+              <Avatar variant='square' src={comunityInfo?.logoUrl || '/assets/images/logos/value-exchange_200w.png'} />
+              <Typograhpy style={{ marginLeft: 8 }} variant='h5'> {comunityInfo&&comunityInfo[0]} </Typograhpy>
             </div>
             <CircleButton style={{ display: 'flex', backgroundColor: '#292C40' }}
               icon={<CloseIcon onClick={onClose} style={{ color: '#fff' }} fontSize='large' />} />
@@ -126,13 +132,6 @@ const FullScreenDialog = ({ open, onClose, comunityInfo, children }) => {
           open={true}
           onClose={openCloseDialogHandler('')}
           dataList={filteringData(isDialog)} />}
-      {/* {isDetailDialog &&
-        <MemberDetailDialog
-          title={''}
-          onClose={openCloseDialogHandler}
-          open={true}
-        />
-      } */}
     </>
   );
 }

@@ -1,8 +1,8 @@
 
 import React, { useState, useCallback } from 'react';
 import Dialog from '@material-ui/core/Dialog';
-import { makeStyles } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { Typography, useMediaQuery } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import Slide from '@material-ui/core/Slide';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -28,7 +28,15 @@ import { isEmpty } from 'utils/utility';
 const useStyles = makeStyles(theme => ({
 
     root: {
-        backgroundColor: theme.palette.background.default
+        backgroundColor: theme.palette.background.default,
+        border: `solid 0.5px ${theme.palette.text.secondary}`,
+        margin: theme.spacing(0.5),
+        // boxShadow: `1px 1px 2px 0 ${theme.palette.text.notification}`,
+        // marginTop : 20,
+        // marginBottom : theme.spacing(5),
+        // marginTop:theme.spacing(8),
+
+        borderRadius: '20px'
     },
     dialogTitleContainer: {
         display: 'flex',
@@ -44,7 +52,7 @@ const useStyles = makeStyles(theme => ({
     avatarContainer: {
         display: 'flex',
         alignItems: 'center',
-        width: '70%',
+        width: '80%',
     },
     avatar: {
         border: `2px solid ${theme.palette.text.secondary}`,
@@ -91,96 +99,101 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const MemberDetailDialog = () => {
+const MemberDetailDialog = ({communityDetail, account, onClose}) => {
     const classes = useStyles();
     const history = useHistory();
     const location = useLocation();
-
+    const theme = useTheme();
+    const isSm = useMediaQuery(theme.breakpoints.down('sm'), {
+        defaultMatches: true,
+    });
     const [open, setOpen] = useState(true);
     const [state, setState] = useState({});
     const owner = useOwner();
     const { allRoles, allRolesLoading } = useAllRules();
 
-    const { accountRulesloading, ownRoles } = useGetAccountRules(location.state.account)
-    const onClose = () => {
-        history.push(`${PAGES.COMMUNITIES.url}/address`)
-    }
+    // const { accountRulesloading, ownRoles } = useGetAccountRules(location.state.account)
+    const { accountRulesloading, ownRoles } = useGetAccountRules(communityDetail?.account)
+
     const handleDelete = () => {
         console.info('kevin TODO giving some events');
     };
+
     const onSelectHandler = useCallback((value, name) => {
         setState(prevState => ({ ...prevState, [name]: value }));
     }, []);
 
     return (
-        <Dialog classes={{ paper: classes.root }} disableEnforceFocus fullScreen open={open} TransitionComponent={Transition} >
-            <DialogTitle>
-                <div className={classes.dialogTitleContainer}>
-                    <div className={classes.avatarContainer}>
-                        <Avatar src={'/assets/images/photos/people/scst@2x.png'} className={classes.avatar} />
-                        <Typography variant='h4'>{location.state.name}</Typography>
+        <div>
+            <Dialog classes={{ paper: classes.root }} disableEnforceFocus fullScreen  = {isSm ? true : false} open={open} TransitionComponent={Transition} >
+                <DialogTitle>
+                    <div className={classes.dialogTitleContainer}>
+                        <div className={classes.avatarContainer}>
+                            <Avatar src={'/assets/images/photos/people/scst@2x.png'} className={classes.avatar} />
+                            <Typography variant='h4' noWrap>{communityDetail.name}</Typography>
+                        </div>
+                        <CircleButton
+                            style={{ backgroundColor: '#1B1F2E' }} onClick={onClose}
+                            icon={<CloseIcon style={{ color: theme.palette.text.primary }} fontSize='default' />} />
                     </div>
-                    <CircleButton
-                        style={{ backgroundColor: '#1B1F2E' }} onClick={onClose}
-                        icon={<CloseIcon style={{ color: '#fff' }} fontSize='default' />} />
-                </div>
-            </DialogTitle>
-            <DialogContent classes={{ root: classes.dialogContent }}>
-                <OutlinedButton className={classes.button}>
-                    <Typography variant='h6'>
-                        Add to Contacts
+                </DialogTitle>
+                <DialogContent classes={{ root: classes.dialogContent }}>
+                    <OutlinedButton className={classes.button}>
+                        <Typography variant='h6'>
+                            Add to Contacts
                     </Typography>
-                </OutlinedButton>
-                <div className={classes.chipConatiner}>
-                    {accountRulesloading ? <IntercoinLoading wholeOverlay /> : null}
-                    {ownRoles.map((role, index) => {
-                        return (
-                            <Chip
-                                key={index}
-                                icon={<FaceIcon />}
-                                label={role}
-                                clickable
-                                color="primary"
-                                onDelete={handleDelete}
-                                classes={{ colorPrimary: classes.chip }}
-                                deleteIcon={<DoneIcon />}
-                            />)
-                    })}
-                </div>
-            </DialogContent>
-            <DialogActions disableSpacing classes={{ root: classes.dialogActionContainer }} >
-                <OutlinedButton className={classes.button} style={{ marginBottom: 20 }}>
-                    <SendIcon style={{ marginRight: 8 }} />
-                    <Typography variant='h6'>
-                        Send Payment
+                    </OutlinedButton>
+                    <div className={classes.chipConatiner}>
+                        {accountRulesloading ? <IntercoinLoading wholeOverlay /> : null}
+                        {ownRoles.map((role, index) => {
+                            return (
+                                <Chip
+                                    key={index}
+                                    icon={<FaceIcon />}
+                                    label={role}
+                                    clickable
+                                    color="primary"
+                                    onDelete={handleDelete}
+                                    classes={{ colorPrimary: classes.chip }}
+                                    deleteIcon={<DoneIcon />}
+                                />)
+                        })}
+                    </div>
+                </DialogContent>
+                <DialogActions disableSpacing classes={{ root: classes.dialogActionContainer }} >
+                    <OutlinedButton className={classes.button} style={{ marginBottom: 20 }}>
+                        <SendIcon style={{ marginRight: 8 }} />
+                        <Typography variant='h6'>
+                            Send Payment
                      </Typography>
-                </OutlinedButton>
-                {owner === location.state.account &&
-                    <>
-                        <Divider width={'100%'} style={{ backgroundColor: '#6B76A1' }} variant='fullWidth' orientation={'horizontal'} />
-                        <Typography variant='h3' style={{ marginRight: 'auto', padding: 8 }} >Income </Typography>
-                        <Typography className={classes.selectContainer} component='div' variant='h5'>
-                            Managed by :
+                    </OutlinedButton>
+                    {owner === communityDetail.account &&
+                        <>
+                            <Divider width={'100%'} style={{ backgroundColor: '#6B76A1' }} variant='fullWidth' orientation={'horizontal'} />
+                            <Typography variant='h3' style={{ marginRight: 'auto', padding: 8 }} >Income </Typography>
+                            <Typography className={classes.selectContainer} component='div' variant='h5'>
+                                Managed by :
                         <MemoizedOutlinedSelect
-                                placeholder='Role'
-                                name='role'
-                                style={{ width: '50%' }}
-                                items={allRoles.filter(item => item)}
-                                value={state.role}
-                                onChange={onSelectHandler}
-                            />
-                        </Typography>
-                        <Typography variant='h6' style={{ padding: 4 }}>
-                            Max $120/week, $20/day
-                     </Typography>
-                        <OutlinedButton className={classes.button}>
-                            <Typography variant='h6'>
-                                + Add Restricition
+                                    placeholder='Role'
+                                    name='role'
+                                    style={{ width: '50%' }}
+                                    items={allRoles.filter(item => item)}
+                                    value={state.role}
+                                    onChange={onSelectHandler}
+                                />
                             </Typography>
-                        </OutlinedButton>
-                    </>}
-            </DialogActions >
-        </Dialog>
+                            <Typography variant='h6' style={{ padding: 4 }}>
+                                Max $120/week, $20/day
+                     </Typography>
+                            <OutlinedButton className={classes.button}>
+                                <Typography variant='h6'>
+                                    + Add Restricition
+                            </Typography>
+                            </OutlinedButton>
+                        </>}
+                </DialogActions >
+            </Dialog>
+        </div>
     );
 }
 

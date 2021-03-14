@@ -19,14 +19,8 @@ const useStyles = makeStyles(theme => ({
 
 const Contests = () => {
   const classes = useStyles();
-  const { setLoadingInfo, account } = useContext(AppContext);
+  const { account } = useContext(AppContext);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    setLoadingInfo(true);
-    setTimeout(() => {
-      setLoadingInfo(false);
-    }, 2000);
-  }, [setLoadingInfo]);
 
   return (
     <div className={classes.root}>

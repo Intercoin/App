@@ -96,7 +96,7 @@ const AdminPollDialog = ({ open, onClose, pollData }) => {
                     />
                     <LineMarkSeries
                       curve={'curveMonotoneX'}
-                      data={[{ x: option.from, y: 80 }, { x: option.to / 2, y: 99 }, { x: option.to, y: 70 }]}
+                      data={[{ x: option.from, y: 50 }, { x: option.to / 2, y: 99 }, { x: option.to, y: 120 }]}
                     />
                   </FlexibleWidthXYPlot>
                 </div>

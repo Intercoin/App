@@ -89,12 +89,6 @@ const Profile = ({ history }) => {
   const [filterValue, setFilterValue] = useState("");
   const [contactBoard, setContactBoard] = useState();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    setLoadingInfo(true);
-    setTimeout(() => {
-      setLoadingInfo(false);
-    }, 2000);
-  }, [setLoadingInfo]);
 
   const closeHandler = () => {
     setContactBoard()

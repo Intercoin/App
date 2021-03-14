@@ -16,21 +16,15 @@ const useStyles = makeStyles(theme => ({
     },
     backgroundColor: theme.palette.background.main,
     maxHeight: '100vh',
-    overflow: 'scroll'
+    overflowY: 'scroll',
+    overflowY:'none'
   },
-  tabHeader: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'flex-end'
-  },
-  button: {
-    backgroundColor: theme.custom.palette.green
-  }
+
 }));
 
 const DetailContext = ({ communityDetailData }) => {
   const classes = useStyles();
-  const [filterValue, setFilterValue] = useState("");
+  const [filterValue, setFilterValue] = useState(0);
 
   return (
     <div className={classes.root}>
@@ -40,12 +34,9 @@ const DetailContext = ({ communityDetailData }) => {
           setFilterValue={setFilterValue}
           TabList={CommunityTabList}
         />
-        <div className={classes.tabHeader} >
-          <Typography variant='body1'>15 members</Typography>
-          <OutlinedButton className={classes.button}>+ Invite </OutlinedButton>
-        </div>
         <TabContent
           communityDetailData={communityDetailData}
+          filterValue={filterValue}
         />
       </CardWrapper>
     </div>

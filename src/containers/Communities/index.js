@@ -75,13 +75,6 @@ const Communities = () => {
     setIsDialog(show);
   }
 
-  useEffect(() => {
-    setLoadingInfo(true);
-    setTimeout(() => {
-      setLoadingInfo(false);
-    }, 2000);
-  }, [setLoadingInfo]);
-
   const cardHandler = (id) => {
     if (isEmpty(id)) {
       setIsDialog(true);
@@ -89,7 +82,7 @@ const Communities = () => {
     else {
       history.push({
         pathname: `${PAGES.COMMUNITIES.url}/address`,
-        state: communityData[id]
+        state: communityDataList[id]
       })
     }
   }
@@ -139,7 +132,8 @@ const Communities = () => {
           }
           <Grid item xs={12} sm={6} md={4} lg={3}>
             <Card className={classes.card} onClick={() => cardHandler()}>
-              {communityCreateLoading && <IntercoinLoading wholeOverlay />}
+              {communityCreateLoading &&
+                <IntercoinLoading wholeOverlay />}
               <CircleButton
                 style={{ marginLeft: 4, backgroundColor: '#292C40' }}
                 icon={<AddIcon style={{ color: communityCreateLoading ? '#6B76A1' : '#fff', width: 32, height: 32 }} fontSize={'large'} />} />
