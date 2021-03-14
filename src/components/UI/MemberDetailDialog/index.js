@@ -93,7 +93,11 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center',
         width: '100%',
         padding: 8
-    }
+    },
+    "@keyframes shine": {
+        '0%': { left: '200%' },
+        '100%': { left: '-200%' }
+      }
 }));
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -112,7 +116,6 @@ const MemberDetailDialog = ({communityDetail, account, onClose}) => {
     const owner = useOwner();
     const { allRoles, allRolesLoading } = useAllRules();
 
-    // const { accountRulesloading, ownRoles } = useGetAccountRules(location.state.account)
     const { accountRulesloading, ownRoles } = useGetAccountRules(communityDetail?.account)
 
     const handleDelete = () => {
@@ -170,7 +173,7 @@ const MemberDetailDialog = ({communityDetail, account, onClose}) => {
                     {owner === communityDetail.account &&
                         <>
                             <Divider width={'100%'} style={{ backgroundColor: '#6B76A1' }} variant='fullWidth' orientation={'horizontal'} />
-                            <Typography variant='h3' style={{ marginRight: 'auto', padding: 8 }} >Income </Typography>
+                            <Typography variant='h4' style={{ marginRight: 'auto', padding: 8 }} >Income </Typography>
                             <Typography className={classes.selectContainer} component='div' variant='h5'>
                                 Managed by :
                         <MemoizedOutlinedSelect

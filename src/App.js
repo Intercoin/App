@@ -15,6 +15,7 @@ import { AppContext } from 'contexts';
 import { PAGES } from 'utils/links/pages';
 import { TOP_BAR_MENUS } from 'constants/top-menu-items';
 import WalletModal from 'components/WalletModal';
+import IntercoinLoading from 'components/IntercoinLoading'
 import { formatEther } from '@ethersproject/units'
 import { isEmpty } from 'utils/utility';
 
@@ -127,7 +128,7 @@ const App = ({ location, history }) => {
       }}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<IntercoinLoading wholeOverlay />}>
           <Layout layout={layout}>
             {
               isWalletDialog &&

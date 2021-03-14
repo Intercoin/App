@@ -8,6 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import { useHistory } from "react-router-dom";
+import { generateFromString } from 'generate-avatar'
 
 import ImageIcon from '@material-ui/icons/Image';
 import WorkIcon from '@material-ui/icons/Work';
@@ -71,8 +72,7 @@ const People = ({ communityDetailData, index }) => {
                                 <Grid xs={isSM ? 12 : 6} item key={index}>
                                     <ListItem onClick={() => listClickHandler(communityDetail, index)}>
                                         <ListItemAvatar>
-                                            <Avatar>
-                                                <ImageIcon />
+                                            <Avatar src={`data:image/svg+xml;utf8,${generateFromString(communityDetail.account)}`}>
                                             </Avatar>
                                         </ListItemAvatar>
                                         <ListItemText primary={communityDetail.name} secondary={communityDetail?.role} />

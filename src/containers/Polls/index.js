@@ -64,6 +64,15 @@ const Pools = ({ history }) => {
     setTableData(poolData)
   }, [poolData])
 
+  useEffect(() => {
+    if (isAdminDialog) {
+      document.body.style.overflow = 'hidden !important';
+    }
+    else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isAdminDialog])
+
   return (
     <div className={classes.root}>
       <CardWrapper title={'Intercoin Polls'} buttonName={'CREATE NEW POLL'}>
@@ -84,7 +93,6 @@ const Pools = ({ history }) => {
                 <Row onClick={() => selectPollHandler(rowData)} key={index}>
                   <Cell center>
                     <CheckBox checked={checked[index]} name={index} onClick={changeHandler} />
-                    {/* <div onClick={changeHandler}>test</div> */}
                   </Cell>
                   <Cell >
                     {rowData.title}

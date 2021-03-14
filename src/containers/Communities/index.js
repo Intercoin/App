@@ -60,7 +60,7 @@ const Communities = () => {
   const blockNumber = useBlockNumber(library);
   const community = communityInstance(account, chainId, library);
   const [communityDataList, setCommunityDataList] = useState([]);
-  const [communityCreateLoading, setcommunityCreateLoading] = useState(false);
+  const [communityCreateLoading, setcommunityCreateLoading] = useState(true);
 
   const [isDialog, setIsDialog] = useState(false);
   const params = {

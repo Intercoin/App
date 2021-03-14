@@ -68,49 +68,40 @@ const AdminPollDialog = ({ open, onClose, pollData }) => {
   const dialogClasses = dialogStyles();
   const [state, setState] = useState({});
 
-  const onFormSubmit = async (ev) => {
-    ev.preventDefault()
-    onClose();
-  }
-
   return (
     <DialogWrapper open={open} onClose={onClose} smallWidth >
-      <form onSubmit={onFormSubmit} >
-        <div className={dialogClasses.root}>
-          <Typography variant='h6' className={classes.titleLine}>{pollData.title}</Typography>
-          <DialogContent dividers className={classes.dialogContent}>
-            {optionData.map((option, index) => {
+      <div className={dialogClasses.root}>
+        <Typography variant='h6' className={classes.titleLine}>{pollData.title}</Typography>
+        <DialogContent dividers className={classes.dialogContent}>
+          {optionData.map((option, index) => {
 
-              return (
-                <div key={index} className={classes.sliderContainer}>
-                  <Typography style={{ fontWeight: '300' }} variant='subtitle2'>{` ( ${index + 1} )  `}  {option.content}</Typography>
-                  <FlexibleWidthXYPlot height={80}>
-                    <XAxis />
-                    <LineMarkSeries
-                      className="linemark-series-example"
-                      style={{
-                        strokeWidth: '3px'
-                      }}
-                      markStyle={{ stroke: 'blue' }}
-                      data={[{ x: option.to / 2, y: 0 }]}
-                    />
-                    <LineMarkSeries
-                      curve={'curveMonotoneX'}
-                      data={[{ x: option.from, y: 50 }, { x: option.to / 2, y: 99 }, { x: option.to, y: 120 }]}
-                    />
-                  </FlexibleWidthXYPlot>
-                </div>
-              )
-            })}
-            <Typography>(1) we should complete this work asap!</Typography>
-          </DialogContent>
-          <div className={classes.dialogActions}>
-            <ContainedButton className={classes.actionButton} type="submit">
-              Invite More
+            return (
+              <div key={index} className={classes.sliderContainer}>
+                <Typography style={{ fontWeight: '300' }} variant='subtitle2'>{` ( ${index + 1} )  `}  {option.content}</Typography>
+                <FlexibleWidthXYPlot height={80}>
+                  <XAxis />
+                  <LineMarkSeries
+                    style={{
+                      strokeWidth: '3px'
+                    }}
+                    markStyle={{ stroke: 'blue' }}
+                    data={[{ x: option.to / 2, y: 0 }]}
+                  />
+                  <LineMarkSeries
+                    curve={'curveMonotoneX'}
+                    data={[{ x: option.from, y: 50 }, { x: option.to / 2, y: 99 }, { x: option.to, y: 120 }]}
+                  />
+                </FlexibleWidthXYPlot>
+              </div>
+            )
+          })}
+        </DialogContent>
+        <div className={classes.dialogActions}>
+          <ContainedButton className={classes.actionButton} type="submit">
+            Invite More
             </ContainedButton>
-          </div>
         </div>
-      </form>
+      </div>
     </DialogWrapper>
   );
 }

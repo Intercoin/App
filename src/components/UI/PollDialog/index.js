@@ -55,6 +55,7 @@ const useStyles = makeStyles(theme => ({
     height: theme.spacing(18)
   }
 }));
+//.slick-list, .slick-track { touch-action:pan-y; } for the unable to preventDefault inside passive event listener warning
 
 const PollDialog = ({ open, onClose, pollData }) => {
   const classes = useStyles();

@@ -28,6 +28,7 @@
     "compressorjs": "^1.0.7",
     "ethers": "^5.0.31",
     "fortmatic": "^2.2.1",
+    "generate-avatar": "^1.4.6",
     "p-min-delay": "^3.2.0",
     "react": "^17.0.1",
     "react-avatar": "^3.10.0",
