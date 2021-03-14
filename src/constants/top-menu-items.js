@@ -25,24 +25,12 @@ const TOP_BAR_MENUS = [
     url: PAGES.POLLS.url,
     text: 'Polls'
   },
-  // {
-  //   id: 'currencies',
-  //   icon: <InterCoinIcon fontSize='large' />,
-  //   url: PAGES.CURRENCIES.url,
-  //   text: "Currencies"
-  // },
   {
     id: 'currencies',
-    icon: <Avatar variant='square' style={{ width: 65, height: 65, marginBottom: 8 }} src={'assets/images/intercoin-gold.png'} />,
+    icon: <Avatar variant='square' style={{ width: 65, height: 65, marginBottom: 8 }} src={'/assets/images/intercoin-gold.png'} />,
     url: PAGES.CURRENCIES.url,
     text: "Currencies"
   },
-  // {
-  //   id: 'income',
-  //   icon: <CreditCardIcon fontSize='large' />,
-  //   url: PAGES.INCOME.url,
-  //   text: "Income"
-  // },
   {
     id: 'contests',
     icon: <ContestIcon />,
@@ -64,24 +52,12 @@ const TOP_BAR_MENUS_DESKTOP = [
     url: PAGES.POLLS.url,
     text: 'Polls'
   },
-  // {
-  //   id: 'currencies',
-  //   icon: <InterCoinIcon fontSize='large' />,
-  //   url: PAGES.CURRENCIES.url,
-  //   text: "Currencies"
-  // },
   {
     id: 'currencies',
     icon: <Avatar variant='square' style={{ width: 38, height: 38 }} src={'assets/images/intercoin-gold.png'} />,
     url: PAGES.CURRENCIES.url,
     text: "Currencies"
   },
-  // {
-  //   id: 'income',
-  //   icon: <CreditCardIcon fontSize='large' />,
-  //   url: PAGES.INCOME.url,
-  //   text: "Income"
-  // },
   {
     id: 'contests',
     icon: <ContestIcon />,

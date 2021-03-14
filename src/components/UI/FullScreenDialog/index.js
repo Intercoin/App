@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Typograhpy from '@material-ui/core/Typography';
+import Typography from '@material-ui/core/Typography';
 import Dialog from '@material-ui/core/Dialog';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -104,7 +104,7 @@ const FullScreenDialog = ({ open, onClose, comunityInfo, children }) => {
           <Toolbar className={classes.toolbar}>
             <div className={classes.titleContainer}>
               <Avatar variant='square' src={comunityInfo?.logoUrl || '/assets/images/logos/value-exchange_200w.png'} />
-              <Typograhpy style={{ marginLeft: 8 }} variant='h5'> {comunityInfo&&comunityInfo[0]} </Typograhpy>
+              <Typography style={{ marginLeft: 8 }} variant='h5'> {comunityInfo&&comunityInfo[0]} </Typography>
             </div>
             <CircleButton style={{ display: 'flex', backgroundColor: '#292C40' }}
               icon={<CloseIcon onClick={onClose} style={{ color: '#fff' }} fontSize='large' />} />
@@ -116,12 +116,12 @@ const FullScreenDialog = ({ open, onClose, comunityInfo, children }) => {
             <div className={classes.buttonContainer}>
               <CircleButton onClick={() => onClickHandler('Roles')}
                 style={{ display: 'flex', backgroundColor: '#292C40' }} icon={<RoleIcon style={{ color: '#fff' }} fontSize='large' />} />
-              <Typograhpy variant='h6'>All Roles </Typograhpy>
+              <Typography variant='h6'>All Roles </Typography>
             </div>
             <div className={classes.buttonContainer}>
               <CircleButton onClick={() => onClickHandler('Tags')}
                 style={{ display: 'flex', backgroundColor: '#292C40' }} icon={<LabelIcon style={{ color: '#fff' }} fontSize='large' />} />
-              <Typograhpy variant='h6'>All Tags </Typograhpy>
+              <Typography variant='h6'>All Tags </Typography>
             </div>
           </Toolbar>
         </AppBar>

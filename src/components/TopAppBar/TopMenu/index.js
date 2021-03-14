@@ -30,7 +30,6 @@ const DesktopMenu = () => {
   return (
     <>
       <TopAppBarLeft setOpen={setOpen} TOP_BAR_MENUS={TOP_BAR_MENUS_DESKTOP} topAppMenu={topAppMenu} />
-      {/* <Typography variant='h5'>{TOP_BAR_MENUS[topAppMenu]?.text}</Typography> */}
       <div className={classes.LogoContainer}>
         <Hidden smDown implementation='css' className={classes.height}>
           <TopAppBarMenu topAppMenu={topAppMenu}

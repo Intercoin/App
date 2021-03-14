@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
+import AddIcon from '@material-ui/icons/Add';
 
 import { PAGES } from 'utils/links/pages';
 
@@ -32,6 +33,10 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: theme.palette.background.default,
       marginTop: theme.spacing(props.marginTop),
       border: `1px solid ${theme.palette.text.hoverText}`,
+      [theme.breakpoints.down('sm')]: {
+        marginTop: theme.spacing(-5.5),
+
+      },
     },
     '&:focus': {
       backgroundColor: theme.palette.secondary.main
@@ -116,12 +121,14 @@ IntercoinDownMenu.defaultProps = {
   itemsType: 'avatar',
   AvatarItems: [
     {
-      title: "Profile",
-      url: PAGES.PROFILE.url
+      title: "Add new account",
+      leftIcon: <AddIcon />
     },
     {
-      title: "Deactive",
-    }
+      leftIcon: '😉 ',
+      title: "My cool account",
+      url: PAGES.PROFILE.url
+    },
   ]
 }
 
