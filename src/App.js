@@ -138,6 +138,7 @@ const App = ({ location, history }) => {
                 onClose={openCloseDialogHandler(false)}
                 setActivatingConnector={setActivatingConnector}
                 activatingConnector={activatingConnector}
+                triedEager = {triedEager}
                 context={context}
               />
             }

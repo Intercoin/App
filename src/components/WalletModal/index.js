@@ -71,7 +71,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const PollDialog = ({ open, onClose, headerTitle, activatingConnector, setActivatingConnector }) => {
+const WalletModal = ({ open, onClose, headerTitle, activatingConnector, setActivatingConnector,triedEager }) => {
   const classes = useStyles();
   const dialogClasses = dialogStyles();
   const [showMore, setShowMore] = useState(false)
@@ -102,19 +102,17 @@ const PollDialog = ({ open, onClose, headerTitle, activatingConnector, setActiva
     'xDai': xDai
   }
 
-  const { connector, library, chainId, account, activate, deactivate, active, error } = context
+  const { connector, library, chainId, account, activate, deactivate, active, error} = context
   // handle logic to recognize the connector currently being activated
-
-  useEffect(() => {
-    if (activatingConnector && activatingConnector === connector) {
-      setActivatingConnector(undefined)
-    }
-  }, [activatingConnector, connector])
-
-  const triedEager = useEagerConnect()
+  // useEffect(() => {
+  //   if (activatingConnector && activatingConnector === connector) {
+  //     setActivatingConnector(undefined)
+  //   }
+  // }, [activatingConnector, connector])
+  // const triedEager = useEagerConnect()
 
   // handle logic to connect in reaction to certain events on the injected ethereum provider, if it exists
-  useInactiveListener(!triedEager || !!activatingConnector)
+  // useInactiveListener(!triedEager || !!activatingConnector)
 
   const metaMaskInstallHandler = () => {
     window.open('https://metamask.io/download', '_blank');
@@ -209,4 +207,4 @@ const PollDialog = ({ open, onClose, headerTitle, activatingConnector, setActiva
   );
 }
 
-export default PollDialog;
+export default WalletModal;
