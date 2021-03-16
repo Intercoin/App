@@ -54,7 +54,7 @@ const TOP_BAR_MENUS_DESKTOP = [
   },
   {
     id: 'currencies',
-    icon: <Avatar variant='square' style={{ width: 38, height: 38 }} src={'assets/images/intercoin-gold.png'} />,
+    icon: <Avatar variant='square' style={{ width: 38, height: 38 }} src={'/assets/images/intercoin-gold.png'} />,
     url: PAGES.CURRENCIES.url,
     text: "Currencies"
   },

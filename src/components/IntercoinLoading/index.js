@@ -12,4 +12,5 @@ const IntercoinLoading = ({ wholeOverlay, classes = {} }) => {
     );
 };
 
+
 export default IntercoinLoading;

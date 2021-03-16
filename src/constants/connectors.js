@@ -40,4 +40,7 @@ export const xDai = new InjectedConnector({
   pollingInterval: POLLING_INTERVAL
 })
 
-export const fortmatic = new FortmaticConnector({ apiKey: 'pk_test_D58C7F46E173BEDB', chainId: 4 })
+export const fortmatic = new FortmaticConnector({ apiKey: 'pk_test_D58C7F46E173BEDB', chainId: 4, pollingInterval: 15000 }) 
+
+//Test Rinkeby, Kovan, Ropsten : pk_test_D58C7F46E173BEDB
+//Production localhost : pk_live_724ABCF7B9489C5C

@@ -13,7 +13,6 @@ import DialogWrapper, { dialogStyles } from 'hoc/DialogWrapper';
 import WalletCard from 'components/UI/WalletCard';
 import ContainedButton from 'components/UI/Buttons/ContainedButton';
 import { Spinner } from 'components/UI/Spinner';
-import { useEagerConnect, useInactiveListener } from 'utils/hooks.js'
 import { walletconnect, injected, intercoinToken, xDai, fortmatic } from 'constants/connectors';
 
 const useStyles = makeStyles(theme => ({
@@ -71,12 +70,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const WalletModal = ({ open, onClose, headerTitle, activatingConnector, setActivatingConnector,triedEager }) => {
+const WalletModal = ({ open, onClose, headerTitle, activatingConnector, setActivatingConnector, triedEager, context }) => {
   const classes = useStyles();
   const dialogClasses = dialogStyles();
   const [showMore, setShowMore] = useState(false)
 
-  const context = useWeb3React()
   const getErrorMessage = (error) => {
     if (error instanceof NoEthereumProviderError) {
       return `No Ethereum browser extension detected, install MetaMask on desktop or visit from a dApp browser on mobile.`
@@ -102,17 +100,7 @@ const WalletModal = ({ open, onClose, headerTitle, activatingConnector, setActiv
     'xDai': xDai
   }
 
-  const { connector, library, chainId, account, activate, deactivate, active, error} = context
-  // handle logic to recognize the connector currently being activated
-  // useEffect(() => {
-  //   if (activatingConnector && activatingConnector === connector) {
-  //     setActivatingConnector(undefined)
-  //   }
-  // }, [activatingConnector, connector])
-  // const triedEager = useEagerConnect()
-
-  // handle logic to connect in reaction to certain events on the injected ethereum provider, if it exists
-  // useInactiveListener(!triedEager || !!activatingConnector)
+  const { connector, library, chainId, account, activate, deactivate, active, error } = context
 
   const metaMaskInstallHandler = () => {
     window.open('https://metamask.io/download', '_blank');
@@ -125,6 +113,13 @@ const WalletModal = ({ open, onClose, headerTitle, activatingConnector, setActiv
 
   const showmoreHandler = () => {
     setShowMore(!showMore)
+  }
+
+  const walletSelectHander = (currentConnector) => {
+    localStorage.setItem(`${currentConnector.constructor.name}`,currentConnector.constructor.name );
+    setActivatingConnector(currentConnector)
+    activate(currentConnector)
+    onClose();
   }
 
   return (
@@ -148,10 +143,7 @@ const WalletModal = ({ open, onClose, headerTitle, activatingConnector, setActiv
                     name={name}
                     logoType={name}
                     activating={activating}
-                    onClick={() => {
-                      setActivatingConnector(currentConnector)
-                      activate(connectorsByName[name])
-                    }}>
+                    onClick={()=>walletSelectHander(currentConnector)}>
                     <div
                       style={{
                         position: 'absolute',
@@ -181,7 +173,7 @@ const WalletModal = ({ open, onClose, headerTitle, activatingConnector, setActiv
                       cursor: 'pointer',
                     }}
                     variant="outlined"
-                    onClick={() =>metaMaskInstallHandler()}
+                    onClick={() => metaMaskInstallHandler()}
                   >
                     Install Metamask
                   </ContainedButton>

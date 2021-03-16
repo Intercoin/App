@@ -120,11 +120,11 @@ const Communities = () => {
                   key={index}
                   selectedCard={''}
                   id={index}
-                  imageUrl={community.logoUrl || '/assets/images/logos/value-exchange_200w.png'}
-                  content={community[0]}
-                  subContent={community.role || 'owner, manager, developer'}
-                  detail={community.personalInfo || 'member'}
-                  value={community.tokenAmount || 232}
+                  imageUrl={community?.logoUrl || '/assets/images/logos/value-exchange_200w.png'}
+                  content={community && community[0]}
+                  subContent={community?.role || 'owner, manager, developer'}
+                  detail={community?.personalInfo || 'member'}
+                  value={community?.tokenAmount || 232}
                   cardHandler={cardHandler}
                 />
               )

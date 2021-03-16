@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 // import CloseIcon from 'components/Icons/CloseIcon';
@@ -7,6 +7,8 @@ import CircleButton from 'components/UI/Buttons/CircleButton';
 import CloseIcon from '@material-ui/icons/Close';
 import LAYER from 'constants/z-index';
 import CheckIcon from '@material-ui/icons/Check';
+import Dialog from '@material-ui/core/Dialog';
+
 
 const useStyles = makeStyles(theme => ({
   overlay: {
@@ -61,6 +63,14 @@ export const dialogStyles = makeStyles(theme => ({
 
 const DialogWrapper = ({ open, onClose, smallWidth, isCheckIcon, children }) => {
   const classes = useStyles();
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden';
+    }
+    else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [open])
 
   if (!open) {
     return null;
@@ -71,7 +81,8 @@ const DialogWrapper = ({ open, onClose, smallWidth, isCheckIcon, children }) => 
       <div className={clsx(classes.overlay, 'animated fadeIn')} onClick={onClose} />
       <div className={clsx(classes.rect, smallWidth && classes.smallRect)}>
         {children}
-        <CircleButton style={{ display: 'flex', backgroundColor: isCheckIcon ? '#4caf50' : '#292C41' }} className={classes.closeIcon} onClick={onClose}
+        <CircleButton className={classes.closeIcon} onClick={onClose}
+          style={{ display: 'flex', backgroundColor: isCheckIcon ? '#4caf50' : '#292C41' }}
           icon={isCheckIcon
             ? <CheckIcon style={{ color: '#fff' }} fontSize='default' />
             : <CloseIcon style={{ color: '#fff' }} fontSize='default' />} />
