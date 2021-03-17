@@ -21,6 +21,9 @@ const useStyles = makeStyles(theme => ({
     zIndex: LAYER.DIALOG_OVERLAY
   },
   rect: props => ({
+    [theme.breakpoints.down('sm')]: {
+      padding: `${theme.spacing(3.5)}px ${theme.spacing(1.5)}px`,
+    },
     position: 'fixed',
     transform: 'translate(-50%, -50%)',
     left: '50%',
@@ -31,7 +34,7 @@ const useStyles = makeStyles(theme => ({
     boxShadow: theme.shadows[10],
     borderRadius: theme.spacing(3 / 8),
     [theme.breakpoints.up('sm')]: {
-      width: props.width ? props.width : 660
+      width: props.width ? props.width : 660,
     },
     zIndex: LAYER.DIALOG_MAIN
   }),
@@ -41,6 +44,9 @@ const useStyles = makeStyles(theme => ({
     }
   },
   closeIcon: {
+    [theme.breakpoints.down('sm')]: {
+      right: theme.spacing(0)
+    },
     cursor: 'pointer',
     position: 'absolute',
     // width: theme.spacing(2),

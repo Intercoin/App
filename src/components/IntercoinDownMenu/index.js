@@ -17,6 +17,7 @@ import { useEagerConnect, useInactiveListener } from 'utils/hooks.js'
 import { PAGES } from 'utils/links/pages';
 import IntercoinLoading from 'components/IntercoinLoading';
 import { isEmpty } from 'utils/utility';
+import Notifications from 'components/Notifications';
 
 const filterLists = ({ itemsType, AvatarItems }) => {
   switch (itemsType) {
@@ -103,10 +104,12 @@ const IntercoinDownMenu = ({ anchorEl, onClose, marginTop, itemsType, AvatarItem
   const context = useWeb3React();
   const { connector, library, chainId, account, activate, deactivate, active, error } = context
   const [activatingConnector, setActivatingConnector] = useState();
+  const [accountInfo, setAccountInfo] = useState({});
 
   useEffect(() => {
     if (activatingConnector && activatingConnector === connector) {
       setActivatingConnector(undefined)
+      setAccountInfo({account : 'Account was successfully switched!'})
     }
   }, [activatingConnector, connector])
 
@@ -140,6 +143,7 @@ const IntercoinDownMenu = ({ anchorEl, onClose, marginTop, itemsType, AvatarItem
 
   return (
     <>
+    <Notifications notifications={accountInfo} notificationType={'success'} />
       <Menu
         id="customized-menu"
         anchorEl={anchorEl}

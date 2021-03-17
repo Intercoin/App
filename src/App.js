@@ -1,12 +1,14 @@
 
 import 'typeface-roboto';
 import React, { useState, useEffect, Suspense } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import { useWeb3React } from '@web3-react/core'
 import { useEagerConnect, useInactiveListener } from 'utils/hooks.js'
 import { Switch, Route, withRouter } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
 import loadable from '@loadable/component';
+import { SnackbarProvider } from 'notistack';
 import pMinDelay from 'p-min-delay';
 
 import theme from 'styles/theme';
@@ -31,7 +33,14 @@ const Income = loadable(() => pMinDelay(import('containers/Income'), DELAY_TIME)
 const Contests = loadable(() => pMinDelay(import('containers/Contests'), DELAY_TIME));
 const SharedControl = loadable(() => pMinDelay(import('containers/SharedControl'), DELAY_TIME));
 
+const useStyles = makeStyles(() => ({
+  primaryTextColor: {
+    color: '#fff'
+  }
+}));
+
 const App = ({ location, history }) => {
+  const classes = useStyles();
   const context = useWeb3React();
   const { connector, library, chainId, account, activate, deactivate, active, error } = context
 
@@ -128,6 +137,18 @@ const App = ({ location, history }) => {
         deactivate
       }}>
       <ThemeProvider theme={theme}>
+      <SnackbarProvider
+          classes={{
+            variantSuccess: classes.primaryTextColor,
+            variantError: classes.primaryTextColor,
+            variantWarning: classes.primaryTextColor,
+            variantInfo: classes.primaryTextColor
+          }}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left'
+          }}
+          maxSnack={3}>
         <CssBaseline />
         <Suspense fallback={<IntercoinLoading wholeOverlay />}>
           <Layout layout={layout}>
@@ -166,6 +187,7 @@ const App = ({ location, history }) => {
             </Switch>
           </Layout>
         </Suspense>
+        </SnackbarProvider>
       </ThemeProvider>
     </AppContext.Provider>
   )
