@@ -99,6 +99,30 @@ const InviteDialog = ({ open, onClose }) => {
         }));
     }, []);
 
+    const sendEmailHandler = () => {
+
+    }
+
+    const copyLinkHandler = () => {
+
+    }
+
+    const generateQrCodeHander = () => {
+
+    }
+
+    const sendSmsHandler = () => {
+
+    }
+
+    const sendFacebookHandler = () => {
+
+    }
+
+    const sendTwitterHandler = () => {
+
+    }
+
     return (
         <DialogWrapper open={open} onClose={onClose} smallWidth width={460} >
             <div className={dialogClasses.root}>
@@ -149,35 +173,39 @@ const InviteDialog = ({ open, onClose }) => {
                                 <Grid container item justify='center' alignItems='center' direction="row">
                                     <Grid xs={3} container item justify='center' alignItems='center'>
                                         <CircleButton
+                                            onClick={sendEmailHandler}
                                             style={{ backgroundColor: '#292C41', margin: 4 }}
                                             icon={<EmailIcon fontSize={'large'} style={{ color: '#fff' }} />} />
                                     </Grid>
                                     <Grid xs={3} container item justify='center' alignItems='center'>
                                         <CircleButton
+                                            onClick={sendSmsHandler}
                                             style={{ backgroundColor: '#292C41', margin: 4 }}
                                             icon={<SmsIcon fontSize={'large'} style={{ color: '#fff' }} />} />
                                     </Grid>
                                     <Grid xs={3} container item justify='center' alignItems='center'>
                                         <CircleButton
+                                            onClick={sendFacebookHandler}
                                             style={{ backgroundColor: '#292C41', margin: 4 }}
                                             icon={<FacebookIcon fontSize={'large'} style={{ color: '#fff' }} />} />
                                     </Grid>
                                     <Grid xs={3} container item justify='center' alignItems='center'>
                                         <CircleButton
+                                            onClick={sendTwitterHandler}
                                             style={{ backgroundColor: '#292C41', margin: 4 }}
                                             icon={<TwitterIcon fontSize={'large'} style={{ color: '#fff' }} />} />
                                     </Grid>
                                 </Grid>
                                 <Grid container item justify='center' alignItems='center' direction="row" >
                                     <Grid xs={12} container item justify='center' alignItems='center'>
-                                        <OutlinedButton className={classes.tapButton}>
+                                        <OutlinedButton onClick={copyLinkHandler} className={classes.tapButton}>
                                             <Typography variant='body1'>Tap to Copy invite link </Typography>
                                         </OutlinedButton>
                                     </Grid>
                                 </Grid>
                                 <Grid container item justify='center' alignItems='center' direction="row" >
                                     <Grid xs={12} container item justify='center' alignItems='center'>
-                                        <OutlinedButton className={classes.tapButton}>
+                                        <OutlinedButton onClick={generateQrCodeHander} className={classes.tapButton}>
                                             <Typography variant='body1'>Tap to generate QR code</Typography>
                                         </OutlinedButton>
                                     </Grid>
