@@ -102,7 +102,7 @@ const People = ({ communityDetailData, index }) => {
                         communityDetailData.map((communityDetail, index) => {
                             return (
                                 <Grid xs={isSM ? 12 : 6} item key={index} style={{ cursor: 'pointer' }} >
-                                    <ListItem onClick={() => listClickHandler(communityDetail, index)}>
+                                    <ListItem button onClick={() => listClickHandler(communityDetail, index)}>
                                         <ListItemAvatar>
                                             <Avatar src={`data:image/svg+xml;utf8,${generateFromString(communityDetail.account)}`}>
                                             </Avatar>
@@ -116,7 +116,7 @@ const People = ({ communityDetailData, index }) => {
                 </Grid>
             </List>
             {memberDetailData && <MemberDetailDialog onClose={closeHandler} communityDetail={memberDetailData} />}
-            {isInviteDialog && <InviteDialog open={true} onClose={closeHandler}/>}
+            {isInviteDialog && <InviteDialog open={true} onClose={closeHandler} />}
         </div>
     );
 };

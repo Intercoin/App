@@ -87,8 +87,8 @@ const InviteDialog = ({ open, onClose }) => {
     const { allRoles, allRolesLoading } = useAllRules();
     const [state, setState] = useState({});
     const [selectedRoles, setSelectedRoles] = useState([]);
-    const [notifications, setNotifications] = useState({});
     const [headerTitle, setHeaderTitle] = useState('Select Role');
+    let selectedRoleTitles = [];
 
     const inviteUserHandler = () => {
         setHeaderTitle('Invite Admin')
@@ -100,6 +100,13 @@ const InviteDialog = ({ open, onClose }) => {
                 ...prevState,
                 title
             ]));
+        } else {
+            selectedRoleTitles = [...selectedRoles]
+            const index = selectedRoleTitles.indexOf(title);
+            if (index > -1) {
+                selectedRoleTitles.splice(index, 1);
+            }
+            setSelectedRoles(selectedRoleTitles)
         }
     }
 
@@ -120,19 +127,19 @@ const InviteDialog = ({ open, onClose }) => {
     }
 
     const generateQrCodeHander = () => {
-
+        onClose()
     }
 
     const sendSmsHandler = () => {
-
+        onClose()
     }
 
     const sendFacebookHandler = () => {
-
+        onClose()
     }
 
     const sendTwitterHandler = () => {
-
+        onClose()
     }
 
     return (
