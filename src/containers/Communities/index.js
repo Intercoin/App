@@ -132,12 +132,11 @@ const Communities = () => {
           }
           <Grid item xs={12} sm={6} md={4} lg={3}>
             <Card className={classes.card} onClick={() => cardHandler()}>
-              {communityCreateLoading &&
-                <IntercoinLoading wholeOverlay />}
+              {communityCreateLoading && <IntercoinLoading wholeOverlay />}
               <CircleButton
                 style={{ marginLeft: 4, backgroundColor: '#292C40' }}
                 icon={<AddIcon style={{ color: communityCreateLoading ? '#6B76A1' : '#fff', width: 32, height: 32 }} fontSize={'large'} />} />
-              <Typography variant='h6' color={communityCreateLoading ? 'textSecondary' : 'inherit'}> {'Start a Community'}  </Typography>
+              <Typography variant='h6' color={communityCreateLoading ? 'textSecondary' : 'inherit'}> {'Start a Community'} </Typography>
             </Card>
           </Grid>
         </Grid>

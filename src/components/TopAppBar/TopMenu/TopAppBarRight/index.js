@@ -69,6 +69,7 @@ const TopAppBarRight = ({ isMobileMenu }) => {
   };
 
   const connectWallet = () => {
+    setAnchorEl(null);
     if (isEmpty(account)) {
       setIsWalletDialog(true)
     }

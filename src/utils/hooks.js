@@ -155,6 +155,7 @@ const useAllRules = () => {
     if (isEmpty(community) || isEmpty(account) || isEmpty(library)) {
       return null
     }
+    setAllRolesLoading(true)
     Promise.resolve(community['getRoles()']()).then(function (allRoles) {
       setAllRoles(allRoles)
       setAllRolesLoading(false)
