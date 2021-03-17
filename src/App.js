@@ -34,7 +34,6 @@ const SharedControl = loadable(() => pMinDelay(import('containers/SharedControl'
 const App = ({ location, history }) => {
   const context = useWeb3React();
   const { connector, library, chainId, account, activate, deactivate, active, error } = context
-  console.log('kevin===>', library)
 
   const [isWalletDialog, setIsWalletDialog] = useState();
   const [activatingConnector, setActivatingConnector] = useState();
