@@ -42,8 +42,7 @@ const useStyles = makeStyles(() => ({
 const App = ({ location, history }) => {
   const classes = useStyles();
   const context = useWeb3React();
-  const { connector, library, chainId, account, activate, deactivate, active, error } = context
-
+  const { connector, library, chainId, account, activate, deactivate, active, error } = context;
   const [isWalletDialog, setIsWalletDialog] = useState();
   const [activatingConnector, setActivatingConnector] = useState();
   const [balance, setBalance] = useState()
@@ -170,6 +169,7 @@ const App = ({ location, history }) => {
                   <Switch>
                     <Route exact path={PAGES.HOME.url} component={Home} />
                     <Route exact path={PAGES.COMMUNITIES.url} component={Communities} />
+                    <Route exact path={`${PAGES.COMMUNITIES.url}/i`} component={Communities} />
                     <Route exact path={`${PAGES.COMMUNITIES.url}/address`} component={CommunitiesDetail} />
                     <Route exact path={PAGES.POLLS.url} component={Polls} />
                     <Route exact path={`${PAGES.POLLS.url}/:_id`} component={AddEditPolls} />

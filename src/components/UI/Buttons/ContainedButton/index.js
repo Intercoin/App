@@ -67,7 +67,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ContainedButton = ({ className, type, color, variant = 'contained', disabled, loading, children, fullWidth, ...rest }) => {
+const ContainedButton = ({ className, type, color, variant = 'contained', disabled, loading, children, fullWidth, disable, ...rest }) => {
   const classes = useStyles({ fullWidth });
 
   return (
@@ -77,7 +77,7 @@ const ContainedButton = ({ className, type, color, variant = 'contained', disabl
         color={color}
         variant={variant}
         type={type}
-        disabled={loading}
+        disabled={loading || disable}
         {...rest}>
         {children}
       </Button>

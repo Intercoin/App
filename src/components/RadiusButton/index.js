@@ -17,7 +17,7 @@ const RadiusButton = React.forwardRef(({ className, ...rest }, ref) => {
   const classes = useStyles();
 
   return (
-    <ContainedButton className={clsx(classes.root, className)} ref={ref} {...rest} />
+    <ContainedButton className={clsx(classes.root, className)} ref={ref}  {...rest} />
   );
 });
 

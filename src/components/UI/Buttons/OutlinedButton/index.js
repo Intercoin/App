@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const OutlinedButton = ({ className, color, variant, href, children, loading, ...rest }) => {
+const OutlinedButton = ({ className, color, variant, href, children, loading, disable, ...rest }) => {
   const classes = useStyles();
 
   return (
@@ -25,7 +25,7 @@ const OutlinedButton = ({ className, color, variant, href, children, loading, ..
       component={href ? ButtonLink : 'button'}
       href={href}
       className={clsx(className, classes.root)}
-      disabled={loading}
+      disabled={loading || disable}
       color={color}
       variant='outlined'
       {...rest}>

@@ -1,5 +1,6 @@
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useContext, useCallback } from 'react';
+import { AppContext } from 'contexts';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -16,6 +17,7 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import { useSnackbar } from 'notistack';
 
+import { API_BASE_URL } from 'config';
 import DialogWrapper, { dialogStyles } from 'hoc/DialogWrapper';
 import RadiusButton from 'components/RadiusButton';
 import CircleButton from 'components/UI/Buttons/CircleButton';
@@ -23,7 +25,9 @@ import OutlinedButton from 'components/UI/Buttons/OutlinedButton';
 import { MemoizedOutlinedTextField } from 'components/UI/OutlinedTextField';
 import { useAllRules } from 'utils/hooks';
 import IntercoinLoading from 'components/IntercoinLoading';
+import { communityInstance } from 'services/communityInstance';
 import { isEmpty } from 'utils/utility';
+import { PAGES } from 'utils/links/pages';
 
 const useStyles = makeStyles(theme => ({
     actionButton: {
@@ -83,14 +87,41 @@ const useStyles = makeStyles(theme => ({
 const InviteDialog = ({ open, onClose }) => {
     const classes = useStyles();
     const dialogClasses = dialogStyles();
+    const { account, chainId, library } = useContext(AppContext);
+    const community = communityInstance(account, chainId, library);
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
     const { allRoles, allRolesLoading } = useAllRules();
     const [state, setState] = useState({});
     const [selectedRoles, setSelectedRoles] = useState([]);
     const [headerTitle, setHeaderTitle] = useState('Select Role');
+    const [pSig, setPSig] = useState('')
     let selectedRoleTitles = [];
 
+    let adminMsg = [
+        'invite',
+        communityInstance.address,
+        [
+            ...selectedRoles
+        ].join(','),
+        'GregMagarshak'
+    ].join(':');
+    let recipientMsg = '' + '0xe9D045cF6D3a2418eab537d3AC7a905a1dDcF048' + ':John Doe';
+    // let psignature = EthUtil.ecsign(EthUtil.hashPersonalMessage(new Buffer(adminMsg)), new Buffer(privatekey1, 'hex'));
+    // let pSig = EthUtil.toRpcSig(psignature.v, psignature.r, psignature.s);
+    const Signer = library.getSigner()
+
+
+    // let rpsignature = EthUtil.ecsign(EthUtil.hashPersonalMessage(new Buffer(recipientMsg)), new Buffer(privatekey2, 'hex'));
+    // let rpSig = EthUtil.toRpcSig(rpsignature.v, rpsignature.r, rpsignature.s);
     const inviteUserHandler = () => {
+
+        Promise.resolve(Signer.signMessage(adminMsg)).then(function (pSig) {
+            setPSig(pSig)
+
+        }).catch(function (error) {
+
+            console.log('pSigError===>', error)
+        })
         setHeaderTitle('Invite Admin')
     }
 
@@ -126,7 +157,7 @@ const InviteDialog = ({ open, onClose }) => {
         onClose()
     }
 
-    const generateQrCodeHander = () => {
+    const generateQrCodeHandler = () => {
         onClose()
     }
 
@@ -180,12 +211,12 @@ const InviteDialog = ({ open, onClose }) => {
                                 <Grid xs={3} sm={2} item>
                                     <RadiusButton className={classes.buttonColor} onClick={inviteUserHandler} variant='outlined' >
                                         Go
-                                       </RadiusButton>
+                                    </RadiusButton>
                                 </Grid>
                             </Grid>
                             <Grid container item justify='center' alignItems='center' direction="row">
                                 <Grid xs={12} container item justify='center' alignItems='center'>
-                                    <Typography>Or invite people by using: </Typography>
+                                    <Typography variant='body1'>Or invite people by using: </Typography>
                                 </Grid>
                             </Grid>
                             <Grid container item justify='center' alignItems='center' direction="row">
@@ -216,7 +247,7 @@ const InviteDialog = ({ open, onClose }) => {
                             </Grid>
                             <Grid container item justify='center' alignItems='center' direction="row" >
                                 <Grid xs={12} container item justify='center' alignItems='center'>
-                                    <CopyToClipboard text={'copied!'}>
+                                    <CopyToClipboard text={`${API_BASE_URL}${PAGES.COMMUNITIES.url}/i?pSig=${pSig}`}>
                                         <OutlinedButton onClick={copyLinkHandler} className={classes.tapButton}>
                                             <Typography variant='body1'>Tap to Copy invite link </Typography>
                                         </OutlinedButton>
@@ -225,7 +256,7 @@ const InviteDialog = ({ open, onClose }) => {
                             </Grid>
                             <Grid container item justify='center' alignItems='center' direction="row" >
                                 <Grid xs={12} container item justify='center' alignItems='center'>
-                                    <OutlinedButton onClick={generateQrCodeHander} className={classes.tapButton}>
+                                    <OutlinedButton onClick={generateQrCodeHandler} className={classes.tapButton}>
                                         <Typography variant='body1'>Tap to generate QR code</Typography>
                                     </OutlinedButton>
                                 </Grid>

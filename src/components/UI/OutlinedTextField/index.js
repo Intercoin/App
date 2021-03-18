@@ -9,14 +9,14 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   textField: props => ({
-    border:  props.readOnly ? `1px solid ${theme.palette.secondary.contrastText}80`: `1px solid ${theme.palette.secondary.contrastText}`,
+    border: props.readOnly ? `1px solid ${theme.palette.secondary.contrastText}80` : `1px solid ${theme.palette.secondary.contrastText}`,
     borderRadius: theme.spacing(0.5),
     background: 'transparent',
     width: '100%',
     '& input': {
       height: theme.spacing(28 / 8),
       color: theme.palette.secondary.contrastText,
-      '-webkit-text-fill-color': props.readOnly? `${theme.palette.secondary.contrastText}80`: theme.palette.secondary.contrastText,
+      '-webkit-text-fill-color': props.readOnly ? `${theme.palette.secondary.contrastText}80` : theme.palette.secondary.contrastText,
       '-webkit-box-shadow': '0 0 0px 1000px transparent inset',
       border: 'none',
       padding: '8px 14px',
@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
       },
       '&:focus': {
         color: theme.palette.primary.contrastText,
-        '-webkit-text-fill-color' : theme.palette.primary.contrastText,
+        '-webkit-text-fill-color': theme.palette.primary.contrastText,
       }
     },
     '& textarea': {
@@ -38,10 +38,10 @@ const useStyles = makeStyles(theme => ({
       }
     },
     '& fieldset': {
-        border: 'none'
+      border: 'none'
     },
     '&:hover': {
-      border: props.readOnly ? `1px solid ${theme.palette.secondary.contrastText}80`: `1px solid ${theme.custom.palette.grey}`
+      border: props.readOnly ? `1px solid ${theme.palette.secondary.contrastText}80` : `1px solid ${theme.custom.palette.grey}`
     }
   }),
   error: props => ({
@@ -60,8 +60,8 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const OutlinedTextField = ({ className, value, placeholder, showLength, prefix, limit=50, type, error, readOnly, endAdornment, ...rest }) => {
-  const classes = useStyles({readOnly});
+const OutlinedTextField = ({ className, value, placeholder, showLength, prefix, limit = 50, type, error, readOnly, endAdornment, ...rest }) => {
+  const classes = useStyles({ readOnly });
   const [showPassword, setShowPassword] = useState(false);
 
   const showPasswordHandler = () => {
@@ -85,27 +85,27 @@ const OutlinedTextField = ({ className, value, placeholder, showLength, prefix, 
         error && classes.error
       )}
       startAdornment={
-        prefix? prefix: null
+        prefix ? prefix : null
       }
       endAdornment={
-        endAdornment ? endAdornment: 
-        showLength ? 
-        <InputAdornment position="end" classes={{root: classes.textLength}}>
-          {`${value ? value.length : 0}/${limit}`}
-        </InputAdornment> :
-        type === 'password' ? (
-          <InputAdornment className={classes.inputAdornment} position='end'>
-            <IconButton
-              size='small'
-              onClick={showPasswordHandler}
-              onMouseDown={mouseDownPasswordHandler}>
-              {showPassword ?
-                <EyeIcon color='white' /> :
-                <EyeDisableIcon />
-              }
-            </IconButton>
-          </InputAdornment>
-        ) : null
+        endAdornment ? endAdornment :
+          showLength ?
+            <InputAdornment position="end" classes={{ root: classes.textLength }}>
+              {`${value ? value.length : 0}/${limit}`}
+            </InputAdornment> :
+            type === 'password' ? (
+              <InputAdornment className={classes.inputAdornment} position='end'>
+                <IconButton
+                  size='small'
+                  onClick={showPasswordHandler}
+                  onMouseDown={mouseDownPasswordHandler}>
+                  {showPassword ?
+                    <EyeIcon color='white' /> :
+                    <EyeDisableIcon />
+                  }
+                </IconButton>
+              </InputAdornment>
+            ) : null
       }
       readOnly={readOnly}
       {...rest}

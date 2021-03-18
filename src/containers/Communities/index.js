@@ -6,8 +6,9 @@ import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid";
 import Card from '@material-ui/core/Card';
 import AddIcon from '@material-ui/icons/Add';
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useQuery } from 'react-query';
+import qs from 'qs';
 
 import CardWrapper from 'hoc/CardWrapper';
 import CircleButton from 'components/UI/Buttons/CircleButton';
@@ -16,10 +17,12 @@ import IntercoinCard from 'components/IntercoinCard';
 import { PAGES } from 'utils/links/pages';
 import { isEmpty } from 'utils/utility';
 import AddCommunityDialog from 'components/UI/AddCommunityDialog';
+import InviteReceiveDialog from 'components/UI/InviteReceiveDialog';
 import { conversionToDollar } from 'services/conversion';
 import { useBlockNumber } from 'utils/hooks';
 import { communityInstance } from 'services/communityInstance';
 import IntercoinLoading from 'components/IntercoinLoading';
+import { TrafficRounded } from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -57,12 +60,15 @@ const Communities = () => {
   const classes = useStyles();
   const { setLoadingInfo, account, chainId, library } = useContext(AppContext);
   const history = useHistory();
+  const location = useLocation();
+  console.log('kevin location', qs.parse(location.search, { ignoreQueryPrefix: true }))
   const blockNumber = useBlockNumber(library);
   const community = communityInstance(account, chainId, library);
   const [communityDataList, setCommunityDataList] = useState([]);
   const [communityCreateLoading, setcommunityCreateLoading] = useState(true);
-
   const [isDialog, setIsDialog] = useState(false);
+  const [isInviteReceiveDialog, setIsInviteReceiveDialog] = useState(false);
+
   const params = {
     fsym: 'ETH',
     tsyms: 'USD'
@@ -73,6 +79,7 @@ const Communities = () => {
 
   const openCloseDialogHandler = show => () => {
     setIsDialog(show);
+    setIsInviteReceiveDialog(show);
   }
 
   const cardHandler = (id) => {
@@ -107,6 +114,12 @@ const Communities = () => {
     })
 
   }, [blockNumber])
+
+  useEffect(() => {
+    if (location?.search) {
+      setIsInviteReceiveDialog(true);
+    }
+  }, [location])
 
   return (
     <div className={classes.root}>
@@ -148,6 +161,14 @@ const Communities = () => {
           ticker={conversionCurrency?.data.USD}
           onClose={openCloseDialogHandler('')}
           creatNewCommunityHandler={creatNewCommunityHandler} />
+      }
+      {isInviteReceiveDialog &&
+        <InviteReceiveDialog
+          title={'You were invited!'}
+          pSig={qs.parse(location.search, { ignoreQueryPrefix: true }).pSig}
+          onClose={openCloseDialogHandler('')}
+          open={true}
+        />
       }
     </div>
   );
