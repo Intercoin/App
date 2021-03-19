@@ -58,44 +58,30 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const InvitePrepareDialog = ({ open, onClose }) => {
+const InvitePrepareDialog = ({ open, onClose, title, pSig, rpSig, adminMsg, recipientMsg }) => {
     const classes = useStyles();
     const { account, chainId, library } = useContext(AppContext);
     const community = communityInstance(account, chainId, library);
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
     const [state, setState] = useState({});
-    const [selectedRoles, setSelectedRoles] = useState([]);
-    const [headerTitle, setHeaderTitle] = useState('Select Role');
-    const [pSig, setPSig] = useState('')
-    let selectedRoleTitles = [];
 
-    // let adminMsg = [
-    //     'invite',
-    //     communityInstance.address,
-    //     [
-    //         ...selectedRoles
-    //     ].join(','),
-    //     'GregMagarshak'
-    // ].join(':');
-    // let psignature = EthUtil.ecsign(EthUtil.hashPersonalMessage(new Buffer(adminMsg)), new Buffer(privatekey1, 'hex'));
-    // let pSig = EthUtil.toRpcSig(psignature.v, psignature.r, psignature.s);
-    const Signer = library.getSigner()
-
-
-    // let rpsignature = EthUtil.ecsign(EthUtil.hashPersonalMessage(new Buffer(recipientMsg)), new Buffer(privatekey2, 'hex'));
-    // let rpSig = EthUtil.toRpcSig(rpsignature.v, rpsignature.r, rpsignature.s);
-    const inviteUserHandler = () => {
-
-        // Promise.resolve(Signer.signMessage(adminMsg)).then(function (pSig) {
-        //     setPSig(pSig)
-
-        // }).catch(function (error) {
-
-        //     console.log('pSigError===>', error)
-        // })
-        // setHeaderTitle('Invite Admin')
+    const inviteRequestHandler = () => {
+        Promise.resolve(community.invitePrepare(pSig, rpSig, { from: account })).then(function (data) {
+            Promise.resolve(community.inviteAccept(adminMsg, pSig, recipientMsg, rpSig, { from: account })).then(function (data) {
+                enqueueSnackbar('The user was successfully invited!', { variant: 'success' });
+            }).catch(function (error) {
+                console.log('inviteAccept error!', error)
+            })
+        }).catch(function (error) {
+      
+            Promise.resolve(community.inviteAccept(adminMsg, pSig, recipientMsg, rpSig, { from: account })).then(function (data) {
+                enqueueSnackbar('The user was successfully invited!', { variant: 'success' });
+            }).catch(function (error) {
+                console.log('inviteAccept error!', error)
+            })
+            enqueueSnackbar(error.data.message, { variant: 'error' });
+        })
     }
-
 
     const inputChangeHandler = useCallback(event => {
         const { name, value } = event.target;
@@ -108,20 +94,19 @@ const InvitePrepareDialog = ({ open, onClose }) => {
 
     }
 
- 
-        // enqueueSnackbar('Invite link was successfully copied!', { variant: 'success' });
-
-
     return (
         <DialogWrapper open={open} onClose={onClose} smallWidth width={460} >
-            <Typography variant='h6' className={classes.titleLine}>{headerTitle}</Typography>
+            <Typography variant='h6' className={classes.titleLine}>{title}</Typography>
             <DialogContent dividers className={classes.dialogContent}>
-             
+                <Typography noWrap>Admin Message : {adminMsg}</Typography>
+                <Typography noWrap>pSig : {pSig}</Typography>
+                <Typography noWrap>Recipient Message : {recipientMsg}</Typography>
+                <Typography noWrap>rpSig :{rpSig}</Typography>
                 {/* {allRolesLoading && <IntercoinLoading />} */}
             </DialogContent>
             <div className={classes.dialogActions}>
-                <RadiusButton onClick={inviteUserHandler} variant='outlined'>
-                    Invite Users
+                <RadiusButton onClick={inviteRequestHandler} variant='outlined'>
+                    Sending invite Request
                    </RadiusButton>
             </div>
         </DialogWrapper >

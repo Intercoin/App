@@ -99,27 +99,19 @@ const InviteDialog = ({ open, onClose }) => {
 
     let adminMsg = [
         'invite',
-        communityInstance.address,
+        community.address,
         [
             ...selectedRoles
         ].join(','),
         'GregMagarshak'
     ].join(':');
-    let recipientMsg = '' + '0xe9D045cF6D3a2418eab537d3AC7a905a1dDcF048' + ':John Doe';
-    // let psignature = EthUtil.ecsign(EthUtil.hashPersonalMessage(new Buffer(adminMsg)), new Buffer(privatekey1, 'hex'));
-    // let pSig = EthUtil.toRpcSig(psignature.v, psignature.r, psignature.s);
-    const Signer = library.getSigner()
 
+    const Signer = library.getSigner();
 
-    // let rpsignature = EthUtil.ecsign(EthUtil.hashPersonalMessage(new Buffer(recipientMsg)), new Buffer(privatekey2, 'hex'));
-    // let rpSig = EthUtil.toRpcSig(rpsignature.v, rpsignature.r, rpsignature.s);
     const inviteUserHandler = () => {
-
         Promise.resolve(Signer.signMessage(adminMsg)).then(function (pSig) {
             setPSig(pSig)
-
         }).catch(function (error) {
-
             console.log('pSigError===>', error)
         })
         setHeaderTitle('Invite Admin')
@@ -247,7 +239,7 @@ const InviteDialog = ({ open, onClose }) => {
                             </Grid>
                             <Grid container item justify='center' alignItems='center' direction="row" >
                                 <Grid xs={12} container item justify='center' alignItems='center'>
-                                    <CopyToClipboard text={`${API_BASE_URL}${PAGES.COMMUNITIES.url}/i?pSig=${pSig}`}>
+                                    <CopyToClipboard text={`${API_BASE_URL}${PAGES.COMMUNITIES.url}/i?pSig=${pSig}&adminMsg=${adminMsg}`}>
                                         <OutlinedButton onClick={copyLinkHandler} className={classes.tapButton}>
                                             <Typography variant='body1'>Tap to Copy invite link </Typography>
                                         </OutlinedButton>

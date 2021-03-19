@@ -18,6 +18,7 @@ import { PAGES } from 'utils/links/pages';
 import { isEmpty } from 'utils/utility';
 import AddCommunityDialog from 'components/UI/AddCommunityDialog';
 import InviteReceiveDialog from 'components/UI/InviteReceiveDialog';
+import InvitePrepareDialog from 'components/UI/InvitePrepareDialog';
 import { conversionToDollar } from 'services/conversion';
 import { useBlockNumber } from 'utils/hooks';
 import { communityInstance } from 'services/communityInstance';
@@ -68,6 +69,7 @@ const Communities = () => {
   const [communityCreateLoading, setcommunityCreateLoading] = useState(true);
   const [isDialog, setIsDialog] = useState(false);
   const [isInviteReceiveDialog, setIsInviteReceiveDialog] = useState(false);
+  const [isInvitePrepareDialog, setIsInvitePrepareDialog] = useState(false);
 
   const params = {
     fsym: 'ETH',
@@ -80,6 +82,7 @@ const Communities = () => {
   const openCloseDialogHandler = show => () => {
     setIsDialog(show);
     setIsInviteReceiveDialog(show);
+    setIsInvitePrepareDialog(show);
   }
 
   const cardHandler = (id) => {
@@ -117,7 +120,12 @@ const Communities = () => {
 
   useEffect(() => {
     if (location?.search) {
-      setIsInviteReceiveDialog(true);
+      if (qs.parse(location.search, { ignoreQueryPrefix: true }).pSig && qs.parse(location.search, { ignoreQueryPrefix: true }).rpSig) {
+        setIsInvitePrepareDialog(true);
+      }
+      else {
+        setIsInviteReceiveDialog(true);
+      }
     }
   }, [location])
 
@@ -165,9 +173,21 @@ const Communities = () => {
       {isInviteReceiveDialog &&
         <InviteReceiveDialog
           title={'You were invited!'}
+          adminMsg = {qs.parse(location.search, { ignoreQueryPrefix: true }).adminMsg}
           pSig={qs.parse(location.search, { ignoreQueryPrefix: true }).pSig}
           onClose={openCloseDialogHandler('')}
           open={true}
+        />
+      }
+      {isInvitePrepareDialog &&
+        <InvitePrepareDialog
+          title={'Invite Prepare!'}
+          open={true}
+          onClose={openCloseDialogHandler('')}
+          adminMsg = {qs.parse(location.search, { ignoreQueryPrefix: true }).adminMsg}
+          recipientMsg = {qs.parse(location.search, { ignoreQueryPrefix: true }).recipientMsg}
+          pSig={qs.parse(location.search, { ignoreQueryPrefix: true }).pSig}
+          rpSig={qs.parse(location.search, { ignoreQueryPrefix: true }).rpSig}
         />
       }
     </div>

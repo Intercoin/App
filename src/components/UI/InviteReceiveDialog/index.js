@@ -63,7 +63,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const InviteReceiveDialog = ({ title, open, onClose, pSig }) => {
+const InviteReceiveDialog = ({ title, open, onClose, pSig, adminMsg }) => {
     const classes = useStyles();
     const { account, chainId, library } = useContext(AppContext);
     const community = communityInstance(account, chainId, library);
@@ -76,7 +76,6 @@ const InviteReceiveDialog = ({ title, open, onClose, pSig }) => {
     let recipientMsg = '' + account + ':John Doe';
     const inviteAcceptrHandler = () => {
         Promise.resolve(Signer.signMessage(recipientMsg)).then(function (rpSign) {
-            console.log('kevin copy link handler===>', rpSign)
             setRpSig(rpSign)
         }).catch(function (error) {
             console.log('rpSigError===>', error)
@@ -154,7 +153,7 @@ const InviteReceiveDialog = ({ title, open, onClose, pSig }) => {
                     </Grid>
                     <Grid container item justify='center' alignItems='center' direction="row" >
                         <Grid xs={12} container item justify='center' alignItems='center'>
-                            <CopyToClipboard text={`${API_BASE_URL}${PAGES.COMMUNITIES.url}/i?pSig=${pSig}&rpSig=${rpSig}`}>
+                            <CopyToClipboard text={`${API_BASE_URL}${PAGES.COMMUNITIES.url}/i?pSig=${pSig}&rpSig=${rpSig}&adminMsg=${adminMsg}&recipientMsg=${recipientMsg}`}>
                                 <OutlinedButton disable={isEmpty(rpSig)} onClick={copyLinkHandler} className={classes.tapButton}>
                                     <Typography variant='body1'>Tap to Copy invite accept link </Typography>
                                 </OutlinedButton>
