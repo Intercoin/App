@@ -67,6 +67,13 @@ const InvitePrepareDialog = ({ open, onClose, title, pSig, rpSig, adminMsg, reci
 
     const inviteRequestHandler = () => {
         Promise.resolve(community.invitePrepare(pSig, rpSig, { from: account })).then(function (data) {
+
+            Promise.resolve(community.inviteView( pSig, {from : account})).then(function (data) {
+                console.log('inviteView!');
+            }).catch(function (error) {
+                console.log('inviteView error!', error)
+            })
+
             Promise.resolve(community.inviteAccept(adminMsg, pSig, recipientMsg, rpSig, { from: account })).then(function (data) {
                 enqueueSnackbar('The user was successfully invited!', { variant: 'success' });
             }).catch(function (error) {
