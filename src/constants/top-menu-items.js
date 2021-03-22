@@ -29,7 +29,7 @@ const TOP_BAR_MENUS = [
     id: 'currencies',
     icon: <Avatar variant='square' style={{ width: 65, height: 65, marginBottom: 8 }} src={'/assets/images/intercoin-gold.png'} />,
     url: PAGES.CURRENCIES.url,
-    text: "Currencies"
+    text: "Intercoin"
   },
   {
     id: 'contests',
@@ -56,7 +56,7 @@ const TOP_BAR_MENUS_DESKTOP = [
     id: 'currencies',
     icon: <Avatar variant='square' style={{ width: 38, height: 38 }} src={'/assets/images/intercoin-gold.png'} />,
     url: PAGES.CURRENCIES.url,
-    text: "Currencies"
+    text: "Intercoin"
   },
   {
     id: 'contests',

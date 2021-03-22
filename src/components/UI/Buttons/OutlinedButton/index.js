@@ -27,7 +27,7 @@ const OutlinedButton = ({ className, color, variant, href, children, loading, di
       className={clsx(className, classes.root)}
       disabled={loading || disable}
       color={color}
-      variant='outlined'
+      variant={variant || 'outlined'}
       {...rest}>
       {children}
       {loading && <CircularProgress className={classes.loadingSpin} color={color === 'primary' ? 'secondary' : 'primary'} size={20} />}

@@ -27,7 +27,7 @@ const theme = responsiveFontSizes(createMuiTheme({
       main: '#1B1F2E',
       sideDrawer: '#0f1118',
       selectedMenu: '#292C4130',
-      main: '#232637',
+      // main: '#232637',
       overlay: '#00000099'
     },
     text: {
