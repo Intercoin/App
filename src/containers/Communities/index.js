@@ -62,7 +62,6 @@ const Communities = () => {
   const { setLoadingInfo, account, chainId, library } = useContext(AppContext);
   const history = useHistory();
   const location = useLocation();
-  console.log('kevin location', qs.parse(location.search, { ignoreQueryPrefix: true }))
   const blockNumber = useBlockNumber(library);
   const community = communityInstance(account, chainId, library);
   const [communityDataList, setCommunityDataList] = useState([]);

@@ -63,7 +63,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Profile = ({ history, chainId, account, setIsWalletDialog }) => {
+const Profile = ({ history, chainId, account, setIsWalletDialog, ethBalance }) => {
   const classes = useStyles();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('330'));
@@ -78,6 +78,8 @@ const Profile = ({ history, chainId, account, setIsWalletDialog }) => {
         <div className={classes.nameContainer}>
           <Typography>Kevin </Typography>
           <Typography>Jin</Typography>
+          
+          
         </div>
       </div >
       <div className={classes.accountName} >
@@ -91,6 +93,9 @@ const Profile = ({ history, chainId, account, setIsWalletDialog }) => {
             {account?.slice(0, 9) + '...' + account?.slice(account?.length - 6, account?.length)}
           </Typography>
         </RadiusButton>
+        <Typography variant = 'body1' noWrap>
+        {ethBalance} (ETH)
+        </Typography>
       </div>
       <div className={classes.contactContainer}>
         <CircleButton icon={<PhoneIphoneIcon />} className={classes.iconColor} />

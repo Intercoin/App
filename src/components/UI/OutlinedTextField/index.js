@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
     background: 'transparent',
     width: '100%',
     '& input': {
-      height: theme.spacing(28 / 8),
+      height: theme.spacing(34 / 8),
       color: theme.palette.secondary.contrastText,
       '-webkit-text-fill-color': props.readOnly ? `${theme.palette.secondary.contrastText}80` : theme.palette.secondary.contrastText,
       '-webkit-box-shadow': '0 0 0px 1000px transparent inset',

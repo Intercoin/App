@@ -1,4 +1,5 @@
 
+import { AppContext } from 'contexts';
 import React, { useState, useContext } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useMediaQuery, Grid, Typography } from '@material-ui/core';
@@ -7,15 +8,13 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
-import { generateFromString } from 'generate-avatar'
-import { AppContext } from 'contexts';
+import Jdenticon from 'react-jdenticon';
 
 import OutlinedButton from 'components/UI/Buttons/OutlinedButton';
 import MemberDetailDialog from 'components/UI/MemberDetailDialog';
 import InviteDialog from 'components/UI/InviteDialog';
 import { communityInstance } from 'services/communityInstance';
 // TODO should be changed reall image or icon
-
 import { PAGES } from 'utils/links/pages';
 
 const useStyles = makeStyles(theme => ({
@@ -35,6 +34,9 @@ const useStyles = makeStyles(theme => ({
     },
     button: {
         backgroundColor: theme.custom.palette.green
+    },
+    avatarContainer: {
+        backgroundColor: 'transparent'
     }
 }));
 
@@ -104,8 +106,10 @@ const People = ({ communityDetailData, index }) => {
                                 <Grid xs={isSM ? 12 : 6} item key={index} style={{ cursor: 'pointer' }} >
                                     <ListItem button onClick={() => listClickHandler(communityDetail, index)}>
                                         <ListItemAvatar>
-                                            <Avatar src={`data:image/svg+xml;utf8,${generateFromString(communityDetail.account)}`}>
+                                            <Avatar classes={{ colorDefault: classes.avatarContainer }} variant='square'>
+                                                <Jdenticon size="40" value={communityDetail.account} />
                                             </Avatar>
+
                                         </ListItemAvatar>
                                         <ListItemText primary={communityDetail.name} secondary={communityDetail?.role} />
                                     </ListItem>

@@ -9,7 +9,7 @@ import OutlinedButton from 'components/UI/Buttons/OutlinedButton';
 import { MemoizedOutlinedTextField } from 'components/UI/OutlinedTextField';
 import { MemoizedOutlinedSelect } from 'components/UI/OutlinedSelect';
 import Dropzone from 'components/UI/Dropzone';
-import { TRANSACTIONTYPES } from 'constants/transactionTypes';
+import { TRANSACTION_TYPES } from 'constants/Types';
 import { isEmpty } from 'utils/utility';
 
 const useStyles = makeStyles(theme => ({
@@ -52,7 +52,7 @@ const AddCommunityDialog = ({ open, onClose, title, ticker, creatNewCommunityHan
     const dialogClasses = dialogStyles();
     const [image, setImage] = useState('');
     const [state, setState] = useState({
-        transactionType: TRANSACTIONTYPES[0]
+        transactionType: TRANSACTION_TYPES[0]
     })
 
     const imageChangeHandler = img => {
@@ -98,7 +98,7 @@ const AddCommunityDialog = ({ open, onClose, title, ticker, creatNewCommunityHan
                             name='transactionType'
                             placeholder='Transaction Type'
                             value={state.transactionType}
-                            items={TRANSACTIONTYPES}
+                            items={TRANSACTION_TYPES}
                             onChange={onSelectHandler}
                         />
                     </div>

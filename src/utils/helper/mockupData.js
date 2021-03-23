@@ -292,7 +292,7 @@ const communityDetailData = [
   {
     name: 'John Smith',
     role: 'Member, admin',
-    avatar:  '/assets/images/logos/web3evm-p02-300sq.png',
+    // avatar:  '/assets/images/logos/web3evm-p02-300sq.png',
     account : '0x48631372F83B65387F84018F68B1ADf536Be17AD'
   },
   {

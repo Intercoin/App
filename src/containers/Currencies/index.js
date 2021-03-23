@@ -8,16 +8,22 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import StepContent from '@material-ui/core/StepContent';
-import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
+import { useQuery } from 'react-query';
+import { useSnackbar } from 'notistack';
+import { parseEther, parseUnits } from '@ethersproject/units'
 
+import { gasFeeEstimation } from 'services/gasFeeEstimation';
 import CardWrapper from 'hoc/CardWrapper';
 import theme from 'styles/theme';
-import SettingsIcon from '@material-ui/icons/Settings';
 import InterCoinIcon from 'components/Icons/InterCoinIcon';
-import CheckBoxIcon from 'components/Icons/CheckBoxIcon';
+import ShuttleIcon from 'components/Icons/ShuttleIcon';
 import OutlinedButton from 'components/UI/Buttons/OutlinedButton'
 import IntercoinLoading from 'components/IntercoinLoading'
+import PowerIcon from 'components/Icons/PowerIcon';
+import GetToken from './GetToken';
+import { fundContractAddress } from 'constants/contractAddress';
+import { isEmpty } from 'utils/utility';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -71,21 +77,29 @@ const useColorlibStepIconStyles = makeStyles({
     alignItems: 'center',
   },
   active: {
-    backgroundImage:
-      'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
-    boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
+    backgroundColor: theme.palette.text.hoverText,
+    boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)'
   },
   completed: {
-    backgroundImage:
-      'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+    backgroundColor: theme.palette.text.hoverText
   },
 });
 
 const Currencies = () => {
   const classes = useStyles();
-  const { account, setIsWalletDialog, active } = useContext(AppContext);
+  const { account, setIsWalletDialog, active, library } = useContext(AppContext);
   const [stepLoading, setStepLoading] = useState(false);
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = useState(0);
+  const { enqueueSnackbar } = useSnackbar();
+
+  const { data: { data: { estimates = {} } = {} } = {}, isLoading: loading } = useQuery(['gas-fee-estimation'],
+    () => gasFeeEstimation());
+
+  const [state, setState] = useState({
+    itrAmount: '',
+    currencyType: '',
+    tMethod: ''
+  });
 
   const getSteps = () => {
     return ['Get Started', 'Get the Tokens', 'Join the Community!'];
@@ -100,7 +114,6 @@ const Currencies = () => {
     else {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
-
   };
 
   const handleBack = () => {
@@ -116,9 +129,9 @@ const Currencies = () => {
     const { active, completed } = props;
 
     const icons = {
-      1: <SettingsIcon style={{ width: 30, height: 30 }} />,
+      1: <PowerIcon style={{ width: 30, height: 30 }} />,
       2: <InterCoinIcon style={{ width: 40, height: 40 }} />,
-      3: <CheckBoxIcon style={{ width: 40, height: 31 }} />,
+      3: < ShuttleIcon style={{ width: 40, height: 31 }} />,
     };
 
     return (
@@ -133,14 +146,12 @@ const Currencies = () => {
     );
   }
 
-
   const getStepContent = (step) => {
     switch (step) {
       case 0:
         return `You can just select your wallet.`;
       case 1:
-        return `Once you have your tokens, you can request to be listed here as well.
-         We are working on setting up an autonomous smart contract running on the EVM that will be able to facilitate buying and selling tokens without needing to find a counterparty using this over-the-counter market.`;
+        return <GetToken setState={setState} state={state} estimates={estimates} />
       case 2:
         return `Communities use the Intercoin Currency Kit to issue their own currency, and integrate it into their local
         Community Apps. Each community promotes their Community Coin internally to its members,
@@ -166,25 +177,72 @@ const Currencies = () => {
   }
 
   const stepHandler = (step) => {
+    setStepLoading(true);
     switch (step) {
       case 0:
-        setStepLoading(true);
-        setIsWalletDialog(true);
+        return setIsWalletDialog(true);
       case 1:
-        setStepLoading(true);
-        getITRTokens();
-      case 2:
-
-        createAccount();
-      // setStepLoading(true)
-      default:
-        return 'Unknown step';
+        return getITRTokens();
+      case 2: createAccount();
     }
   }
 
   const getITRTokens = () => {
-    handleNext();
-    setStepLoading(false)
+    if (isEmpty(state.itrAmount) ) {
+      console.log('kevin here jump')
+      enqueueSnackbar('The currency is not enough to get ITR!', { variant: 'error' });
+      setStepLoading(false)
+    }
+    else {
+      const Signer = library.getSigner();
+      const gasPrice = parseUnits(`${estimates[`${state.tMethod}`]}`, "gwei").toHexString()
+      Promise.resolve(Signer.sendTransaction({
+        gasLimit: 200000,
+        gasPrice: gasPrice,
+        from: account,
+        to: fundContractAddress,
+        value: parseEther(state.itrAmount).toHexString()
+
+      })).then(function (transaction) {
+        setStepLoading(false)
+        console.log(transaction)
+        handleNext(2);
+        enqueueSnackbar('The transaction has been successfully processed!', { variant: 'success' });
+      }).catch(function (error) {
+        console.log('pSigError===>', error)
+        setStepLoading(false)
+      })
+    }
+    // const parameters = [
+    //   {
+    //     gasLimit: "200000",
+    //     gasPrice: parseUnits(`${estimates[`${state.tMethod}`]}`, "gwei").toHexString(),
+    //     from: account,
+    //     to: fundContractAddress,
+    //     value: parseEther(state.itrAmount).toHexString(),
+    //   }
+    // ];
+    // const payload = {
+    //   method: "eth_sendTransaction",
+    //   params: parameters,
+    //   from: account
+    // };
+
+    // library.provider.sendAsync(payload, function (
+    //   err,
+    //   response
+    // ) {
+    //   if (err) {
+    //     setStepLoading(false)
+    //     enqueueSnackbar('Something went wrong', { variant: 'error' });
+    //     console.log(err);
+    //   } else {
+    //     setStepLoading(false)
+    //     enqueueSnackbar('The transaction has been successfully processed!', { variant: 'success' });
+    //     handleNext(2);
+    //     console.log(response.result);
+    //   }
+    // });
   }
 
   const createAccount = () => {
@@ -210,7 +268,7 @@ const Currencies = () => {
               </StepLabel>
               <StepContent >
                 {stepLoading && <IntercoinLoading wholeOverlay />}
-                <Typography variant='body1'>{getStepContent(index)}</Typography>
+                <Typography component='div' variant='body1'>{getStepContent(index)}</Typography>
                 <div className={classes.actionsContainer}>
                   <OutlinedButton onClick={() => stepHandler(index)} className={classes.commonButton}>
                     <InterCoinIcon variant='contained' style={{ width: 32, height: 32, marginRight: 12 }} />

@@ -45,7 +45,6 @@ const App = ({ location, history }) => {
   const { connector, library, chainId, account, activate, deactivate, active, error } = context;
   const [isWalletDialog, setIsWalletDialog] = useState();
   const [activatingConnector, setActivatingConnector] = useState();
-  console.log('kevin ===>', activatingConnector, active)
   const [balance, setBalance] = useState()
   useEffect(() => {
     if (activatingConnector && activatingConnector === connector) {
@@ -135,7 +134,8 @@ const App = ({ location, history }) => {
         setIsWalletDialog,
         account,
         chainId,
-        deactivate
+        deactivate,
+        balance
       }}>
       <ThemeProvider theme={theme}>
       <SnackbarProvider
@@ -184,6 +184,7 @@ const App = ({ location, history }) => {
                   :
                   <Switch>
                     <Route exact path={PAGES.HOME.url} component={Home} />
+                    <Route exact path={PAGES.CURRENCIES.url} component={Currencies} />
                   </Switch>
               )} />
             </Switch>

@@ -10,6 +10,7 @@ import { Typography } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from 'components/Icons/CloseIcon';
 import TextField from '@material-ui/core/TextField';
+import { formatEther} from '@ethersproject/units'
 
 import CardWrapper from 'hoc/CardWrapper';
 import IntercoinAvatarBox from 'components/IntercoinAvatarBox';
@@ -85,10 +86,12 @@ const useStyles = makeStyles(theme => ({
 
 const Profile = ({ history }) => {
   const classes = useStyles();
-  const { account, chainId, setLoadingInfo, setIsWalletDialog } = useContext(AppContext);
+  const { account, chainId, setLoadingInfo, setIsWalletDialog, balance } = useContext(AppContext);
   const [filterValue, setFilterValue] = useState("");
   const [contactBoard, setContactBoard] = useState();
   // eslint-disable-next-line react-hooks/exhaustive-deps
+    // console.log('kevin getting the account balance===>',account, balance && formatEther(balance),context ) //TODO show the account balance
+  const ethBalance = balance && formatEther(balance)
 
   const closeHandler = () => {
     setContactBoard()
@@ -100,6 +103,7 @@ const Profile = ({ history }) => {
         <div>
           <Grid container spacing={2} className={classes.container} >
             <IntercoinAvatarBox
+              ethBalance = {ethBalance}
               account={account}
               chainId={chainId}
               setIsWalletDialog={setIsWalletDialog}

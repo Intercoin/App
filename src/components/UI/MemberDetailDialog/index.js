@@ -3,6 +3,7 @@ import React, { useState, useCallback } from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Typography, useMediaQuery } from '@material-ui/core';
+import { useHistory, useLocation } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Slide from '@material-ui/core/Slide';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -12,7 +13,7 @@ import Chip from '@material-ui/core/Chip';
 import FaceIcon from '@material-ui/icons/Face';
 import SendIcon from '@material-ui/icons/Send';
 import Divider from '@material-ui/core/Divider';
-import { useHistory, useLocation } from 'react-router-dom';
+import Jdenticon from 'react-jdenticon';
 
 import RadiusButton from 'components/RadiusButton';
 import { MemoizedOutlinedSelect } from 'components/UI/OutlinedSelect';
@@ -35,7 +36,6 @@ const useStyles = makeStyles(theme => ({
         // marginTop : 20,
         // marginBottom : theme.spacing(5),
         // marginTop:theme.spacing(8),
-
         borderRadius: '20px'
     },
     dialogTitleContainer: {
@@ -55,6 +55,7 @@ const useStyles = makeStyles(theme => ({
         width: '80%',
     },
     avatar: {
+        backgroundColor: 'transparent',
         border: `2px solid ${theme.palette.text.secondary}`,
         height: theme.spacing(9),
         width: theme.spacing(9),
@@ -134,7 +135,9 @@ const MemberDetailDialog = ({ communityDetail, account, onClose }) => {
                 <DialogTitle>
                     <div className={classes.dialogTitleContainer}>
                         <div className={classes.avatarContainer}>
-                            <Avatar src={'/assets/images/photos/people/scst@2x.png'} className={classes.avatar} />
+                            <Avatar src={communityDetail.avatar ? '/assets/images/photos/people/scst@2x.png' : null} className={classes.avatar} >
+                                <Jdenticon size="50" value={communityDetail.account} />
+                            </Avatar>
                             <Typography variant='h4' noWrap>{communityDetail.name}</Typography>
                         </div>
                         <CircleButton
@@ -178,7 +181,7 @@ const MemberDetailDialog = ({ communityDetail, account, onClose }) => {
                             <Typography variant='h4' style={{ marginRight: 'auto', padding: 8 }} >Income </Typography>
                             <Typography className={classes.selectContainer} component='div' variant='h5'>
                                 Managed by :
-                        <MemoizedOutlinedSelect
+                            <MemoizedOutlinedSelect
                                     placeholder='Role'
                                     name='role'
                                     style={{ width: '50%' }}
