@@ -10,21 +10,26 @@ import { Typography } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from 'components/Icons/CloseIcon';
 import TextField from '@material-ui/core/TextField';
+import { formatEther } from '@ethersproject/units'
+import Drawer from '@material-ui/core/Drawer';
 
 import CardWrapper from 'hoc/CardWrapper';
 import IntercoinAvatarBox from 'components/IntercoinAvatarBox';
 import IntercoinTabContainer from 'components/IntercoinTabContainer';
 import RecentTransactions from './RecentTransactions';
+import Information from './Information';
+import Schedule from './Schedule';
+import Interest from './Interest';
+import QrCode from './QrCode';
+import Currency from './Currency';
 import { transactionData } from 'utils/helper/mockupData';
 import { isEmpty } from 'utils/utility';
+import { ProfileTabList } from 'constants/InterCoinTabList';
 
+const drawerWidth = 360;
 const useStyles = makeStyles(theme => ({
   root: {
-    display: 'flex',
-    flexDirection: 'row',
-    height: '100%',
-    width: '100%',
-    justifyContent: 'center',
+    height: '100%'
   },
   container: {
     [theme.breakpoints.down('sm')]: {
@@ -39,16 +44,22 @@ const useStyles = makeStyles(theme => ({
     height: theme.spacing(7),
   },
   additionalGrid: {
+    width: drawerWidth - theme.spacing(2),
     [theme.breakpoints.down('sm')]: {
       display: 'none',
     },
-    margin: theme.spacing(2),
+    [theme.breakpoints.down('md')]: {
+      margin: theme.spacing(0, 2.5, 0, 4),
+    },
+    margin: theme.spacing(0, 7.5, 0, 4),
+    // padding: `${theme.spacing(-4, 0, -4, 0)} !important`
   },
   card: {
     backgroundColor: theme.palette.background.default,
     display: 'flex',
     width: "100%",
-    minHeight: `calc(100vh - ${theme.custom.layout.topAppBarHeight + theme.custom.layout.footerHeight}px)`,
+    marginRight: theme.spacing(3),
+    minHeight: `calc(100vh - ${theme.custom.layout.topAppBarHeight + theme.custom.layout.footerHeight + theme.custom.layout.topAppBarHeight}px)`,
     flexDirection: 'column',
     justifyContent: 'space-between',
     cursor: 'pointer',
@@ -79,54 +90,95 @@ const useStyles = makeStyles(theme => ({
   },
   cardHeader: {
     borderBottom: '0.5px solid #fff'
+  },
+  drawer: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
+    width: '100%',
+    flexShrink: 0,
+  },
+  drawerPaper: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
+    // width: drawerWidth,
+    border: 'none',
+    height: `100%`,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+    // marginTop : 30
+  },
+
+  contentShift: {
+    [theme.breakpoints.up('sm')]: {
+      transition: theme.transitions.create("margin", {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen
+      }),
+      marginRight: drawerWidth
+    },
   }
 }));
 
 const Profile = ({ history }) => {
   const classes = useStyles();
-  const { account, chainId, setLoadingInfo, setIsWalletDialog } = useContext(AppContext);
-  const [filterValue, setFilterValue] = useState("");
+  const { account, chainId, setLoadingInfo, setIsWalletDialog, balance } = useContext(AppContext);
+  const [filterValue, setFilterValue] = useState(0);
   const [contactBoard, setContactBoard] = useState();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    setLoadingInfo(true);
-    setTimeout(() => {
-      setLoadingInfo(false);
-    }, 2000);
-  }, [setLoadingInfo]);
+  // console.log('kevin getting the account balance===>',account, balance && formatEther(balance),context ) //TODO show the account balance
+  const ethBalance = balance && formatEther(balance);
 
   const closeHandler = () => {
     setContactBoard()
   }
 
+  const tabContentFilter = (tabId) => {
+    switch (tabId) {
+      case 0:
+        return (
+          <RecentTransactions
+            contactBoard={contactBoard}
+            setContactBoard={setContactBoard}
+            transactionData={transactionData} />);
+      case 1:
+        return <Information />;
+      case 2:
+        return <Schedule />;
+      case 3:
+        return <Interest />;
+      case 4:
+        return <QrCode />;
+      case 5:
+        return <Currency />;
+    }
+  }
+
   return (
-    <div className={classes.root}>
-      <CardWrapper >
-        <div>
-          <Grid container spacing={2} className={classes.container} >
-            <IntercoinAvatarBox
-              account={account}
-              chainId={chainId}
-              setIsWalletDialog={setIsWalletDialog}
-            />
-            <IntercoinTabContainer setFilterValue={setFilterValue} />
-            {
-              transactionData.map((transaction, index) => {
-                
-                return (
-                  <RecentTransactions
-                    key={index}
-                    id={index}
-                    contactBoard={contactBoard}
-                    setContactBoard={setContactBoard}
-                    transaction={transaction} />
-                )
-              })
-            }
-          </Grid>
-        </div>
-      </CardWrapper>
-      {!isEmpty(contactBoard) &&
+    <>
+      <div className={classes.root}>
+        <CardWrapper >
+          <div className={contactBoard && classes.contentShift}>
+            <Grid container spacing={2} className={classes.container} >
+              <IntercoinAvatarBox
+                ethBalance={ethBalance}
+                account={account}
+                chainId={chainId}
+                setIsWalletDialog={setIsWalletDialog}
+              />
+              <IntercoinTabContainer
+                setFilterValue={setFilterValue}
+                TabList={ProfileTabList}
+              />
+              {tabContentFilter(filterValue)}
+
+            </Grid>
+          </div>
+        </CardWrapper>
+
+        {/* {!isEmpty(contactBoard) &&
         <Grid className={classes.additionalGrid} item xs={12} sm={12} md={6} lg={4}>
           <Card className={classes.card} >
             <CardHeader
@@ -155,8 +207,49 @@ const Profile = ({ history }) => {
             </div>
           </Card>
         </Grid>
-      }
-    </div>
+      } */}
+        <Drawer
+          className={classes.drawer}
+          variant="persistent"
+          anchor="right"
+          open={isEmpty(contactBoard) ? false : true}
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+        >
+          {!isEmpty(contactBoard) &&
+            <Grid className={classes.additionalGrid}>
+              <Card className={classes.card} >
+                <CardHeader
+                  className={classes.cardHeader}
+                  title={`${transactionData[contactBoard].sender} ⇔ ${transactionData[contactBoard].receiver} `}
+                  action={
+                    <IconButton aria-label="settings">
+                      <CloseIcon onClick={closeHandler} style={{ color: '#fff' }} />
+                    </IconButton>
+                  }>
+                </CardHeader>
+                <div className={classes.chatActionContainer}>
+                  <TextField
+                    className={classes.input}
+                    multiline
+                    rows='2'
+                    variant='outlined'
+                    style={{ border: '0.5px solid #8D9BD4' }}
+                  />
+                  <Typography
+                    className={classes.send}
+                    color='textSecondary'
+                  >
+                    SEND
+                  </Typography>
+                </div>
+              </Card>
+            </Grid>
+          }
+        </Drawer>
+      </div>
+    </>
   );
 };
 

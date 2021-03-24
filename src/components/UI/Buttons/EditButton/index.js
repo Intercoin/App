@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
-import Typograhpy from '@material-ui/core/Typography';
+import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import EditIcon from 'components/Icons/EditIcon';
 
@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   },
   label: {
     [theme.breakpoints.down('sm')]: {
-     display:'none'
+      display: 'none'
     },
     color: theme.palette.text.secondary,
     marginRight: theme.spacing(10 / 8),
@@ -42,9 +42,9 @@ const EditButton = ({ noBorder, ...rest }) => {
       onMouseEnter={onEnter}
       onMouseLeave={() => setIsHover(false)}
       {...rest}>
-      <Typograhpy variant='body2' className={clsx(classes.label, isHover && classes.hoverColor)}>
+      <Typography variant='body2' className={clsx(classes.label, isHover && classes.hoverColor)}>
         edit
-      </Typograhpy>
+      </Typography>
       <EditIcon
         color={isHover && '#fff'} />
     </div>

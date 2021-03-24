@@ -1,4 +1,5 @@
 
+
 const poolData = [
   {
     checkStatus: true,
@@ -249,10 +250,145 @@ const transactionData = [
   }
 ]
 
+const communityData = [
+  {
+    logoUrl: '/assets/images/logos/evidencer_200w.png',
+    communityTitle: 'New York  City',
+    personalInfo: 'citizen',
+    role: 'NYC & Company',
+    tokenAmount: 22.5
+  },
+  {
+    logoUrl: '/assets/images/logos/team-of-electronic-servants_200w.png',
+    communityTitle: 'Marshall Chess Club',
+    personalInfo: 'player',
+    role: 'manager',
+    tokenAmount: 200
+  },
+  {
+    logoUrl: '/assets/images/logos/value-exchange_200w.png',
+    communityTitle: 'Chipotle Grill',
+    personalInfo: 'PA',
+    role: 'customer',
+    tokenAmount: 3.25
+  },
+  {
+    logoUrl: '/assets/images/logos/victim-services_200w.png',
+    communityTitle: 'New York  City',
+    personalInfo: 'citizen',
+    role: 'NYC & Company',
+    tokenAmount: 200
+  },
+  {
+    logoUrl: '/assets/images/logos/web3evm-p02-300sq.png',
+    communityTitle: 'Marshall Chess Club',
+    personalInfo: 'PA',
+    role: 'customer',
+    tokenAmount: 3.25
+  }
+]
+
+const communityDetailData = [
+  {
+    name: 'John Smith',
+    role: 'Member, admin',
+    // avatar:  '/assets/images/logos/web3evm-p02-300sq.png',
+    account : '0x48631372F83B65387F84018F68B1ADf536Be17AD'
+  },
+  {
+    name: 'Bob Moo',
+    role: 'Member, engineer',
+    avatar:  '/assets/images/logos/web3evm-p02-300sq.png',
+    account : '0x48631372F83B65387F84018F68B1ADf536Be17AD'
+  },
+  {
+    name: '0X23436544...324',
+    avatar:  '/assets/images/logos/web3evm-p02-300sq.png',
+    account : '0xe9D045cF6D3a2418eab537d3AC7a905a1dDcF048'
+  },
+  {
+    name: '0X23456434...628',
+    account : '0x48631372F83B65387F84018F68B1ADf536Be17AD'
+  },
+  {
+    name: '0X27456434...384',
+    avatar:  '/assets/images/logos/web3evm-p02-300sq.png',
+    account : '0x48631372F83B65387F84018F68B1ADf536Be17AD'
+  },
+  {
+    name: '0X23654434...322',
+    account : '0xe9D045cF6D3a2418eab537d3AC7a905a1dDcF048'
+  },
+  {
+    name: '0X26453734...321',
+    avatar:  '/assets/images/logos/web3evm-p02-300sq.png',
+    account : '0x48631372F83B65387F84018F68B1ADf536Be17AD'
+  },
+  {
+    name: '0X23445634...726',
+    account : '0x2Ca51ED4e4Bb914cbFC58A17d6D8b705c9407614'
+  }
+]
+
+const tagData = [
+  {
+    valeu: 0,
+    title: "Clothing",
+    image: '/assets/images/logos/value-exchange_200w.png',
+  },
+  {
+    value: 1,
+    title: "Books",
+    image: '/assets/images/logos/victim-services_200w.png'
+  },
+  {
+    value: 2,
+    title: "Venues",
+    image: '/assets/images/logos/value-exchange_200w.png',
+  },
+  {
+    value: 3,
+    title: "Tutoring",
+    image: '/assets/images/logos/web3evm-p02-300sq.png'
+  }
+]
+
+const roleData = [
+  {
+    valeu: 0,
+    title: "All Roles",
+    image: '/assets/images/logos/web3evm-p02-300sq.png'
+  },
+  {
+    value: 1,
+    title: "Owners",
+    image: '/assets/images/logos/value-exchange_200w.png',
+  },
+  {
+    value: 2,
+    title: "Managers",
+    image: '/assets/images/logos/victim-services_200w.png'
+  },
+  {
+    value: 3,
+    title: "Vendors",
+    image: '/assets/images/logos/value-exchange_200w.png',
+  },
+  {
+    value: 4,
+    title: "Members",
+    image: '/assets/images/logos/value-exchange_200w.png',
+  }
+]
+
 export {
   poolData,
   optionData,
   integrations,
   support,
-  transactionData
+  transactionData,
+  communityData,
+  communityDetailData,
+  tagData,
+  roleData
 }

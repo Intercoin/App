@@ -6,10 +6,10 @@ import { useDropzone } from 'react-dropzone';
 import Compressor from 'compressorjs';
 import PicIcon from 'components/Icons/PicIcon';
 import TrashIcon from 'components/Icons/TrashIcon';
-import dashImage from 'assets/images/dashed.png';
+import dashImage from './images/dashed.png';
 
 const useStyles = makeStyles(theme => ({
-  root: {
+  root: props => ({
     cursor: 'pointer',
     position: 'relative',
     display: 'flex',
@@ -19,11 +19,11 @@ const useStyles = makeStyles(theme => ({
     background: 'transparent',
     width: '100%',
     height: '100%',
-    minHeight: 180,
+    minHeight: props.dropZoneSize ? props.dropZoneSize : 180,
     '&:focus': {
       outline: 'none'
     },
-  },
+  }),
   commonBorder: {
     border: `1px solid ${theme.palette.secondary.contrastText}`,
   },
@@ -57,8 +57,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Dropzone = ({ image, setImage, imageURL }) => {
-  const classes = useStyles();
+const Dropzone = ({ image, setImage, imageURL, title, dropZoneSize }) => {
+  const classes = useStyles({ dropZoneSize });
   const [imageSrc, setImageSrc] = useState();
 
   const onClear = event => {
@@ -71,11 +71,11 @@ const Dropzone = ({ image, setImage, imageURL }) => {
     setImageSrc(imageURL);
   }, [imageURL]);
 
-  const onDrop = useCallback( async (acceptedFiles) => {
+  const onDrop = useCallback(async (acceptedFiles) => {
     if (!Array.isArray(acceptedFiles) || acceptedFiles.length <= 0) return;
     const file = acceptedFiles[0];
 
-    const compressorPromise = new Promise(function(resolve, reject) {
+    const compressorPromise = new Promise(function (resolve, reject) {
       new Compressor(file, {
         quality: 0.7,
         convertSize: 500000,
@@ -110,10 +110,10 @@ const Dropzone = ({ image, setImage, imageURL }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const accept=".jpg, .png, .jpeg";
+  const accept = ".jpg, .png, .jpeg";
 
-  const {getRootProps, getInputProps} = useDropzone({onDrop, accept})
- 
+  const { getRootProps, getInputProps } = useDropzone({ onDrop, accept })
+
   return (
     <>
       <div {...getRootProps()}
@@ -123,7 +123,7 @@ const Dropzone = ({ image, setImage, imageURL }) => {
           <>
             <PicIcon />
             <Typography variant='body2' color='textSecondary' className={classes.placeholder}>
-              Drag and Drop <br /> Thumbnail image here
+              Drag and Drop <br /> {title} here
             </Typography>
           </>
         }
@@ -139,7 +139,6 @@ const Dropzone = ({ image, setImage, imageURL }) => {
           </>
         }
       </div>
-
     </>
   )
 }

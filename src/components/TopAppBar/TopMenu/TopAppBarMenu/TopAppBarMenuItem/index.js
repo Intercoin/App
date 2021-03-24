@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { memo } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -9,9 +9,16 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles(theme => ({
   selectedItem: props => ({
+   
+    [theme.breakpoints.down('sm')]: {
+      padding: theme.spacing(2)
+    },
+    [theme.breakpoints.down(360)]: {
+      padding: theme.spacing(1.5),
+    },
     borderTop: props.isMobileMenu ? `1px solid ${theme.palette.text.hoverText}` : null,
-    color: props.isMobileMenu ? theme.palette.text.hoverText : theme.palette.primary.contrastText,
-    backgroundColor: `${theme.palette.background.main} !important`
+    color: `${props.isMobileMenu ? theme.palette.text.hoverText : theme.palette.primary.contrastText} !important`,
+    backgroundColor: `${theme.palette.background.main} !important`,
   }),
   menuFont: {
     [theme.breakpoints.down(1360)]: {
@@ -22,17 +29,21 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.text.primary,
     fontWeight: 300
   },
-  listItem: {
-    [theme.breakpoints.down(370)]: {
-      padding: (0, 6, 0, 6),
+  listItem: props => ({
+    [theme.breakpoints.down('sm')]: {
+      padding: theme.spacing(2),
+      color: props.menuNumber === 2 ? '#FFA000' : null
+    },
+    [theme.breakpoints.down(360)]: {
+      padding: theme.spacing(1.5),
     },
     padding: (0, 10, 0, 10),
     height: '64px',
-  }
+  })
 }));
 
-const TopAppBarMenuItem = ({ selected, menuItem, onClick, isMobileMenu }) => {
-  const classes = useStyles({ isMobileMenu });
+const TopAppBarMenuItem = ({ selected, menuItem, onClick, isMobileMenu, menuNumber }) => {
+  const classes = useStyles({ isMobileMenu, menuNumber });
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('md'));
 
@@ -53,8 +64,9 @@ const TopAppBarMenuItem = ({ selected, menuItem, onClick, isMobileMenu }) => {
           </ListItemText>
         </Hidden>
       </ListItem>
+
     </>
   );
 };
 
-export default TopAppBarMenuItem
+export default memo(TopAppBarMenuItem);

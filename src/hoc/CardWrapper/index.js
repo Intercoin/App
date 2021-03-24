@@ -7,7 +7,7 @@ import GridTitle from 'components/GridTitle';
 const useStyles = makeStyles(theme => ({
   root: props => ({
     [theme.breakpoints.down('sm')]: {
-      padding: theme.spacing(2, 1.5, 0, 1.5),
+      padding: theme.spacing(0, 1.5, 0, 1.5),
     },
     height: '100%',
     width: '100%',
@@ -25,15 +25,17 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const CardWrapper = ({ children, title, buttonName, center, flexDirection }) => {
-  const classes = useStyles({ flexDirection });
+const CardWrapper = ({ children, title, buttonName, center, flexDirection, noPaddingTop }) => {
+  const classes = useStyles({ flexDirection, noPaddingTop});
 
   return (
     <div className={classes.root}>
       <GridTitle
         center={center}
         title={title}
-        buttonName={buttonName} />
+        buttonName={buttonName}
+        noPaddingTop = {noPaddingTop}
+        />
       {children}
     </div>
   );

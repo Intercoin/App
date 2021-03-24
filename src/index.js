@@ -3,10 +3,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Web3ReactProvider } from '@web3-react/core'
-import { Web3Provider } from '@ethersproject/providers'
+import { Web3Provider } from '@ethersproject/providers';
+import { ReactQueryConfigProvider } from 'react-query';
+import axios from 'axios';
 
-import './index.css';
 import App from './App';
+import { getBaseUrl } from 'utils/helper';
+import './index.css';
 import * as serviceWorker from './serviceWorker';
 
 const getLibrary = (provider) => {
@@ -15,10 +18,14 @@ const getLibrary = (provider) => {
   return library
 }
 
+axios.defaults.baseURL = getBaseUrl();
+
 const app = (
   <BrowserRouter>
     <Web3ReactProvider getLibrary={getLibrary}>
-      <App />
+      <ReactQueryConfigProvider>
+        <App />
+      </ReactQueryConfigProvider>
     </Web3ReactProvider>
   </BrowserRouter>
 );

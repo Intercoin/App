@@ -6,6 +6,9 @@ import Tab from '@material-ui/core/Tab';
 
 const useStyles = makeStyles(theme => ({
   root: props => ({
+    [theme.breakpoints.down('sm')]: {
+      width: props.isTabFullWidth ? '100%' : null,
+    },
     display: 'flex',
     justifyContent: 'space-between',
     minHeight: 'auto',
@@ -17,15 +20,21 @@ const useStyles = makeStyles(theme => ({
     },
     '& .MuiTabs-scroller': {
       height: props.height ? props.height : 'none',
+    },
+    '& .MuiTabs-flexContainer': {
+      justifyContent: 'space-between',
+      alignItems: 'baseline',
     }
   }),
   tab: props => ({
     display: 'flex',
+    flexDirection: 'column',
     minWidth: 0,
     marginRight: theme.spacing(0),
     borderBottom: `solid 0.5px ${theme.palette.background.default}`,
     '&.MuiTab-labelIcon .MuiTab-wrapper > *:first-child': {
-      marginRight: theme.spacing(1)
+      marginBottom: 0,
+      // marginRight: theme.spacing(1)
     },
     minHeight: props.height ? props.height : 'none',
     height: props.height ? props.height : theme.spacing(4),
@@ -34,11 +43,13 @@ const useStyles = makeStyles(theme => ({
   }),
   unSelectedTab: props => ({
     display: 'flex',
+    flexDirection: 'column',
     minWidth: 0,
     marginRight: theme.spacing(0),
     borderBottom: `0.5px solid${props.borderColor ? props.borderColor : theme.palette.background.default}`,
     '&.MuiTab-labelIcon .MuiTab-wrapper > *:first-child': {
-      marginRight: theme.spacing(1),
+      marginBottom: 0,
+      // marginRight: theme.spacing(1),
     },
     minHeight: props.height ? props.height : 'none',
     height: props.height ? props.height : theme.spacing(4),
@@ -49,8 +60,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const IntercoinTabPanel = ({ value, tabs, onChange, backgroundColor, indicatorColor, width,
-  height, UnselectedTabBackgroundColor, opacity, borderColor }) => {
-  const classes = useStyles({ backgroundColor, width, height, UnselectedTabBackgroundColor, opacity, borderColor });
+  height, UnselectedTabBackgroundColor, opacity, borderColor, isTabFullWidth }) => {
+  const classes = useStyles({ backgroundColor, width, height, UnselectedTabBackgroundColor, opacity, borderColor, isTabFullWidth });
   const theme = useTheme();
 
   return (

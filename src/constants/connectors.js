@@ -1,7 +1,8 @@
 
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
+import { FortmaticConnector } from '@web3-react/fortmatic-connector';
+import { InjectedConnector } from '@web3-react/injected-connector';
 
-import { InjectedConnector } from '@web3-react/injected-connector'
 
 const POLLING_INTERVAL = 12000
 // const RPC_URLS: { [chainId] } = {
@@ -18,7 +19,7 @@ export const walletconnect = new WalletConnectConnector({
   pollingInterval: POLLING_INTERVAL
 })
 
-export const injected = new InjectedConnector({ supportedChainIds: [1, 3, 4, 5, 42] })
+export const injected = new InjectedConnector({ supportedChainIds: [1, 3, 4, 5, 42, 1337] })
 
 
 export const intercoinToken = new InjectedConnector({
@@ -38,3 +39,8 @@ export const xDai = new InjectedConnector({
   symbox: 'xDai',
   pollingInterval: POLLING_INTERVAL
 })
+
+export const fortmatic = new FortmaticConnector({ apiKey: 'pk_test_D58C7F46E173BEDB', chainId: 4, pollingInterval: 15000 }) 
+
+//Test Rinkeby, Kovan, Ropsten : pk_test_D58C7F46E173BEDB
+//Production localhost : pk_live_724ABCF7B9489C5C
