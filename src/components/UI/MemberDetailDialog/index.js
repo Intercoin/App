@@ -173,7 +173,7 @@ const MemberDetailDialog = ({ communityDetail, account, onClose }) => {
                         <SendIcon style={{ marginRight: 8 }} />
                         <Typography variant='h6'>
                             Send Payment
-                     </Typography>
+                        </Typography>
                     </RadiusButton>
                     {owner === communityDetail.account &&
                         <>

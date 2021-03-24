@@ -1,6 +1,7 @@
 
 import 'typeface-roboto';
 import React, { useState, useEffect, Suspense } from 'react';
+import { useSnackbar } from 'notistack';
 import { makeStyles } from '@material-ui/core/styles';
 import { useWeb3React } from '@web3-react/core'
 import { useEagerConnect, useInactiveListener } from 'utils/hooks.js'
@@ -18,6 +19,7 @@ import { PAGES } from 'utils/links/pages';
 import { TOP_BAR_MENUS } from 'constants/top-menu-items';
 import WalletModal from 'components/WalletModal';
 import IntercoinLoading from 'components/IntercoinLoading'
+import Notifications from 'components/Notifications';
 import { formatEther } from '@ethersproject/units'
 import { isEmpty } from 'utils/utility';
 
@@ -151,6 +153,7 @@ const App = ({ location, history }) => {
           }}
           maxSnack={3}>
         <CssBaseline />
+        <Notifications notifications={''} notificationType={'success'} />
         <Suspense fallback={<IntercoinLoading wholeOverlay />}>
           <Layout layout={layout}>
             {

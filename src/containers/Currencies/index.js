@@ -189,7 +189,6 @@ const Currencies = () => {
 
   const getITRTokens = () => {
     if (isEmpty(state.itrAmount) ) {
-      console.log('kevin here jump')
       enqueueSnackbar('The currency is not enough to get ITR!', { variant: 'error' });
       setStepLoading(false)
     }

@@ -5,6 +5,7 @@ import { useWeb3React } from '@web3-react/core'
 import { walletconnect, injected, intercoinToken, xDai } from 'constants/connectors';
 import { communityInstance } from 'services/communityInstance';
 import { isEmpty } from 'utils/utility';
+import { useSnackbar } from 'notistack';
 
 const useEagerConnect = () => {
   const { activate, active } = useWeb3React()
@@ -110,6 +111,9 @@ const useOwner = () => {
   const community = communityInstance(account, chainId, library);
 
   useMemo(() => {
+    if (!owner) {
+      return null
+    }
     Promise.resolve(community.owner()).then(function (owner) {
       setOwner(owner)
     }).catch(function (error) {
