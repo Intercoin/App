@@ -1,16 +1,16 @@
 
 import React from 'react';
-
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import { useHistory } from "react-router-dom";
+import { Typography, useMediaQuery } from '@material-ui/core';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import { PAGES } from 'utils/links/pages';
-import ContainedButton from 'components/UI/Buttons/ContainedButton'
+import ContainedButton from 'components/UI/Buttons/ContainedButton';
 
 const useStyles = makeStyles(theme => ({
   root: props => ({
-    [theme.breakpoints.down('sm')] : {
-      padding: theme.spacing(2, 0, 0, 0),
+    [theme.breakpoints.down('sm')]: {
+      padding: props.noPaddingTop ? theme.spacing(0) : theme.spacing(2, 0, 0, 0),
     },
     display: 'flex',
     marginBottom: theme.spacing(2),
@@ -18,12 +18,24 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center'
   }),
   bold: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none'
+    },
     fontWeight: '400'
   }
 }));
 
-const GridTitle = ({ title, buttonName, center }) => {
-  const classes = useStyles({ center });
+const GridTitle = ({ title, buttonName, center, noPaddingTop }) => {
+  const classes = useStyles({ center, noPaddingTop });
+  const history = useHistory();
+  const theme = useTheme();
+  const isSm = useMediaQuery(theme.breakpoints.down('sm'), {
+    defaultMatches: true,
+  });
+
+  const clickHandler = () => {
+    history.push(`${PAGES.POLLS.url}/new`)
+  }
 
   return (
     <div className={classes.root}>
@@ -31,10 +43,11 @@ const GridTitle = ({ title, buttonName, center }) => {
         {title}
       </Typography>
       {
-        buttonName &&
+        buttonName && !isSm &&
         <ContainedButton
-          href={`${PAGES.POLLS}/new`}
-          type='submit'>
+          style={{ backgroundColor: theme.palette.text.textHover }}
+          onClick={clickHandler}
+        >
           {buttonName}
         </ContainedButton>
       }

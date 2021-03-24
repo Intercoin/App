@@ -109,7 +109,7 @@ const AddEditPolls = ({ history, location, match }) => {
   }
   const goBack = () => {
     history.push({
-      pathname: PAGES.POLLS,
+      pathname: PAGES.POLLS.url,
       state: {
         currentPage: (location.state || {}).currentPage
       }
@@ -168,6 +168,7 @@ const AddEditPolls = ({ history, location, match }) => {
         </ContainedButton>
           <ContainedButton
             disabled={''}
+            style = {{backgroundColor : '#4caf50'}}
             onClick={submitHandler}>
             CREATE POLL
         </ContainedButton>

@@ -13,8 +13,7 @@ import DialogWrapper, { dialogStyles } from 'hoc/DialogWrapper';
 import WalletCard from 'components/UI/WalletCard';
 import ContainedButton from 'components/UI/Buttons/ContainedButton';
 import { Spinner } from 'components/UI/Spinner';
-import { useEagerConnect, useInactiveListener } from 'utils/hooks.js'
-import { walletconnect, injected } from 'constants/connectors';
+import { walletconnect, injected, intercoinToken, xDai, fortmatic } from 'constants/connectors';
 
 const useStyles = makeStyles(theme => ({
   actionButton: {
@@ -36,10 +35,19 @@ const useStyles = makeStyles(theme => ({
     minHeight: 'unset'
   },
   dialogContent: {
-    [theme.breakpoints.down('xs')]: {
-      maxHeight: '400px',
+    [theme.breakpoints.down(360)]: {
+      maxHeight: '200px',
+      padding: theme.spacing(0.5),
     },
+    [theme.breakpoints.down('xs')]: {
+      maxHeight: '382px',
+      padding: theme.spacing(1, 0, 1, .5),
+    },
+    display: 'flex',
+    justifyContent: 'center',
+    padding: theme.spacing(1),
     maxHeight: '460px',
+    width: 'auto',
     overflowX: 'unset',
     overflowY: 'scroll',
     '&::-webkit-scrollbar-track': {
@@ -62,12 +70,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const PollDialog = ({ open, onClose, headerTitle, activatingConnector, setActivatingConnector }) => {
+const WalletModal = ({ open, onClose, headerTitle, activatingConnector, setActivatingConnector, triedEager, context }) => {
   const classes = useStyles();
   const dialogClasses = dialogStyles();
-  const [showmore, setShowmore] = useState(false)
+  const [showMore, setShowMore] = useState(false)
 
-  const context = useWeb3React()
   const getErrorMessage = (error) => {
     if (error instanceof NoEthereumProviderError) {
       return `No Ethereum browser extension detected, install MetaMask on desktop or visit from a dApp browser on mobile.`
@@ -87,22 +94,13 @@ const PollDialog = ({ open, onClose, headerTitle, activatingConnector, setActiva
 
   const connectorsByName = {
     'MetaMask': injected,
-    'WalletConnect': walletconnect
+    'Fortmatic': fortmatic,
+    'WalletConnect': walletconnect,
+    'Intercoin': intercoinToken,
+    'xDai': xDai
   }
 
   const { connector, library, chainId, account, activate, deactivate, active, error } = context
-  // handle logic to recognize the connector currently being activated
-
-  useEffect(() => {
-    if (activatingConnector && activatingConnector === connector) {
-      setActivatingConnector(undefined)
-    }
-  }, [activatingConnector, connector])
-
-  const triedEager = useEagerConnect()
-
-  // handle logic to connect in reaction to certain events on the injected ethereum provider, if it exists
-  useInactiveListener(!triedEager || !!activatingConnector)
 
   const metaMaskInstallHandler = () => {
     window.open('https://metamask.io/download', '_blank');
@@ -114,7 +112,14 @@ const PollDialog = ({ open, onClose, headerTitle, activatingConnector, setActiva
   }
 
   const showmoreHandler = () => {
-    setShowmore(true)
+    setShowMore(!showMore)
+  }
+
+  const walletSelectHander = (currentConnector) => {
+    localStorage.setItem(`${currentConnector.constructor.name}`,currentConnector.constructor.name );
+    setActivatingConnector(currentConnector)
+    activate(currentConnector)
+    onClose();
   }
 
   return (
@@ -124,8 +129,7 @@ const PollDialog = ({ open, onClose, headerTitle, activatingConnector, setActiva
           <Typography variant='h6' className={classes.titleLine}>{headerTitle}</Typography>
           <DialogContent dividers className={classes.dialogContent}>
             <Grid container spacing={2} className={classes.container} >
-
-              {Object.keys(connectorsByName).map(name => {
+              {Object.keys(connectorsByName).filter((item, index) => index < (showMore ? Object.keys(connectorsByName).length : 4)).map(name => {
                 const currentConnector = connectorsByName[name]
                 const activating = currentConnector === activatingConnector
                 const connected = currentConnector === connector
@@ -133,16 +137,13 @@ const PollDialog = ({ open, onClose, headerTitle, activatingConnector, setActiva
 
                 return (
                   <WalletCard
+                    connected={connected}
                     disabled={disabled}
                     key={name}
                     name={name}
                     logoType={name}
                     activating={activating}
-                    onClick={() => {
-                      setActivatingConnector(currentConnector)
-                      activate(connectorsByName[name])
-                    }}
-                  >
+                    onClick={()=>walletSelectHander(currentConnector)}>
                     <div
                       style={{
                         position: 'absolute',
@@ -179,7 +180,6 @@ const PollDialog = ({ open, onClose, headerTitle, activatingConnector, setActiva
                 )}
                 {!!error && <h4 style={{ marginTop: '1rem', marginBottom: '0', color: '#16ACE2' }}>{getErrorMessage(error)}</h4>}
               </div>
-
             </Grid>
           </DialogContent>
           <div className={classes.dialogActions}>
@@ -189,10 +189,9 @@ const PollDialog = ({ open, onClose, headerTitle, activatingConnector, setActiva
                 cursor: 'pointer',
               }}
               variant="outlined"
-              onClick={showmoreHandler}
-            >
-              Show more
-          </ContainedButton>
+              onClick={showmoreHandler}>
+              {showMore ? 'Show less' : 'Show more'}
+            </ContainedButton>
           </div>
         </div>
       </form>
@@ -200,4 +199,4 @@ const PollDialog = ({ open, onClose, headerTitle, activatingConnector, setActiva
   );
 }
 
-export default PollDialog;
+export default WalletModal;

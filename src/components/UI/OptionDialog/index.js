@@ -63,9 +63,9 @@ const OptionDialog = ({ open, onClose, headerTitle }) => {
               />
             </Grid>
             <Grid style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }} md={12} xs={12} item>
-              <Grid md={5} xs={12} item>
-                <Typography component='div' variant='h6'>
-                  Values can range
+              <Grid md={4} xs={7} item>
+                <Typography component='div' variant='body1'>
+                  Values :
                 </Typography>
               </Grid>
               <Grid md={4} xs={12} item>
@@ -79,7 +79,7 @@ const OptionDialog = ({ open, onClose, headerTitle }) => {
                 />
               </Grid>
               <div style={{ width: '8px' }}></div>
-              <Grid md={3} xs={12} item>
+              <Grid md={4} xs={12} item>
                 <MemoizedOutlinedTextField
                   name='to'
                   prefix='to:'

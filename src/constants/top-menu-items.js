@@ -1,52 +1,72 @@
 
-import ForumIcon from '@material-ui/icons/Forum';
-import HowToVoteIcon from '@material-ui/icons/HowToVote';
-import LocalAtmIcon from '@material-ui/icons/LocalAtm';
+import Icon from '@material-ui/core/Icon';
+import OutlinedFlagRoundedIcon from '@material-ui/icons/OutlinedFlagRounded';
+import HowToVoteOutlinedIcon from '@material-ui/icons/HowToVoteOutlined';
 import CreditCardIcon from '@material-ui/icons/CreditCard';
-import MultilineChartIcon from '@material-ui/icons/MultilineChart';
-import SettingsRemoteIcon from '@material-ui/icons/SettingsRemote';
+import LockIcon from '@material-ui/icons/Lock';
+import CurrenciesIcon from 'components/Icons/CurrenciesIcon';
+import Avatar from '@material-ui/core/Avatar';
 
-import PAGES from 'utils/links/pages';
+import ContestIcon from 'components/Icons/ContestIcon';
+import CheckBoxIcon from 'components/Icons/CheckBoxIcon';
+import InterCoinIcon from 'components/Icons/InterCoinIcon';
+import { PAGES } from 'utils/links/pages';
 
 const TOP_BAR_MENUS = [
   {
     id: 'Communities',
-    icon: <ForumIcon />,
-    url: '/communities',
+    icon: <OutlinedFlagRoundedIcon fontSize='large' />,
+    url: PAGES.COMMUNITIES.url,
     text: 'Communities'
   },
   {
     id: 'pools',
-    icon: <HowToVoteIcon />,
-    url: '/polls',
+    icon: <CheckBoxIcon />,
+    url: PAGES.POLLS.url,
     text: 'Polls'
   },
   {
     id: 'currencies',
-    icon: <LocalAtmIcon />,
-    url: '/currencies',
-    text: "Currencies"
-  },
-  {
-    id: 'income',
-    icon: <CreditCardIcon />,
-    url: '/income',
-    text: "Income"
+    icon: <Avatar variant='square' style={{ width: 65, height: 65, marginBottom: 8 }} src={'/assets/images/intercoin-gold.png'} />,
+    url: PAGES.CURRENCIES.url,
+    text: "Intercoin"
   },
   {
     id: 'contests',
-    icon: <MultilineChartIcon />,
-    url: '/contests',
+    icon: <ContestIcon />,
+    url: PAGES.CONTESTS.url,
     text: "Contests"
+  }
+];
+
+const TOP_BAR_MENUS_DESKTOP = [
+  {
+    id: 'Communities',
+    icon: <OutlinedFlagRoundedIcon fontSize='large' />,
+    url: PAGES.COMMUNITIES.url,
+    text: 'Communities'
   },
   {
-    id: 'controlling',
-    icon: <SettingsRemoteIcon />,
-    url: '/controlling',
-    text: "Controlling"
+    id: 'pools',
+    icon: <CheckBoxIcon />,
+    url: PAGES.POLLS.url,
+    text: 'Polls'
+  },
+  {
+    id: 'currencies',
+    icon: <Avatar variant='square' style={{ width: 38, height: 38 }} src={'/assets/images/intercoin-gold.png'} />,
+    url: PAGES.CURRENCIES.url,
+    text: "Intercoin"
+  },
+  {
+    id: 'contests',
+    icon: <ContestIcon />,
+    url: PAGES.CONTESTS.url,
+    text: "Contests"
   }
 ];
 
 export {
-  TOP_BAR_MENUS
+  TOP_BAR_MENUS,
+  TOP_BAR_MENUS_DESKTOP
 }

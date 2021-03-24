@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import Typograhpy from '@material-ui/core/Typography';
+import Typography from '@material-ui/core/Typography';
 import ArrowDownIcon from 'components/Icons/ArrowDownIcon';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -71,27 +71,27 @@ const Paginator = ({ totalPages = 1, currentPage = 1, setCurrentPage }) => {
       </div>
 
       <div className={classes.main}>
-        <Typograhpy
+        <Typography
           variant='caption'
           className={clsx(classes.firstLast, currentPage === 1 && classes.disabled)}
           onClick={changePageHandler(1)}>
           First
-        </Typograhpy>
+        </Typography>
         {visiblePages.map(page => (
-          <Typograhpy
+          <Typography
             key={page}
             variant='caption'
             className={clsx(classes.pageNumber, page !== currentPage && classes.disabled)}
             onClick={changePageHandler(page)}>
             {page}
-          </Typograhpy>
+          </Typography>
         ))}
-        <Typograhpy
+        <Typography
           variant='caption'
           className={clsx(classes.firstLast, currentPage === totalPages && classes.disabled)}
           onClick={changePageHandler(totalPages)}>
           Last
-        </Typograhpy>
+        </Typography>
       </div>
 
       <div className={classes.prev} onClick={changePageHandler(Math.min(currentPage + 1, totalPages))}>

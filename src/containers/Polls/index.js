@@ -23,7 +23,7 @@ const headerData = ['Voting Title', 'Count', 'Context', 'Action'];
 
 const Pools = ({ history }) => {
   const classes = useTableStyles();
-  const { setLoadingInfo, account } = useContext(AppContext);
+  const { setLoadingInfo } = useContext(AppContext);
   const [tableData, setTableData] = useState([]);
   const [pollData, setPollData] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
@@ -32,16 +32,10 @@ const Pools = ({ history }) => {
   const [isAdminDialog, setIsAdminDialog] = useState();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    setLoadingInfo(true);
-    setTimeout(() => {
-      setLoadingInfo(false);
-    }, 2000);
-  }, [setLoadingInfo]);
 
   const editHandler = _id => () => {
     history.push({
-      pathname: `${PAGES.POLLS}/${_id}`
+      pathname: `${PAGES.POLLS.url}/${_id}`
     })
 
   };
@@ -56,7 +50,6 @@ const Pools = ({ history }) => {
 
 
   const selectPollHandler = (rowData) => {
-    console.log('checking rendering counts')
     setPollData(rowData)
     // setIsDialog(true);
     setIsAdminDialog(true)
@@ -70,6 +63,15 @@ const Pools = ({ history }) => {
   useEffect(() => {
     setTableData(poolData)
   }, [poolData])
+
+  useEffect(() => {
+    if (isAdminDialog) {
+      document.body.style.overflow = 'hidden !important';
+    }
+    else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isAdminDialog])
 
   return (
     <div className={classes.root}>
@@ -91,7 +93,6 @@ const Pools = ({ history }) => {
                 <Row onClick={() => selectPollHandler(rowData)} key={index}>
                   <Cell center>
                     <CheckBox checked={checked[index]} name={index} onClick={changeHandler} />
-                    {/* <div onClick={changeHandler}>test</div> */}
                   </Cell>
                   <Cell >
                     {rowData.title}

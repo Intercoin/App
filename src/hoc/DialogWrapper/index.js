@@ -1,9 +1,14 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import CloseIcon from 'components/Icons/CloseIcon';
+// import CloseIcon from 'components/Icons/CloseIcon';
+import CircleButton from 'components/UI/Buttons/CircleButton';
+import CloseIcon from '@material-ui/icons/Close';
 import LAYER from 'constants/z-index';
+import CheckIcon from '@material-ui/icons/Check';
+import Dialog from '@material-ui/core/Dialog';
+
 
 const useStyles = makeStyles(theme => ({
   overlay: {
@@ -15,7 +20,10 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.overlay,
     zIndex: LAYER.DIALOG_OVERLAY
   },
-  rect: {
+  rect: props => ({
+    [theme.breakpoints.down('sm')]: {
+      padding: `${theme.spacing(3.5)}px ${theme.spacing(1.5)}px`,
+    },
     position: 'fixed',
     transform: 'translate(-50%, -50%)',
     left: '50%',
@@ -26,20 +34,23 @@ const useStyles = makeStyles(theme => ({
     boxShadow: theme.shadows[10],
     borderRadius: theme.spacing(3 / 8),
     [theme.breakpoints.up('sm')]: {
-      width: 660
+      width: props.width ? props.width : 660,
     },
     zIndex: LAYER.DIALOG_MAIN
-  },
+  }),
   smallRect: {
     [theme.breakpoints.up('sm')]: {
-      width: 500
+      width: '500'
     }
   },
   closeIcon: {
+    [theme.breakpoints.down('sm')]: {
+      right: theme.spacing(0)
+    },
     cursor: 'pointer',
     position: 'absolute',
-    width: theme.spacing(2),
-    height: theme.spacing(2),
+    // width: theme.spacing(2),
+    // height: theme.spacing(2),
     top: theme.spacing(2),
     right: theme.spacing(2)
   }
@@ -56,8 +67,16 @@ export const dialogStyles = makeStyles(theme => ({
   },
 }));
 
-const DialogWrapper = ({ open, onClose, smallWidth, children }) => {
-  const classes = useStyles();
+const DialogWrapper = ({ open, onClose, smallWidth, width, isCheckIcon, children }) => {
+  const classes = useStyles({ width });
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden';
+    }
+    else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [open])
 
   if (!open) {
     return null;
@@ -68,7 +87,11 @@ const DialogWrapper = ({ open, onClose, smallWidth, children }) => {
       <div className={clsx(classes.overlay, 'animated fadeIn')} onClick={onClose} />
       <div className={clsx(classes.rect, smallWidth && classes.smallRect)}>
         {children}
-        <CloseIcon className={classes.closeIcon} onClick={onClose} />
+        <CircleButton className={classes.closeIcon} onClick={onClose}
+          style={{ display: 'flex', backgroundColor: isCheckIcon ? '#4caf50' : '#292C41' }}
+          icon={isCheckIcon
+            ? <CheckIcon style={{ color: '#fff' }} fontSize='default' />
+            : <CloseIcon style={{ color: '#fff' }} fontSize='default' />} />
       </div>
     </>
   );

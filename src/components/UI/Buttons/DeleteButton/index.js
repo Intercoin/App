@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Typograhpy from '@material-ui/core/Typography';
+import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import TrashIcon from 'components/Icons/TrashIcon';
@@ -48,9 +48,9 @@ const DeleteButton = props => {
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
       {...props}>
-      <Typograhpy variant='body2' className={clsx(classes.label, isHover && classes.hoverColor)}>
+      <Typography variant='body2' className={clsx(classes.label, isHover && classes.hoverColor)}>
         delete
-      </Typograhpy>
+      </Typography>
       <TrashIcon
         color={isHover && '#EE2741'} />
     </div>

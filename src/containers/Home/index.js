@@ -1,7 +1,6 @@
 
 import React, { useEffect, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import { AppContext } from 'contexts';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -13,7 +12,6 @@ import Partners from './Partners';
 import Customization from './Customization';
 import Support from './Support';
 import Download from './Download';
-import CardWrapper from 'hoc/CardWrapper';
 import { integrations, support } from 'utils/helper/mockupData';
 
 const useStyles = makeStyles(theme => ({
@@ -31,12 +29,6 @@ const Home = () => {
   const classes = useStyles();
   const { setLoadingInfo, account } = useContext(AppContext);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    setLoadingInfo(true);
-    setTimeout(() => {
-      setLoadingInfo(false);
-    }, 2000);
-  }, [setLoadingInfo]);
 
   AOS.init({
     once: true,
