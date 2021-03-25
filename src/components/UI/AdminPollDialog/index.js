@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import DialogContent from '@material-ui/core/DialogContent';
-import '../../../../node_modules/react-vis/dist/style.css';
+import 'react-vis/dist/style.css';
 
 import {
   FlexibleWidthXYPlot,

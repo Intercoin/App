@@ -19,6 +19,7 @@ const useStyles = makeStyles(theme => ({
     },
     backgroundColor: theme.palette.background.main,
     Height: '100vh',
+    width : '100%',
     overflowY: 'scroll',
     overflowY: 'none'
   },

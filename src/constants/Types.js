@@ -15,8 +15,16 @@ const TRANSACTION_METHODS = [
   "Slow"
 ]
 
+const PERIOD = [
+  'All',
+  'Weekly',
+  'Monthly',
+  'yearly'
+]
+
 export {
   TRANSACTION_TYPES,
   CURRENCY_TYPES,
-  TRANSACTION_METHODS
+  TRANSACTION_METHODS,
+  PERIOD
 }
