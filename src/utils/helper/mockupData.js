@@ -293,40 +293,40 @@ const communityDetailData = [
     name: 'John Smith',
     role: 'Member, admin',
     // avatar:  '/assets/images/logos/web3evm-p02-300sq.png',
-    account : '0x48631372F83B65387F84018F68B1ADf536Be17AD'
+    account: '0x48631372F83B65387F84018F68B1ADf536Be17AD'
   },
   {
     name: 'Bob Moo',
     role: 'Member, engineer',
-    avatar:  '/assets/images/logos/web3evm-p02-300sq.png',
-    account : '0x48631372F83B65387F84018F68B1ADf536Be17AD'
+    avatar: '/assets/images/logos/web3evm-p02-300sq.png',
+    account: '0x48631372F83B65387F84018F68B1ADf536Be17AD'
   },
   {
     name: '0X23436544...324',
-    avatar:  '/assets/images/logos/web3evm-p02-300sq.png',
-    account : '0xe9D045cF6D3a2418eab537d3AC7a905a1dDcF048'
+    avatar: '/assets/images/logos/web3evm-p02-300sq.png',
+    account: '0xe9D045cF6D3a2418eab537d3AC7a905a1dDcF048'
   },
   {
     name: '0X23456434...628',
-    account : '0x48631372F83B65387F84018F68B1ADf536Be17AD'
+    account: '0x48631372F83B65387F84018F68B1ADf536Be17AD'
   },
   {
     name: '0X27456434...384',
-    avatar:  '/assets/images/logos/web3evm-p02-300sq.png',
-    account : '0x48631372F83B65387F84018F68B1ADf536Be17AD'
+    avatar: '/assets/images/logos/web3evm-p02-300sq.png',
+    account: '0x48631372F83B65387F84018F68B1ADf536Be17AD'
   },
   {
     name: '0X23654434...322',
-    account : '0xe9D045cF6D3a2418eab537d3AC7a905a1dDcF048'
+    account: '0xe9D045cF6D3a2418eab537d3AC7a905a1dDcF048'
   },
   {
     name: '0X26453734...321',
-    avatar:  '/assets/images/logos/web3evm-p02-300sq.png',
-    account : '0x48631372F83B65387F84018F68B1ADf536Be17AD'
+    avatar: '/assets/images/logos/web3evm-p02-300sq.png',
+    account: '0x48631372F83B65387F84018F68B1ADf536Be17AD'
   },
   {
     name: '0X23445634...726',
-    account : '0x2Ca51ED4e4Bb914cbFC58A17d6D8b705c9407614'
+    account: '0x2Ca51ED4e4Bb914cbFC58A17d6D8b705c9407614'
   }
 ]
 
@@ -381,6 +381,25 @@ const roleData = [
   }
 ]
 
+const basicIncomeData = [
+  {
+    title: "Voluntary",
+    content: "Next week issue more BY coins to all students to cover the average close of food by."
+  },
+  {
+    title: "Voluntary",
+    content: "Next week issue more BY coins to all students to cover the average close of food by."
+  },
+  {
+    title: "Voluntary",
+    content: "Next week issue more BY coins to all students to cover the average close of food by."
+  },
+  {
+    title: "Voluntary",
+    content: "Next week issue more BY coins to all students to cover the average close of food by."
+  }
+]
+
 export {
   poolData,
   optionData,
@@ -390,5 +409,6 @@ export {
   communityData,
   communityDetailData,
   tagData,
-  roleData
+  roleData,
+  basicIncomeData
 }

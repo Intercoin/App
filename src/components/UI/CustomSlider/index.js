@@ -5,8 +5,11 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    [theme.breakpoints.down('sm')]: {
+      marginBottom: theme.spacing(2),
+    },
     height: theme.spacing(4),
-    marginTop: theme.spacing(2),
+    width: '100%',
     // width: 320 + theme.spacing(3) * 2,
     marginLeft: theme.spacing(1)
   },
@@ -66,7 +69,7 @@ const PrettoSlider = withStyles({
   },
 })(Slider);
 
-const CustomSlider = ({ from, to, value }) => {
+const CustomSlider = ({ from, to, value, marksList }) => {
   const classes = useStyles();
   const marks = [{ value }]
 
@@ -78,7 +81,7 @@ const CustomSlider = ({ from, to, value }) => {
           max={to}
           valueLabelDisplay="auto"
           getAriaValueText={valuetext}
-          marks={marks}
+          marks={marksList ? marksList : marks}
           step={0.1}
           aria-label="pretto slider"
           defaultValue={value || 0}
@@ -86,10 +89,10 @@ const CustomSlider = ({ from, to, value }) => {
         />
         <div className={classes.minMaxContainer}>
           <div className={classes.minMaxValue}>
-            <Typography color='textSecondary' variant='subtitle2'>{from.toFixed(1)} </Typography>
+            <Typography color='textSecondary' variant='subtitle2'>{from?.toFixed(1)} </Typography>
           </div>
           <div className={classes.minMaxValue}>
-            <Typography color='textSecondary' variant='subtitle2'>{to.toFixed(1)} </Typography>
+            <Typography color='textSecondary' variant='subtitle2'>{to?.toFixed(1)} </Typography>
           </div>
         </div>
       </div>

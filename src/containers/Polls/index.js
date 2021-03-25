@@ -51,8 +51,8 @@ const Pools = ({ history }) => {
 
   const selectPollHandler = (rowData) => {
     setPollData(rowData)
-    // setIsDialog(true);
-    setIsAdminDialog(true)
+    setIsDialog(true);
+    // setIsAdminDialog(true)
   }
 
   const openCloseDialogHandler = show => () => {

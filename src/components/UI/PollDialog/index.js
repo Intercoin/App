@@ -78,7 +78,7 @@ const PollDialog = ({ open, onClose, pollData }) => {
 
               return (
                 <div key={index} className={classes.sliderContainer}>
-                  <Typography style={{ fontWeight: '300' }} variant='subtitle2'>{` ( ${index + 1} )  `}   {option.content}</Typography>
+                  <Typography style={{ fontWeight: '300', marginBottom: 12 }} variant='subtitle2'>{` ( ${index + 1} )  `}   {option.content}</Typography>
                   <CustomSlider
                     value={option.to / 2}
                     from={option.from}
