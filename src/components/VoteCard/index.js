@@ -11,6 +11,7 @@ import clsx from 'clsx';
 
 import CustomSlider from 'components/UI/CustomSlider';
 import OutlinedButton from 'components/UI/Buttons/OutlinedButton';
+import { MARK_LIST } from 'constants/Types';
 
 const useStyles = makeStyles(theme => ({
     root: {},
@@ -45,19 +46,15 @@ const useStyles = makeStyles(theme => ({
         height: '50%',
     },
     selected: {
-        backgroundColor: theme.palette.background.main  
-    },
-    badgeBackgroundColor: {
-        // backgroundColor: theme.custom.palette.gold
-        background: 'linear-gradient(to bottom, #AB8227 0%, #40310F 48.34%, #D8A42D 100%)',
+        backgroundColor: theme.palette.background.main
     },
     cardActions: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         width: '100%',
-        padding: theme.spacing(2,2,4,2),
-        
+        padding: theme.spacing(2, 2, 4, 2),
+
     },
     button: {
         backgroundColor: theme.custom.palette.green
@@ -66,29 +63,6 @@ const useStyles = makeStyles(theme => ({
 
 const VoteCard = ({ id, VoteInfo }) => {
     const classes = useStyles({});
-
-    const marks = [
-        {
-            value: 0,
-            label: '0%',
-        },
-        {
-            value: 25,
-            label: '25%',
-        },
-        {
-            value: 50,
-            label: '50%',
-        },
-        {
-            value: 75,
-            label: '75%',
-        },
-        {
-            value: 100,
-            label: '100%',
-        },
-    ];
 
     return (
         <Grid item xs={12} sm={6} md={6} lg={4}>
@@ -99,30 +73,10 @@ const VoteCard = ({ id, VoteInfo }) => {
                 </CardHeader>
                 <CardContent >
                     <Typography variant={'body1'}>{VoteInfo.content}</Typography>
-                    {/* <Grid container direction="row" justify="center" alignItems="center">
-            <Grid item xs={2}>
-              <Avatar variant='square' src={imageUrl} />
-            </Grid>
-            <Grid item xs>
-              <Typography style={{ display: 'flex', flexDirection: 'column', padding: 8 }}
-                component='div' variant='body1' noWrap>
-                {content}
-                <Typography variant='caption'>
-                  {detail} , {subContent}
-                </Typography>
-              </Typography>
-            </Grid>
-            <Grid item xs={1}>
-              <Badge color='primary'
-                classes={{ colorPrimary: classes.badgeBackgroundColor }}
-                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                max={999999} badgeContent={value} />
-            </Grid>
-          </Grid> */}
                 </CardContent >
                 <CardActions classes={{ root: classes.cardActions }}>
-                    <div style = {{width : '90%', marginRight:20}}>
-                        <CustomSlider marksList={marks} />
+                    <div style={{ width: '90%', marginRight: 20 }}>
+                        <CustomSlider marksList={MARK_LIST} />
                     </div>
                     <OutlinedButton className={classes.button}>Vote </OutlinedButton>
                 </CardActions>

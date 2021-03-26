@@ -31,13 +31,10 @@ const Pools = ({ history }) => {
   const [isDialog, setIsDialog] = useState();
   const [isAdminDialog, setIsAdminDialog] = useState();
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-
   const editHandler = _id => () => {
     history.push({
       pathname: `${PAGES.POLLS.url}/${_id}`
     })
-
   };
 
   const removeHandler = (_id) => () => {

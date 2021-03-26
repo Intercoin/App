@@ -111,7 +111,7 @@ const useOwner = () => {
   const community = communityInstance(account, chainId, library);
 
   useMemo(() => {
-    if (!owner) {
+    if (!account) {
       return null
     }
     Promise.resolve(community.owner()).then(function (owner) {

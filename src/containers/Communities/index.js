@@ -23,7 +23,6 @@ import { conversionToDollar } from 'services/conversion';
 import { useBlockNumber } from 'utils/hooks';
 import { communityInstance } from 'services/communityInstance';
 import IntercoinLoading from 'components/IntercoinLoading';
-import { TrafficRounded } from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
   root: {

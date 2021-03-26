@@ -19,7 +19,7 @@ import { PAGES } from 'utils/links/pages';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        width: '100%',
+        width: '100%'
     },
     GridContainer: {
         display: 'flex',
