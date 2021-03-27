@@ -83,12 +83,14 @@ const useInactiveListener = (suppress) => {
 
 const useBlockNumber = () => {
   const { library } = useWeb3React()
+  console.log('kevin  library count')
   const [blockNumber, setBlockNumber] = useState(-1)
 
   useEffect(() => {
     if (!library) {
       return
     }
+
     const t = setInterval(async () => {
       try {
         setBlockNumber(await library.getBlockNumber())
@@ -102,6 +104,7 @@ const useBlockNumber = () => {
     }, 1000)
 
   }, [library])
+
   return blockNumber
 }
 
