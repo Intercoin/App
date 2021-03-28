@@ -11,7 +11,7 @@ import { optionData } from 'utils/helper/mockupData';
 
 const useStyles = makeStyles(theme => ({
   actionButton: {
-    backgroundColor: theme.custom.palette.darkRed,
+    backgroundColor: theme.custom.palette.green,
     minWidth: theme.spacing(12),
     border: 'none'
   },

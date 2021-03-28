@@ -381,24 +381,12 @@ const roleData = [
   }
 ]
 
-const basicIncomeData = [
-  {
-    title: "Voluntary",
-    content: "Next week issue more BY coins to all students to cover the average close of food by."
-  },
-  {
-    title: "Voluntary",
-    content: "Next week issue more BY coins to all students to cover the average close of food by."
-  },
-  {
-    title: "Voluntary",
-    content: "Next week issue more BY coins to all students to cover the average close of food by."
-  },
-  {
-    title: "Voluntary",
-    content: "Next week issue more BY coins to all students to cover the average close of food by."
-  }
-]
+const basicIncomeData =
+{
+  title: "Voluntary",
+  content: "Next week issue more BY coins to all students to cover the average close of food by."
+}
+
 
 export {
   poolData,

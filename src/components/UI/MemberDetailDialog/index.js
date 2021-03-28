@@ -117,7 +117,6 @@ const MemberDetailDialog = ({ communityDetail, account, onClose }) => {
     const [open, setOpen] = useState(true);
     const [state, setState] = useState({});
     const owner = useOwner();
-    console.log('kevin owner', owner)
     const { allRoles, allRolesLoading } = useAllRules();
 
     const { accountRulesloading, ownRoles } = useGetAccountRules(communityDetail?.account)

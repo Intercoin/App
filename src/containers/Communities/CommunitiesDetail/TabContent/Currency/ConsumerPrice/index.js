@@ -63,9 +63,8 @@ const ConsumerPrice = () => {
                 onValueMouseOut={forgetValue}
                 data={DATA[0]}
             />
-            {/* <Crosshair values={crosshairValues} /> */}
             {hintValues ? <Hint value={hintValues}  >
-                <div style={{ background: '#292C40', padding: 8, borderRadius: '5px' }}>
+                <div style={{ background: '#1B1F2E', padding: 8, borderRadius: '5px' }}>
                     <Typography> Date: Feb {hintValues.x} </Typography>
                     <Typography> Price: {hintValues.y} $</Typography>
                 </div>

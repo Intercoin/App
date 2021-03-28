@@ -1,5 +1,5 @@
 
-import React, { useState, memo, useCallback, useEffect } from 'react';
+import React, { useState, memo, useCallback, useEffect, useMemo } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useMediaQuery, Grid, Typography } from '@material-ui/core';
 
@@ -10,6 +10,8 @@ import ConsumerPrice from './ConsumerPrice';
 import CurrencyPoll from './CurrencyPoll';
 import IntercoinLoading from 'components/IntercoinLoading';
 import { TAG_LIST } from 'constants/Types';
+import IntercoinAccordion from 'components/UI/IntercoinAccordion';
+import { CURRENCY_PANEL } from 'constants/common';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -39,34 +41,49 @@ const Currency = () => {
     const classes = useStyles();
     const theme = useTheme();
     const { allRoles, allRolesLoading } = useAllRules();
+    const [expanded, setExpanded] = useState(`${CURRENCY_PANEL}0`);
+
+    const currenyBoards = [
+        {
+            title: `Consumer Price Index`,
+            content: <ConsumerPrice />
+        },
+        {
+            title: `Voluntary Basic Income`,
+            content: <CurrencyPoll />
+        }
+    ]
 
     const isSM = useMediaQuery(theme.breakpoints.down('sm'), {
         defaultMatches: true,
     });
-    
+
     const [state, setState] = useState({
-        period: '',
+        period: PERIOD[0],
         role: '',
-        tag: ''
+        tag: TAG_LIST[1]
     });
 
     const onSelectHandler = useCallback((value, name) => {
         setState(prevState => ({ ...prevState, [name]: value }));
     }, []);
 
-    useEffect(() => {
-        setState({
-            period: PERIOD[0],
-            role: allRoles && allRoles[1],
-            tag: TAG_LIST[1]
-        })
+    useMemo(() => {
+        if (allRoles) {
+            setState({
+                period: PERIOD[0],
+                role: allRoles && allRoles[1],
+                tag: TAG_LIST[1]
+            })
+        }
     }, [allRoles])
+
+    const expandHandler = useCallback(panel => {
+        setExpanded(panel);
+    }, [setExpanded]);
 
     return (
         <div className={classes.root} >
-            <div className={classes.tabHeader} >
-                <Typography variant='h4' style={{ fontWeight: 'bold' }}>Consumer Price Index</Typography>
-            </div>
             <Grid classes={{ root: classes.gridContainer }} container direction={isSM ? "column" : "row"} justify="center" alignItems='center' spacing={1}>
                 <Grid xs={isSM ? 12 : 6} container item justify={isSM ? "space-between" : 'center'} >
                     {isSM ? <Grid xs={isSM ? 6 : 2} container item alignItems='center' >
@@ -79,7 +96,7 @@ const Currency = () => {
                         <MemoizedOutlinedSelect
                             name='role'
                             items={allRoles.filter(item => item) || []}
-                            value={state.role || ''} />
+                            value={state.role || null} />
                     </Grid>
                 </Grid>
                 <Grid xs={isSM ? 12 : 6} container item justify="space-between">
@@ -90,7 +107,7 @@ const Currency = () => {
                         <Grid item xs={7} item>
                             <MemoizedOutlinedSelect
                                 name='period'
-                                items={PERIOD || []}
+                                items={PERIOD}
                                 value={state.period}
                                 onChange={onSelectHandler}
                             />
@@ -103,17 +120,23 @@ const Currency = () => {
                         <MemoizedOutlinedSelect
                             name='tag'
                             value={state.tag}
-                            items={TAG_LIST || []}
+                            items={TAG_LIST}
                             onChange={onSelectHandler}
                         />
                     </Grid>
                 </Grid>
             </Grid>
-            <ConsumerPrice />
-            <div className={classes.tabHeader} >
-                <Typography variant='h4' style={{ fontWeight: 'bold' }} >Polls</Typography>
-            </div>
-            <CurrencyPoll />
+
+            {currenyBoards.map((currenyBoard, index) =>
+                <IntercoinAccordion
+                    key={index}
+                    title={currenyBoard.title}
+                    content={currenyBoard.content}
+                    selectedPanel={expanded}
+                    panel={`${CURRENCY_PANEL}${index}`}
+                    onExpand={expandHandler}
+                />
+            )}
             {allRolesLoading && <IntercoinLoading wholeOverlay />}
         </div>
     );

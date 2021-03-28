@@ -21,7 +21,6 @@ const useStyles = makeStyles(theme => ({
         width: "100%",
         flexDirection: 'column',
         justifyContent: 'center',
-        cursor: 'pointer',
         borderRadius: 20,
         borderColor: 'red',
         boxShadow: `0 1px 6px 0 ${theme.palette.text.notification}`,
@@ -61,18 +60,14 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const VoteCard = ({ id, VoteInfo }) => {
+const VoteCard = ({ VoteInfo }) => {
     const classes = useStyles({});
 
     return (
-        <Grid item xs={12} sm={6} md={6} lg={4}>
+        <Grid item xs={12}>
             <Card className={classes.card}>
-                <CardHeader
-                    classes={{ root: classes.cardHeader }}
-                    title={VoteInfo.title}>
-                </CardHeader>
                 <CardContent >
-                    <Typography variant={'body1'}>{VoteInfo.content}</Typography>
+                    <Typography variant={'h6'} style={{ fontWeight: 300 }}>{VoteInfo.content}</Typography>
                 </CardContent >
                 <CardActions classes={{ root: classes.cardActions }}>
                     <div style={{ width: '90%', marginRight: 20 }}>

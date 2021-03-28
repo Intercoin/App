@@ -18,11 +18,7 @@ const CurrencyPoll = () => {
     return (
         <div className={classes.root}>
             <Grid container spacing={3} >
-                {basicIncomeData.map((data, index) => {
-                    return (
-                        <VoteCard key={index} VoteInfo={data} />
-                    )
-                })}
+                <VoteCard VoteInfo={basicIncomeData} />
             </Grid>
         </div>
     );

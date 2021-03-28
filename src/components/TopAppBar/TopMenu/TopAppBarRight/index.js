@@ -36,8 +36,10 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '64px',
-
+    height: '64px'
+  },
+  avatar: {
+    cursor: 'pointer'
   },
   backgroundColor: {
     backgroundColor: `${theme.palette.text.hoverText} !important`,
@@ -89,7 +91,7 @@ const TopAppBarRight = ({ isMobileMenu }) => {
               <>
                 {(matches || isMobileMenu) && <CircleButton onClick={handleClick}
                   className={clsx(classes.avatarContainer, isAvatarSelected ? classes.backgroundColor : null)}
-                  icon={<Avatar size={"38"} style={{ cursor: 'pointer' }} round={true}
+                  icon={<Avatar size={"38"} className={classes.avatar} round={true}
                     src={'/assets/images/photos/people/rl-400x.png'} name={"Inter Coin"} />} />}
                 <IntercoinDownMenu marginTop={0.7} anchorEl={anchorEl} onClose={handleClose} itemsType='avatar' />
               </>

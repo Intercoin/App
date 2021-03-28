@@ -45,7 +45,7 @@ const GridTitle = ({ title, buttonName, center, noPaddingTop }) => {
       {
         buttonName && !isSm &&
         <ContainedButton
-          style={{ backgroundColor: theme.palette.text.textHover }}
+          style={{ backgroundColor: theme.custom.palette.green }}
           onClick={clickHandler}
         >
           {buttonName}
