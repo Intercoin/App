@@ -15,14 +15,15 @@ import CircleButton from 'components/UI/Buttons/CircleButton';
 import { communityData } from 'utils/helper/mockupData';
 import CommunityCard from 'components/CommunityCard';
 import { PAGES } from 'utils/links/pages';
-import { isEmpty } from 'utils/utility';
 import AddCommunityDialog from 'components/UI/AddCommunityDialog';
 import InviteReceiveDialog from 'components/UI/InviteReceiveDialog';
 import InvitePrepareDialog from 'components/UI/InvitePrepareDialog';
 import { conversionToDollar } from 'services/conversion';
 import { useBlockNumber } from 'utils/hooks';
 import { communityInstance } from 'services/communityInstance';
+import { communityFactoryInstance } from 'services/communityFactoryInstance';
 import IntercoinLoading from 'components/IntercoinLoading';
+import { isEmpty } from 'utils/utility';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -63,8 +64,9 @@ const Communities = () => {
   const location = useLocation();
   const blockNumber = useBlockNumber(library);
   const community = communityInstance(account, chainId, library);
+  const communityFactory = communityFactoryInstance(account, chainId, library);
   const [communityDataList, setCommunityDataList] = useState([]);
-  const [communityCreateLoading, setcommunityCreateLoading] = useState(true);
+  const [communityCreateLoading, setcommunityCreateLoading] = useState(false); //should be true
   const [isDialog, setIsDialog] = useState(false);
   const [isInviteReceiveDialog, setIsInviteReceiveDialog] = useState(false);
   const [isInvitePrepareDialog, setIsInvitePrepareDialog] = useState(false);
@@ -95,19 +97,31 @@ const Communities = () => {
     }
   }
 
+  console.log('kevin===>communityDataList', communityDataList)
   const creatNewCommunityHandler = (title, image, ticker) => {
     if (isEmpty(title) || isEmpty(ticker)) {
       return null
     }
     setcommunityCreateLoading(true)
     const ico = isEmpty(image) ? ["data:image/png;base64", ""] : image.split(',')
-    community?.setSettings(title, ["data:image/png;base64", ""], ticker);
+
+    Promise.resolve(communityFactory?.produce()).then(function (data) {
+      console.log('kevin produce data===>', data)
+      communityFactory.init()
+    }).catch(function (error) {
+      console.log('communityFactoryInstance produce error ===>', error)
+      setcommunityCreateLoading(false)
+    })
+
+    // community?.setSettings(title, ["data:image/png;base64", ""], ticker);
     setIsDialog(false);
   }
 
   useEffect(() => {
     Promise.resolve(community?.getSettings()).then(function (communityData) {
-      setCommunityDataList([communityData])
+      if (!isEmpty(communityData)) {
+        setCommunityDataList([communityData])
+      }
       setcommunityCreateLoading(false)
     }).catch(function (error) {
       console.log('community creating error ===>', error)
@@ -126,13 +140,13 @@ const Communities = () => {
       }
     }
   }, [location])
-
+  console.log('kevin community===>', communityDataList.length, isEmpty(communityDataList))
   return (
     <div className={classes.root}>
       <CardWrapper >
         <Grid container spacing={2} >
           {
-            communityDataList.map((community, index) => {
+            communityDataList?.map((community, index) => {
 
               return (
                 <CommunityCard
@@ -165,6 +179,7 @@ const Communities = () => {
           title={'Creating a new Community'}
           open={true}
           ticker={conversionCurrency?.data.USD}
+          ticker={1400}
           onClose={openCloseDialogHandler('')}
           creatNewCommunityHandler={creatNewCommunityHandler} />
       }
