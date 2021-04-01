@@ -8,9 +8,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 import Avatar from '@material-ui/core/Avatar';
-import AppsIcon from '@material-ui/icons/Apps';
-import LocalOfferIcon from '@material-ui/icons/LocalOffer';
-import LabelImportantIcon from '@material-ui/icons/LabelImportant';
 
 import CircleButton from 'components/UI/Buttons/CircleButton';
 import RoleTagDialog from 'components/UI/RoleTagDialog';
