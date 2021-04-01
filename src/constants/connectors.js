@@ -3,7 +3,6 @@ import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
 import { FortmaticConnector } from '@web3-react/fortmatic-connector';
 import { InjectedConnector } from '@web3-react/injected-connector';
 
-
 const POLLING_INTERVAL = 12000
 // const RPC_URLS: { [chainId] } = {
 //   1: process.env.RPC_URL_1 ,

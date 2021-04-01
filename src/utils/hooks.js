@@ -5,7 +5,6 @@ import { useWeb3React } from '@web3-react/core'
 import { walletconnect, injected, intercoinToken, xDai } from 'constants/connectors';
 import { communityInstance } from 'services/communityInstance';
 import { isEmpty } from 'utils/utility';
-import { useSnackbar } from 'notistack';
 
 const useEagerConnect = () => {
   const { activate, active } = useWeb3React()
