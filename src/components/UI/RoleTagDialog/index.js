@@ -18,6 +18,7 @@ import { communityInstance } from 'services/communityInstance';
 import { statsInstance } from 'services/statsInstance';
 import IntercoinLoading from 'components/IntercoinLoading';
 import { useBlockNumber, useOwner } from 'utils/hooks';
+import { TAG_LIST } from 'constants/Types';
 
 const useStyles = makeStyles(theme => ({
   dialogActions: {
@@ -108,7 +109,7 @@ const RoleTagDialog = ({ dataList, open, onClose, title }) => {
   const inputChangeHandler = useCallback(event => {
     const { name, value } = event.target;
     setState(prevState => ({
-      ...prevState,
+      ...prevState, 
       [name]: value
     }));
   }, []);
@@ -127,8 +128,7 @@ const RoleTagDialog = ({ dataList, open, onClose, title }) => {
       }
       else {
         Promise.resolve(stats.avgSumByAllTags(31536000)).then(function (avgTagCount) {
-          const TagList = ["Clothing", "Development", "Books", "Venues", "Tutoring"];      //TODO should be updated the smartContract
-          setAllTags(TagList.filter((item, index) => index < parseInt(avgTagCount)));
+          setAllTags(TAG_LIST.filter((item, index) => index < parseInt(avgTagCount)));
           setRoleTagLoading(false)
         }).catch(function (error) {
           setRoleTagLoading(false)

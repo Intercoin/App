@@ -114,7 +114,7 @@ const InvitePrepareDialog = ({ open, onClose, title, pSig, rpSig, adminMsg, reci
             <div className={classes.dialogActions}>
                 <RadiusButton onClick={inviteRequestHandler} variant='outlined'>
                     Sending invite Request
-                   </RadiusButton>
+                </RadiusButton>
             </div>
         </DialogWrapper >
     );

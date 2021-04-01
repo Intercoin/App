@@ -22,7 +22,7 @@ import OutlinedButton from 'components/UI/Buttons/OutlinedButton'
 import IntercoinLoading from 'components/IntercoinLoading'
 import PowerIcon from 'components/Icons/PowerIcon';
 import GetToken from './GetToken';
-import { fundContractAddress } from 'constants/contractAddress';
+import { FUND_CONTRACT_ADDRESS } from 'constants/contractAddress';
 import { isEmpty } from 'utils/utility';
 
 const useStyles = makeStyles(theme => ({
@@ -199,7 +199,7 @@ const Currencies = () => {
         gasLimit: 200000,
         gasPrice: gasPrice,
         from: account,
-        to: fundContractAddress,
+        to: FUND_CONTRACT_ADDRESS,
         value: parseEther(state.itrAmount).toHexString()
 
       })).then(function (transaction) {
@@ -217,7 +217,7 @@ const Currencies = () => {
     //     gasLimit: "200000",
     //     gasPrice: parseUnits(`${estimates[`${state.tMethod}`]}`, "gwei").toHexString(),
     //     from: account,
-    //     to: fundContractAddress,
+    //     to: FUND_CONTRACT_ADDRESS,
     //     value: parseEther(state.itrAmount).toHexString(),
     //   }
     // ];

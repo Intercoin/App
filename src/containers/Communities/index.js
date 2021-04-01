@@ -13,7 +13,7 @@ import qs from 'qs';
 import CardWrapper from 'hoc/CardWrapper';
 import CircleButton from 'components/UI/Buttons/CircleButton';
 import { communityData } from 'utils/helper/mockupData';
-import IntercoinCard from 'components/IntercoinCard';
+import CommunityCard from 'components/CommunityCard';
 import { PAGES } from 'utils/links/pages';
 import { isEmpty } from 'utils/utility';
 import AddCommunityDialog from 'components/UI/AddCommunityDialog';
@@ -23,7 +23,6 @@ import { conversionToDollar } from 'services/conversion';
 import { useBlockNumber } from 'utils/hooks';
 import { communityInstance } from 'services/communityInstance';
 import IntercoinLoading from 'components/IntercoinLoading';
-import { TrafficRounded } from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -131,12 +130,12 @@ const Communities = () => {
   return (
     <div className={classes.root}>
       <CardWrapper >
-        <Grid container spacing={2} className={classes.container} >
+        <Grid container spacing={2} >
           {
             communityDataList.map((community, index) => {
 
               return (
-                <IntercoinCard
+                <CommunityCard
                   key={index}
                   selectedCard={''}
                   id={index}
@@ -172,7 +171,7 @@ const Communities = () => {
       {isInviteReceiveDialog &&
         <InviteReceiveDialog
           title={'You were invited!'}
-          adminMsg = {qs.parse(location.search, { ignoreQueryPrefix: true }).adminMsg}
+          adminMsg={qs.parse(location.search, { ignoreQueryPrefix: true }).adminMsg}
           pSig={qs.parse(location.search, { ignoreQueryPrefix: true }).pSig}
           onClose={openCloseDialogHandler('')}
           open={true}
@@ -183,8 +182,8 @@ const Communities = () => {
           title={'Invite Prepare!'}
           open={true}
           onClose={openCloseDialogHandler('')}
-          adminMsg = {qs.parse(location.search, { ignoreQueryPrefix: true }).adminMsg}
-          recipientMsg = {qs.parse(location.search, { ignoreQueryPrefix: true }).recipientMsg}
+          adminMsg={qs.parse(location.search, { ignoreQueryPrefix: true }).adminMsg}
+          recipientMsg={qs.parse(location.search, { ignoreQueryPrefix: true }).recipientMsg}
           pSig={qs.parse(location.search, { ignoreQueryPrefix: true }).pSig}
           rpSig={qs.parse(location.search, { ignoreQueryPrefix: true }).rpSig}
         />

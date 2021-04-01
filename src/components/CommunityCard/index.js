@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const RecentTransactions = ({ selectedCard, id, imageUrl, content, subContent, detail, value, cardHandler }) => {
+const CommunityCard = ({ selectedCard, id, imageUrl, content, subContent, detail, value, cardHandler }) => {
   const classes = useStyles({});
 
   return (
@@ -77,4 +77,4 @@ const RecentTransactions = ({ selectedCard, id, imageUrl, content, subContent, d
   );
 };
 
-export default RecentTransactions;
+export default CommunityCard;

@@ -175,7 +175,7 @@ const MemberDetailDialog = ({ communityDetail, account, onClose }) => {
                             Send Payment
                         </Typography>
                     </RadiusButton>
-                    {owner === communityDetail.account &&
+                    {owner === communityDetail.account ?
                         <>
                             <Divider width={'100%'} style={{ backgroundColor: '#6B76A1' }} variant='fullWidth' orientation={'horizontal'} />
                             <Typography variant='h4' style={{ marginRight: 'auto', padding: 8 }} >Income </Typography>
@@ -198,7 +198,7 @@ const MemberDetailDialog = ({ communityDetail, account, onClose }) => {
                                     + Add Restricition
                                 </Typography>
                             </RadiusButton>
-                        </>}
+                        </> : null}
                 </DialogActions >
             </Dialog>
         </div>

@@ -89,6 +89,7 @@ const useBlockNumber = () => {
     if (!library) {
       return
     }
+
     const t = setInterval(async () => {
       try {
         setBlockNumber(await library.getBlockNumber())
@@ -102,6 +103,7 @@ const useBlockNumber = () => {
     }, 1000)
 
   }, [library])
+
   return blockNumber
 }
 
@@ -111,7 +113,7 @@ const useOwner = () => {
   const community = communityInstance(account, chainId, library);
 
   useMemo(() => {
-    if (!owner) {
+    if (!account) {
       return null
     }
     Promise.resolve(community.owner()).then(function (owner) {
