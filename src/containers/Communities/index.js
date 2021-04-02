@@ -99,6 +99,7 @@ const Communities = () => {
 
   console.log('kevin===>communityDataList', communityDataList)
   const creatNewCommunityHandler = (title, image, ticker) => {
+    console.log('kevin title===>', title)
     if (isEmpty(title) || isEmpty(ticker)) {
       return null
     }
@@ -107,13 +108,23 @@ const Communities = () => {
 
     Promise.resolve(communityFactory?.produce()).then(function (data) {
       console.log('kevin produce data===>', data)
-      communityFactory.init()
+      if (data) {
+        Promise.resolve(community?.init()).then(function (data) {
+          console.log('kevin initData===>', data)
+          community?.setSettings(title, ["data:image/png;base64", ""], ticker, { gasLimit: 200000 });
+          setcommunityCreateLoading(false)
+        }).catch(function (error) {
+          console.log('community init error ===>', error)
+          community?.setSettings(title, ["data:image/png;base64", ""], ticker, { gasLimit: 200000 });
+          setcommunityCreateLoading(false)
+        })
+        // community?.init({ from: account, gasLimit: 200000 })
+        // community?.setSettings(title, ["data:image/png;base64", ""], ticker, { gasLimit: 200000 });
+      }
     }).catch(function (error) {
       console.log('communityFactoryInstance produce error ===>', error)
       setcommunityCreateLoading(false)
     })
-
-    // community?.setSettings(title, ["data:image/png;base64", ""], ticker);
     setIsDialog(false);
   }
 
