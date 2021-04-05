@@ -31,7 +31,7 @@ const CallsImage = ({
         width={width}
         height={height}
         src='/assets/images/placeholder.gif'
-        alt='calls' />
+        alt='Intercoin' />
     </picture>
   );
 };

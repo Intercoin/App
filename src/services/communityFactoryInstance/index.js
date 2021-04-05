@@ -7,8 +7,6 @@ import RinkebyCommunityFactoryContract from 'contracts/Rinkeby/community/Rinkeby
 
 const communityFactoryInstance = (account, chainId, library) => {
 
-    console.log('kevin===>chainId', chainId)
-
     if (chainId) {
         if (CommunityContract.networks && CommunityContract.networks[chainId]) {
             return new Contract(CommunityContract.networks[chainId].address, CommunityContract.abi, library.getSigner(account));

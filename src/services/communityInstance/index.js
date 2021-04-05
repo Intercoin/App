@@ -5,7 +5,7 @@ import CommunityContract from 'contracts/community/CommunityContract';
 import RinkebyCommunityContract from 'contracts/Rinkeby/community/RinkebyCommunityContract';
 import { COMMUNITY_CONTRACT_ADDRESS } from 'constants/contractAddress';
 
-const communityInstance = (account, chainId, library) => {
+const communityInstance = (account, chainId, library, latestCommunityAddress) => {
 
     if (chainId) {
         if (CommunityContract.networks && CommunityContract.networks[chainId]) {

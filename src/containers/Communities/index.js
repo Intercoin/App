@@ -63,14 +63,14 @@ const Communities = () => {
   const history = useHistory();
   const location = useLocation();
   const blockNumber = useBlockNumber(library);
-  const community = communityInstance(account, chainId, library);
-  const communityFactory = communityFactoryInstance(account, chainId, library);
+  const [latestCommunityAddress, setLatestCommunityAddress] = useState();
   const [communityDataList, setCommunityDataList] = useState([]);
   const [communityCreateLoading, setcommunityCreateLoading] = useState(false); //should be true
   const [isDialog, setIsDialog] = useState(false);
   const [isInviteReceiveDialog, setIsInviteReceiveDialog] = useState(false);
   const [isInvitePrepareDialog, setIsInvitePrepareDialog] = useState(false);
-
+  const community = communityInstance(account, chainId, library, latestCommunityAddress);
+  const communityFactory = communityFactoryInstance(account, chainId, library);
   const params = {
     fsym: 'ETH',
     tsyms: 'USD'
@@ -97,9 +97,9 @@ const Communities = () => {
     }
   }
 
-  console.log('kevin===>communityDataList', communityDataList)
+  // console.log('kevin===>communityDataList', communityDataList)
   const creatNewCommunityHandler = (title, image, ticker) => {
-    console.log('kevin title===>', title)
+    // console.log('kevin title===>', title)
     if (isEmpty(title) || isEmpty(ticker)) {
       return null
     }
@@ -107,11 +107,11 @@ const Communities = () => {
     const ico = isEmpty(image) ? ["data:image/png;base64", ""] : image.split(',')
 
     Promise.resolve(communityFactory?.produce()).then(function (data) {
-      console.log('kevin produce data===>', data)
+      console.log('kevin communityFactory produce data===>', data)
       if (data) {
         Promise.resolve(community?.init()).then(function (data) {
           console.log('kevin initData===>', data)
-          community?.setSettings(title, ["data:image/png;base64", ""], ticker, { gasLimit: 200000 });
+          // community?.setSettings(title, ["data:image/png;base64", ""], ticker, { gasLimit: 200000 });
           setcommunityCreateLoading(false)
         }).catch(function (error) {
           console.log('community init error ===>', error)
