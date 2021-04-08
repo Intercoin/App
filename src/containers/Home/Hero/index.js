@@ -51,11 +51,11 @@ const Hero = props => {
                 Welcome Intercoin!
                 <br />
                 <span style={{ color: theme.palette.text.hoverText }}>
-                  MAKING CRYPTO MAINSTREAM.
+                  LAUNCH A SMART ECONOMY FOR YOUR COMMUNITY.
                 </span>
               </span>
             }
-            subtitle="Superpowers for Any Currency"
+            // subtitle="Superpowers for Any Currency"
             ctaGroup={[
               <ContainedButton variant="contained" style={{ backgroundColor: theme.palette.text.hoverText }} size="large">
                 Start now

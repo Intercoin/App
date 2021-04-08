@@ -4,8 +4,8 @@ import { useWeb3React, UnsupportedChainIdError } from '@web3-react/core'
 import { UserRejectedRequestError as UserRejectedRequestErrorWalletConnect } from '@web3-react/walletconnect-connector'
 import { NoEthereumProviderError, UserRejectedRequestError as UserRejectedRequestErrorInjected } from '@web3-react/injected-connector'
 import { UserRejectedRequestError as UserRejectedRequestErrorFrame } from '@web3-react/frame-connector'
-import { makeStyles } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { Typography, useMediaQuery } from '@material-ui/core';
 import DialogContent from '@material-ui/core/DialogContent';
 import Grid from "@material-ui/core/Grid";
 
@@ -13,7 +13,7 @@ import DialogWrapper, { dialogStyles } from 'hoc/DialogWrapper';
 import WalletCard from 'components/UI/WalletCard';
 import ContainedButton from 'components/UI/Buttons/ContainedButton';
 import { Spinner } from 'components/UI/Spinner';
-import { walletconnect, injected, intercoinToken, xDai, fortmatic } from 'constants/connectors';
+import { walletconnect, injected, intercoinToken, xDai, fortmatic, trustWallet } from 'constants/connectors';
 
 const useStyles = makeStyles(theme => ({
   actionButton: {
@@ -72,7 +72,11 @@ const useStyles = makeStyles(theme => ({
 
 const WalletModal = ({ open, onClose, headerTitle, activatingConnector, setActivatingConnector, triedEager, context }) => {
   const classes = useStyles();
+  const theme = useTheme();
   const dialogClasses = dialogStyles();
+  const isSm = useMediaQuery(theme.breakpoints.down('sm'), {
+    defaultMatches: true,
+  });
   const [showMore, setShowMore] = useState(false)
 
   const getErrorMessage = (error) => {
@@ -93,11 +97,16 @@ const WalletModal = ({ open, onClose, headerTitle, activatingConnector, setActiv
   }
 
   const connectorsByName = {
-    'MetaMask': injected,
-    'Fortmatic': fortmatic,
     'WalletConnect': walletconnect,
-    'Intercoin': intercoinToken,
-    'xDai': xDai
+    'MetaMask': injected,
+    // 'Fortmatic': fortmatic,
+    // 'Intercoin': intercoinToken,
+    // 'xDai': xDai
+  }
+
+  const mobileconnectorsByName = {
+    'WalletConnect': walletconnect,
+    'TrustWallet': trustWallet,
   }
 
   const { connector, library, chainId, account, activate, deactivate, active, error } = context
@@ -116,7 +125,8 @@ const WalletModal = ({ open, onClose, headerTitle, activatingConnector, setActiv
   }
 
   const walletSelectHander = (currentConnector) => {
-    localStorage.setItem(`${currentConnector.constructor.name}`,currentConnector.constructor.name );
+    console.log('kevin currentConnector', currentConnector)
+    localStorage.setItem(`${currentConnector.constructor.name}`, currentConnector.constructor.name);
     setActivatingConnector(currentConnector)
     activate(currentConnector)
     onClose();
@@ -129,12 +139,12 @@ const WalletModal = ({ open, onClose, headerTitle, activatingConnector, setActiv
           <Typography variant='h6' className={classes.titleLine}>{headerTitle}</Typography>
           <DialogContent dividers className={classes.dialogContent}>
             <Grid container spacing={2} className={classes.container} >
-              {Object.keys(connectorsByName).filter((item, index) => index < (showMore ? Object.keys(connectorsByName).length : 4)).map(name => {
-                const currentConnector = connectorsByName[name]
+              {Object.keys(isSm ? mobileconnectorsByName : connectorsByName).filter((item, index) => index < (showMore ? Object.keys(connectorsByName).length : 4)).map(name => {
+                const currentConnector = isSm ? mobileconnectorsByName[name] : connectorsByName[name]
                 const activating = currentConnector === activatingConnector
                 const connected = currentConnector === connector
                 const disabled = !triedEager || !!activatingConnector || connected || !!error
-
+                console.log('kevin connected', connected)
                 return (
                   <WalletCard
                     connected={connected}
@@ -143,7 +153,7 @@ const WalletModal = ({ open, onClose, headerTitle, activatingConnector, setActiv
                     name={name}
                     logoType={name}
                     activating={activating}
-                    onClick={()=>walletSelectHander(currentConnector)}>
+                    onClick={() => walletSelectHander(currentConnector)}>
                     <div
                       style={{
                         position: 'absolute',
@@ -182,7 +192,7 @@ const WalletModal = ({ open, onClose, headerTitle, activatingConnector, setActiv
               </div>
             </Grid>
           </DialogContent>
-          <div className={classes.dialogActions}>
+          {mobileconnectorsByName.length > 4 ? <div className={classes.dialogActions}>
             <ContainedButton
               style={{
                 borderRadius: '1rem',
@@ -192,7 +202,7 @@ const WalletModal = ({ open, onClose, headerTitle, activatingConnector, setActiv
               onClick={showmoreHandler}>
               {showMore ? 'Show less' : 'Show more'}
             </ContainedButton>
-          </div>
+          </div> : null}
         </div>
       </form>
     </DialogWrapper>

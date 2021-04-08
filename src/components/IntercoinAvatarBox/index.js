@@ -7,6 +7,7 @@ import { Typography } from '@material-ui/core';
 import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import makeBlockie from 'ethereum-blockies-base64';
 
 import CircleButton from 'components/UI/Buttons/CircleButton';
 import RadiusButton from 'components//RadiusButton';
@@ -74,7 +75,7 @@ const Profile = ({ history, chainId, account, setIsWalletDialog, ethBalance }) =
   return (
     <div className={classes.root}>
       <div className={classes.avatarContainer}>
-        <Avatar src='/assets/images/photos/people/rl-400x.png' className={classes.large} />
+        <Avatar src={makeBlockie(account)} className={classes.large} />
         <div className={classes.nameContainer}>
           <Typography>Kevin </Typography>
           <Typography>Jin</Typography>

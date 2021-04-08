@@ -9,8 +9,9 @@ import SearchIcon from '@material-ui/icons/Search';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import AddIcon from '@material-ui/icons/Add';
 import ListItem from '@material-ui/core/ListItem';
-import IntercoinDownMenu from 'components/IntercoinDownMenu';
+import makeBlockie from 'ethereum-blockies-base64';
 
+import IntercoinDownMenu from 'components/IntercoinDownMenu';
 import CircleButton from 'components/UI/Buttons/CircleButton';
 import RadiusButton from 'components/RadiusButton';
 import { isEmpty } from 'utils/utility';
@@ -92,7 +93,7 @@ const TopAppBarRight = ({ isMobileMenu }) => {
                 {(matches || isMobileMenu) && <CircleButton onClick={handleClick}
                   className={clsx(classes.avatarContainer, isAvatarSelected ? classes.backgroundColor : null)}
                   icon={<Avatar size={"38"} className={classes.avatar} round={true}
-                    src={'/assets/images/photos/people/rl-400x.png'} name={"Inter Coin"} />} />}
+                    src={makeBlockie(account)} name={"Inter Coin"} />} />}
                 <IntercoinDownMenu marginTop={0.7} anchorEl={anchorEl} onClose={handleClose} itemsType='avatar' />
               </>
               :

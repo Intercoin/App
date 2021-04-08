@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Layout = ({ children, layout }) => {
+const Layout = ({ children, layout, account }) => {
   const classes = useStyles({});
 
   return (
@@ -50,7 +50,7 @@ const Layout = ({ children, layout }) => {
             {children}
           </div>
         </main>
-        <BottomNavigationBar />
+        {account ? <BottomNavigationBar /> : null}
       </div>
     </>
   );

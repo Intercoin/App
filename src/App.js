@@ -48,6 +48,7 @@ const App = ({ location, history }) => {
   const [isWalletDialog, setIsWalletDialog] = useState();
   const [activatingConnector, setActivatingConnector] = useState();
   const [balance, setBalance] = useState()
+
   useEffect(() => {
     if (activatingConnector && activatingConnector === connector) {
       setActivatingConnector(undefined)
@@ -140,7 +141,7 @@ const App = ({ location, history }) => {
         balance
       }}>
       <ThemeProvider theme={theme}>
-      <SnackbarProvider
+        <SnackbarProvider
           classes={{
             variantSuccess: classes.primaryTextColor,
             variantError: classes.primaryTextColor,
@@ -152,47 +153,47 @@ const App = ({ location, history }) => {
             horizontal: 'left'
           }}
           maxSnack={3}>
-        <CssBaseline />
-        <Notifications notifications={''} notificationType={'success'} />
-        <Suspense fallback={<IntercoinLoading wholeOverlay />}>
-          <Layout layout={layout}>
-            {
-              isWalletDialog &&
-              <WalletModal
-                headerTitle={'Select a Wallet'}
-                open={true}
-                onClose={openCloseDialogHandler(false)}
-                setActivatingConnector={setActivatingConnector}
-                activatingConnector={activatingConnector}
-                triedEager = {triedEager}
-                context={context}
-              />
-            }
-            <Switch>
-              <Route render={() => (
-                account ?
-                  <Switch>
-                    <Route exact path={PAGES.HOME.url} component={Home} />
-                    <Route exact path={PAGES.COMMUNITIES.url} component={Communities} />
-                    <Route exact path={`${PAGES.COMMUNITIES.url}/i`} component={Communities} />
-                    <Route exact path={`${PAGES.COMMUNITIES.url}/address`} component={CommunitiesDetail} />
-                    <Route exact path={PAGES.POLLS.url} component={Polls} />
-                    <Route exact path={`${PAGES.POLLS.url}/:_id`} component={AddEditPolls} />
-                    <Route exact path={PAGES.CURRENCIES.url} component={Currencies} />
-                    <Route exact path={PAGES.PROFILE.url} component={Profile} />
-                    <Route exact path={PAGES.INCOME.url} component={Income} />
-                    <Route exact path={PAGES.CONTESTS.url} component={Contests} />
-                    <Route exact path={PAGES.SHARED_CONTROL.url} component={SharedControl} />
-                  </Switch>
-                  :
-                  <Switch>
-                    <Route exact path={PAGES.HOME.url} component={Home} />
-                    <Route exact path={PAGES.CURRENCIES.url} component={Currencies} />
-                  </Switch>
-              )} />
-            </Switch>
-          </Layout>
-        </Suspense>
+          <CssBaseline />
+          <Notifications notifications={''} notificationType={'success'} />
+          <Suspense fallback={<IntercoinLoading wholeOverlay />}>
+            <Layout layout={layout} account={account}>
+              {
+                isWalletDialog &&
+                <WalletModal
+                  headerTitle={'Select a Wallet'}
+                  open={true}
+                  onClose={openCloseDialogHandler(false)}
+                  setActivatingConnector={setActivatingConnector}
+                  activatingConnector={activatingConnector}
+                  triedEager={triedEager}
+                  context={context}
+                />
+              }
+              <Switch>
+                <Route render={() => (
+                  account ?
+                    <Switch>
+                      <Route exact path={PAGES.HOME.url} component={Home} />
+                      <Route exact path={PAGES.COMMUNITIES.url} component={Communities} />
+                      <Route exact path={`${PAGES.COMMUNITIES.url}/i`} component={Communities} />
+                      <Route exact path={`${PAGES.COMMUNITIES.url}/address`} component={CommunitiesDetail} />
+                      <Route exact path={PAGES.POLLS.url} component={Polls} />
+                      <Route exact path={`${PAGES.POLLS.url}/:_id`} component={AddEditPolls} />
+                      <Route exact path={PAGES.CURRENCIES.url} component={Currencies} />
+                      <Route exact path={PAGES.PROFILE.url} component={Profile} />
+                      <Route exact path={PAGES.INCOME.url} component={Income} />
+                      <Route exact path={PAGES.CONTESTS.url} component={Contests} />
+                      <Route exact path={PAGES.SHARED_CONTROL.url} component={SharedControl} />
+                    </Switch>
+                    :
+                    <Switch>
+                      <Route exact path={PAGES.HOME.url} component={Home} />
+                      <Route exact path={PAGES.CURRENCIES.url} component={Currencies} />
+                    </Switch>
+                )} />
+              </Switch>
+            </Layout>
+          </Suspense>
         </SnackbarProvider>
       </ThemeProvider>
     </AppContext.Provider>

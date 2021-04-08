@@ -75,7 +75,7 @@ const styles = (theme) => {
       textDecoration: 'none'
     },
     selected: {
-      border: `0.5px solid ${theme.palette.text.notification}`
+      border: `0.5px solid ${theme.palette.text.hoverText}`
     }
   };
 };
