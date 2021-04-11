@@ -125,10 +125,12 @@ const WalletModal = ({ open, onClose, headerTitle, activatingConnector, setActiv
   }
 
   const walletSelectHander = (currentConnector) => {
-    console.log('kevin currentConnector', currentConnector)
-    localStorage.setItem(`${currentConnector.constructor.name}`, currentConnector.constructor.name);
-    setActivatingConnector(currentConnector)
+    console.log('kevin currentConnector', currentConnector.constructor.name);
+    setActivatingConnector(currentConnector);
     activate(currentConnector)
+    // if (account) {
+    //   localStorage.setItem(`${currentConnector.constructor.name}`, {account : account, connector : currentConnector.constructor.name});
+    // }
     onClose();
   }
 

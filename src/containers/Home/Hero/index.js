@@ -48,7 +48,7 @@ const Hero = props => {
           <SectionHeader
             title={
               <span>
-                Welcome Intercoin!
+                Welcome Intercoin App!
                 <br />
                 <span style={{ color: theme.palette.text.hoverText }}>
                   LAUNCH A SMART ECONOMY FOR YOUR COMMUNITY.
@@ -79,7 +79,7 @@ const Hero = props => {
           data-aos={'fade-up'}
         >
           <Image
-            src="assets/images/dashboard-screenshot.jpg"
+            src="assets/images/intercoin_currency.png"
             alt="Web3 Legal Engineering"
             className={classes.image}
             data-aos="flip-left"

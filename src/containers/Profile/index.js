@@ -173,7 +173,6 @@ const Profile = ({ history }) => {
                 TabList={ProfileTabList}
               />
               {tabContentFilter(filterValue)}
-
             </Grid>
           </div>
         </CardWrapper>

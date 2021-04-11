@@ -3,7 +3,7 @@
   "name": "Create React App Sample",
   "icons": [
     {
-      "src": "Intercoin.png",
+      "src": "intercoin.png",
       "type": "image/png",
       "sizes": "32x22"
     }

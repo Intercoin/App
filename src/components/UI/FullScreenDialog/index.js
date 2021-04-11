@@ -90,9 +90,9 @@ const FullScreenDialog = ({ open, onClose, comunityInfo, children }) => {
   }
 
 
-  useEffect(()=>{
+  useEffect(() => {
     setCommunityStats(comunityInfo)
-  },[comunityInfo])
+  }, [comunityInfo])
 
   return (
     <>
@@ -101,7 +101,7 @@ const FullScreenDialog = ({ open, onClose, comunityInfo, children }) => {
           <Toolbar className={classes.toolbar}>
             <div className={classes.titleContainer}>
               <Avatar variant='square' src={comunityInfo?.logoUrl || '/assets/images/logos/value-exchange_200w.png'} />
-              <Typography style={{ marginLeft: 8 }} variant='h5'> {comunityInfo&&comunityInfo[0]} </Typography>
+              <Typography style={{ marginLeft: 8 }} variant='h5'> {comunityInfo && comunityInfo[0]} </Typography>
             </div>
             <CircleButton style={{ display: 'flex', backgroundColor: '#292C40' }}
               icon={<CloseIcon onClick={onClose} style={{ color: '#fff' }} fontSize='large' />} />

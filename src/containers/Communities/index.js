@@ -151,7 +151,7 @@ const Communities = () => {
       }
     }
   }, [location])
-  console.log('kevin community===>', communityDataList.length, isEmpty(communityDataList))
+ 
   return (
     <div className={classes.root}>
       <CardWrapper >

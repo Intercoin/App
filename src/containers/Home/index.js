@@ -42,7 +42,7 @@ const Home = () => {
       <Section >
         <Hero />
       </Section>
-      <Section>
+      {/* <Section>
         <Partners data={integrations} />
       </Section>
       <SectionAlternate>
@@ -53,7 +53,7 @@ const Home = () => {
       </Section>
       <Section>
         <Download data={[]} />
-      </Section>
+      </Section> */}
     </div>
   );
 };

@@ -238,7 +238,7 @@ const transactionData = [
     type: 2,
     companyTitle: "Intercoin : Welcome",
     subTitle: "Intercoin - Building the world wide web ",
-    imageUrl: '/assets/images/Intercoin.png',
+    imageUrl: '/assets/images/intercoin.png',
     avatarUrl: "/assets/images/photos/people/rl-400x.png"
   },
   {

@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import AddIcon from '@material-ui/icons/Add';
 import FaceIcon from '@material-ui/icons/Face';
 import Avatar from '@material-ui/core/Avatar';
+import makeBlockie from 'ethereum-blockies-base64';
 
 import { walletconnect, injected, intercoinToken, xDai, fortmatic } from 'constants/connectors';
 import WalletModal from 'components/WalletModal';
@@ -18,6 +19,7 @@ import { PAGES } from 'utils/links/pages';
 import IntercoinLoading from 'components/IntercoinLoading';
 import { isEmpty } from 'utils/utility';
 import Notifications from 'components/Notifications';
+import WalletDetailDialog from 'components/UI/WalletDetailDialog';
 
 const filterLists = ({ itemsType, AvatarItems }) => {
   switch (itemsType) {
@@ -70,33 +72,39 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(1)
   },
   avatarSize: {
-    height: 30,
-    width: 30
+    height: 25,
+    width: 25,
+    marginLeft: theme.spacing(.5),
+    marginRight: theme.spacing(.3)
   }
 }));
 
 const IntercoinDownMenu = ({ anchorEl, onClose, marginTop, itemsType, AvatarItems, setAnchorEl }) => {
   const classes = useStyles({ marginTop });
+
   const connectorsByName = {
     'InjectedConnector': injected,
     'FortmaticConnector': fortmatic,
-    'WalletConnect': walletconnect,
+    'WalletConnectConnector': walletconnect,
     'Intercoin': intercoinToken,
-    'xDai': xDai
+    'xDai': xDai,
+    'TronWallet': injected
   }
-  let additionalAccounts = []
-  useMemo(() => {
-    Object.keys(connectorsByName).map((name) => {
-      if (!isEmpty(localStorage.getItem(name))) {
-        additionalAccounts.push({
-          leftIcon: <Avatar variant='square' className={classes.avatarSize} src={`/assets/images/connectors/${name}.png`} />,
-          title: name, connectorName: name,
-          url: PAGES.PROFILE.url
-        })
-      }
-    })
-  }, [connectorsByName])
 
+  // let additionalAccounts = [];
+
+  // useMemo(() => {
+  //   // console.log('kevin===>',JSON.parse(localStorage.getItem('WALLETCONNECT_DEEPLINK_CHOICE')).name)
+  //   Object.keys(connectorsByName).map((name) => {
+  //     if (!isEmpty(localStorage.getItem(name))) {
+  //       additionalAccounts.push({
+  //         leftIcon: <Avatar variant='square' className={classes.avatarSize} src={`/assets/images/connectors/${name}.png`} />,
+  //         title: name, connectorName: name,
+  //         url: PAGES.PROFILE.url
+  //       })
+  //     }
+  //   })
+  // }, [connectorsByName])
 
   const history = useHistory();
   const [isWalletDialog, setIsWalletDialog] = useState(false);
@@ -105,11 +113,12 @@ const IntercoinDownMenu = ({ anchorEl, onClose, marginTop, itemsType, AvatarItem
   const { connector, library, chainId, account, activate, deactivate, active, error } = context
   const [activatingConnector, setActivatingConnector] = useState();
   const [accountInfo, setAccountInfo] = useState({});
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (activatingConnector && activatingConnector === connector) {
       setActivatingConnector(undefined)
-      setAccountInfo({account : 'Account was successfully switched!'})
+      setAccountInfo({ account: 'Account was successfully switched!' })
     }
   }, [activatingConnector, connector])
 
@@ -141,9 +150,13 @@ const IntercoinDownMenu = ({ anchorEl, onClose, marginTop, itemsType, AvatarItem
     activate(connectorsByName[connectName])
   }
 
+  const handleCloseOpen = () => {
+    setOpen(false);
+  };
+
   return (
     <>
-    <Notifications notifications={accountInfo} notificationType={'success'} />
+      <Notifications notifications={accountInfo} notificationType={'success'} />
       <Menu
         id="customized-menu"
         anchorEl={anchorEl}
@@ -162,6 +175,17 @@ const IntercoinDownMenu = ({ anchorEl, onClose, marginTop, itemsType, AvatarItem
           horizontal: 'center',
         }}
       >
+
+        <MenuItem className={clsx(classes.paper)} onClick={() => setOpen(true)}>
+          <Avatar className={classes.avatarSize} variant={'square'}
+            src={makeBlockie(account)} />
+          <Typography
+            variant='body1'
+            className={classes.hoverEffect}
+          >
+            {account?.slice(0, 6) + '...' + account?.slice(account?.length - 6, account?.length)}
+          </Typography>
+        </MenuItem>
         {
           items.map((item, index) => {
             return (
@@ -179,7 +203,7 @@ const IntercoinDownMenu = ({ anchorEl, onClose, marginTop, itemsType, AvatarItem
             )
           })
         }
-        {
+        {/* {
           additionalAccounts.map((item, index) => {
 
             return (
@@ -197,18 +221,31 @@ const IntercoinDownMenu = ({ anchorEl, onClose, marginTop, itemsType, AvatarItem
               </MenuItem>
             )
           })
-        }
+        } */}
+
       </Menu>
       {
         isWalletDialog &&
         <WalletModal
-          headerTitle={'Add a Wallet'}
+          headerTitle={'Select a Wallet'}
           open={true}
           onClose={openCloseDialogHandler(false)}
           setActivatingConnector={setActivatingConnector}
           activatingConnector={activatingConnector}
           triedEager={triedEager}
           context={context}
+        />
+      }
+
+      {
+        <WalletDetailDialog
+          open={open}
+          setOpen={setOpen}
+          onClose={handleCloseOpen}
+          account={account}
+          chainId={chainId}
+          balance={''}
+          setIsWalletDialog={setIsWalletDialog}
         />
       }
     </>
