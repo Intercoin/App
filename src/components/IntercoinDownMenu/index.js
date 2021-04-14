@@ -145,14 +145,18 @@ const IntercoinDownMenu = ({ anchorEl, onClose, marginTop, itemsType, AvatarItem
     setIsWalletDialog(show);
   }
 
-  const additionalAccountHandler = (connectName, url) => {
-    setActivatingConnector(connectorsByName[connectName])
-    activate(connectorsByName[connectName])
-  }
+  // const additionalAccountHandler = (connectName, url) => {
+  //   setActivatingConnector(connectorsByName[connectName])
+  //   activate(connectorsByName[connectName])
+  // }
 
   const handleCloseOpen = () => {
     setOpen(false);
   };
+
+  const accountDetailHandler = () => {
+    history.push(PAGES.WALLET_DETAIL.url)
+  }
 
   return (
     <>
@@ -172,11 +176,9 @@ const IntercoinDownMenu = ({ anchorEl, onClose, marginTop, itemsType, AvatarItem
         }}
         transformOrigin={{
           vertical: 'top',
-          horizontal: 'center',
-        }}
-      >
-
-        <MenuItem className={clsx(classes.paper)} onClick={() => setOpen(true)}>
+          horizontal: 'center'
+        }}>
+        <MenuItem className={clsx(classes.paper)} onClick={accountDetailHandler}>
           <Avatar className={classes.avatarSize} variant={'square'}
             src={makeBlockie(account)} />
           <Typography
@@ -236,7 +238,6 @@ const IntercoinDownMenu = ({ anchorEl, onClose, marginTop, itemsType, AvatarItem
           context={context}
         />
       }
-
       {
         <WalletDetailDialog
           open={open}
@@ -260,11 +261,10 @@ IntercoinDownMenu.defaultProps = {
       leftIcon: <FaceIcon style={{ height: 30, width: 30 }} fontSize='large' />,
       url: PAGES.PROFILE.url
     },
-    {
-      title: "Add new account",
-      leftIcon: <AddIcon style={{ height: 30, width: 30 }} fontSize='large' />
-    },
-
+    // {
+    //   title: "Add new account",
+    //   leftIcon: <AddIcon style={{ height: 30, width: 30 }} fontSize='large' />
+    // },
   ]
 }
 

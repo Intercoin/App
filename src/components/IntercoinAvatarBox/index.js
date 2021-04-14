@@ -8,6 +8,7 @@ import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import makeBlockie from 'ethereum-blockies-base64';
+import SettingsIcon from '@material-ui/icons/Settings';
 
 import CircleButton from 'components/UI/Buttons/CircleButton';
 import RadiusButton from 'components//RadiusButton';
@@ -79,23 +80,24 @@ const Profile = ({ history, chainId, account, setIsWalletDialog, ethBalance }) =
         <div className={classes.nameContainer}>
           <Typography>Kevin </Typography>
           <Typography>Jin</Typography>
-          
-          
+
+
         </div>
       </div >
       <div className={classes.accountName} >
         <Typography
           component='div' variant={matches ? 'body1' : 'h6'}
           color='textSecondary' style={{ paddingRight: 4 }} >
-             Kevin Jin's Main Wallet
+          Kevin Jin's Main Wallet
         </Typography>
         <RadiusButton onClick={accountSwitchingHandler} variant='outlined'>
           <Typography>
             {account?.slice(0, 9) + '...' + account?.slice(account?.length - 6, account?.length)}
+            <SettingsIcon fontSize='small' style={{ marginLeft: 4 }} />
           </Typography>
         </RadiusButton>
-        <Typography variant = 'body1' noWrap>
-        {ethBalance} (ETH)
+        <Typography variant='body1' noWrap>
+          {ethBalance} (ETH)
         </Typography>
       </div>
       <div className={classes.contactContainer}>

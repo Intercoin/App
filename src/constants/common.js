@@ -1,3 +1,5 @@
 
+exports.API_KEY = '37Z89VJ45SRDUI6W96JZCNHH29ZY1A6TBX';
+exports.ITR_CONTRACT_ADDRESS = '0x6ef5febbd2a56fab23f18a69d3fb9f4e2a70440b';
 exports.CURRENCY_PANEL = 'master';
 exports.GOVERNANCE_PANEL = 'second';

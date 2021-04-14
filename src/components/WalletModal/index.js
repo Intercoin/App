@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { useWeb3React, UnsupportedChainIdError } from '@web3-react/core'
+import { UnsupportedChainIdError } from '@web3-react/core'
 import { UserRejectedRequestError as UserRejectedRequestErrorWalletConnect } from '@web3-react/walletconnect-connector'
 import { NoEthereumProviderError, UserRejectedRequestError as UserRejectedRequestErrorInjected } from '@web3-react/injected-connector'
 import { UserRejectedRequestError as UserRejectedRequestErrorFrame } from '@web3-react/frame-connector'
@@ -125,7 +125,6 @@ const WalletModal = ({ open, onClose, headerTitle, activatingConnector, setActiv
   }
 
   const walletSelectHander = (currentConnector) => {
-    console.log('kevin currentConnector', currentConnector.constructor.name);
     setActivatingConnector(currentConnector);
     activate(currentConnector)
     // if (account) {

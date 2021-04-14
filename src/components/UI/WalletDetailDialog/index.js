@@ -106,7 +106,6 @@ const WalletDetailDialog = ({ open, onClose, account, chainId, balance, setIsWal
     const ethBalance = balance && formatEther(balance);
     console.log('kevin ', balance)
 
-
     return (
         <div>
             <Dialog classes={{ paper: classes.root }} disableEnforceFocus fullScreen={isSm ? true : false} open={open} TransitionComponent={Transition} >

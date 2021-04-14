@@ -30,6 +30,7 @@ const CommunitiesDetail = loadable(() => pMinDelay(import('containers/Communitie
 const Polls = loadable(() => pMinDelay(import('containers/Polls'), DELAY_TIME));
 const AddEditPolls = loadable(() => pMinDelay(import('containers/Polls/AddEditPolls'), DELAY_TIME));
 const Profile = loadable(() => pMinDelay(import('containers/Profile'), DELAY_TIME));
+const WalletDetail = loadable(() => pMinDelay(import('containers/WalletDetail'), DELAY_TIME));
 const Currencies = loadable(() => pMinDelay(import('containers/Currencies'), DELAY_TIME));
 const Income = loadable(() => pMinDelay(import('containers/Income'), DELAY_TIME));
 const Contests = loadable(() => pMinDelay(import('containers/Contests'), DELAY_TIME));
@@ -45,6 +46,8 @@ const App = ({ location, history }) => {
   const classes = useStyles();
   const context = useWeb3React();
   const { connector, library, chainId, account, activate, deactivate, active, error } = context;
+
+  console.log('kevin===>connector', connector)
   const [isWalletDialog, setIsWalletDialog] = useState();
   const [activatingConnector, setActivatingConnector] = useState();
   const [balance, setBalance] = useState()
@@ -138,7 +141,8 @@ const App = ({ location, history }) => {
         account,
         chainId,
         deactivate,
-        balance
+        balance,
+        connector
       }}>
       <ThemeProvider theme={theme}>
         <SnackbarProvider
@@ -184,6 +188,7 @@ const App = ({ location, history }) => {
                       <Route exact path={PAGES.INCOME.url} component={Income} />
                       <Route exact path={PAGES.CONTESTS.url} component={Contests} />
                       <Route exact path={PAGES.SHARED_CONTROL.url} component={SharedControl} />
+                      <Route exact path={PAGES.WALLET_DETAIL.url} component={WalletDetail} />
                     </Switch>
                     :
                     <Switch>

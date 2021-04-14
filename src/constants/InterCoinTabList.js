@@ -51,7 +51,13 @@ const CommunityTabList = [
   }
 ]
 
+const WalletDetailTabList = [
+  { title: 'Asset' },
+  { title: 'Transaction' }
+]
+
 export {
   ProfileTabList,
-  CommunityTabList
+  CommunityTabList,
+  WalletDetailTabList
 }

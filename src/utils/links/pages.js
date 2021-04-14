@@ -31,7 +31,11 @@ const PAGES = {
   SHARED_CONTROL: {
     title: 'sharedControl',
     url: '/sharedControl'
+  },
+  WALLET_DETAIL: {
+    title: 'walletDetail',
+    url: '/walletDetail'
   }
 };
 
-export { PAGES } 
+export { PAGES }

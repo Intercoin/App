@@ -71,6 +71,7 @@ const Communities = () => {
   const [isInvitePrepareDialog, setIsInvitePrepareDialog] = useState(false);
   const community = communityInstance(account, chainId, library, latestCommunityAddress);
   const communityFactory = communityFactoryInstance(account, chainId, library);
+  
   const params = {
     fsym: 'ETH',
     tsyms: 'USD'

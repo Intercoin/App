@@ -1,5 +1,5 @@
 
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Hidden from '@material-ui/core/Hidden';
 
@@ -25,11 +25,11 @@ const useStyles = makeStyles(theme => ({
 const DesktopMenu = () => {
   const classes = useStyles();
   const { account, topAppMenu } = useContext(AppContext);
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
 
   return (
     <>
-      <TopAppBarLeft setOpen={setOpen} TOP_BAR_MENUS={TOP_BAR_MENUS_DESKTOP} topAppMenu={topAppMenu} />
+      <TopAppBarLeft setOpen={false} TOP_BAR_MENUS={TOP_BAR_MENUS_DESKTOP} topAppMenu={topAppMenu} />
       <div className={classes.LogoContainer}>
         <Hidden smDown implementation='css' className={classes.height}>
           <TopAppBarMenu topAppMenu={topAppMenu}
