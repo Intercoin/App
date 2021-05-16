@@ -304,7 +304,7 @@ const communityDetailData = [
   {
     name: '0X23436544...324',
     avatar: '/assets/images/logos/web3evm-p02-300sq.png',
-    account: '0xe9D045cF6D3a2418eab537d3AC7a905a1dDcF048'
+    account: '0x6A482d254bb515674bC3d4Ef37D61353529ad1f4'
   },
   {
     name: '0X23456434...628',

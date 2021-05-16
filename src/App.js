@@ -47,7 +47,6 @@ const App = ({ location, history }) => {
   const context = useWeb3React();
   const { connector, library, chainId, account, activate, deactivate, active, error } = context;
 
-  console.log('kevin===>connector', connector)
   const [isWalletDialog, setIsWalletDialog] = useState();
   const [activatingConnector, setActivatingConnector] = useState();
   const [balance, setBalance] = useState()
@@ -100,6 +99,7 @@ const App = ({ location, history }) => {
   //     history.push(PAGES.HOME.url)
   //   }
   // }, [account]) //TODO account validiation
+  console.log('kevin===>', topAppMenu)
 
   useEffect(() => {
     TOP_BAR_MENUS.map((TOP_BAR_MENU, index) => {
@@ -110,6 +110,9 @@ const App = ({ location, history }) => {
       else {
         if (location.pathname === PAGES.PROFILE.url) {
           setTopAppMenu(10)
+        }
+        if (location.pathname === PAGES.WALLET_DETAIL.url) {
+          setTopAppMenu(11)
         }
       }
     });

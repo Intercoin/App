@@ -52,8 +52,9 @@ const CommunityTabList = [
 ]
 
 const WalletDetailTabList = [
-  { title: 'Asset' },
-  { title: 'Transaction' }
+  { title: 'Assets' },
+  { title: 'Transactions' },
+  { title: 'Activation' }
 ]
 
 export {

@@ -11,7 +11,6 @@ const communityInstance = (account, chainId, library, latestCommunityAddress) =>
         if (CommunityContract.networks && CommunityContract.networks[chainId]) {
             return new Contract(CommunityContract.networks[chainId].address, CommunityContract.abi, library.getSigner(account));
         } else {
-            console.log('kevin rinkeby instance area =========================> ')
             return new Contract(COMMUNITY_CONTRACT_ADDRESS, RinkebyCommunityContract.abi, library.getSigner(account));
         }
     }

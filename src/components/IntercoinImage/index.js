@@ -8,7 +8,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const CallsImage = ({
+const IntercoinImage = ({
   sources,
   width,
   height,
@@ -36,4 +36,4 @@ const CallsImage = ({
   );
 };
 
-export default CallsImage;
+export default IntercoinImage;

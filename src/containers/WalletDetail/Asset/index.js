@@ -14,6 +14,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import { API_KEY, ITR_CONTRACT_ADDRESS } from 'constants/common';
 import { ethScan } from 'services/ethScan';
 import { conversionToDollar } from 'services/conversion';
+import IntercoinImage from 'components/IntercoinImage';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -24,8 +25,10 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center',
         flexDirection: 'column'
     },
-    avatar: {
-        margin: theme.spacing(1, 0, 1, 1)
+    CurrencyLogo: {
+        width: theme.spacing(5),
+        height: theme.spacing(5)
+
     }
 }));
 
@@ -68,49 +71,53 @@ const Asset = ({ account }) => {
 
     return (
         <div className={classes.root}>
-            <Avatar src={makeBlockie(account)} className={classes.avatar} />
             <ListItem key={20} button>
                 <ListItemAvatar>
-                    <Avatar variant='square'
+                    <Avatar
+                        className={classes.CurrencyLogo}
+                        variant='square'
                         src={'/assets/images/CurrencyIcon.webp'}
                     />
                 </ListItemAvatar>
-                <ListItemText id={1} primary={`1 ETH/1 USD`} />
-                <ListItemText id={2} primary={conversionCurrency?.data.USD} />
-                <ListItemText id={3} primary={`($)`} />
+                <ListItemText id={1} primary={`1 ⬨/$`} />
+                <ListItemText id={2} style={{ display: 'flex', justifyContent: 'center' }} primary={conversionCurrency?.data.USD} />
+                <ListItemText style={{ display: 'flex', justifyContent: 'flex-end' }} id={3} primary={`(USD)`} />
             </ListItem>
 
             <ListItem key={21} button>
                 <ListItemAvatar>
                     <Avatar
+                        className={classes.CurrencyLogo}
                         src={'/assets/images/EthereumIcon.png'}
                     />
                 </ListItemAvatar>
                 <ListItemText id={4} primary={`ETH`} />
-                <ListItemText id={5} primary={accountETH} />
-                <ListItemText id={6} primary={`(ETH)`} />
+                <ListItemText id={5} style={{ display: 'flex', justifyContent: 'center' }} primary={accountETH} />
+                <ListItemText style={{ display: 'flex', justifyContent: 'flex-end' }} id={6} primary={`(ETH)`} />
             </ListItem>
 
             <ListItem key={23} button>
                 <ListItemAvatar>
                     <Avatar
+                        className={classes.CurrencyLogo}
                         src={'/assets/images/USDIcon.png'}
                     />
                 </ListItemAvatar>
                 <ListItemText id={7} primary={`USD`} />
-                <ListItemText id={8} primary={conversionCurrency?.data.USD * accountETH || 0} />
-                <ListItemText id={9} primary={`($)`} />
+                <ListItemText id={8} style={{ display: 'flex', justifyContent: 'center' }} primary={conversionCurrency?.data.USD * accountETH || 0} />
+                <ListItemText style={{ display: 'flex', justifyContent: 'flex-end' }} id={9} primary={`(USD)`} />
             </ListItem>
 
             <ListItem key={24} button>
                 <ListItemAvatar>
                     <Avatar
-                        src={'/assets/images/intercoin-gold.png'}
+                        className={classes.CurrencyLogo}
+                        src={'/assets/images/intercoinTokenLogo.png'}
                     />
                 </ListItemAvatar>
                 <ListItemText id={10} primary={`ITR`} />
-                <ListItemText id={11} primary={accountITR} />
-                <ListItemText id={12} primary={`(ITR)`} />
+                <ListItemText id={11} style={{ display: 'flex', justifyContent: 'center' }} primary={accountITR} />
+                <ListItemText style={{ display: 'flex', justifyContent: 'flex-end' }} id={12} primary={`(ITR)`} />
             </ListItem>
         </div>
     );

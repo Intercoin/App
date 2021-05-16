@@ -48,7 +48,7 @@ const Hero = props => {
           <SectionHeader
             title={
               <span>
-                Welcome Intercoin App!
+                Welcome to Intercoin
                 <br />
                 <span style={{ color: theme.palette.text.hoverText }}>
                   LAUNCH A SMART ECONOMY FOR YOUR COMMUNITY.

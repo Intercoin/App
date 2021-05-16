@@ -94,7 +94,7 @@ const TopAppBarRight = ({ isMobileMenu }) => {
                   className={clsx(classes.avatarContainer, isAvatarSelected ? classes.backgroundColor : null)}
                   icon={<Avatar size={"38"} className={classes.avatar} round={true}
                     src={makeBlockie(account)} name={"Inter Coin"} />} />}
-                <IntercoinDownMenu marginTop={0.7} anchorEl={anchorEl} onClose={handleClose} itemsType='avatar' />
+                <IntercoinDownMenu marginTop={0.7} anchorEl={anchorEl} onClose={handleClose} itemsType='avatar' setTopAppMenu={setTopAppMenu} />
               </>
               :
               <>
@@ -108,7 +108,7 @@ const TopAppBarRight = ({ isMobileMenu }) => {
             }
           </ConfigProvider>
         </div>
-        {!isMobileMenu && !isEmpty(account) &&
+        {!isMobileMenu && !isEmpty(account) && !topAppMenu === 11 &&
           <>
             <CircleButton
               style={{ backgroundColor: '#292C41', margin: 4 }}

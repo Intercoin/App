@@ -80,8 +80,6 @@ const Profile = ({ history, chainId, account, setIsWalletDialog, ethBalance }) =
         <div className={classes.nameContainer}>
           <Typography>Kevin </Typography>
           <Typography>Jin</Typography>
-
-
         </div>
       </div >
       <div className={classes.accountName} >

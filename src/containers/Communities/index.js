@@ -63,7 +63,7 @@ const Communities = () => {
   const history = useHistory();
   const location = useLocation();
   const blockNumber = useBlockNumber(library);
-  const [latestCommunityAddress, setLatestCommunityAddress] = useState();
+  const [latestCommunityAddress, setLatestCommunityAddress] = useState('0xb2dC1610f021E2a92d531fd6e60f1E01b372eC36 ');
   const [communityDataList, setCommunityDataList] = useState([]);
   const [communityCreateLoading, setcommunityCreateLoading] = useState(false); //should be true
   const [isDialog, setIsDialog] = useState(false);
@@ -112,7 +112,7 @@ const Communities = () => {
       if (data) {
         Promise.resolve(community?.init()).then(function (data) {
           console.log('kevin initData===>', data)
-          // community?.setSettings(title, ["data:image/png;base64", ""], ticker, { gasLimit: 200000 });
+          community?.setSettings(title, ["data:image/png;base64", ""], ticker, { gasLimit: 200000 });
           setcommunityCreateLoading(false)
         }).catch(function (error) {
           console.log('community init error ===>', error)
@@ -131,6 +131,7 @@ const Communities = () => {
 
   useEffect(() => {
     Promise.resolve(community?.getSettings()).then(function (communityData) {
+      console.log('kevin===>', communityData)
       if (!isEmpty(communityData)) {
         setCommunityDataList([communityData])
       }
@@ -191,7 +192,7 @@ const Communities = () => {
           title={'Creating a new Community'}
           open={true}
           ticker={conversionCurrency?.data.USD}
-          ticker={1400}
+          // ticker={1400}
           onClose={openCloseDialogHandler('')}
           creatNewCommunityHandler={creatNewCommunityHandler} />
       }

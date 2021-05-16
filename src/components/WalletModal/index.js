@@ -127,6 +127,7 @@ const WalletModal = ({ open, onClose, headerTitle, activatingConnector, setActiv
   const walletSelectHander = (currentConnector) => {
     setActivatingConnector(currentConnector);
     activate(currentConnector)
+    
     // if (account) {
     //   localStorage.setItem(`${currentConnector.constructor.name}`, {account : account, connector : currentConnector.constructor.name});
     // }
@@ -145,7 +146,7 @@ const WalletModal = ({ open, onClose, headerTitle, activatingConnector, setActiv
                 const activating = currentConnector === activatingConnector
                 const connected = currentConnector === connector
                 const disabled = !triedEager || !!activatingConnector || connected || !!error
-                console.log('kevin connected', connected)
+             
                 return (
                   <WalletCard
                     connected={connected}

@@ -79,7 +79,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const IntercoinDownMenu = ({ anchorEl, onClose, marginTop, itemsType, AvatarItems, setAnchorEl }) => {
+const IntercoinDownMenu = ({ anchorEl, onClose, marginTop, itemsType, AvatarItems, setAnchorEl, setTopAppMenu}) => {
   const classes = useStyles({ marginTop });
 
   const connectorsByName = {
@@ -155,6 +155,7 @@ const IntercoinDownMenu = ({ anchorEl, onClose, marginTop, itemsType, AvatarItem
   };
 
   const accountDetailHandler = () => {
+    setTopAppMenu(11);
     history.push(PAGES.WALLET_DETAIL.url)
   }
 

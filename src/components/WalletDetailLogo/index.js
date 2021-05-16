@@ -22,18 +22,6 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'space-between',
         padding: theme.spacing(1)
     },
-    avatarContainer: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'row',
-        marginBottom: theme.spacing(1)
-    },
-    large: {
-        width: theme.spacing(7),
-        height: theme.spacing(7),
-        marginRight: theme.spacing(1)
-    },
     nameContainer: {
         [theme.breakpoints.down('sm')]: {
             display: 'none'
@@ -61,11 +49,15 @@ const useStyles = makeStyles(theme => ({
     },
     accountName: {
         [theme.breakpoints.down('sm')]: {
-            flexDirection: 'column'
+            flexDirection: 'row'
         },
         display: 'flex',
-        justifyContent: 'center',
+        width: '100%',
+        // justifyContent: 'center',
         alignItems: 'center'
+    },
+    avatar: {
+        margin: theme.spacing(0, 1)
     }
 }));
 
@@ -79,25 +71,11 @@ const WalletDetailLogo = ({ history, chainId, account, setIsWalletDialog, ethBal
 
     return (
         <div className={classes.root}>
-            <div className={classes.avatarContainer}>
-                <Avatar src={walletInfo?.logo} variant='square' className={classes.large} />
-                <Typography variant='h6'> {walletInfo?.title} </Typography>
-            </div >
             <div className={classes.accountName} >
-                {/* <Typography
-                    component='div' variant={matches ? 'body1' : 'h6'}
-                    color='textSecondary' style={{ paddingRight: 4 }} >
-                    Kevin Jin's Main Wallet
-                </Typography> */}
-                <RadiusButton onClick={accountSwitchingHandler} variant='outlined'>
-                    <Typography component='div' style={{ display: 'flex', justifyContent: 'center' }}>
-                        {account?.slice(0, 8) + '...' + account?.slice(account?.length - 6, account?.length)}
-                        <SettingsIcon fontSize='small' style={{ marginLeft: 4 }} />
-                    </Typography>
-                </RadiusButton>
-                {/* <Typography variant='body1' noWrap>
-                    {ethBalance} (ETH)
-                </Typography> */}
+                <Avatar src={makeBlockie(account)} className={classes.avatar} />
+                <Typography variant='h6' component='div' color='textSecondary' style={{ display: 'flex', justifyContent: 'center' }}>
+                    {account?.slice(0, 5) + '...' + account?.slice(account?.length - 5, account?.length)}
+                </Typography>
             </div>
         </div>
     );

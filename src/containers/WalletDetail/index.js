@@ -19,6 +19,7 @@ import IntercoinTabContainer from 'components/IntercoinTabContainer';
 import WalletDetailLogo from 'components/WalletDetailLogo';
 import Asset from './Asset';
 import Transaction from './Transaction';
+import AccountActivity from './AccountActivity';
 import { transactionData } from 'utils/helper/mockupData';
 import { isEmpty } from 'utils/utility';
 import { WalletDetailTabList } from 'constants/InterCoinTabList';
@@ -92,7 +93,7 @@ const useStyles = makeStyles(theme => ({
 
 const WalletDetail = ({ history }) => {
     const classes = useStyles();
-    const { account, chainId, setLoadingInfo, setIsWalletDialog, balance, connector } = useContext(AppContext);
+    const { account, chainId, setLoadingInfo, setIsWalletDialog, balance, connector, deactivate} = useContext(AppContext);
     const [filterValue, setFilterValue] = useState(0);
     const ethBalance = balance && formatEther(balance);
 
@@ -115,6 +116,13 @@ const WalletDetail = ({ history }) => {
                     <Transaction
                         account={account}
                     />);
+            case 2:
+                return (
+                    <AccountActivity
+                    account={account}
+                    deactivate = {deactivate}
+                    />
+                )
         }
     }
 
