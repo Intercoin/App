@@ -42,6 +42,7 @@ const TopAppBarLeft = ({ setOpen, topAppMenu, TOP_BAR_MENUS, connector, chainId,
   const classes = useStyles();
 
   const gettingWalletLogo = (connector) => {
+    console.log('kevin connector', connector?.constructor.name)
     switch (connector?.constructor.name) {
       case 'InjectedConnector':
         return { logo: '/assets/images/connectors/TrustWallet.png', title: 'Trust Wallet' }

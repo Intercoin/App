@@ -81,8 +81,6 @@ const App = ({ location, history }) => {
     }
   }, [account, library, chainId])
 
-  // console.log('kevin getting the account balance===>',account, balance && formatEther(balance),context ) //TODO show the account balance
-
   const triedEager = useEagerConnect();
   useInactiveListener(!triedEager || !!activatingConnector)
 
@@ -93,13 +91,6 @@ const App = ({ location, history }) => {
   const openCloseDialogHandler = show => () => {
     setIsWalletDialog(show)
   }
-
-  // useEffect(() => {
-  //   if (isEmpty(account)) {
-  //     history.push(PAGES.HOME.url)
-  //   }
-  // }, [account]) //TODO account validiation
-  console.log('kevin===>', topAppMenu)
 
   useEffect(() => {
     TOP_BAR_MENUS.map((TOP_BAR_MENU, index) => {
